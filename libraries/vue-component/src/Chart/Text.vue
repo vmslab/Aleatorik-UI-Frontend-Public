@@ -1,7 +1,7 @@
 <template></template>
 
 <script setup lang="ts">
-import { TextType, ShapeType, Position, IMargin, Location, IChartTextParams } from "@mozart-ui/common-ui";
+import { TextType, ShapeType, Position, IMargin, Location, IChartTextParams } from "@aleatorik-ui/common-ui";
 
 const props = defineProps<{
   text?: string;

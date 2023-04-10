@@ -1,11 +1,11 @@
 {
-  "name": "@mozart-ui/common-node",
+  "name": "@aleatorik-ui/common-node",
   "private": true,
   "version": "0.1.0",
   "license": "ISC",
   "main": "src/",
   "dependencies": {
-    "@mozart-ui/common": "^0.1.0",
+    "@aleatorik-ui/common": "^0.1.0",
     "adm-zip": "^0.5.9",
     "regedit": "5.0.0"
   },

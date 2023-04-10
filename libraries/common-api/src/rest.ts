@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import axios, { AxiosResponse, Method, AxiosRequestConfig } from "axios";
 import { Upload, isSupported } from "tus-js-client";
-import { toCamelCase, StreamingParameter, FileParameter } from "@mozart-ui/common";
+import { toCamelCase, StreamingParameter, FileParameter } from "@aleatorik-ui/common";
 import { getWebSocketURL, blobToArrayBuffer, errorProcess } from "./utils/common";
 import ByteBuffer from "bytebuffer";
 

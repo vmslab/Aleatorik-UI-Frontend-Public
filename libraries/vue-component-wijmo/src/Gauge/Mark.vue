@@ -1,7 +1,7 @@
 <template></template>
 
 <script setup lang="ts">
-import { MarkType } from "@mozart-ui/common-ui";
+import { MarkType } from "@aleatorik-ui/common-ui";
 
 const props = defineProps<{
   value?: number;

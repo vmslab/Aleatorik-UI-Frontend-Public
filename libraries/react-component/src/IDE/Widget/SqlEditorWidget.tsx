@@ -1,5 +1,5 @@
 import * as React from "react";
-import { SqlEditor, ISqlEditor, ISqlEditorParams, createCamelProps } from "@mozart-ui/common-ui";
+import { SqlEditor, ISqlEditor, ISqlEditorParams, createCamelProps } from "@aleatorik-ui/common-ui";
 
 interface ISqlEditorWidgetProps extends ISqlEditor {
   children?: React.ReactNode | React.ReactNode[];

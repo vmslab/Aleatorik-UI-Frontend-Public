@@ -1,5 +1,5 @@
 {
-  "name": "@mozart-ui/react-main",
+  "name": "@aleatorik-ui/react-main",
   "private": true,
   "version": "0.1.0",
   "license": "ISC",
@@ -10,11 +10,11 @@
     "build": "tsc && vite build"
   },
   "dependencies": {
-    "@mozart-ui/common": "^0.1.0",
-    "@mozart-ui/common-api": "^0.1.0",
-    "@mozart-ui/common-ui": "^0.1.0",
-    "@mozart-ui/protos": "^0.1.0",
-    "@mozart-ui/react-component": "^0.1.0",
+    "@aleatorik-ui/common": "^0.1.0",
+    "@aleatorik-ui/common-api": "^0.1.0",
+    "@aleatorik-ui/common-ui": "^0.1.0",
+    "@aleatorik-ui/protos": "^0.1.0",
+    "@aleatorik-ui/react-component": "^0.1.0",
     "dayjs": "^1.11.6",
     "devextreme": "^22.2.3",
     "devextreme-react": "^22.2.3",

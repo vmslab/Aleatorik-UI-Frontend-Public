@@ -1,4 +1,4 @@
-import { EventBus } from "@mozart-ui/common";
+import { EventBus } from "@aleatorik-ui/common";
 
 export const isElectron: boolean = (window as any).ipcRenderer ? true : false;
 

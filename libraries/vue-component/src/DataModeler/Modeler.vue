@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { createApp, onMounted, ref, StyleValue } from "vue";
-import { Flow, FlowClone, FlowMinimap } from "@mozart-ui/common-ui";
+import { Flow, FlowClone, FlowMinimap } from "@aleatorik-ui/common-ui";
 import TableNode from "./node/TableNode.vue";
 
 const props = defineProps<{

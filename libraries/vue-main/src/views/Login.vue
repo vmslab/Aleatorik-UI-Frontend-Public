@@ -45,8 +45,8 @@ import DxTextBox from "devextreme-vue/text-box";
 import { DxValidator, DxRequiredRule, DxPatternRule, DxStringLengthRule } from "devextreme-vue/validator";
 import { DxCheckBox } from "devextreme-vue/check-box";
 
-import { Login as LoginCall, getCookie, setCookie, parseExpires, removeCookie } from "@mozart-ui/common-api";
-import { encodeUnescapeBtoa, decodeEscapeAtob } from "@mozart-ui/common-ui";
+import { Login as LoginCall, getCookie, setCookie, parseExpires, removeCookie } from "@aleatorik-ui/common-api";
+import { encodeUnescapeBtoa, decodeEscapeAtob } from "@aleatorik-ui/common-ui";
 import { useLayoutStore, useLoadStore, useAlarmStore, useUserStore } from "../stores/mainStore";
 
 const { t } = useTranslation();

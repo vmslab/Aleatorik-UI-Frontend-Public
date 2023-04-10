@@ -16,13 +16,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useQuery, useMutation } from "vue-query";
-import { ITreeNode, ITreeProps, Command, getSystemTreeItems } from "@mozart-ui/protos";
+import { ITreeNode, ITreeProps, Command, getSystemTreeItems } from "@aleatorik-ui/protos";
 import SystemDialog from "./SystemDialog.vue";
 import { useSelectedStore, useSystemStore } from "../../stores/devStore";
-import { GetSystem, Remove } from "@mozart-ui/common-api";
+import { GetSystem, Remove } from "@aleatorik-ui/common-api";
 import { showConfirm } from "../../utils/dialog";
 import queryClient from "../../utils/query";
-import { Tree } from "@mozart-ui/vue-component";
+import { Tree } from "@aleatorik-ui/vue-component";
 
 // interface ISystemTreeProps extends ITreeProps {}
 

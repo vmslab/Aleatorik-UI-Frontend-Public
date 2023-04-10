@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ColorPicker as ColorPickerComponent, IColorPickerOptions } from "@mozart-ui/common-ui";
+import { ColorPicker as ColorPickerComponent, IColorPickerOptions } from "@aleatorik-ui/common-ui";
 
 interface IColorPickerOptionsDetail extends IColorPickerOptions {
   children?: React.ReactNode;

@@ -1,5 +1,5 @@
 import devTheme from "devextreme/ui/themes";
-import { setCustomColor } from "@mozart-ui/common-ui";
+import { setCustomColor } from "@aleatorik-ui/common-ui";
 
 export const setAppTheme = (theme: any, layout: any) => {
   if (theme.compact === "compact") {

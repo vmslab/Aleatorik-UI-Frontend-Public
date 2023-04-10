@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Gantt as GanttComponent, IGanttProps } from "@mozart-ui/common-ui";
+import { Gantt as GanttComponent, IGanttProps } from "@aleatorik-ui/common-ui";
 
 const Gantt: React.FC<IGanttProps> = (props: IGanttProps) => {
   const ganttRef = React.useRef(null);

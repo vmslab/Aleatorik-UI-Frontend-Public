@@ -8,8 +8,8 @@ import cloneDeep from "lodash/cloneDeep";
 import { Popup } from "devextreme-react/popup";
 import Button from "devextreme-react/button";
 import { fileProgressState, getServerDelimiter } from "../../stores/devStore";
-import { FileParameter } from "@mozart-ui/common";
-import { Upload, Download } from "@mozart-ui/common-api";
+import { FileParameter } from "@aleatorik-ui/common";
+import { Upload, Download } from "@aleatorik-ui/common-api";
 
 interface IZip {
   key: string;

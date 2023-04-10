@@ -59,11 +59,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
-import { StreamingParameter } from "@mozart-ui/common";
-import { GetServerInfo, ServerSate } from "@mozart-ui/common-api";
-import { generateGUID } from "@mozart-ui/common-ui";
-import { ServerStateResponse } from "@mozart-ui/protos/src/generated/Protos/ServerService";
-import { Gauge, Arc } from "@mozart-ui/vue-component";
+import { StreamingParameter } from "@aleatorik-ui/common";
+import { GetServerInfo, ServerSate } from "@aleatorik-ui/common-api";
+import { generateGUID } from "@aleatorik-ui/common-ui";
+import { ServerStateResponse } from "@aleatorik-ui/protos/src/generated/Protos/ServerService";
+import { Gauge, Arc } from "@aleatorik-ui/vue-component";
 
 const serverInfo = ref({} as Record<string, any>);
 const serverState = ref({} as Record<string, any>);

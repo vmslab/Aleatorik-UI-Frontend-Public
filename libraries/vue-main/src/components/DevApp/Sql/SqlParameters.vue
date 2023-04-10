@@ -26,8 +26,8 @@
 </template>
 
 <script setup lang="ts">
-import { types } from "@mozart-ui/protos";
-import { SqlParam } from "@mozart-ui/protos/src/generated/Protos/ModelService";
+import { types } from "@aleatorik-ui/protos";
+import { SqlParam } from "@aleatorik-ui/protos/src/generated/Protos/ModelService";
 import { DxDataGrid, DxColumn, DxEditing, DxLookup, DxToolbar, DxItem } from "devextreme-vue/data-grid";
 import { DxTextBox } from "devextreme-vue/text-box";
 import { DxButton } from "devextreme-vue/button";

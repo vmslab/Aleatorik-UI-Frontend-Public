@@ -24,7 +24,7 @@ function runChild(command, callback) {
 }
 
 async function main() {
-  runChild("pnpm --filter @mozart-ui/installer-ui build", () => {
+  runChild("pnpm --filter @aleatorik-ui/installer-ui build", () => {
     const uiDistDir = path.join(__dirname, "..", "apps", "installer-ui", "dist");
     const guiDistDir = path.join(__dirname, "..", "apps", "installer-gui", "dist");
     if (fs.existsSync(guiDistDir)) {
@@ -32,7 +32,7 @@ async function main() {
     }
     copyFolderRecursiveSync(uiDistDir, guiDistDir);
 
-    runChild("pnpm --filter @mozart-ui/installer-gui pkg", () => {
+    runChild("pnpm --filter @aleatorik-ui/installer-gui pkg", () => {
       console.log("Done!");
     });
   });

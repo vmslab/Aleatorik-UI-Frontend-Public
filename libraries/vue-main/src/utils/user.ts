@@ -1,6 +1,6 @@
 import { toRefs } from "vue";
 import { storeToRefs } from "pinia";
-import { Logout, removeCookie } from "@mozart-ui/common-api";
+import { Logout, removeCookie } from "@aleatorik-ui/common-api";
 import { useLayoutStore, useLoadStore, useAlarmStore, useUserStore } from "../stores/mainStore";
 
 export const useSignout = () => {

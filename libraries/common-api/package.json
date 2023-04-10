@@ -1,11 +1,11 @@
 {
-  "name": "@mozart-ui/common-api",
+  "name": "@aleatorik-ui/common-api",
   "private": true,
   "version": "0.1.0",
   "license": "ISC",
   "main": "src/",
   "devDependencies": {
-    "@mozart-ui/common": "^0.1.0",
+    "@aleatorik-ui/common": "^0.1.0",
     "@types/bytebuffer": "^5.0.43",
     "@types/tus-js-client": "^2.1.0",
     "axios": "^0.26.0",

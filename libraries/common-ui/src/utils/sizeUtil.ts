@@ -1,6 +1,6 @@
 import { max } from "lodash";
 import dayjs from "dayjs";
-import { dayjsRange, DayjsRange, EventBus } from "@mozart-ui/common";
+import { dayjsRange, DayjsRange, EventBus } from "@aleatorik-ui/common";
 import Column from "../components/gantt/GanttColumn";
 import { ISize, IGanttRow } from "../types";
 

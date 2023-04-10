@@ -22,7 +22,7 @@ import {
   TooltipType,
   IMapData,
   CollisionTextType,
-} from "@mozart-ui/common-ui";
+} from "@aleatorik-ui/common-ui";
 
 const props = defineProps<{
   data: IChartData[];

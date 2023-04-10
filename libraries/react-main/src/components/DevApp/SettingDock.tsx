@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ColorPicker } from "@mozart-ui/react-component";
+import { ColorPicker } from "@aleatorik-ui/react-component";
 
 interface ISettingProps {}
 

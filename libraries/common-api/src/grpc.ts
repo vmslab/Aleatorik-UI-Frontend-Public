@@ -1,5 +1,5 @@
 import { Method } from "axios";
-import { IpcRequest, IpcResponse, StreamingParameter, FileParameter } from "@mozart-ui/common";
+import { IpcRequest, IpcResponse, StreamingParameter, FileParameter } from "@aleatorik-ui/common";
 import { errorProcess } from "./utils/common";
 
 interface IpcRenderer {

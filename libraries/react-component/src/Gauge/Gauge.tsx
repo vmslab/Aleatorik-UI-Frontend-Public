@@ -9,7 +9,7 @@ import {
   IArcProps,
   IMarkProps,
   createCamelProps,
-} from "@mozart-ui/common-ui";
+} from "@aleatorik-ui/common-ui";
 
 interface IGaugePropsDetail extends IGaugeProps {
   children?: React.ReactNode | React.ReactNode[];

@@ -3,9 +3,9 @@ import ReactDOM from "react-dom/client";
 import { useRecoilBridgeAcrossReactRoots_UNSTABLE } from "recoil";
 import { QueryClientProvider } from "react-query";
 import queryClient from "../../utils/query";
-import { SqlEditor, ISqlEditorParams } from "@mozart-ui/common-ui";
-import { SqlDef } from "@mozart-ui/protos/src/generated/Protos/ModelService";
-import { SqlEditorWidget } from "@mozart-ui/react-component";
+import { SqlEditor, ISqlEditorParams } from "@aleatorik-ui/common-ui";
+import { SqlDef } from "@aleatorik-ui/protos/src/generated/Protos/ModelService";
+import { SqlEditorWidget } from "@aleatorik-ui/react-component";
 import SqlParameters from "./Sql/SqlParameters";
 import SqlResults from "./Sql/SqlResults";
 

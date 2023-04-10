@@ -5,10 +5,10 @@ import ContextMenu from "devextreme-react/context-menu";
 import { userState, serverState, themeState, layoutState } from "../../stores/mainStore";
 import { setAppTheme } from "../../utils/theme";
 import { useSignout } from "../../utils/user";
-import { StreamingParameter } from "@mozart-ui/common";
-import { generateGUID } from "@mozart-ui/common-ui";
-import { ServerTime } from "@mozart-ui/common-api";
-import { ServerTimeResponse } from "@mozart-ui/protos/src/generated/Protos/ServerService";
+import { StreamingParameter } from "@aleatorik-ui/common";
+import { generateGUID } from "@aleatorik-ui/common-ui";
+import { ServerTime } from "@aleatorik-ui/common-api";
+import { ServerTimeResponse } from "@aleatorik-ui/protos/src/generated/Protos/ServerService";
 
 const ServerTimeComponent: React.FC = () => {
   const server = useRecoilValue(serverState);

@@ -1,14 +1,14 @@
 import * as React from "react";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { useQuery, useMutation } from "react-query";
-import { GetSystem } from "@mozart-ui/common-api";
-import { ITreeNode, ITreeProps, Command, getSystemTreeItems } from "@mozart-ui/protos";
+import { GetSystem } from "@aleatorik-ui/common-api";
+import { ITreeNode, ITreeProps, Command, getSystemTreeItems } from "@aleatorik-ui/protos";
 import { selectedState, systemState } from "../../stores/devStore";
 import SystemDialog from "./SystemDialog";
-import { Remove } from "@mozart-ui/common-api";
+import { Remove } from "@aleatorik-ui/common-api";
 import { showConfirm } from "../../utils/dialog";
 import queryClient from "../../utils/query";
-import { Tree } from "@mozart-ui/react-component";
+import { Tree } from "@aleatorik-ui/react-component";
 
 interface ISystemTreeProp extends ITreeProps {}
 

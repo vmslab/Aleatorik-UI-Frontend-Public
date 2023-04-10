@@ -1,5 +1,5 @@
 {
-  "name": "@mozart-ui/common-ui",
+  "name": "@aleatorik-ui/common-ui",
   "private": true,
   "version": "0.1.0",
   "license": "ISC",
@@ -17,7 +17,7 @@
     "@lumino/signaling": "^1.11.0",
     "@lumino/polling": "^1.11.3",
     "@lumino/widgets": "^1.36.0",
-    "@mozart-ui/common": "^0.1.0",
+    "@aleatorik-ui/common": "^0.1.0",
     "cytoscape": "^3.22.1",
     "cytoscape-klay": "3.1.4",
     "cytoscape-dagre": "2.4.0",

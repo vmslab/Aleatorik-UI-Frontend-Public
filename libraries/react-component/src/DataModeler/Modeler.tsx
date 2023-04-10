@@ -1,6 +1,6 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
-import { Flow, FlowClone, FlowMinimap } from "@mozart-ui/common-ui";
+import { Flow, FlowClone, FlowMinimap } from "@aleatorik-ui/common-ui";
 import TableNode from "./node/TableNode";
 
 export interface IModelerProps {

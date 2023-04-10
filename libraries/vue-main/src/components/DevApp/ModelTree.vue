@@ -16,15 +16,15 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useQuery, useMutation } from "vue-query";
-import { ITreeNode, ITreeProps, Command, getModelTreeItems } from "@mozart-ui/protos";
+import { ITreeNode, ITreeProps, Command, getModelTreeItems } from "@aleatorik-ui/protos";
 import ConnectionDialog from "./ConnectionDialog.vue";
 import { useSelectedStore, useConnectionStore } from "../../stores/devStore";
-import { GetModel, Remove, Migrate } from "@mozart-ui/common-api";
+import { GetModel, Remove, Migrate } from "@aleatorik-ui/common-api";
 import { showConfirm } from "../../utils/dialog";
 import { useAlarmStore, useLoadStore } from "../../stores/mainStore";
 import queryClient from "../../utils/query";
-import { generateGUID } from "@mozart-ui/common-ui";
-import { Tree } from "@mozart-ui/vue-component";
+import { generateGUID } from "@aleatorik-ui/common-ui";
+import { Tree } from "@aleatorik-ui/vue-component";
 
 // interface IModelTreeProps extends ITreeProps { };
 

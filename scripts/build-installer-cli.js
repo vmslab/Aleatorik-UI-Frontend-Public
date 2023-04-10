@@ -20,8 +20,8 @@ function runChild(command, callback) {
 }
 
 async function main() {
-  runChild("pnpm --filter @mozart-ui/installer-cli build", () => {
-    runChild("pnpm --filter @mozart-ui/installer-cli pkg", () => {
+  runChild("pnpm --filter @aleatorik-ui/installer-cli build", () => {
+    runChild("pnpm --filter @aleatorik-ui/installer-cli pkg", () => {
       console.log("Done!");
     });
   });

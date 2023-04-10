@@ -133,12 +133,12 @@ import {
 } from "../../stores/mainStore";
 import { setAppTheme } from "../../utils/theme";
 import { useSignout } from "../../utils/user";
-import { StreamingParameter } from "@mozart-ui/common";
-import { generateGUID } from "@mozart-ui/common-ui";
-import { ServerTime } from "@mozart-ui/common-api";
+import { StreamingParameter } from "@aleatorik-ui/common";
+import { generateGUID } from "@aleatorik-ui/common-ui";
+import { ServerTime } from "@aleatorik-ui/common-api";
 import { storeToRefs } from "pinia";
-import { ServerTimeResponse } from "@mozart-ui/protos/src/generated/Protos/ServerService";
-import { IMenu } from "@mozart-ui/common-api";
+import { ServerTimeResponse } from "@aleatorik-ui/protos/src/generated/Protos/ServerService";
+import { IMenu } from "@aleatorik-ui/common-api";
 import { useRouter } from "vue-router";
 
 const user = useUserStore();

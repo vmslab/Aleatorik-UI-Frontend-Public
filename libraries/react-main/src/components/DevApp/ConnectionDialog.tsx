@@ -6,9 +6,9 @@ import { Popup, ToolbarItem } from "devextreme-react/popup";
 import TileView from "devextreme-react/tile-view";
 import { connectionState, provider, selectedState } from "../../stores/devStore";
 import Form, { Item } from "devextreme-react/form";
-import { providers } from "@mozart-ui/protos";
-import { generateGUID } from "@mozart-ui/common-ui";
-import { Add, Modify, TestConnection } from "@mozart-ui/common-api";
+import { providers } from "@aleatorik-ui/protos";
+import { generateGUID } from "@aleatorik-ui/common-ui";
+import { Add, Modify, TestConnection } from "@aleatorik-ui/common-api";
 import { alarmState } from "../../stores/mainStore";
 import queryClient from "../../utils/query";
 

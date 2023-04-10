@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { ITreeNode, providers } from "@mozart-ui/protos";
-import { FileParameter } from "@mozart-ui/common";
+import { ITreeNode, providers } from "@aleatorik-ui/protos";
+import { FileParameter } from "@aleatorik-ui/common";
 
 export const useSelectedStore = defineStore("model-tree-selected", {
   state: () => ({

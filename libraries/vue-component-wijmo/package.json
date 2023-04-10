@@ -1,12 +1,12 @@
 {
-  "name": "@mozart-ui/vue-component-wijmo",
+  "name": "@aleatorik-ui/vue-component-wijmo",
   "private": true,
   "version": "0.1.0",
   "license": "ISC",
   "main": "src/",
   "dependencies": {
-    "@mozart-ui/common": "^0.1.0",
-    "@mozart-ui/common-ui": "^0.1.0",
+    "@aleatorik-ui/common": "^0.1.0",
+    "@aleatorik-ui/common-ui": "^0.1.0",
     "lodash": "^4.17.21",
     "vue": "^3.2.45"
   },

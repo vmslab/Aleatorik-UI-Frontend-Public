@@ -14,8 +14,8 @@ import {
   MENU_HEIGHT,
   STATUS_HEIGHT,
   IThemeData,
-} from "@mozart-ui/common-ui";
-import { menus, IMenu } from "@mozart-ui/common-api";
+} from "@aleatorik-ui/common-ui";
+import { menus, IMenu } from "@aleatorik-ui/common-api";
 import router from "../router";
 import { ITreeNode, makeMenuChildren, makeToHierarchicalFormat } from "../../src/utils/tree";
 

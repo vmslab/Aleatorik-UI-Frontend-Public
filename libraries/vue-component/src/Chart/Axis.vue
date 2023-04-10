@@ -11,7 +11,7 @@ import {
   IChartTextParams,
   ChartData,
   ITooltipParams,
-} from "@mozart-ui/common-ui";
+} from "@aleatorik-ui/common-ui";
 
 const props = defineProps<{
   name: string;

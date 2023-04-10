@@ -4,10 +4,10 @@ import { useRecoilBridgeAcrossReactRoots_UNSTABLE, useSetRecoilState, useRecoilS
 import { QueryClientProvider, useQuery } from "react-query";
 import { useTranslation } from "react-i18next";
 import queryClient from "../utils/query";
-import { IDE } from "@mozart-ui/react-component";
-import { IDEMain, IDEMenu, IDEStatus, IIDEParams, IMenuItem, ICommandOptions } from "@mozart-ui/common-ui";
-import { GetDeployInfo } from "@mozart-ui/common-api";
-import { ITreeNode } from "@mozart-ui/protos";
+import { IDE } from "@aleatorik-ui/react-component";
+import { IDEMain, IDEMenu, IDEStatus, IIDEParams, IMenuItem, ICommandOptions } from "@aleatorik-ui/common-ui";
+import { GetDeployInfo } from "@aleatorik-ui/common-api";
+import { ITreeNode } from "@aleatorik-ui/protos";
 import { themeState, layoutState } from "../stores/mainStore";
 import { deployState } from "../stores/devStore";
 import { useSignout } from "../utils/user";

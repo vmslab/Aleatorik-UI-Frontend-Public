@@ -10,7 +10,7 @@ import {
   ISplitterProps,
   Direction,
   createCamelProps,
-} from "@mozart-ui/common-ui";
+} from "@aleatorik-ui/common-ui";
 
 const props = defineProps<{
   direction?: Direction;

@@ -1,6 +1,6 @@
 import { atom, selector } from "recoil";
-import { ITreeNode, providers } from "@mozart-ui/protos";
-import { FileParameter } from "@mozart-ui/common";
+import { ITreeNode, providers } from "@aleatorik-ui/protos";
+import { FileParameter } from "@aleatorik-ui/common";
 
 export const selectedState = atom({
   key: "model-tree-selected",

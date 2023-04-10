@@ -4,5 +4,5 @@
 </template>
 
 <script setup lang="ts">
-import { ColorPicker } from "@mozart-ui/vue-component";
+import { ColorPicker } from "@aleatorik-ui/vue-component";
 </script>

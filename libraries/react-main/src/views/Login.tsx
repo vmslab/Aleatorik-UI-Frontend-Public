@@ -7,8 +7,8 @@ import TextBox from "devextreme-react/text-box";
 import { Validator, RequiredRule, PatternRule, StringLengthRule } from "devextreme-react/validator";
 import { CheckBox } from "devextreme-react/check-box";
 
-import { Login as LoginCall, getCookie, setCookie, parseExpires, removeCookie } from "@mozart-ui/common-api";
-import { encodeUnescapeBtoa, decodeEscapeAtob } from "@mozart-ui/common-ui";
+import { Login as LoginCall, getCookie, setCookie, parseExpires, removeCookie } from "@aleatorik-ui/common-api";
+import { encodeUnescapeBtoa, decodeEscapeAtob } from "@aleatorik-ui/common-ui";
 import { layoutState, loadState, alarmState, userState } from "../stores/mainStore";
 
 const Login: React.FC = () => {

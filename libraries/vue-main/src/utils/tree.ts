@@ -1,4 +1,4 @@
-import { IMenu, IView } from "@mozart-ui/common-api";
+import { IMenu, IView } from "@aleatorik-ui/common-api";
 export interface IViewNode {
   id: string;
   name: string;

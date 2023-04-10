@@ -14,7 +14,7 @@ import {
   MENU_HEIGHT,
   STATUS_HEIGHT,
   IThemeData,
-} from "@mozart-ui/common-ui";
+} from "@aleatorik-ui/common-ui";
 import { setAppTheme } from "../utils/theme";
 
 export const layoutState = atom({

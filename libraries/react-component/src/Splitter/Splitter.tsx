@@ -6,7 +6,7 @@ import {
   ISplitterProps,
   Direction,
   createCamelProps,
-} from "@mozart-ui/common-ui";
+} from "@aleatorik-ui/common-ui";
 
 interface ISplitterPropsDetail extends ISplitterProps {
   children?: React.ReactNode | React.ReactNode[];

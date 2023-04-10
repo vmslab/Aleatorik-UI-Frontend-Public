@@ -1,7 +1,7 @@
 <template></template>
 
 <script setup lang="ts">
-import { LabelType } from "@mozart-ui/common-ui";
+import { LabelType } from "@aleatorik-ui/common-ui";
 const props = defineProps<{
   value: number;
   name?: string;

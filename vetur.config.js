@@ -10,42 +10,7 @@ module.exports = {
       tsconfig: "./tsconfig.json",
     },
     {
-      root: "./apps/mozart-ui-framework-dev",
-      package: "./package.json",
-      tsconfig: "./tsconfig.json",
-    },
-    {
-      root: "./apps/mozart-management-console",
-      package: "./package.json",
-      tsconfig: "./tsconfig.json",
-    },
-    {
-      root: "./templates/ui-framework-template-dev",
-      package: "./package.json",
-      tsconfig: "./tsconfig.json",
-    },
-    {
-      root: "./templates/ui-framework-template-login",
-      package: "./package.json",
-      tsconfig: "./tsconfig.json",
-    },
-    {
-      root: "./templates/project-management-system",
-      package: "./package.json",
-      tsconfig: "./tsconfig.json",
-    },
-    {
-      root: "./templates/project-management-system-login",
-      package: "./package.json",
-      tsconfig: "./tsconfig.json",
-    },
-    {
-      root: "./templates/lab-management-system",
-      package: "./package.json",
-      tsconfig: "./tsconfig.json",
-    },
-    {
-      root: "./templates/aleatorik-ui",
+      root: "./packages/standard",
       package: "./package.json",
       tsconfig: "./tsconfig.json",
     },

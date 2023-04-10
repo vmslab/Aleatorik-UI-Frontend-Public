@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Graph as GanttComponent, IGraphProps } from "@mozart-ui/common-ui";
+import { Graph as GanttComponent, IGraphProps } from "@aleatorik-ui/common-ui";
 
 const Graph: React.FC<IGraphProps> = (props: IGraphProps) => {
   const graphRef = React.useRef(null);

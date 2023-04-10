@@ -2,7 +2,7 @@ import React from "react";
 import Routes from "../router/user";
 import { useRecoilState } from "recoil";
 import Drawer from "devextreme-react/drawer";
-import { DRAWER_MAX, DRAWER_MIN } from "@mozart-ui/common-ui";
+import { DRAWER_MAX, DRAWER_MIN } from "@aleatorik-ui/common-ui";
 
 import { layoutState } from "../stores/mainStore";
 

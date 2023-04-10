@@ -1,7 +1,7 @@
 <template></template>
 
 <script setup lang="ts">
-import { SeriesType, ColorStandard, IBoxPlotTooltipLabels, Aggregation } from "@mozart-ui/common-ui";
+import { SeriesType, ColorStandard, IBoxPlotTooltipLabels, Aggregation } from "@aleatorik-ui/common-ui";
 
 const props = defineProps<{
   field: string;

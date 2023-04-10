@@ -4,8 +4,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, defineExpose } from "vue";
-import { Graph as GraphComponent, ElementDefinition, ElementsDefinition } from "@mozart-ui/common-ui";
-import { IGraphProps, createCamelProps } from "@mozart-ui/common-ui";
+import { Graph as GraphComponent, ElementDefinition, ElementsDefinition } from "@aleatorik-ui/common-ui";
+import { IGraphProps, createCamelProps } from "@aleatorik-ui/common-ui";
 
 const props = defineProps<{
   elements?: ElementsDefinition | ElementDefinition[] | Promise<ElementsDefinition> | Promise<ElementDefinition[]>;

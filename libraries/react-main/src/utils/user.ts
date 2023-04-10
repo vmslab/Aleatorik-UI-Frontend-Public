@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import { Logout, removeCookie } from "@mozart-ui/common-api";
+import { Logout, removeCookie } from "@aleatorik-ui/common-api";
 import { layoutState, loadState, alarmState, userState } from "../stores/mainStore";
 
 export const useSignout = () => {

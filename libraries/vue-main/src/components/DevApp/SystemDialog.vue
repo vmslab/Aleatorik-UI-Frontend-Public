@@ -35,8 +35,8 @@
 import { useMutation } from "vue-query";
 import { DxPopup, DxToolbarItem } from "devextreme-vue/popup";
 import { DxForm, DxItem } from "devextreme-vue/form";
-import { generateGUID } from "@mozart-ui/common-ui";
-import { Add, Modify } from "@mozart-ui/common-api";
+import { generateGUID } from "@aleatorik-ui/common-ui";
+import { Add, Modify } from "@aleatorik-ui/common-api";
 import { useAlarmStore } from "../../stores/mainStore";
 import { useSelectedStore, useSystemStore } from "../../stores/devStore";
 import queryClient from "../../utils/query";

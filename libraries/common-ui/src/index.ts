@@ -150,7 +150,7 @@ export {
 } from "./utils/themeSet";
 export { replaceGenericLight, replaceGenericDark } from "./utils/themeMeta";
 
-export { dayjsRange, DayjsRange } from "@mozart-ui/common";
+export { dayjsRange, DayjsRange } from "@aleatorik-ui/common";
 
 export type { ElementDefinition, ElementsDefinition, Stylesheet, LayoutOptions } from "cytoscape";
 

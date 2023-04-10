@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from "dayjs";
-import { DayjsRange } from "@mozart-ui/common";
+import { DayjsRange } from "@aleatorik-ui/common";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import weekOfYear from "dayjs/plugin/weekOfYear";
 import { IGanttHeader, GanttHeaderType, GanttTaskLineType } from "../../types";

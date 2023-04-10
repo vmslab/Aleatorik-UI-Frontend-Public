@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, useSlots, defineExpose } from "vue";
-import { SqlEditor, ISqlEditor, ISchema, IField, ISqlEditorParams, createCamelProps } from "@mozart-ui/common-ui";
+import { SqlEditor, ISqlEditor, ISchema, IField, ISqlEditorParams, createCamelProps } from "@aleatorik-ui/common-ui";
 
 const props = defineProps<{
   contents?: string;

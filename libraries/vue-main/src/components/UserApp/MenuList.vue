@@ -38,9 +38,9 @@ import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { DxTreeView } from "devextreme-vue/ui/tree-view";
 import { useLayoutStore, useMenuItems, useMenuStore, useMenuLocationStore } from "../../stores/mainStore";
-import { addTooltipEvent } from "@mozart-ui/common-ui";
-import { menus, IMenu } from "@mozart-ui/common-api";
-import { Tree } from "@mozart-ui/vue-component";
+import { addTooltipEvent } from "@aleatorik-ui/common-ui";
+import { menus, IMenu } from "@aleatorik-ui/common-api";
+import { Tree } from "@aleatorik-ui/vue-component";
 
 const layout = useLayoutStore();
 const { drawer } = storeToRefs(layout);

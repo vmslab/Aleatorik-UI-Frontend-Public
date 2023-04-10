@@ -12,8 +12,8 @@
 import { onBeforeMount, onUnmounted, watch, ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useQuery } from "vue-query";
-import { isElectron, init, theme as themeData, Refresh, getCookie, removeCookie } from "@mozart-ui/common-api";
-import { decodeEscapeAtob } from "@mozart-ui/common-ui";
+import { isElectron, init, theme as themeData, Refresh, getCookie, removeCookie } from "@aleatorik-ui/common-api";
+import { decodeEscapeAtob } from "@aleatorik-ui/common-ui";
 import Loader from "./components/Loader.vue";
 import {
   useLayoutStore,

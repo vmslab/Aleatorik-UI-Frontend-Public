@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { FileParameter } from "@mozart-ui/common";
-import { generateGUID } from "@mozart-ui/common-ui";
-import { CopyTo, CreateDirectory, DeleteItem, GetFileInfos, MoveTo, RenameItem } from "@mozart-ui/common-api";
+import { FileParameter } from "@aleatorik-ui/common";
+import { generateGUID } from "@aleatorik-ui/common-ui";
+import { CopyTo, CreateDirectory, DeleteItem, GetFileInfos, MoveTo, RenameItem } from "@aleatorik-ui/common-api";
 import FileManager, { Permissions, Notifications } from "devextreme-react/file-manager";
 import { getServerDelimiter, fileProgressState } from "../../stores/devStore";
 import { createProviderConfig } from "../../utils/fileProvider";

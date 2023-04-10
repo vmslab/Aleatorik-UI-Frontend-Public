@@ -1,7 +1,7 @@
 import { request, wsCall, sendFile, reciveFile } from "./rest";
 import { unary, bidirectional, fileSend, fileRecive } from "./grpc";
 import { AxiosRequestConfig, AxiosResponse, Method } from "axios";
-import { StreamingParameter, IpcResponse, FileParameter } from "@mozart-ui/common";
+import { StreamingParameter, IpcResponse, FileParameter } from "@aleatorik-ui/common";
 
 const ipcRenderer: any = (window as any).ipcRenderer;
 

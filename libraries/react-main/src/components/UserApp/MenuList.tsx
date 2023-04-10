@@ -2,8 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { TreeView } from "devextreme-react/ui/tree-view";
-import { addTooltipEvent } from "@mozart-ui/common-ui";
-import { menus, IMenu } from "@mozart-ui/common-api";
+import { addTooltipEvent } from "@aleatorik-ui/common-ui";
+import { menus, IMenu } from "@aleatorik-ui/common-api";
 import { layoutState } from "../../stores/mainStore";
 
 const MenuList: React.FC = () => {

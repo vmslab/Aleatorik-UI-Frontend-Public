@@ -32,9 +32,9 @@
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
 import { useTranslation } from "i18next-vue";
-import { FileParameter } from "@mozart-ui/common";
-import { generateGUID } from "@mozart-ui/common-ui";
-import { CopyTo, CreateDirectory, DeleteItem, GetFileInfos, MoveTo, RenameItem } from "@mozart-ui/common-api";
+import { FileParameter } from "@aleatorik-ui/common";
+import { generateGUID } from "@aleatorik-ui/common-ui";
+import { CopyTo, CreateDirectory, DeleteItem, GetFileInfos, MoveTo, RenameItem } from "@aleatorik-ui/common-api";
 import {
   DxFileManager,
   DxPermissions,

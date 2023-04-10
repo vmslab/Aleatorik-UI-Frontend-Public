@@ -14,8 +14,8 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@mozart-ui/common": "^0.1.0",
-    "@mozart-ui/common-ui": "^0.1.0",
+    "@aleatorik-ui/common": "^0.1.0",
+    "@aleatorik-ui/common-ui": "^0.1.0",
     "core-js": "^3.6.5",
     "cytoscape": "^3.22.1",
     "cytoscape-cise": "^1.0.0",

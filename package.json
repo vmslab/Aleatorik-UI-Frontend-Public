@@ -1,5 +1,5 @@
 {
-  "name": "mozart-ui",
+  "name": "aleatorik-ui",
   "private": true,
   "version": "0.1.0",
   "devDependencies": {
@@ -27,19 +27,18 @@
   "scripts": {
     "clean": "rimraf node_modules && lerna clean --yes",
     "setup": "pnpm i",
-    "=== vue3-template ===": "",
-    "dev:vue3-template": "pnpm --filter vue3-template dev",
-    "build:vue3-template": "pnpm --filter vue3-template build",
+    "=== aleatorik-standard ===": "",
+    "dev:": "pnpm --filter @aleatorik-ui/standard dev",
+    "build:": "pnpm --filter @aleatorik-ui/standard build",
     "=== etc ===": "",
     "build:font": "node scripts/font.js",
     "build:theme-builder": "pnpm --filter theme-builder build",
-    "build:ts-proto": "pnpm --filter ts-proto build",
     "build:style": "node scripts/style.js",
     "build:lang": "node scripts/lang.js",
+    "build:ts-proto": "pnpm --filter ts-proto build",
     "=== common ===": "",
-    "build:common:font": "pnpm --filter @mozart-ui/common-ui build:font",
-    "build:common:proto": "pnpm --filter @mozart-ui/protos build",
-    "build:zip": "node scripts/zip-make.js win"
+    "build:common:font": "pnpm --filter @aleatorik-ui/common-ui build:font",
+    "build:common:proto": "pnpm --filter @aleatorik-ui/protos build"
   },
   "author": "",
   "license": "ISC",

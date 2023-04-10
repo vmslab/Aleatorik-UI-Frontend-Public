@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ITextProps } from "@mozart-ui/common-ui";
+import { ITextProps } from "@aleatorik-ui/common-ui";
 
 const Text: React.FC<ITextProps> = props => {
   return <></>;

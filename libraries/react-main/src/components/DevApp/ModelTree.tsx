@@ -1,15 +1,15 @@
 import * as React from "react";
 import { useSetRecoilState } from "recoil";
 import { useQuery, useMutation } from "react-query";
-import { ITreeNode, ITreeProps, Command, getModelTreeItems } from "@mozart-ui/protos";
+import { ITreeNode, ITreeProps, Command, getModelTreeItems } from "@aleatorik-ui/protos";
 import { selectedState, connectionState } from "../../stores/devStore";
 import ConnectionDialog from "./ConnectionDialog";
-import { GetModel, Remove, Migrate } from "@mozart-ui/common-api";
+import { GetModel, Remove, Migrate } from "@aleatorik-ui/common-api";
 import { showConfirm } from "../../utils/dialog";
 import { alarmState, loadState } from "../../stores/mainStore";
 import queryClient from "../../utils/query";
-import { generateGUID } from "@mozart-ui/common-ui";
-import { Tree } from "@mozart-ui/react-component";
+import { generateGUID } from "@aleatorik-ui/common-ui";
+import { Tree } from "@aleatorik-ui/react-component";
 
 interface IModelTreeProp extends ITreeProps {}
 

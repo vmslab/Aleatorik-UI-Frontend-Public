@@ -4,8 +4,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, defineExpose } from "vue";
-import { DayjsRange } from "@mozart-ui/common";
-import { Gantt as GanttComponent } from "@mozart-ui/common-ui";
+import { DayjsRange } from "@aleatorik-ui/common";
+import { Gantt as GanttComponent } from "@aleatorik-ui/common-ui";
 import {
   Column,
   IGanttRow,
@@ -16,7 +16,7 @@ import {
   GanttHeaderType,
   GanttTaskLineType,
   createCamelProps,
-} from "@mozart-ui/common-ui";
+} from "@aleatorik-ui/common-ui";
 
 const props = defineProps<{
   columns: Column[];

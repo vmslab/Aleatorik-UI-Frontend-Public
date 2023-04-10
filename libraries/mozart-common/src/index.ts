@@ -5,7 +5,7 @@ import MenuItem from "./data/MenuItem";
 import FileSystem from "./data/FileSystem";
 import EventBus from "./event/EventBus";
 
-export { ChartData, Chart, Axis, Series, Text } from "@mozart-ui/common-ui";
+export { ChartData, Chart, Axis, Series, Text } from "@aleatorik-ui/common-ui";
 export type {
   IAxisProps,
   ITooltipParams,
@@ -14,10 +14,10 @@ export type {
   ISeriesProps,
   IBoxPlotTooltipLabels,
   ITextProps,
-} from "@mozart-ui/common-ui";
+} from "@aleatorik-ui/common-ui";
 
-export { Gauge, Bar, Arc, Mark } from "@mozart-ui/common-ui";
-export type { IGaugeProps, IBarProps, IArcProps, IMarkProps } from "@mozart-ui/common-ui";
+export { Gauge, Bar, Arc, Mark } from "@aleatorik-ui/common-ui";
+export type { IGaugeProps, IBarProps, IArcProps, IMarkProps } from "@aleatorik-ui/common-ui";
 
 export {
   Cell,
@@ -27,15 +27,15 @@ export {
   GanttHeader,
   GanttBody,
   Gantt,
-} from "@mozart-ui/common-ui";
+} from "@aleatorik-ui/common-ui";
 
-export type { IGanttProps } from "@mozart-ui/common-ui";
+export type { IGanttProps } from "@aleatorik-ui/common-ui";
 
-export { Pane, Splitter } from "@mozart-ui/common-ui";
+export { Pane, Splitter } from "@aleatorik-ui/common-ui";
 
-export { ScrollBar } from "@mozart-ui/common-ui";
+export { ScrollBar } from "@aleatorik-ui/common-ui";
 
-export { Flow, FlowClone, FlowMinimap } from "@mozart-ui/common-ui";
+export { Flow, FlowClone, FlowMinimap } from "@aleatorik-ui/common-ui";
 
 import Editor from "./components/Editor/Editor";
 
@@ -83,7 +83,7 @@ export type {
   IGanttRow,
   GanttHeaderType,
   GanttTaskLineType,
-} from "@mozart-ui/common-ui";
+} from "@aleatorik-ui/common-ui";
 
 export type {
   IKeyValue,
@@ -173,12 +173,12 @@ export {
   getElementDocument,
   isCollision,
   isOver,
-} from "@mozart-ui/common-ui";
+} from "@aleatorik-ui/common-ui";
 export { addTooltipEventNode } from "./utils/graphUtil";
 
 export { enumToArray } from "./utils/enumUtil";
 export { convertFilterToWhere } from "./utils/filterUtil";
-export type { IDummyOptions } from "@mozart-ui/common-ui";
+export type { IDummyOptions } from "@aleatorik-ui/common-ui";
 export {
   calcTextSize,
   getArrSizes,
@@ -186,7 +186,7 @@ export {
   dateRangeToWidth,
   widthToEndDate,
   changeSizeTheme,
-} from "@mozart-ui/common-ui";
+} from "@aleatorik-ui/common-ui";
 export { copy, instancing } from "./utils/objectUtil";
 export { parseCsv } from "./utils/csvUtil";
 export {
@@ -207,21 +207,21 @@ export {
   getColorByType,
   colorPalletesSet,
   changeColorTheme,
-} from "@mozart-ui/common-ui";
-export { hexToRgba, rgbaToRgb, calcBrightness, getTextColor2 } from "@mozart-ui/common-ui";
+} from "@aleatorik-ui/common-ui";
+export { hexToRgba, rgbaToRgb, calcBrightness, getTextColor2 } from "@aleatorik-ui/common-ui";
 export { parseLink } from "./utils/regexUtil";
 export { formatSizeUnits } from "./utils/fileUtil";
-export { dayjsRange, DayjsRange } from "@mozart-ui/common-ui";
+export { dayjsRange, DayjsRange } from "@aleatorik-ui/common-ui";
 
-export { MIN_WIDTH, MIN_HEIGHT, setThemeData, getAllThemeItems } from "@mozart-ui/common-ui";
+export { MIN_WIDTH, MIN_HEIGHT, setThemeData, getAllThemeItems } from "@aleatorik-ui/common-ui";
 export {
   setCustomColor,
   materialColorIndex,
   setHorizontalSize,
   setVerticalSize,
   resizeVerticalSize,
-} from "@mozart-ui/common-ui";
-export { replaceGenericLight, replaceGenericDark } from "@mozart-ui/common-ui";
+} from "@aleatorik-ui/common-ui";
+export { replaceGenericLight, replaceGenericDark } from "@aleatorik-ui/common-ui";
 
 export type { ElementDefinition, ElementsDefinition, Stylesheet, LayoutOptions } from "cytoscape";
 

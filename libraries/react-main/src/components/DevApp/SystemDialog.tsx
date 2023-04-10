@@ -4,8 +4,8 @@ import { useMutation } from "react-query";
 import { Popup, ToolbarItem } from "devextreme-react/popup";
 import { systemState, selectedState } from "../../stores/devStore";
 import Form, { Item } from "devextreme-react/form";
-import { generateGUID } from "@mozart-ui/common-ui";
-import { Add, Modify } from "@mozart-ui/common-api";
+import { generateGUID } from "@aleatorik-ui/common-ui";
+import { Add, Modify } from "@aleatorik-ui/common-api";
 import { alarmState } from "../../stores/mainStore";
 import queryClient from "../../utils/query";
 

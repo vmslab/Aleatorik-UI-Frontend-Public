@@ -1,6 +1,6 @@
 import * as React from "react";
 // import ReactDOM from "react-dom/client";
-import { IDEMain, IDEMenu, IDEStatus, IIDEParams, IMenuItem, ICommandOptions } from "@mozart-ui/common-ui";
+import { IDEMain, IDEMenu, IDEStatus, IIDEParams, IMenuItem, ICommandOptions } from "@aleatorik-ui/common-ui";
 // import HelloWorldWidget from "./Widget/HelloWorldWidget";
 
 interface IIDE {

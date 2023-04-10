@@ -48,8 +48,8 @@ import { saveAs } from "file-saver";
 import path from "path-browserify";
 import { DxPopup } from "devextreme-vue/popup";
 import { DxButton } from "devextreme-vue/button";
-import { FileParameter } from "@mozart-ui/common";
-import { Upload, Download } from "@mozart-ui/common-api";
+import { FileParameter } from "@aleatorik-ui/common";
+import { Upload, Download } from "@aleatorik-ui/common-api";
 import { useFileProgressStore, useDeployStore } from "../../stores/devStore";
 
 interface IZip {

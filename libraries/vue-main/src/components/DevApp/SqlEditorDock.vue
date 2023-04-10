@@ -13,11 +13,11 @@
 <script setup lang="ts">
 import { createApp } from "vue";
 import { VueQueryPlugin } from "vue-query";
-import { SqlEditor, ISqlEditorParams } from "@mozart-ui/common-ui";
+import { SqlEditor, ISqlEditorParams } from "@aleatorik-ui/common-ui";
 import i18n from "../../plugin/i18n";
 import queryClient from "../../utils/query";
-import { SqlDef } from "@mozart-ui/protos/src/generated/Protos/ModelService";
-import { SqlEditorWidget } from "@mozart-ui/vue-component";
+import { SqlDef } from "@aleatorik-ui/protos/src/generated/Protos/ModelService";
+import { SqlEditorWidget } from "@aleatorik-ui/vue-component";
 import SqlParameters from "./Sql/SqlParameters.vue";
 import SqlResults from "./Sql/SqlResults.vue";
 

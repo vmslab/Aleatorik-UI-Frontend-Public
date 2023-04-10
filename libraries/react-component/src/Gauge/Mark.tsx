@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IMarkProps } from "@mozart-ui/common-ui";
+import { IMarkProps } from "@aleatorik-ui/common-ui";
 
 const Mark: React.FC<IMarkProps> = props => {
   return <></>;

@@ -9,7 +9,7 @@ import {
   ISeriesProps,
   ITextProps,
   createCamelProps,
-} from "@mozart-ui/common-ui";
+} from "@aleatorik-ui/common-ui";
 
 interface IChartPropsDetail extends IChartProps {
   children?: React.ReactNode | React.ReactNode[];

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Tree as TreeComponent, ITreeProps } from "@mozart-ui/common-ui";
+import { Tree as TreeComponent, ITreeProps } from "@aleatorik-ui/common-ui";
 
 const Tree: React.FC<ITreeProps> = (props: ITreeProps) => {
   const treeRef = React.useRef(null);

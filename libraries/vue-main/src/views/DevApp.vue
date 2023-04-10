@@ -38,10 +38,10 @@
 import { createApp, computed } from "vue";
 import { VueQueryPlugin, useQuery } from "vue-query";
 import { useTranslation } from "i18next-vue";
-import { IDE } from "@mozart-ui/vue-component";
-import { IDEMain, IDEMenu, IDEStatus, IIDEParams, IMenuItem, ICommandOptions } from "@mozart-ui/common-ui";
-import { GetDeployInfo } from "@mozart-ui/common-api";
-import { ITreeNode } from "@mozart-ui/protos";
+import { IDE } from "@aleatorik-ui/vue-component";
+import { IDEMain, IDEMenu, IDEStatus, IIDEParams, IMenuItem, ICommandOptions } from "@aleatorik-ui/common-ui";
+import { GetDeployInfo } from "@aleatorik-ui/common-api";
+import { ITreeNode } from "@aleatorik-ui/protos";
 import i18n from "../plugin/i18n";
 import { useThemeStore } from "../stores/mainStore";
 import { useDeployStore } from "../stores/devStore";

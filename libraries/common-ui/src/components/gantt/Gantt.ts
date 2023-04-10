@@ -1,5 +1,5 @@
 import { throttle } from "lodash";
-import { DayjsRange } from "@mozart-ui/common";
+import { DayjsRange } from "@aleatorik-ui/common";
 import { GanttHeaderType, GanttTaskLineType, IGanttHeader, IGanttRow, IGanttTask, IGanttMilestone } from "../../types";
 import { calcRowCount } from "../../utils/ganttUtil";
 import { widthToEndDate } from "../../utils/sizeUtil";

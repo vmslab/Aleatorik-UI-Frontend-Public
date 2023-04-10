@@ -1,10 +1,10 @@
 import * as React from "react";
 import { useSetRecoilState } from "recoil";
 import { useMutation } from "react-query";
-import { generateGUID } from "@mozart-ui/common-ui";
-import { types } from "@mozart-ui/protos";
-import { EntityDef, EntityPropDef } from "@mozart-ui/protos/src/generated/Protos/ModelService";
-import { Add, Modify } from "@mozart-ui/common-api";
+import { generateGUID } from "@aleatorik-ui/common-ui";
+import { types } from "@aleatorik-ui/protos";
+import { EntityDef, EntityPropDef } from "@aleatorik-ui/protos/src/generated/Protos/ModelService";
+import { Add, Modify } from "@aleatorik-ui/common-api";
 import { alarmState } from "../../stores/mainStore";
 import queryClient from "../../utils/query";
 import { DataGrid, Column, Editing, Lookup, Toolbar, Item } from "devextreme-react/data-grid";

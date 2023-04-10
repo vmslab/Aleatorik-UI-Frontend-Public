@@ -1,4 +1,4 @@
-import { dayjsRange, DayjsRange } from "@mozart-ui/common";
+import { dayjsRange, DayjsRange } from "@aleatorik-ui/common";
 import { dateRangeToWidth, widthToEndDate } from "../../utils/sizeUtil";
 import { addTooltipEvent } from "../../utils/element";
 import { stringToColor, lightenDarkenColor, ganttColors, getGanttKeyColor, getTextColor } from "../../utils/colorUtil";
