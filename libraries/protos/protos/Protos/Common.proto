@@ -1,0 +1,35 @@
+﻿syntax = "proto3";
+
+//import "google/protobuf/wrappers.proto";
+//import "google/protobuf/empty.proto";
+import "google/protobuf/struct.proto";
+
+option csharp_namespace = "MozartUI.Services.Grpc";
+
+package mozartui.services;
+
+// Empty is a blank response, to be used when there is no return expected.
+message Empty {}
+
+message AnyArray {
+  // 
+  repeated google.protobuf.Value items = 1;
+}
+
+message Result {
+  //
+  int32 count = 1;
+  //
+  optional google.protobuf.Value obj = 2;
+  //
+  optional string msg = 3;
+  //
+  optional string systemId = 4;
+}
+
+message Filter {
+  //
+  optional string col = 1;
+  //
+  optional string val = 2;
+}

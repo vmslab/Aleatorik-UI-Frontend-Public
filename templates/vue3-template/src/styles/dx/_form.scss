@@ -1,0 +1,13 @@
+.dx-form {
+  .dx-item {
+    .dx-item-content {
+      .dx-field-item-label-text {
+        font-size: var(--font-size-body02);
+        color: var(--color-font4);
+      }
+      .dx-field-item-required-mark {
+        color: var(--color-error);
+      }
+    }
+  }
+}

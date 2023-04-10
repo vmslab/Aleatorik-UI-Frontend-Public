@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #828b9a;
+        stroke: rgba(0,0,0,0);
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <g id="icon-folder" transform="translate(-527 -58)">
+    <path id="합치기_132" data-name="합치기 132" class="cls-2" d="M-2515.49,2896.643h-10.3a.843.843,0,0,1-.6-.248l-2.549-2.549a3.465,3.465,0,0,0-2.468-1.024h-7.1a3.5,3.5,0,0,0-3.489,3.492v20.492a3.494,3.494,0,0,0,3.489,3.49h23.021a3.5,3.5,0,0,0,3.49-3.49v-16.673a3.5,3.5,0,0,0-3.49-3.49" transform="translate(3070 -2832.559)"/>
+  </g>
+</svg>

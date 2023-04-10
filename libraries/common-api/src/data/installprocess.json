@@ -1,0 +1,56 @@
+[
+  {
+    "processId": "start",
+    "name": "Start",
+    "categoryId": "",
+    "type": "",
+    "path": "/install",
+    "isAutoBlock": false,
+    "visibility": true
+  },
+  {
+    "processId": "selectWorkingDirectory",
+    "name": "Select Working Directory",
+    "categoryId": "",
+    "type": "",
+    "path": "/install/selectWorkingDirectory",
+    "isAutoBlock": true,
+    "visibility": true
+  },
+  {
+    "processId": "unzipUIServerFiles",
+    "name": "Unzip UI Server Files",
+    "categoryId": "",
+    "type": "",
+    "path": "/install/unzipUIServerFiles",
+    "isAutoBlock": true,
+    "visibility": false
+  },
+  {
+    "processId": "installServices",
+    "name": "Install Services",
+    "categoryId": "",
+    "type": "",
+    "path": "/install/installServices",
+    "isAutoBlock": true,
+    "visibility": false
+  },
+  {
+    "processId": "startService",
+    "name": "Start Service",
+    "categoryId": "",
+    "type": "",
+    "path": "/install/start",
+    "isAutoBlock": true,
+    "visibility": false
+  },
+  {
+    "processId": "finish",
+    "name": "Finish",
+    "categoryId": "",
+    "type": "",
+    "path": "/install/finish",
+    "isAutoBlock": false,
+    "visibility": false
+  }
+]

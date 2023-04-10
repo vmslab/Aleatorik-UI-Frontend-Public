@@ -1,0 +1,288 @@
+@import "../function";
+@import "../mixin";
+
+.moz-treeview {
+  .dx-scrollable-content > .dx-treeview-node-container {
+    margin-top: var(--size-card-top-padding);
+    margin-left: var(--size-card-title-left-padding);
+  }
+
+  .dx-treeview-node {
+    .dx-treeview-item {
+      padding: 6px;
+      line-height: var(--font-size-body02);
+      &.dx-state-hover {
+        color: unset;
+        background-color: unset;
+      }
+    }
+    .dx-treeview-toggle-item-visibility {
+      width: var(--size-arrow-btn);
+      height: var(--size-arrow-btn);
+      background-color: var(--color-border1);
+      color: var(--color-font5);
+      border-radius: 2px;
+      margin-right: 10px;
+      margin-top: 8px;
+      left: 0px;
+
+      &::before {
+        font-family: "mozart-icons";
+        font-size: 28px;
+        color: var(--color-font5);
+        content: unicode("e10d");
+        display: block;
+        margin-left: -14px;
+      }
+
+      &-opened {
+        background-color: var(--color-font5);
+
+        &::before {
+          font-family: "mozart-icons";
+          color: var(--color-border1);
+          content: unicode("e10d");
+          transform: rotate(180deg);
+          display: block;
+          margin-left: var(--size-list-expand-icon-padding);
+        }
+      }
+    }
+    .dx-treeview-item-without-checkbox {
+      &.dx-state-selected > {
+        .dx-treeview-item {
+          color: unset;
+          background-color: unset;
+        }
+      }
+    }
+  }
+  .dx-treeview-node[aria-level="1"] {
+    padding-left: 20px;
+
+    > .dx-treeview-item {
+      font-weight: bold;
+    }
+
+    > .dx-treeview-toggle-item-visibility {
+      background-color: var(--color-border1);
+
+      &::before {
+        color: var(--color-font5);
+        margin-left: -14px;
+      }
+
+      &-opened {
+        background-color: var(--color-accent);
+        &::before {
+          color: var(--color-font-white);
+          margin-left: var(--size-list-expand-icon-padding);
+        }
+      }
+    }
+  }
+  .dx-treeview-node[aria-level="2"],
+  .dx-treeview-node[aria-level="3"] {
+    padding-left: 20px;
+    margin-left: 8px;
+
+    &.dx-treeview-node-is-leaf {
+      padding-left: 0px;
+      margin-left: 0px;
+    }
+  }
+  .dx-treeview-search {
+    margin: 10px var(--size-card-rbl-padding) 0px var(--size-card-rbl-padding);
+    .dx-texteditor-container {
+      .dx-texteditor-input-container {
+        .dx-placeholder {
+          left: 16px;
+        }
+      }
+    }
+  }
+  &.dx-treeview-with-search {
+    > .dx-scrollable {
+      height: calc(100% - 39px);
+      .dx-scrollable-content {
+        height: auto;
+        min-height: auto;
+      }
+    }
+  }
+}
+
+.moz-emphasize-treeview {
+  padding-top: 10px;
+  .dx-treeview-node {
+    padding: 0px;
+
+    &[aria-level="1"] > .dx-treeview-toggle-item-visibility {
+      height: var(--size-drawer-item-height);
+    }
+
+    // Normal 상태
+    .dx-treeview-item {
+      min-height: var(--size-drawer-item-height);
+      padding: 0px;
+
+      .second-node,
+      .child-node {
+        span {
+          @include nowrap-text;
+        }
+        padding: 0px 0px 0px calc(var(--size-card-rbl-padding) * 2 + 8px);
+      }
+
+      // Second Node
+      .second-node {
+        font-size: var(--font-size-body02);
+        font-weight: 700;
+        height: var(--size-drawer-item-height);
+        line-height: var(--size-drawer-item-height);
+        @include flex-center-horizontal;
+
+        span {
+          height: inherit;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      // Leaf Node
+      .child-node {
+        font-size: var(--font-size-body03);
+        height: var(--size-drawer-item-height);
+        line-height: var(--size-drawer-item-height);
+        @include flex-center-horizontal;
+      }
+
+      // Node Icons
+      .node-icons {
+        @include flex-center-horizontal;
+        padding-right: var(--size-card-rbl-padding);
+        .dx-button {
+          margin-left: 2px;
+          .dx-button-content {
+            @include flex-center;
+          }
+        }
+        .dx-button-has-icon {
+          .dx-button-content {
+            padding: 0;
+          }
+        }
+      }
+
+      &.dx-state-hover {
+        color: unset;
+        background-color: unset;
+      }
+    }
+
+    // Hover 상태
+    .dx-treeview-item.dx-state-hover {
+      background-color: var(--color-hover);
+      .second-node,
+      .child-node {
+        span {
+          color: var(--color-accent);
+        }
+      }
+    }
+
+    // Selected 상태
+    .dx-state-selected {
+      background-color: var(--color-contentback);
+      .second-node,
+      .child-node {
+        span {
+          color: var(--color-accent);
+        }
+        .node-icons {
+          visibility: visible !important;
+        }
+      }
+    }
+
+    .dx-treeview-item-without-checkbox {
+      &.dx-state-selected > {
+        .dx-treeview-item {
+          color: unset;
+          background-color: unset;
+        }
+      }
+    }
+
+    // Toggle Icon Style (Normal)
+    .dx-treeview-toggle-item-visibility {
+      left: 0px;
+      &::before {
+        content: unicode("e13a");
+        pointer-events: none;
+        font-size: 30px;
+        font-family: "mozart-icons";
+        left: var(--size-card-rbl-padding);
+        // margin-left: -10px;
+        @include flex-center-horizontal;
+      }
+    }
+    .dx-treeview-toggle-item-visibility-opened {
+      left: 0px;
+      &::before {
+        content: unicode("e10d");
+        pointer-events: none;
+        font-size: 30px;
+        font-family: "mozart-icons";
+        left: var(--size-card-rbl-padding);
+        // margin-left: -10px;
+        @include flex-center-horizontal;
+      }
+    }
+
+    // Toggle Icon Style (Hover)
+    .dx-treeview-item.dx-state-hover ~ .dx-treeview-toggle-item-visibility::before {
+      color: var(--color-accent);
+      content: unicode("e13a");
+      font-family: "mozart-icons";
+    }
+    .dx-treeview-item.dx-state-hover ~ .dx-treeview-toggle-item-visibility-opened::before {
+      color: var(--color-accent);
+      content: unicode("e10d");
+      font-family: "mozart-icons";
+    }
+
+    // Toggle Icon Location
+    ul li {
+      .dx-treeview-toggle-item-visibility::before {
+        content: unicode("e13a");
+        left: 34px;
+      }
+      .dx-treeview-toggle-item-visibility-opened::before {
+        content: unicode("e10d");
+        left: 34px;
+      }
+    }
+
+    &.selected_parent .dx-treeview-toggle-item-visibility {
+      &::before {
+        color: var(--color-drawer-selected-menu-font);
+      }
+    }
+  }
+
+  .dx-treeview-search {
+    margin: 0px var(--size-card-rbl-padding) 10px var(--size-card-rbl-padding);
+    &.dx-editor-outlined {
+      border: none;
+    }
+    .dx-texteditor-container {
+      .dx-texteditor-input-container {
+        .dx-placeholder {
+          left: 30px;
+        }
+      }
+    }
+  }
+}

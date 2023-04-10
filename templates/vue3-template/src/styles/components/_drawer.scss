@@ -1,0 +1,323 @@
+@import "../mixin";
+@import "../function";
+
+// Side Drawer & Tree Style
+.moz-drawer {
+  // z-index: 1501;
+  height: var(--size-height);
+  background-color: var(--color-primary);
+
+  // 배경 색상
+  .dx-drawer-panel-content {
+    // z-index: 1;
+    .dx-treeview {
+      background-color: var(--color-primary);
+    }
+  }
+
+  // Node Style
+  .moz-drawer-treeview {
+    height: var(--size-height-without-top);
+    .dx-treeview-node {
+      padding: 0px;
+
+      &[aria-level="1"] > .dx-treeview-toggle-item-visibility {
+        display: none;
+      }
+      &[aria-level="1"][aria-expanded="false"]:not([data-item-id="Favorite"]) .first-node {
+        i:before {
+          content: unicode("e14e");
+          pointer-events: none;
+          font-size: var(--size-drawer-icon-font-size);
+          font-family: "mozart-icons";
+        }
+      }
+      &[aria-level="2"] > .dx-treeview-toggle-item-visibility {
+        height: var(--size-drawer-item-height);
+      }
+
+      // Normal 상태
+      .dx-treeview-item {
+        padding: 0px;
+
+        // First Node
+        .first-node {
+          span {
+            @include nowrap-text;
+          }
+          font-size: var(--font-size-body02);
+          font-weight: bold;
+          height: var(--size-drawer-category-height);
+          display: block;
+          padding-top: 3px;
+          padding: 0px 0px 0px 20px;
+          span {
+            color: var(--color-drawer-font);
+            padding-left: var(--size-padding1);
+          }
+          i {
+            width: 30px;
+            height: inherit;
+            display: inline-flex;
+          }
+          i::before {
+            color: var(--color-drawer-font);
+            pointer-events: none;
+            font-size: var(--size-drawer-icon-font-size);
+            vertical-align: middle;
+            display: inline;
+          }
+        }
+
+        .second-node,
+        .child-node {
+          span {
+            @include nowrap-text;
+          }
+          padding: 0px 0px 0px 55px;
+          span {
+            color: var(--color-drawer-font);
+          }
+        }
+
+        // Second Node
+        .second-node {
+          font-size: var(--font-size-body03);
+          height: var(--size-drawer-item-height);
+          line-height: var(--size-drawer-item-height);
+          @include flex-center-horizontal;
+
+          span {
+            height: inherit;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+
+        // Leaf Node
+        .child-node {
+          font-size: var(--font-size-body03);
+          height: var(--size-drawer-item-height);
+          line-height: var(--size-drawer-item-height);
+          @include flex-center-horizontal;
+        }
+      }
+
+      // Leaf Node가 3단계일 경우 padding 추가
+      .dx-treeview-node-container {
+        .dx-treeview-node-container {
+          .child-node {
+            span {
+              padding-left: 10px;
+            }
+          }
+        }
+      }
+
+      // Hover 상태
+      .dx-treeview-item.dx-state-hover {
+        .first-node {
+          background-color: var(--color-accent);
+          span {
+            color: var(--color-drawer-selected-category-font);
+          }
+
+          .mozart-icons::before {
+            color: var(--color-drawer-selected-category-font);
+          }
+        }
+
+        .second-node,
+        .child-node {
+          background-color: var(--color-secondary);
+          span {
+            color: var(--color-accent);
+          }
+        }
+      }
+
+      // Selected 상태
+      .dx-state-selected > div {
+        .first-node {
+          background-color: var(--color-accent);
+          span {
+            color: var(--color-font-white) !important;
+          }
+        }
+        .second-node,
+        .child-node {
+          background-color: var(--color-secondary);
+          span {
+            color: var(--color-drawer-selected-menu-font);
+          }
+        }
+      }
+
+      // Toggle Icon Style (Normal)
+      .dx-treeview-toggle-item-visibility {
+        &::before {
+          content: unicode("e13a");
+          pointer-events: none;
+          font-size: 30px;
+          font-family: "mozart-icons";
+          left: 225px;
+          color: var(--color-drawer-font);
+          margin-left: -10px;
+          @include flex-center-horizontal;
+        }
+      }
+      .dx-treeview-toggle-item-visibility-opened {
+        &::before {
+          content: unicode("e10d");
+          pointer-events: none;
+          font-size: 30px;
+          font-family: "mozart-icons";
+          left: 225px;
+          margin-left: -10px;
+          @include flex-center-horizontal;
+        }
+      }
+
+      // Toggle Icon Style (Hover)
+      .dx-treeview-item.dx-state-hover ~ .dx-treeview-toggle-item-visibility::before {
+        color: var(--color-accent);
+        content: unicode("e13a");
+        font-family: "mozart-icons";
+      }
+      .dx-treeview-item.dx-state-hover ~ .dx-treeview-toggle-item-visibility-opened::before {
+        color: var(--color-accent);
+        content: unicode("e10d");
+        font-family: "mozart-icons";
+      }
+
+      // Toggle Icon Location
+      ul li {
+        .dx-treeview-toggle-item-visibility::before {
+          content: unicode("e13a");
+          left: 34px;
+        }
+        .dx-treeview-toggle-item-visibility-opened::before {
+          content: unicode("e10d");
+          left: 34px;
+        }
+      }
+
+      &.selected_parent .dx-treeview-toggle-item-visibility {
+        &::before {
+          color: var(--color-drawer-selected-menu-font);
+        }
+      }
+    }
+
+    .dx-state-selected .dx-treeview-toggle-item-visibility::before {
+      color: var(--color-drawer-selected-menu-font);
+      content: unicode("e10d");
+      font-family: "mozart-icons";
+    }
+    .dx-state-selected .dx-treeview-toggle-item-visibility-opened::before {
+      color: var(--color-drawer-selected-menu-font);
+      content: unicode("e10d");
+      transform: rotate(180deg);
+      font-family: "mozart-icons";
+    }
+
+    .dx-treeview-item-without-checkbox.dx-state-selected > .dx-treeview-item .child-node::before {
+      content: "";
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background-color: var(--color-drawer-selected-menu-font);
+      position: absolute;
+      left: 33px;
+    }
+
+    .dx-treeview-item-without-checkbox .dx-state-hover .dx-item-content .child-node::before {
+      content: "";
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background-color: var(--color-accent);
+      position: absolute;
+      left: 33px;
+    }
+
+    &.closed-node {
+      .dx-treeview-node {
+        .dx-treeview-toggle-item-visibility {
+          &::before {
+            content: unicode("e13a");
+            font-family: "mozart-icons";
+            color: var(--color-drawer-font);
+            font-size: 42px;
+            left: 28px;
+            @include flex-center-horizontal;
+          }
+        }
+        .dx-treeview-toggle-item-visibility-opened {
+          &::before {
+            content: unicode("e10d");
+            font-size: 42px;
+            font-family: "mozart-icons";
+            margin-left: -10px;
+            @include flex-center-horizontal;
+          }
+        }
+
+        .dx-treeview-item {
+          .child-node {
+            padding: 0px;
+            &::before {
+              content: "";
+              width: 5px;
+              height: 5px;
+              border-radius: 50%;
+              background-color: var(--color-drawer-font);
+              position: absolute;
+              left: 32px;
+            }
+          }
+        }
+
+        &.dx-state-selected {
+          .child-node::before {
+            background-color: var(--color-font-white);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Drawer 내부 Menu 영역
+.moz-side-menu {
+  width: var(--size-drawer-width);
+  height: var(--size-height-without-top);
+  background-color: var(--color-primary);
+
+  .selected_parent .dx-treeview-item .dx-treeview-item-content div .first-node {
+    background-color: var(--color-accent);
+    .mozart-icons::before {
+      color: var(--color-font-white);
+    }
+    span {
+      color: var(--color-font-white);
+    }
+  }
+  .selected_parent .dx-treeview-toggle-item-visibility-opened::before {
+    color: var(--color-font-white);
+  }
+  .toggle-menu {
+    display: flex;
+    width: 70px;
+    height: var(--size-top-height);
+
+    i {
+      margin: auto;
+      &::before {
+        @include flex-center;
+        display: block;
+      }
+    }
+  }
+}

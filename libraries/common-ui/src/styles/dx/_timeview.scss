@@ -1,0 +1,17 @@
+.dx-timeview {
+  .dx-timeview-clock {
+    background-image: var(--svg-clock);
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px 3px rgb(0 0 0 / 10%);
+    .dx-timeview-hourarrow {
+      background-image: var(--svg-hour);
+    }
+    .dx-timeview-minutearrow {
+      background-image: var(--svg-minute);
+    }
+  }
+}
+
+.dx-datebox-datetime-time-side {
+  background-color: var(--color-back);
+}

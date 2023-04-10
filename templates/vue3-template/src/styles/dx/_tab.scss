@@ -1,0 +1,62 @@
+.dx-tabpanel.dx-state-focused > .dx-tabpanel-container > .dx-multiview-wrapper {
+  border-color: var(--color-border2);
+}
+
+.dx-tab.dx-state-focused::after {
+  border-right: 1px solid var(--color-border2);
+  border-left: 1px solid var(--color-border2);
+  border-top: 1px solid var(--color-border2);
+  border-bottom: 1px solid var(--color-border2);
+}
+.dx-tabpanel.dx-state-focused > .dx-tabpanel-tabs .dx-tabs {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.dx-tabpanel.dx-state-focused > .dx-tabpanel-tabs .dx-tab {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.dx-tabpanel.dx-state-focused > .dx-tabpanel-tabs .dx-tab.dx-tab-selected {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.dx-tabpanel.dx-state-focused
+  > .dx-tabpanel-tabs
+  .dx-tabs-expanded
+  .dx-tab:not(.dx-tab-selected):first-of-type {
+  -webkit-box-shadow: inset 0 -1px var(--color-border2), inset 1px 0, inset 0 1px;
+  box-shadow: inset 0 -1px var(--color-border2), inset 1px 0, inset 0 1px;
+}
+.dx-rtl
+  .dx-tabpanel.dx-state-focused
+  > .dx-tabpanel-tabs
+  .dx-tabs-expanded
+  .dx-tab:not(.dx-tab-selected):first-of-type,
+.dx-rtl.dx-tabpanel.dx-state-focused
+  > .dx-tabpanel-tabs
+  .dx-tabs-expanded
+  .dx-tab:not(.dx-tab-selected):first-of-type,
+.dx-tabpanel.dx-state-focused
+  > .dx-tabpanel-tabs
+  .dx-tabs-stretched
+  .dx-tab:not(.dx-tab-selected):last-of-type {
+  -webkit-box-shadow: inset 0 -1px var(--color-border2), inset -1px 0, inset 0 1px;
+  box-shadow: inset 0 -1px var(--color-border2), inset -1px 0, inset 0 1px;
+}
+.dx-rtl
+  .dx-tabpanel.dx-state-focused
+  > .dx-tabpanel-tabs
+  .dx-tabs-stretched
+  .dx-tab:not(.dx-tab-selected):last-of-type,
+.dx-rtl.dx-tabpanel.dx-state-focused
+  > .dx-tabpanel-tabs
+  .dx-tabs-stretched
+  .dx-tab:not(.dx-tab-selected):last-of-type,
+.dx-tabpanel.dx-state-focused > .dx-tabpanel-tabs .dx-tabs-nav-button-left {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.dx-tabpanel.dx-state-focused > .dx-tabpanel-tabs .dx-tabs-nav-button-right {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

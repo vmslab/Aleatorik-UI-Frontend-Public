@@ -1,0 +1,47 @@
+[
+  {
+    "processId": "start",
+    "name": "Start",
+    "categoryId": "",
+    "type": "",
+    "path": "/uninstall",
+    "isAutoBlock": false,
+    "visibility": true
+  },
+  {
+    "processId": "removeSetting",
+    "name": "Remove Setting",
+    "categoryId": "",
+    "type": "",
+    "path": "/uninstall/removeSetting",
+    "isAutoBlock": false,
+    "visibility": true
+  },
+  {
+    "processId": "stopServices",
+    "name": "Stop Services",
+    "categoryId": "",
+    "type": "",
+    "path": "/uninstall/stop",
+    "isAutoBlock": true,
+    "visibility": true
+  },
+  {
+    "processId": "uninstallServices",
+    "name": "Uninstall Services",
+    "categoryId": "",
+    "type": "",
+    "path": "/uninstall/service",
+    "isAutoBlock": true,
+    "visibility": false
+  },
+  {
+    "processId": "finish",
+    "name": "Finish",
+    "categoryId": "",
+    "type": "",
+    "path": "/uninstall/finish",
+    "isAutoBlock": false,
+    "visibility": false
+  }
+]

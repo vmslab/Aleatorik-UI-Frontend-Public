@@ -1,0 +1,40 @@
+.main-ide-wrapper {
+  height: var(--size-height);
+}
+
+.main-content-panel {
+  height: var(--size-shell-height);
+}
+
+.main-dock-panel {
+  height: var(--size-shell-height);
+}
+
+.sql-content-panel {
+  height: calc(var(--size-shell-height) - 24px);
+}
+
+.left-tab-bar.lm-TabBar {
+  min-width: var(--size-side-tab-bar-width);
+  max-width: 48px;
+  display: block;
+}
+
+.left-tab-bar .lm-TabBar-content {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+  list-style-type: none;
+  height: var(--size-shell-height);
+  transform-origin: 0 0 0;
+}
+
+.status-bar-panel {
+  height: var(--size-status-height);
+}
+
+.p-TabBar,
+.lm-TabBar {
+  max-height: none;
+}

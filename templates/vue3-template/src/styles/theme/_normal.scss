@@ -1,0 +1,117 @@
+:root,
+[font="normal"] {
+  /* Font */
+  --font-size-heading01: 24px;
+  --font-size-heading02: 20px;
+  --font-size-heading03: 17px;
+  --font-size-heading04: 16px;
+  --font-size-body01: 15px;
+  --font-size-body02: 14px;
+  --font-size-body03: 13px;
+  --font-size-body04: 12px;
+  --font-size-button01: 12px;
+
+  /* Common */
+  --size-content-padding-no-scroll: 12px;
+  --size-width: 100%;
+  --size-height: 100%;
+  --size-drawer-width: 260px;
+  --size-height-without-top: 100%;
+  --size-content-height: 100%;
+  --size-content-width: 100%;
+  --size-content-inner-height: 100%;
+  --size-content-inner-height-no-padding: 100%;
+  --size-content-inner-width: 100%;
+
+  /* Top */
+  --size-top-height: 66px;
+  --size-control-height: 66px;
+  --size-top-padding-right: 20px;
+
+  /* Drawer */
+  --size-drawer-category-height: 50px;
+  --size-drawer-icon-font-size: 20px;
+
+  /* Controller */
+  --size-padding-2to1: 8px;
+  --size-filter-height: 26px;
+
+  /* Card */
+  --size-card-title-height: 55px;
+  --size-card-title-left-padding: 28px;
+  --size-card-top-padding: 20px;
+  --size-card-rbl-padding: 32px;
+  --size-card-tab-height: 38px;
+
+  /* Icon */
+  --size-icon-button: 30px;
+  --size-icon-font-size: 19px;
+  --size-icon-controller-font-size: 22px;
+  --size-icon-top-app: 28px;
+
+  /* Button */
+  --size-button-top-app: 40px;
+  --size-button-control-size: 32px;
+  --size-button-height: 30px;
+  --size-button-width: 86px;
+
+  /* Grid */
+  --size-grid-header-height: 50px;
+  --size-grid-row-height: 40px;
+  --size-simple-item-height: 40px;
+  --size-filelist-header-height: 32px;
+  --size-filelist-item-height: 28px;
+  --size-filter-row-height: 28px;
+  --size-dropdown-button-left: 5px;
+  --size-select-dropdown-left: 5px;
+  --size-header-indicator-top: 18px;
+
+  /* Padding */
+  --size-icon-button-padding: 7px;
+  --size-content-padding: 20px;
+  --size-padding-3to2: 12px;
+  --size-8to7: 32px;
+  --size-6to5: 24px;
+
+  /* Switch */
+  --size-switch-handle: 14px;
+  --left-switch-on: 32px;
+  --left-switch-off: 35px;
+  --handle-margin-top: 0px;
+  --size-switch-handle-width: 130%;
+  --size-switch-handle-left: 45%;
+
+  /* List */
+  --size-list-expand-icon-padding: -8px;
+  --size-arrow-button-top: 0px;
+  --size-arrow-button-left: -5px;
+  --size-menu-item-height: 32px;
+
+  /* Popup */
+  --size-toolbar-bottom: 62px;
+
+  /* Input */
+  --size-dropdown-container: 32px;
+  --size-arrow-btn: 18px;
+  --size-checkbox: 20px;
+  --size-input-height: 34px;
+  --size-radio-container: 20px;
+  --size-radio-dot: 10px;
+  --radio-dot-margin-top: -15px;
+  --radio-dot-margin-left: 5px;
+
+  /* Form */
+  --size-label-top-padding: 8px;
+
+  /* Menu Location Top */
+  --menu-location-top-top-height: 60px;
+  --menu-location-top-menu-width: 142px;
+  --menu-location-top-submenu-height: 40px;
+  --menu-location-top-favorite-font-size: 25px;
+
+  /* Menu Location TopAndLeft*/
+  --menu-location-topandleft-left-item-height: 36px;
+
+  /* LMS */
+  --height-table-row: 47px;
+}

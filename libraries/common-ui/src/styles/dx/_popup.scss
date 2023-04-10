@@ -1,0 +1,249 @@
+@import "../mixin";
+.dx-popup-wrapper {
+  .dx-overlay-content {
+    display: grid;
+    border: none;
+    border-radius: var(--border-radius-outer);
+  }
+  &.dx-overlay-shader {
+    background-color: rgb(0, 0, 0, 0.5);
+  }
+
+  &.dx-popup-wrapper .dx-state-focused.dx-overlay-content {
+    border: none;
+  }
+
+  .dx-popup-normal {
+    .dx-popup-title {
+      width: inherit;
+      height: var(--size-card-title-height);
+      border-color: var(--color-border1);
+
+      .dx-item {
+        max-width: auto;
+        .dx-toolbar-item-content {
+          overflow: visible;
+          font-size: var(--font-size-heading04);
+          font-weight: bold;
+          width: inherit;
+          > div {
+            overflow: visible;
+            text-overflow: inherit;
+            color: var(--color-common-header-font);
+          }
+        }
+      }
+    }
+    .dx-toolbar {
+      max-width: inherit;
+      height: var(--size-card-title-height);
+      padding-left: var(--size-card-title-left-padding);
+      padding-right: var(--size-card-rbl-padding);
+      background-color: var(--color-commonheader);
+
+      @include flex-center-horizontal;
+      .dx-toolbar-items-container {
+        .dx-toolbar-center {
+          margin: 0px auto;
+          .dx-button {
+            border: 1px solid var(--color-accent);
+          }
+        }
+        .dx-toolbar-after {
+          .dx-toolbar-button {
+            .dx-closebutton {
+              border-radius: var(--border-radius);
+              left: 0px;
+              height: var(--size-button-control-size);
+              width: var(--size-button-control-size);
+              border: none;
+
+              .dx-button-content {
+                padding: var(--size-icon-button-padding);
+              }
+            }
+            .dx-icon-add-folder::before {
+              color: var(--color-font5);
+            }
+            .dx-closebutton:hover {
+              background-color: var(--color-accent);
+              .dx-icon-close::before {
+                color: var(--color-font-white);
+              }
+            }
+            &:not(:last-of-type) {
+              padding-right: 4px;
+            }
+          }
+        }
+      }
+    }
+    .dx-popup-content {
+      padding: 0px;
+      background-color: var(--color-back);
+
+      .dx-dialog-message {
+        width: -webkit-fill-available;
+      }
+      .dx-scrollview {
+        padding: 0px;
+
+        // .dx-item {
+        //   &.dx-state-hover {
+        //     background-color: var(--color-hover);
+        //     color: var(--color-font-white);
+        //   }
+        // }
+      }
+    }
+
+    .dx-popup-bottom {
+      height: var(--size-toolbar-bottom);
+      border-top: 1px solid var(--color-border1);
+      position: relative;
+      background-color: var(--color-back);
+      .dx-button {
+        text-align: center;
+        height: var(--size-button-height);
+        min-width: var(--size-button-width);
+        border: 1px solid var(--color-accent);
+        background-color: var(--color-back);
+        color: var(--color-accent);
+        .dx-button-content {
+          @include nowrap-text;
+          vertical-align: middle;
+          font-size: var(--font-size-button01);
+          color: var(--color-accent);
+
+          .dx-button-text {
+            color: var(--color-accent);
+            padding: 0px var(--size-padding4);
+            line-height: calc(var(--font-size-button01) + 2px);
+          }
+
+          .dx-icon {
+            display: inline-flex;
+            &::before {
+              color: var(--color-accent);
+            }
+          }
+        }
+
+        &.dx-state-hover,
+        &.dx-state-focused {
+          background-color: var(--color-accent);
+          border-color: var(--color-accent);
+
+          .dx-button-content {
+            color: var(--color-font-white);
+            .dx-button-text {
+              color: var(--color-font-white);
+            }
+          }
+          .dx-icon::before {
+            color: var(--color-font-white);
+          }
+        }
+        &.dx-state-disabled {
+          opacity: 1;
+          border: none;
+          background-color: var(--color-border1);
+          .dx-button-content {
+            color: var(--color-font5);
+            .dx-button-text {
+              color: var(--color-font5);
+            }
+          }
+        }
+      }
+      &.dx-toolbar .dx-toolbar-item {
+        padding-right: 8px;
+        &:last-child {
+          padding-right: 0px;
+        }
+      }
+    }
+  }
+
+  .moz-popup-action {
+    margin: 20px auto !important;
+    display: block;
+
+    .dx-button-text {
+      color: var(--color-accent);
+    }
+    &.dx-state-hover {
+      .dx-button-text {
+        color: var(--color-font-white);
+      }
+    }
+  }
+
+  &.z-index-low {
+    z-index: 100 !important;
+  }
+}
+
+.dx-overlay-wrapper {
+  .dx-overlay-content {
+    .dx-popup-content.dx-dialog-content {
+      padding: var(--size-card-top-padding) var(--size-card-rbl-padding);
+    }
+  }
+}
+
+.dx-header-filter-menu {
+  .dx-overlay-content {
+    .dx-popup-content {
+      .dx-list-select-all {
+        display: -webkit-box;
+        vertical-align: middle;
+        padding: var(--size-padding-2to1);
+        .dx-list-select-all-label {
+          vertical-align: middle;
+        }
+      }
+      .dx-item {
+        padding: 0px var(--size-padding-2to1);
+      }
+    }
+    .dx-popup-bottom {
+      .dx-toolbar-after {
+        position: inherit;
+        padding-left: 0px;
+        right: 0px;
+        margin: auto;
+      }
+    }
+  }
+}
+
+.dx-datagrid-edit-popup,
+.dx-treelist-edit-popup {
+  .dx-form {
+    padding: var(--size-content-padding) var(--size-card-rbl-padding);
+  }
+}
+
+.dx-dialog {
+  .dx-overlay-content {
+    .dx-toolbar {
+      .dx-toolbar-items-container {
+        .dx-toolbar-center {
+          @include flex-center-horizontal-end;
+          margin: 0px;
+        }
+      }
+    }
+    .dx-popup-content {
+      &.dx-dialog-content {
+        @include flex-center-horizontal-start;
+        .dx-dialog-message {
+          .flex {
+            @include flex-center-horizontal-start;
+          }
+        }
+      }
+    }
+  }
+}

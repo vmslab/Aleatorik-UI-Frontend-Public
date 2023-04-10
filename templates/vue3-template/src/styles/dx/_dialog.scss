@@ -1,0 +1,16 @@
+@import "../mixin";
+
+.dx-dialog {
+  .dx-overlay-content {
+    min-width: 400px;
+    max-width: 600px;
+    .dx-dialog-content {
+      min-height: 34px !important;
+      @include flex-center;
+    }
+  }
+
+  &.dx-overlay-shader {
+    background-color: rgb(0, 0, 0, 0.5);
+  }
+}

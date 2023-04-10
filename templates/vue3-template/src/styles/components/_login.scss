@@ -1,0 +1,111 @@
+@import "../function";
+
+.moz-login-container {
+  padding-top: 120px;
+  padding-left: 130px;
+}
+
+.moz-login {
+  width: 440px;
+  height: 300px;
+  left: 130px;
+  top: 55%;
+  position: absolute;
+
+  .moz-system-list {
+    width: 460px;
+    height: 340px;
+    overflow-y: auto;
+
+    ul {
+      li {
+        width: 450px;
+        height: 65px;
+        max-height: 65px;
+        border: 1px solid var(--color-accent);
+        border-radius: var(--border-radius);
+        margin-bottom: 20px;
+        box-sizing: border-box;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        div {
+          margin: 23px 40px;
+          color: var(--color-accent);
+          font-weight: bold;
+        }
+
+        &:hover {
+          background-color: var(--color-accent);
+          div {
+            color: var(--color-font-white);
+          }
+        }
+      }
+    }
+  }
+
+  .moz-download-info {
+    border: 1px solid var(--color-border2);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    width: 430px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+
+  .dx-textbox {
+    width: 430px;
+    margin-bottom: 20px;
+
+    .dx-texteditor-container {
+      height: 65px;
+
+      .dx-texteditor-input-container {
+        box-sizing: border-box;
+        .dx-texteditor-input {
+          width: 428px;
+          color: var(--color-font5);
+        }
+      }
+    }
+
+    &.dx-editor-outlined.dx-state-focused {
+      border-color: var(--color-accent);
+    }
+  }
+
+  .moz-button-login {
+    background-color: var(--color-accent);
+    font-size: var(--font-size-heading03);
+    font-weight: 500;
+    .dx-button-content {
+      color: var(--color-font-white);
+      .dx-button-text {
+        color: var(--color-font-white);
+      }
+    }
+
+    &:hover {
+      background: mixw(var(--color-accent), 0.15);
+      // background-color: #00cdd5;
+    }
+  }
+
+  .moz-link {
+    color: var(--color-accent);
+    line-height: 3.21;
+  }
+}
+
+.moz-login-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  contain: strict;
+}

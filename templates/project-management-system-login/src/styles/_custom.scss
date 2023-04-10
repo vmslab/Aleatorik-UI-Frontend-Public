@@ -1,0 +1,329 @@
+[theme="light"] {
+  --color-custom: #ff0000;
+}
+
+[theme="dark"] {
+  --color-custom: #0000ff;
+}
+
+.moz-custom-login {
+  .moz-login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+  .logo-area {
+    margin-bottom: 30px;
+  }
+  .system-name {
+    padding: 50px;
+    font-size: 30px;
+    height: 100px;
+    color: #000;
+    font-weight: 900;
+    text-align: center;
+    word-break: keep-all;
+    line-height: normal;
+  }
+  .moz-login-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .moz-shadow-box {
+      width: 400px;
+      height: 502px;
+      border-radius: 2px;
+      box-shadow: 0 0 40px 0 rgba(0, 0, 0, 0.08);
+      background-color: #fff;
+
+      .input-area {
+        display: inline-block;
+        margin: 0px 50px;
+        padding-top: 40px;
+        height: 300px;
+
+        .moz-input-text {
+          display: flex;
+          justify-content: center;
+          border-radius: 2px;
+          border: solid 1px #ccc;
+          margin-bottom: 15px;
+
+          .dx-texteditor-container {
+            height: unset;
+          }
+        }
+        .moz-button-login {
+          margin: 5px 0px 10px 0px;
+          width: 300px;
+          height: 50px;
+          border-radius: 2px;
+          font-size: 16px;
+          background-color: #000;
+        }
+        .moz-save-id {
+          font-size: 12px;
+        }
+        .moz-find-pw {
+          text-decoration: none;
+          font-size: 12px;
+          float: right;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    .default-button {
+      border: 1px solid #e1e4ea;
+      border-radius: 0px;
+      width: 90px;
+      height: 30px;
+      background-color: transparent;
+      font-family: MalgunGothic;
+      color: #828b9a;
+      letter-spacing: -0.6px;
+      font-weight: bold;
+      font-size: 12px;
+      margin: 4px;
+      cursor: pointer;
+    }
+  }
+  .notfound-wrapper {
+    width: 600px;
+    height: 500px;
+    margin: auto;
+  }
+  .img-center {
+    display: block;
+    margin: auto;
+  }
+  .info-area {
+    display: block;
+    text-align: center;
+  }
+
+  .warning-text {
+    color: #e05a69;
+    font-size: 20px;
+    margin: 20px auto 8px;
+    letter-spacing: -1.6px;
+    font-weight: bold;
+  }
+
+  .warning-sub-text {
+    width: 500px;
+    margin: 8px auto;
+    margin-bottom: 36px;
+    text-align: center;
+    line-height: 1.54;
+    letter-spacing: -1.04px;
+    color: #565f6e;
+    font-size: 13px;
+  }
+
+  .dx-checkbox {
+    &.dx-checkbox-checked {
+      .dx-checkbox-icon {
+        border-color: #000;
+        background-color: #000;
+      }
+    }
+    &.dx-state-hover {
+      .dx-checkbox-icon {
+        border-color: #000;
+      }
+    }
+    &.dx-state-focused {
+      .dx-checkbox-icon {
+        border-color: #000;
+      }
+    }
+  }
+}
+
+.moz-find-password-popup {
+  &.dx-popup-wrapper {
+    .dx-popup-normal {
+      .dx-toolbar {
+        .dx-toolbar-items-container {
+          .dx-toolbar-after {
+            .dx-toolbar-button {
+              .dx-closebutton:hover {
+                background-color: transparent;
+              }
+            }
+          }
+        }
+      }
+      .dx-popup-bottom {
+        .dx-button {
+          border: none;
+          background-color: #000;
+          color: #fff;
+          .dx-button-text {
+            color: #fff;
+          }
+        }
+      }
+
+      .dx-texteditor {
+        &.dx-editor-outlined {
+          &.dx-state-focused {
+            border-color: #000;
+          }
+        }
+      }
+    }
+  }
+}
+
+.moz-enter {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: var(--size-height);
+  width: var(--size-width);
+  .moz-enter-back {
+    height: var(--size-height);
+    width: var(--size-width);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    contain: strict;
+  }
+  $img-width: 861px;
+  $img-height: 153px;
+  .moz-url {
+    position: relative;
+    margin-top: 96px;
+    width: $img-width;
+    height: $img-height;
+    border-radius: 12px;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.13);
+    background-color: #e1e4ea;
+    animation: vertical-shaking 12s infinite;
+    .moz-url-back {
+      width: $img-width;
+      height: $img-height;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      contain: strict;
+    }
+    .moz-url-text {
+      width: 365px;
+      height: 48px;
+      position: absolute;
+      top: 82px;
+      left: 374px;
+      z-index: 1;
+      contain: strict;
+      &.dx-texteditor {
+        &.dx-editor-outlined {
+          border: 2px solid var(--color-accent);
+          border-radius: 4px;
+        }
+      }
+      .dx-texteditor-input {
+        font-size: 30px;
+        font-weight: bold;
+      }
+      .dx-placeholder {
+        font-size: 30px;
+        font-weight: bold;
+        color: var(--color-accent);
+      }
+    }
+    .moz-url-button {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      top: 86px;
+      left: 786px;
+      z-index: 1;
+      contain: strict;
+      .dx-icon {
+        &.dx-icon-search::before {
+          font-size: 32px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  .moz-announced-text {
+    margin-top: 96px;
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.15;
+    letter-spacing: normal;
+    color: #222;
+  }
+  .moz-url-save {
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: 0px;
+    color: var(--color-font3);
+  }
+  .dx-checkbox {
+    &.dx-checkbox-checked {
+      .dx-checkbox-icon {
+        border-color: var(--color-accent);
+        background-color: var(--color-accent);
+      }
+    }
+    &.dx-state-hover {
+      .dx-checkbox-icon {
+        border-color: var(--color-accent);
+      }
+    }
+    &.dx-state-focused {
+      .dx-checkbox-icon {
+        border-color: var(--color-accent);
+      }
+    }
+  }
+  .moz-button-home {
+    margin-top: 130px;
+    .dx-button-content {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+}
+
+@keyframes vertical-shaking {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  75% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

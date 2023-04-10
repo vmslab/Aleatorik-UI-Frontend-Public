@@ -1,0 +1,97 @@
+.moz-file-uploader {
+  .dx-fileuploader-wrapper {
+    padding: 0px 7px;
+  }
+  .dx-fileuploader-show-file-list .dx-fileuploader-files-container {
+    padding-top: var(--size-6to5);
+  }
+  .dx-fileuploader-upload-button {
+    display: none;
+  }
+  .dx-fileuploader-file-container {
+    height: var(--size-filelist-item-height);
+    padding: 0px;
+
+    .dx-fileuploader-file {
+      padding-top: 0px;
+      display: flex;
+      position: relative;
+      top: calc(0px - var(--size-filelist-item-height));
+
+      &-name {
+        color: var(--color-accent);
+      }
+      &-size {
+        color: var(--color-font5);
+      }
+      &-status-message {
+        color: var(--color-font5);
+      }
+    }
+  }
+  .dx-fileuploader-button {
+    text-align: center;
+    height: 28px;
+    border: 1px solid var(--color-border2);
+    margin-left: calc(50% - 110px);
+    margin-top: 4px;
+
+    .dx-button-content {
+      max-width: 82px;
+      text-overflow: clip;
+      padding: 4px 18px 8px;
+      font-size: var(--font-size-body04);
+      color: var(--color-font5);
+      .dx-button-text {
+        opacity: 1;
+        font-size: var(--font-size-button01);
+        color: var(--color-font5);
+      }
+    }
+  }
+  .dx-fileuploader-button.dx-state-hover,
+  .dx-fileuploader-button.dx-state-focused {
+    border-color: var(--color-accent);
+    background-color: var(--color-accent);
+    .dx-button-content {
+      color: var(--color-font-white);
+      .dx-button-text {
+        color: var(--color-font-white);
+      }
+    }
+  }
+  .dx-fileuploader-input-container {
+    color: var(--color-font5);
+
+    .dx-fileuploader-input-label {
+      padding: 10px;
+      color: var(--color-font5);
+      font-size: var(--font-size-body04);
+    }
+  }
+}
+
+.moz-drop-zone {
+  height: 200px;
+  background-color: rgba(183, 183, 183, 0.1);
+  border-width: 2px;
+  border-style: dashed;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.moz-drop-zone > * {
+  pointer-events: none;
+}
+
+.moz-drop-zone.dropzone-active {
+  border-style: solid;
+}
+
+.moz-fileuploader-container {
+  border: 1px solid var(--color-border2);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--size-padding-3to2);
+}

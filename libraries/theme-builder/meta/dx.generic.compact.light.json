@@ -1,0 +1,266 @@
+{
+  "items": [
+    {
+      "key": "$base-accent",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$base-text-color",
+      "value": "rgba(86, 95, 110, 1)"
+    },
+    {
+      "key": "$base-border-color",
+      "value": "rgba(225, 228, 234, 1)"
+    },
+    {
+      "key": "$base-success",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$base-warning",
+      "value": "rgba(242, 175, 68, 1)"
+    },
+    {
+      "key": "$base-danger",
+      "value": "rgba(224, 90, 105, 1)"
+    },
+    {
+      "key": "$base-border-radius",
+      "value": "3px"
+    },
+    {
+      "key": "$pager-page-selected-bg",
+      "value": "rgba(228, 247, 247, 1)"
+    },
+    {
+      "key": "$base-focus-color",
+      "value": "rgba(86, 95, 110, 1)"
+    },
+    {
+      "key": "$base-hover-bg",
+      "value": "rgba(244, 255, 255, 1)"
+    },
+    {
+      "key": "$navbar-tab-selected-bg",
+      "value": "rgba(228, 247, 247, 1)"
+    },
+    {
+      "key": "$navbar-tab-bg",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$tabs-tab-hover-bg",
+      "value": "rgba(244, 255, 255, 1)"
+    },
+    {
+      "key": "$tabs-tab-selected-bg",
+      "value": "rgba(228, 247, 247, 1)"
+    },
+    {
+      "key": "$tabs-focused-border-color",
+      "value": "rgba(0, 191, 192, 0)"
+    },
+    {
+      "key": "$tabs-tab-bg",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$datagrid-columnchooser-font-weight",
+      "value": "normal"
+    },
+    {
+      "key": "$datagrid-columnchooser-item-color",
+      "value": "rgba(66, 76, 95, 1)"
+    },
+    {
+      "key": "$datagrid-menu-icon-color",
+      "value": "rgba(124, 130, 142, 1)"
+    },
+    {
+      "key": "$datagrid-cell-modified-border-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$datagrid-link-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$datagrid-selection-bg",
+      "value": "rgba(228, 247, 247, 1)"
+    },
+    {
+      "key": "$datagrid-row-alternation-bg",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$datagrid-group-row-bg",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$datagrid-search-color",
+      "value": "rgba(228, 247, 247, 1)"
+    },
+    {
+      "key": "$datagrid-search-bg",
+      "value": "rgba(228, 247, 247, 1)"
+    },
+    {
+      "key": "$datagrid-row-focused-bg",
+      "value": "rgba(228, 247, 247, 1)"
+    },
+    {
+      "key": "$datagrid-row-focused-color",
+      "value": "rgba(124, 130, 142, 1)"
+    },
+    {
+      "key": "$datagrid-row-selected-color",
+      "value": "rgba(124, 130, 142, 1)"
+    },
+    {
+      "key": "$pivotgrid-grandtotalcolor",
+      "value": "rgba(244, 245, 247, 1)"
+    },
+    {
+      "key": "$pivotgrid-totalcolor",
+      "value": "rgba(255, 255, 255, 0.2)"
+    },
+    {
+      "key": "$badge-bg",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$badge-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$button-default-border-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$button-success-border-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$button-group-default-selected-bg",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$button-group-success-selected-bg",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$button-group-normal-selected-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$button-group-normal-selected-bg",
+      "value": "rgba(255, 255, 255, 0)"
+    },
+    {
+      "key": "$button-normal-color",
+      "value": "rgba(153, 159, 170, 1)"
+    },
+    {
+      "key": "$button-group-default-selected-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$button-group-success-selected-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$filterbuilder-plus-icon-color",
+      "value": "rgba(153, 159, 170, 1)"
+    },
+    {
+      "key": "$filterbuilder-item-field-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$filterbuilder-item-operator-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$filterbuilder-text-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$filterbuilder-menu-icon-color",
+      "value": "rgba(153, 159, 170, 1)"
+    },
+    {
+      "key": "$filterbuilder-remove-icon-color",
+      "value": "rgba(153, 159, 170, 1)"
+    },
+    {
+      "key": "$filterbuilder-item-value-color",
+      "value": "rgba(153, 159, 170, 1)"
+    },
+    {
+      "key": "$filterbuilder-group-operation-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$accordion-item-hover-bg",
+      "value": "rgba(244, 255, 255, 1)"
+    },
+    {
+      "key": "$accordion-item-border-color",
+      "value": "rgba(237, 239, 242, 1)"
+    },
+    {
+      "key": "$accordion-item-focused-border-color",
+      "value": "rgba(237, 239, 242, 1)"
+    },
+    {
+      "key": "$list-item-selected-bg",
+      "value": "rgba(228, 247, 247, 0.1)"
+    },
+    {
+      "key": "$list-item-active-bg",
+      "value": "rgba(228, 247, 247, 1)"
+    },
+    {
+      "key": "$base-focus-bg",
+      "value": "rgba(228, 247, 247, 1)"
+    },
+    {
+      "key": "$datagrid-group-row-color",
+      "value": "rgba(124, 130, 142, 1)"
+    },
+    {
+      "key": "$datagrid-nodata-color",
+      "value": "rgba(124, 130, 142, 1)"
+    },
+    {
+      "key": "$datagrid-summary-color",
+      "value": "rgba(124, 130, 142, 0.7)"
+    },
+    {
+      "key": "$datagrid-row-error-color",
+      "value": "rgba(224, 90, 105, 1)"
+    },
+    {
+      "key": "$scheduler-appointment-start-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$scheduler-workspace-focused-cell-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$scheduler-time-indicator-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$scheduler-accent-border-color",
+      "value": "rgba(237, 239, 242, 1)"
+    }
+  ],
+  "baseTheme": "generic.light.compact",
+  "outputColorScheme": "CompactLight",
+  "makeSwatch": false,
+  "version": "21.2.5",
+  "widgets": [],
+  "removeExternalResources": false
+}

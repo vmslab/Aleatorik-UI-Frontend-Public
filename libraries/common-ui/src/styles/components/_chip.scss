@@ -1,0 +1,45 @@
+@import "../mixin";
+
+@mixin chip($color) {
+  @include flex-center;
+  height: 18px;
+  border-radius: 10px;
+  border: 1px solid $color;
+  text-align: center;
+  i {
+    color: $color;
+    font-size: var(--font-size-body04);
+  }
+  span {
+    margin-left: 4px;
+    color: $color;
+    // margin-left: 5px;
+    font-size: var(--font-size-body04);
+  }
+}
+
+.moz-add-chip {
+  @include chip(var(--color-success));
+  width: 80px;
+}
+
+.moz-edit-chip {
+  @include chip(var(--color-info));
+  width: 80px;
+}
+
+.moz-remove-chip {
+  @include chip(var(--color-error));
+  width: 90px;
+}
+
+.moz-update-chip {
+  @include chip(var(--color-accent));
+  width: 60px;
+  margin-right: 4px;
+  cursor: pointer;
+  span {
+    margin-left: 0px;
+    cursor: pointer;
+  }
+}

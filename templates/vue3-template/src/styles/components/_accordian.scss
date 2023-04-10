@@ -1,0 +1,50 @@
+@import "../mixin";
+
+.moz-card-accordian {
+  background-color: var(--color-back);
+  .dx-accordion-wrapper {
+    .dx-accordion-item {
+      border: none;
+      &.dx-state-hover {
+        .dx-accordion-item-title {
+          background-color: var(--color-accent2);
+        }
+      }
+      &.dx-state-focused{
+        &.dx-accordion-item {
+          border-color: unset;
+        }
+      }
+      .dx-accordion-item-title {
+        @include flex-center-horizontal-start;
+        padding: 0px;
+        padding-left: 4px;
+        font-size: var(--font-size-body02);
+        height: var(--size-grid-header-height);
+        color: var(--color-font4);
+        &::before {
+          font-family: "mozart-icons";
+          display: block;
+          font-size: var(--size-icon-font-size);
+          position: relative;
+          font-style: normal;
+          content: unicode("e10d");
+          font-size: 30px;
+          margin-left: 0px;
+          color: var(--color-font4);
+        }
+      }
+      .dx-accordion-item-body {
+        padding: 0px var(--size-card-title-left-padding);
+      }
+    }
+    .dx-accordion-item-opened {
+      border-color: unset;
+      .dx-accordion-item-title {
+        &::before {
+          content: unicode("e13a");
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+@import "../mixin";
+
+.moz-tabs-menu {
+  &.dx-tabs {
+    border: none;
+    height: inherit;
+
+    .dx-tabs-wrapper {
+      padding-left: var(--size-card-title-left-padding);
+      height: inherit;
+      display: flex;
+      align-items: flex-end;
+
+      .dx-tab {
+        display: inline-block;
+        border-top-left-radius: var(--border-radius);
+        border-top-right-radius: var(--border-radius);
+        margin-right: 4px;
+        background-color: transparent;
+        font-weight: 700;
+        // normal mode 기준으로 일단 작업
+        // compact mode에서 변경 필요
+        padding: 5px 28px 8px 28px;
+
+        // bold에 따라서 폭이 변하지 않도록 해준다.
+        &::before {
+          display: block;
+          content: attr(data-title);
+          font-weight: 700;
+          height: 0;
+          overflow: hidden;
+          visibility: hidden;
+        }
+
+        &.dx-state-hover {
+          font-weight: 700;
+          .dx-tab-content {
+            color: var(--color-accent);
+          }
+        }
+
+        &.dx-tab-selected {
+          font-weight: 700;
+          color: var(--color-accent);
+          .dx-tab-content {
+            color: var(--color-accent);
+          }
+          // transform: translateY(1px);
+          box-shadow: 0 0 6px 0 var(--color-shadow2);
+          background-color: var(--color-contentback);
+          &::after {
+            content: none;
+          }
+        }
+      }
+    }
+  }
+}

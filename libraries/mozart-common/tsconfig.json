@@ -1,0 +1,22 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "declaration": true,
+    "importHelpers": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "rootDir": ".",
+    "outDir": "./lib",
+    "types": ["webpack-env"],
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
+    "paths": {
+      "*": ["../../@types/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "tests/**/*.ts", "@types/*"],
+  "exclude": ["node_modules"]
+}

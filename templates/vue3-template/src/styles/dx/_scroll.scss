@@ -1,0 +1,104 @@
+$scrollbar-size: var(--scrollbar-size);
+
+.dx-scrollable-scrollbar {
+  background-color: transparent;
+  &.dx-state-hover {
+    background-color: transparent;
+    transition: none;
+  }
+  &-active {
+    background-color: transparent;
+  }
+
+  &.dx-scrollbar-vertical {
+    .dx-scrollable-scroll {
+      width: $scrollbar-size;
+      .dx-scrollable-scroll-content {
+        width: $scrollbar-size;
+        transition: none;
+      }
+    }
+    &.dx-scrollbar-hoverable {
+      -webkit-transition: none;
+      transition: none;
+      width: $scrollbar-size;
+      &.dx-state-hover {
+        width: $scrollbar-size;
+        .dx-scrollable-scroll {
+          width: $scrollbar-size;
+        }
+      }
+      &.dx-scrollable-scrollbar-active {
+        .dx-scrollable-scroll {
+          width: $scrollbar-size;
+        }
+      }
+      .dx-scrollable-scroll {
+        padding: 0px;
+        -webkit-transition: none;
+        transition: none;
+        &.dx-state-invisible {
+          -webkit-transition: none;
+          transition: none;
+          .dx-scrollable-scroll-content {
+            -webkit-transition: none;
+            transition: none;
+          }
+        }
+      }
+    }
+  }
+  &.dx-scrollbar-horizontal {
+    .dx-scrollable-scroll {
+      height: $scrollbar-size;
+      .dx-scrollable-scroll-content {
+        height: $scrollbar-size;
+        transition: none;
+      }
+    }
+    &.dx-scrollbar-hoverable {
+      -webkit-transition: none;
+      transition: none;
+      height: $scrollbar-size;
+      &.dx-state-hover {
+        height: $scrollbar-size;
+        .dx-scrollable-scroll {
+          height: $scrollbar-size;
+        }
+      }
+      &.dx-scrollable-scrollbar-active {
+        .dx-scrollable-scroll {
+          height: $scrollbar-size;
+        }
+      }
+      .dx-scrollable-scroll {
+        padding: 0px;
+        -webkit-transition: none;
+        transition: none;
+        &.dx-state-invisible {
+          -webkit-transition: none;
+          transition: none;
+          .dx-scrollable-scroll-content {
+            -webkit-transition: none;
+            transition: none;
+          }
+        }
+      }
+    }
+  }
+  &.dx-scrollbar-hoverable.dx-scrollable-scrollbar-active {
+    background-color: transparent !important;
+    .dx-scrollable-scroll-content {
+      background-color: var(--color-border2);
+    }
+  }
+
+  .dx-scrollable-scroll.dx-state-invisible {
+    display: block !important;
+  }
+}
+
+.dx-scrollable-scroll-content {
+  border-radius: var(--scrollbar-radius);
+  background-color: var(--scrollbar-color);
+}

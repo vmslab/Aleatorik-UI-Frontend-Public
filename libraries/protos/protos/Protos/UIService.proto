@@ -1,0 +1,442 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+import "Protos/Common.proto";
+import "Protos/QueryServiceTy.proto";
+
+option csharp_namespace = "MozartUI.Services.Grpc";
+
+package mozartui.services;
+
+service UIService {
+	// 
+	rpc Get(GetRequest) returns (AnyArray) {
+		option (google.api.http) = {
+			post: "/api/get"
+			body: "*"
+		};
+	}
+	//
+	rpc Add(MutateRequest) returns (Result) {
+		option (google.api.http) = {
+			post: "/api/add"
+			body: "*"
+		};
+	}
+	//
+	rpc Modify(MutateRequest) returns (Result) {
+		option (google.api.http) = {
+			post: "/api/modify"
+			body: "*"
+		};
+	}
+	//
+	rpc Remove(MutateRequest) returns (Result) {
+		option (google.api.http) = {
+			post: "/api/remove"
+			body: "*"
+		};
+	}
+	// 
+	rpc GetSystem(Empty) returns (SystemResponse) {
+		option (google.api.http) = {
+			get: "/api/getSystem"
+		};
+	}
+	// 
+	rpc GetLang(Empty) returns (LangList) {
+		option (google.api.http) = {
+			get: "/api/getLang"
+		};
+	}
+}
+
+message SystemResponse {
+	repeated SystemInfo contents = 1;
+}
+
+message SystemInfo {
+	//
+	string id = 1;
+	//
+	string name = 2;
+	//
+	repeated google.protobuf.Value items = 3;
+}
+
+message GetRequest {
+	// 
+	string table = 1;
+	// 
+	string connection = 2;
+	// 
+	LoadOptions options = 3;
+}
+
+message MutateRequest {
+	//
+	string connName = 1;
+	//
+	string tableName = 2;
+	//
+	google.protobuf.Value obj = 3;
+	//
+	repeated google.protobuf.Value wheres = 4;
+}
+
+message Auth {
+	//
+	string auth_id = 1;
+	//
+	string system_id = 2;
+	//
+	string name = 3;
+}
+
+message Download {
+	//
+	string download_id = 1;
+	//
+	string file = 2;
+	//
+	string version = 3;
+	//
+	optional string description = 4;
+	//
+	optional string downloads = 5;
+}
+
+message Group {
+	//
+	string group_id = 1;
+	//
+	string system_id = 2;
+	//
+	string name = 3;
+	//
+	optional string description = 4;
+}
+
+message Lang {
+	//
+	string lang_id = 1;
+	//
+	string language = 2;
+	//
+	string l_key = 3;
+	//
+	string l_value = 4;
+}
+
+message Log {
+	//
+	int32 logid = 1;
+	//
+	google.protobuf.Timestamp date = 2;
+	//
+	string level = 3;
+	//
+	string logger = 4;
+	//
+	optional string message = 5;
+}
+
+message System {
+	//
+	string system_id = 1;
+	//
+	string name = 2;
+	//
+	string type = 3;
+	//
+	optional string start_menu = 4;
+	//
+	optional string paths = 5;
+}
+
+message Login {
+	//
+	optional string token = 1;
+	//
+	optional string email = 2;
+	//
+	optional string name = 3;
+	//
+	optional string group = 4;
+	//
+	optional string system = 5;
+	//
+	optional string description = 6;
+	//
+	optional bool result = 7;
+	//
+	optional bool admin = 8;
+}
+
+
+message Setting {
+	//
+	string system = 1;
+	//
+	string sessionExpiredTime = 2;
+	//
+	string loginTheme = 3;
+	//
+	string mainTheme = 4;
+	//
+	string fontFamily = 5;
+	//
+	string logoImageFile = 6;
+	//
+	string adminEmail = 7;
+	//
+	optional string customColors = 8;
+	//
+	optional string downloadFile = 9;
+	//
+	optional string csLogoImageFile = 10;
+	//
+	optional string loginImageFile = 11;
+	//
+	optional string mainIcon = 12;
+	//
+	optional string title = 13;
+	//
+	optional string defaultDomain = 14;
+	//
+	optional string favoriteCaption = 15;
+	//
+	optional string usePasswordPattern = 16;
+	//
+	string publicKey = 17;
+	//
+	string menuLocation = 18;
+	//
+	bool useCustomLogin = 19;
+	//
+	optional string loginViewFiles = 20;
+	//
+	optional string fontFiles = 21;
+	//
+	optional string customTheme = 22;
+	//
+	optional string themeJsonString = 23;
+	//
+	optional string defaultUserSetting = 24;
+	//
+	optional string userMenu = 25;
+	//
+	optional string logoImageFileDark = 26;
+	//
+	optional string webTitle = 27;
+}
+
+message User {
+	//
+	string email = 1;
+	//
+	string name = 2;
+	//
+	string password = 3;
+	//
+	string group_id = 4;
+	//
+	bool is_admin = 5;
+	//
+	optional string department = 6;
+}
+
+message UserSetting {
+	//
+	string email = 1;
+	//
+	string menu_id = 2;
+	//
+	optional string setting_info = 3;
+}
+
+message Menu {
+	//
+	string menu_id = 1;
+	//
+	optional string system_id = 2;
+	//
+	string name = 3;
+	//
+	string menu_type = 4;
+	//
+	optional bool separator = 5;
+	//
+	optional string view_id = 6;
+	//
+	optional bool start_menu = 7;
+	//
+	optional string category_id = 8;
+	//
+	int32 sequence = 9;
+	//
+	optional string icon = 10;
+	//
+	optional string url = 11;
+	//
+	optional string params = 12;
+	//
+	optional string path = 13;
+}
+
+message MyMenu {
+	//
+	string my_menu_id = 1;
+	//
+	string menu_id = 2;
+	//
+	string system_id = 3;
+	//
+	string email = 4;
+	//
+	int32 sequence = 5;
+}
+
+message Module {
+	//
+	string module_id = 1;
+	//
+	string system_id = 2;
+	//
+	string name = 3;
+	//
+	string version = 4;
+	//
+	optional string description = 5;
+	//
+	optional string files = 6;
+	//
+	optional string components = 7;
+	//
+	optional string view_files = 8;
+}
+
+message ModuleHistory {
+	//
+	string module_history_id = 1;
+	//
+	string module_id = 2;
+	//
+	string version = 3;
+	//
+	optional string description = 4;
+	//
+	optional string view_files = 5;
+}
+
+message ModuleFile {
+	//
+	string name = 1;
+	//
+	int32 size = 2;
+	//
+	string latestUpdateTime = 3;
+	//
+	google.protobuf.Timestamp lastWriteTime = 4;
+	//
+	string installPath = 5;
+	//
+	bool isView = 6;
+	//
+	optional string moduleName = 7;
+}
+
+message View {
+	//
+	string view_id = 1;
+	//
+	string system_id = 2;
+	//
+	string module_id = 3;
+	//
+	string component_id = 4;
+	//
+	string name = 5;
+	//
+	optional string category = 6;
+	//
+	optional string description = 7;
+	//
+	string file_name = 8;
+}
+
+message Service {
+	//
+	string service_id = 1;
+	//
+	optional string display_name = 2;
+	//
+	string version = 3;
+	//
+	optional string description = 4;
+	//
+	string service_url = 5;
+	//
+	string status = 6;
+	//
+	string config_file = 7;
+	//
+	string model_file = 8;
+	//
+	string files = 9;
+}
+
+message ServiceHistory {
+	//
+	string service_history_id = 1;
+	//
+	string service_id = 2;
+	//
+	string version = 3;
+	//
+	optional string description = 4;
+	//
+	string config_file = 5;
+	//
+	string model_file = 6;
+}
+
+message MenuMap {
+	//
+	string menu_map_id = 1;
+	//
+	string group_id = 2;
+	//
+	string menu_id = 3;
+	//
+	bool is_write = 4;
+	//
+	bool is_read = 5;
+	//
+	optional string auths = 6;
+}
+
+message Component {
+	//
+	optional string id = 1;
+	//
+	optional string name = 2;
+	//
+	optional string category = 3;
+	//
+	optional string description = 4;
+	//
+	optional string module = 5;
+	//
+	optional string version = 6;
+	//
+	optional string filename = 7;
+}
+
+message LangList {
+	repeated Lang langs = 1;
+}

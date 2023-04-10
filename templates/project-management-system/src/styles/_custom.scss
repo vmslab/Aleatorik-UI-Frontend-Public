@@ -1,0 +1,28 @@
+[theme="light"] {
+  --color-custom: #ff0000;
+}
+
+[theme="dark"] {
+  --color-custom: #0000ff;
+}
+
+.moz-custom {
+  background-color: var(--color-custom);
+}
+
+.dx-editor-cell .dx-switch.dx-widget {
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.dx-group-cell {
+  background-color: rgb(247, 247, 247);
+}
+
+.dx-command-expand.dx-datagrid-group-space.dx-datagrid-expand {
+  background-color: rgb(247, 247, 247);
+}
+
+.no-padding-button .dx-button-content {
+  padding: 0;
+}

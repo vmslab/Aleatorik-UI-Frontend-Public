@@ -1,0 +1,70 @@
+@import "../../function";
+@import "../../mixin";
+
+input[type="checkbox"] {
+  accent-color: var(--color-accent);
+}
+
+input[type="checkbox"] + span {
+  @include flex-center;
+  width: var(--size-checkbox);
+  height: var(--size-checkbox);
+  border: 1px solid var(--color-border3);
+  border-radius: var(--border-checkbox);
+  white-space: nowrap;
+  flex-direction: column;
+  flex-wrap: wrap;
+  cursor: pointer;
+  &::before {
+    @include moz-icon;
+    content: unicode("e1a0");
+    font-size: 12px;
+    position: relative;
+    left: 0.5px;
+    margin-right: 6px;
+  }
+  &:hover {
+    border-color: var(--color-accent);
+  }
+}
+
+input[type="checkbox"]:checked + span {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  @include flex-center;
+  &::before {
+    @include moz-icon;
+    content: unicode("e12c");
+    font-size: 12px;
+    color: var(--color-top-arrow);
+  }
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+input {
+  font-size: var(--font-size-body02);
+}
+
+input[type="radio"] {
+  margin: 0px;
+  margin-right: 4px;
+  width: 16px;
+  height: 16px;
+}
+
+input[type="radio"]:before {
+  font-family: "mozart-icons";
+  content: unicode("e18e");
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-back);
+  font-size: 16px;
+  color: var(--color-accent);
+}
+
+input[type="radio"]:checked:before {
+  content: unicode("e1ad");
+}

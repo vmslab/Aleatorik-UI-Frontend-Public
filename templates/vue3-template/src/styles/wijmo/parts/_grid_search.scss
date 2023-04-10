@@ -1,0 +1,84 @@
+/*!
+    *
+    * Wijmo Library 5.20221.857
+    * http://wijmo.com/
+    *
+    * Copyright(c) GrapeCity, Inc.  All rights reserved.
+    *
+    * Licensed under the GrapeCity Commercial License.
+    * sales@wijmo.com
+    * wijmo.com/products/wijmo-5/license/
+    *
+    */
+
+@import "../../mixin";
+@import "../../function";
+
+// wijmo.grid.search
+
+.wj-content.wj-flexgridsearch {
+  // see _input.css
+  vertical-align: middle; // so labeledinput.css works in IE
+  display: inline-table; // so height:100% works properly even without <!DOCTYPE html> tag
+  border-collapse: separate;
+  @include flex-center-horizontal-end;
+  width: 100%;
+  padding: var(--size-cell-padding) var(--size-cell-padding) var(--size-cell-padding) 0px;
+  border: none;
+  .wj-input-group {
+    height: var(--size-grid-row-height);
+    border: 1px solid var(--color-border3);
+    @include flex-center-horizontal;
+    .wj-input-group-btn {
+      width: var(--size-grid-row-height);
+      height: var(--size-grid-row-height);
+      min-width: calc(var(--size-grid-row-height) - 2px) !important;
+      min-height: var(--size-grid-row-height) !important;
+      @include flex-center;
+      .wj-btn {
+        &.wj-btn-default {
+          border-left: none;
+          width: var(--size-arrow-btn);
+          height: var(--size-arrow-btn);
+          min-width: var(--size-arrow-btn);
+          min-height: var(--size-arrow-btn);
+          padding: 0px;
+          background-color: var(--color-back);
+          color: var(--color-back);
+          &:hover {
+            background-color: var(--color-accent);
+            color: var(--color-accent);
+
+            &::after {
+              color: var(--color-font-white);
+            }
+          }
+          &::after {
+            font-family: "mozart-icons";
+            @include flex-center;
+            font-size: var(--size-icon-font-size);
+            font-style: normal;
+            content: unicode("e113");
+            position: absolute;
+            font-size: 12px;
+            width: var(--size-grid-row-height);
+            height: var(--size-grid-row-height);
+            font-weight: normal;
+            color: var(--color-font5);
+            // opacity: 0.7;
+            top: 0px;
+            right: 0px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.wj-flexgrid {
+  .wj-cell span.wj-state-match {
+    background: yellow;
+    color: $wj-txt; // make this readable when the cell is selected
+    font-weight: bold;
+  }
+}

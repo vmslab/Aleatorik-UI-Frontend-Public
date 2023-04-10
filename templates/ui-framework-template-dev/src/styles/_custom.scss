@@ -1,0 +1,57 @@
+[theme="light"] {
+  --color-custom: #ff0000;
+}
+
+[theme="dark"] {
+  --color-custom: #0000ff;
+}
+
+.moz-custom {
+  background-color: var(--color-custom);
+}
+
+.dx-editor-cell .dx-switch.dx-widget {
+  margin-left: 5px;
+  vertical-align: middle;
+}
+
+.dx-group-cell {
+  background-color: rgb(247, 247, 247);
+}
+
+.dx-command-expand.dx-datagrid-group-space.dx-datagrid-expand {
+  background-color: rgb(247, 247, 247);
+}
+
+.no-padding-button .dx-button-content {
+  padding: 0;
+}
+
+.moz-gantt-root {
+  .moz-gantt-error-row {
+    // background-color: var(--color-error);
+    background-color: transparent;
+    opacity: 0.8;
+    background-size: 20px 20px;
+    background-image: repeating-linear-gradient(
+      to right,
+      #444cf7,
+      #444cf7 1px,
+      transparent 1px,
+      transparent
+    );
+  }
+  .moz-gantt-error-cell {
+    // background-color: var(--color-warning);
+    background-color: transparent;
+    opacity: 0.8;
+    background-size: 10px 10px;
+    background-image: repeating-linear-gradient(
+      45deg,
+      #444cf7 0,
+      #444cf7 1px,
+      transparent 0,
+      transparent 50%
+    );
+  }
+}

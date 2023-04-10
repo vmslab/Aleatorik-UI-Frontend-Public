@@ -1,0 +1,47 @@
+key,en,ko,ch
+Login,Login,로그인,登录
+Logout,Logout,로그아웃,登出
+SaveID,Save ID,ID 저장,保存ID
+User,User,사용자,用户
+Save,Save,저장,救
+Test,Test,테스트,测试
+Setting,Setting,설정,环境
+Settings,Settings,설정,环境
+Theme,Theme,테마,主题
+Language,Language,언어,语言
+FileUpload,File Upload,파일 업로드,上传文件
+FileDownload,File Download,파일 다운로드,下载文件
+Name,Name,이름,名字
+Size,Size,크기,大小
+LastModified,LastModified,마지막 수정 시간,最后修改时间
+Email,Email,메일,
+Password,Password,비밀번호,
+Group,Group,사용자 그룹,
+Department,Department,부서,
+Menu,Menu,메뉴,
+PathSetting,Path Setting,경로 설정,
+Add,Add,추가,
+Modify,Modify,수정,
+Update,Update,갱신,
+Remove,Remove,삭제,
+Cancel,Cancel,취소,
+Refresh,Refresh,새로고침,
+List,List,목록,
+Top,Top,상단,
+Bottom,Bottom,하단,
+Next,Next,다음,
+Child,Child,자식,
+Import,Import,불러오기,
+Export,Export,내보내기,
+Detail,Detail,상세,
+Title,Title,제목,
+Priority,Priority,우선 순위,
+Content,Content,내용,
+ExpectedDate,Expected Date,예정일,
+Finished,Finished,완료,
+finishedDate,Finished Date,완료일,
+Status,Status,상태,
+InProgress,In Progress,진행 중,
+IsRead,Read Permission,읽기 권한,
+IsWrite,Write Permission,쓰기 권한,
+Description,Description,설명,

@@ -1,0 +1,4 @@
+{
+  "liveServer.settings.port": 5501,
+  "npm.exclude": "**/{lab-management-system,mozart-common,mozart-component-dev,mozart-component-wijmo,mozart-component-wc,mozart-dev,mozart-management-console,theme-builder,ts-proto,mozart-ui-framework-dev,ui-framework-template-dev,ui-framework-template-login,project-management-system,project-management-system-login,aleatorik-ui,common-e2e,common-ui,protos,react-template,vue-template,electron,installer-cli,installer-gui,installer-ui,vue-main,react-main,vue3-template}"
+}

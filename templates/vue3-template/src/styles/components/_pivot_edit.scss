@@ -1,0 +1,179 @@
+@import "../mixin";
+@import "../function";
+
+.moz-edit-pivot {
+  // 최상위 border & radius 추가
+  border: 1px solid var(--color-border3);
+  border-radius: var(--border-radius-outer);
+
+  // 기존 border 재조정
+  &.dx-pivotgrid {
+    .dx-pivotgrid-border {
+      .dx-filter-header {
+        border-top: none;
+      }
+      .dx-column-header,
+      .dx-area-data-cell,
+      .dx-area-column-cell,
+      .dx-filter-header {
+        border-right: none;
+      }
+      .dx-area-description-cell,
+      .dx-area-row-cell,
+      .dx-data-header,
+      .dx-filter-header {
+        border-left: none;
+      }
+    }
+
+    .dx-area-column-cell,
+    .dx-area-description-cell,
+    .dx-bottom-border {
+      border-bottom: 1px solid var(--color-border3);
+    }
+    .dx-area-description-cell,
+    .dx-area-row-cell {
+      border-right: 1px solid var(--color-border3);
+    }
+    .dx-area-column-cell,
+    .dx-area-description-cell,
+    .dx-bottom-border {
+      border-bottom: 1px solid var(--color-border3);
+    }
+    &.dx-row-lines {
+      .dx-pivotgrid-area {
+        td {
+          border-top: 1px solid var(--color-border3);
+        }
+      }
+      .dx-area-data-cell {
+        .dx-pivotgrid-area {
+          td {
+            border-top: 1px solid var(--color-border2);
+          }
+        }
+        tr:first-child td {
+          border-top: none;
+        }
+      }
+    }
+    .dx-pivotgrid-vertical-headers {
+      td {
+        border-right: 1px solid var(--color-border3);
+      }
+      tr:first-child td {
+        border-top: none;
+      }
+    }
+    .dx-pivotgrid-horizontal-headers {
+      td {
+        border: none;
+        border-right: 1px solid var(--color-border3);
+      }
+      tr:first-child {
+        td:last-child {
+          border-top-right-radius: var(--border-radius-outer);
+        }
+      }
+      tr:not(:first-child) {
+        td:last-child {
+          border-right: 1px solid var(--color-border3) !important;
+        }
+      }
+
+      tr:first-child td {
+        border-top: none;
+      }
+    }
+
+    // background 색상 재조정
+    .dx-area-description-cell,
+    .dx-column-header,
+    .dx-data-header,
+    .dx-total {
+      background-color: var(--color-gridheader);
+    }
+
+    // column chooser icon margin 조정
+    .dx-area-description-cell {
+      .dx-pivotgrid-toolbar {
+        .dx-button {
+          margin: 4px;
+        }
+      }
+    }
+
+    // radius 재조정
+    .dx-pivotgrid-border {
+      .dx-area-description-cell {
+        border-top-left-radius: var(--border-radius-outer);
+      }
+    }
+  }
+
+  // horizontal header style
+  .dx-pivotgrid-horizontal-headers {
+    tr {
+      height: var(--size-grid-row-height);
+      td {
+        background-color: var(--color-gridheader);
+        padding: 0px var(--size-cell-padding);
+        vertical-align: middle;
+        font-size: var(--font-size-body02);
+        color: var(--color-grid-header-font);
+      }
+    }
+  }
+
+  // vertical header style
+  .dx-pivotgrid-vertical-headers {
+    tr {
+      height: var(--size-grid-row-height) !important;
+      td {
+        background-color: var(--color-gridheader);
+        padding: 0px var(--size-cell-padding);
+        vertical-align: middle;
+        font-size: var(--font-size-body02);
+        color: var(--color-grid-header-font);
+      }
+    }
+  }
+
+  // data area style
+  .dx-pivotgrid-area-data {
+    tr {
+      height: var(--size-grid-row-height) !important;
+      td {
+        padding: 0px var(--size-cell-padding);
+        vertical-align: middle;
+        font-size: var(--font-size-body03);
+      }
+    }
+  }
+  .dx-area-description-cell {
+    .dx-pivotgrid-toolbar {
+      .dx-pivotgrid-field-chooser-button {
+        .dx-button-content {
+          height: var(--size-button-height);
+          .dx-icon.dx-icon-columnchooser::before {
+            @include moz-icon;
+            content: unicode("e102");
+          }
+        }
+      }
+    }
+  }
+}
+
+.moz-edit-pivot-mouse-action {
+  padding-bottom: 15px;
+  .dx-scrollable-scrollbar {
+    &.dx-widget {
+      &.dx-scrollbar-horizontal {
+        &.dx-scrollbar-hoverable {
+          bottom: -8px;
+        }
+      }
+    }
+  }
+}

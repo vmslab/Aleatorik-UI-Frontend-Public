@@ -1,0 +1,21 @@
+.dx-filter-menu {
+  .dx-submenu {
+    .dx-menu-items-container {
+      li {
+        .dx-menu-item-selected,
+        .dx-menu-item-expanded,
+        .selected-parent {
+          background-color: var(--color-accent1);
+        }
+      }
+    }
+  }
+}
+
+.dx-menu {
+  .dx-menu-item {
+    &.dx-state-hover {
+      background-color: var(--color-hover);
+    }
+  }
+}

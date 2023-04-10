@@ -1,0 +1,58 @@
+.moz-switch {
+  &.dx-state-focused {
+    .dx-switch-container {
+      border-color: var(--color-border2);
+    }
+  }
+  &.dx-state-hover {
+    .dx-switch-container {
+      border-radius: 11px;
+      border-color: var(--color-border2);
+      background-color: var(--color-border2);
+
+      .dx-switch-handle {
+        left: 50%;
+      }
+    }
+  }
+
+  .dx-switch-on {
+    display: none;
+  }
+  .dx-switch-off {
+    display: none;
+  }
+  .dx-switch-container {
+    border-radius: 11px;
+    background-color: var(--color-border2);
+    border-color: var(--color-border2);
+
+    .dx-switch-handle {
+      left: 50%;
+
+      &::before {
+        background-color: var(--color-font-white);
+        width: var(--size-switch-handle-width);
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &.dx-switch-on-value {
+    .dx-switch-container {
+      background-color: var(--color-accent);
+      border-color: var(--color-accent);
+
+      .dx-switch-handle {
+        left: var(--size-switch-handle-left);
+
+        &::before {
+          width: var(--size-switch-handle-width);
+          height: 100%;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}

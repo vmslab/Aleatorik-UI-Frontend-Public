@@ -1,0 +1,35 @@
+@import "../mixin";
+
+.moz-assembly-manager {
+  .dx-treelist-icon-container {
+    max-height: 14px;
+    overflow: visible;
+  }
+  .assembly-open,
+  .assembly-close,
+  .namespace-open,
+  .namespace-close,
+  // .class {
+  //   transform: translate(0px, -3px);
+  // }
+  .assembly-open::before {
+    content: unicode("e130");
+    @include tree-icon(var(--color-accent), true);
+  }
+  .assembly-close::before {
+    content: unicode("e130");
+    @include tree-icon(var(--color-font5), true);
+  }
+  .namespace-open::before {
+    content: unicode("e131");
+    @include tree-icon(var(--color-accent), true);
+  }
+  .namespace-close::before {
+    content: unicode("e131");
+    @include tree-icon(var(--color-font5), true);
+  }
+  .class::before {
+    content: unicode("e132");
+    @include tree-icon(var(--color-font5), true);
+  }
+}

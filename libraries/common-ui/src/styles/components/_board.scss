@@ -1,0 +1,19 @@
+@import "../mixin";
+
+.moz-server-info {
+  padding: 20px 30px 0px 30px;
+  overflow: hidden;
+  .moz-server-info-row {
+    display: flex;
+    overflow: hidden;
+    padding: 6px 0px;
+  }
+  .moz-server-info-col-key {
+    @include nowrap-text;
+    color: var(--color-font5);
+  }
+  .moz-server-info-col-value {
+    @include nowrap-text;
+    color: #535c6c;
+  }
+}

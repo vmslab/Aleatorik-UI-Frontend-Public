@@ -1,0 +1,86 @@
+* {
+  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Malgun Gothic", "맑은 고딕",
+    helvetica, "Apple SD Gothic Neo", "NanumGothic", sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-font4);
+}
+
+.moz-heading-01 {
+  font-weight: bold;
+  font-size: var(--font-size-heading01);
+  color: var(--color-font1);
+}
+
+.moz-heading-02 {
+  font-size: var(--font-size-heading01);
+  color: var(--color-font1);
+}
+
+.moz-heading-03 {
+  font-weight: bold;
+  font-size: var(--font-size-heading03);
+  color: var(--color-font2);
+}
+
+.moz-heading-04 {
+  font-weight: bold;
+  font-size: var(--font-size-heading03);
+  color: var(--color-font2);
+}
+
+.moz-body-01 {
+  font-size: var(--font-size-body01);
+  color: var(--color-font3);
+}
+
+.moz-body-02 {
+  font-size: var(--font-size-body02);
+  color: var(--color-font4);
+}
+
+.moz-body-03 {
+  font-size: var(--font-size-body03);
+  color: var(--color-font4);
+}
+
+.moz-body-04 {
+  font-size: var(--font-size-body04);
+  color: var(--color-font5);
+}
+
+.moz-body-05 {
+  font-size: var(--font-size-button01);
+  color: var(--color-font5);
+}
+
+.moz-color-font1 {
+  color: var(--color-font1);
+}
+
+.moz-color-font2 {
+  color: var(--color-font2);
+}
+
+.moz-color-font3 {
+  color: var(--color-font3);
+}
+
+.moz-color-font4 {
+  color: var(--color-font4);
+}
+
+.moz-color-font5 {
+  color: var(--color-font5);
+}
+
+.moz-color-font6 {
+  color: var(--color-font6);
+}
+
+.moz-color-success {
+  color: var(--color-success);
+}
+.moz-color-error {
+  color: var(--color-error);
+}

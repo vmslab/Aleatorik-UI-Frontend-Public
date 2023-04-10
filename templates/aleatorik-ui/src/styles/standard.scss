@@ -1,0 +1,1433 @@
+/* 
+ * Cloud UI Framework용 표준디자인 Override 적용 버전
+ * 임시용 버전이므로 추후 SPA 적용시 재작업 필요
+ * 2023-03-07 16:05 Hawon Kim
+ */
+
+:root {
+  /* Padding */
+  --size-padding1: 4px;
+  --size-padding2: 6px;
+  --size-padding3: 8px;
+  --size-padding4: 10px;
+  --size-padding5: 12px;
+  --size-padding6: 14px;
+  --size-padding7: 16px;
+  --size-padding8: 20px;
+  --size-padding9: 26px;
+  --size-padding10: 44px;
+
+  /**
+   * Custom css variable
+   */
+  --color-filter-background: #f4f4f7; // 검색 영역 배경색
+  --color-button-spacer-background: #bac6d4; // 버튼 구분자 색상
+  --color-input-border: #bac6d4; // 인풋, 체크박스 등 입력요소 외각선 색상
+  --color-grid-header-selected: #d3d5e5; // 그리드 선택시 헤더 강조 색상
+  --color-grid-header-border: #d5d5db; // 그리드 헤더에서 사용하는 border 색상 (셀 영역은 border2)
+  --color-grid-font: #28364e; // 검색 인풋, 그리드 기본 폰트 색상
+  --color-grid-hover: #e2e7fa; // 그리드 row hover시 색상
+  --color-grid-added: transparent; // 그리드 추가된 셀
+  --color-grid-updated: #45e0c026; // 그리드 수정된 셀
+  --color-tabs-bottom: #e2e1ee; // 탭 메뉴 아래쪽 보더 색상
+  --color-common-header-font: #6a7184; // 일반 헤더 폰트 색상, 기존에는 commonHeaderColor 참조하여 색상 부여되었음. 이 값은 라이트테마 기준임.
+  --font-size-heading05: 12px; // 카드 타이틀 폰트 사이즈
+  --size-popup-title-height: 45px; // 팝업 타이틀 영역 높이
+  --size-popup-left-padding: 16px;
+  --size-popup-right-padding: 16px;
+  --color-drawer-selected-background: #26314d; // drawer 선택된 메뉴 배경 색
+  --color-drawer-menu-font-default: #b6b7c1; // drawer 기본 글자색
+  --color-drawer-menu-font-selected: #ebeef8; // drawer 메뉴 선택시 글자색
+}
+
+// override moz css variable
+body {
+  --color-hover: #e2e7fa; // 그리드 row, list hover시 색상
+  --color-grid-header-font: #6a7184;
+  --color-drawer-font: #ebeef8; // drawer 폰트 색상
+  --color-drawer-menu-default: #b6b7c1; // drawer 폰트 선택 안된 색상
+  --size-radio-container: 12px; // radio icon size
+  --size-radio-dot: 6px;
+  --size-radio-dot: 6px;
+  --radio-dot-margin-top: -9px;
+  --radio-dot-margin-left: 3px;
+
+  --scrollbar-radius: 0px;
+}
+
+.dx-widget input,
+.dx-widget textarea,
+* {
+  font-family: "Roboto", "Noto Sans KR", "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo", "NanumGothic", sans-serif, "Segoe UI Emoji",
+    "Segoe UI Symbol";
+}
+
+/**
+ * moz search area
+ */
+.moz-controller-root {
+  background-color: transparent;
+  border: none;
+
+  .moz-controller {
+    height: var(--size-control-height);
+
+    .moz-controller-title {
+      height: inherit;
+      font-size: 18px;
+
+      span {
+        font-weight: 500;
+      }
+    }
+
+    .filter-icon {
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: var(--size-padding1);
+      border-radius: var(--border-radius);
+
+      &:hover {
+        background-color: #eceef3;
+        background-color: var(--color-filter-background);
+        background-color: var(--color-border2);
+      }
+
+      .moz-filter-icon,
+      .moz-filter-icon-tap {
+        font-size: 20px;
+        color: var(--color-font5);
+      }
+
+      .moz-filter-icon-tap {
+        color: var(--color-accent);
+      }
+
+      .moz-favorite {
+        content: "\e1d3";
+        font-size: 20px;
+      }
+    }
+
+    .moz-controller-actions {
+      gap: var(--size-padding2);
+
+      .spacer {
+        width: 1px;
+        height: 14px;
+        background-color: var(--color-button-spacer-background);
+        // margin-left: calc(
+        //   var(--size-padding4) - var(--size-padding2)
+        // ); // 원래 디자인상 padding4(10px) 이지만 gap(padding2, 6px)이 있으므로 계산해서 넣어준다.
+        margin-right: calc(
+          var(--size-padding6) - var(--size-padding2)
+        ); // 원래 디자인상 padding6(14px) 이지만 gap(padding2, 6px)이 있으므로 계산해서 넣어준다.
+        border-radius: 100px;
+      }
+
+      .dx-button:not(.dx-edit-button) {
+        border: 1px solid var(--color-accent);
+        padding: 0px var(--size-padding4);
+
+        &.dx-state-disabled {
+          border-color: var(--color-backdark3);
+        }
+
+        .dx-button-content {
+          gap: var(--size-padding3);
+          font-weight: bold;
+          &::after {
+            display: none;
+          }
+        }
+
+        &.dx-state-hover {
+          //4568e0
+        }
+      }
+
+      > .dx-widget,
+      > div,
+      > span {
+        margin-right: inherit;
+      }
+
+      // 추가 / 삭제 / 조회 등 버튼 아이콘
+      & > .dx-button {
+        .dx-button-content {
+          .dx-icon::before {
+            font-weight: normal;
+          }
+          .dx-icon.dx-icon-cancel::before {
+            left: 1px;
+          }
+          .dx-button-text {
+            font-weight: 100;
+            font-size: 15px;
+            font-family: "Roboto", "Noto Sans KR", "Spoqa Han Sans Neo", -apple-system, BlinkMacSystemFont, "Segoe UI",
+              "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo", "NanumGothic", sans-serif,
+              "Segoe UI Emoji", "Segoe UI Symbol";
+            line-height: var(--size-button-height);
+          }
+        }
+      }
+    }
+  }
+
+  // 검색 영역
+  .moz-horizontal-filter {
+    padding: var(--size-padding4) var(--size-padding5);
+    // border-radius: var(--border-radius);
+    background-color: var(--color-filter-background);
+    border: 1px solid var(--color-border3);
+    gap: var(--size-padding2);
+    margin-bottom: var(--size-content-padding);
+
+    // 컴포넌트 영역 루트
+    > div {
+      align-items: flex-start;
+      flex-direction: column;
+      margin: 0;
+      display: flex;
+      gap: var(--size-padding1);
+      height: inherit;
+
+      // 컴포넌트 라벨
+      > label {
+        height: inherit;
+        border: inherit;
+        background-color: inherit;
+        padding: inherit;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--color-font2);
+        line-height: 15px;
+      }
+
+      // 컴포넌트에 라벨 없을 경우 컴포넌트 아래로 내리기
+      &:not(:has(> label)) > .dx-widget {
+        margin-top: calc(15px + var(--size-padding1));
+      }
+
+      // 실제 컴포넌트 영역
+      > .dx-widget:not(.dx-button, .dx-checkbox) {
+        box-sizing: content-box;
+        border-radius: var(--border-radius);
+        border-color: var(--color-input-border);
+
+        &:not(.dx-radiogroup-horizontal) {
+          // .dx-radiogroup-horizontal은 가로로 늘어나는 컴포넌트이기 때문에 기본 가로 사이즈 없음
+          width: 120px; // input default size
+
+          &:hover,
+          &:focus-within {
+            // 호버시 외각선
+            border-color: var(--color-accent);
+          }
+        }
+
+        // 인풋 컴포넌트
+        .dx-texteditor-container {
+          .dx-texteditor-input {
+            // input right padding
+            padding-right: var(--size-padding4);
+            min-height: calc(var(--size-input-height) - 2px);
+            color: var(--color-grid-font);
+          }
+
+          .dx-dropdowneditor-button {
+            padding-right: var(--size-padding4);
+            width: 26px;
+            min-width: 26px;
+
+            .dx-button-content {
+              .dx-dropdowneditor-icon {
+                &::before {
+                  content: "\e1c4";
+                  font-size: 14px;
+                }
+              }
+            }
+          }
+        }
+        // 기본적으로 아이콘 배경색 무력화
+        .dx-texteditor-container {
+          .dx-dropdowneditor-button {
+            .dx-button-content {
+              .dx-dropdowneditor-icon {
+                background-color: transparent;
+              }
+            }
+          }
+        }
+        // 인풋 박스 호버시
+        &.dx-state-hover,
+        &.dx-state-active,
+        &.dx-state-focused,
+        &.dx-dropdowneditor-active {
+          .dx-texteditor-container {
+            .dx-dropdowneditor-button {
+              .dx-button-content {
+                .dx-dropdowneditor-icon {
+                  // background-color: transparent;
+                  &::before {
+                    color: var(--color-accent);
+                  }
+                }
+              }
+            }
+          }
+        }
+        // 캘린더 인풋 컴포넌트
+        &.dx-datebox-calendar {
+          .dx-dropdowneditor-button {
+            // calendar icon right padding
+            // TODO: 아이콘 변경시 조정 바람 2023-03-10 15:17 Hawon Kim
+            padding-right: var(--size-padding3);
+
+            .dx-button-content {
+              .dx-dropdowneditor-icon::before {
+                content: "\e1c5";
+                font-size: var(--size-icon-font-size);
+                right: 0px;
+              }
+            }
+          }
+        }
+
+        // 라디오박스 컴포넌트
+        &.dx-radiogroup-horizontal {
+          padding: 0px;
+          background: var(--color-back);
+
+          .dx-collection {
+            height: 100%;
+
+            .dx-radiobutton {
+              height: 100%;
+              margin-right: 0px;
+              padding: 0px var(--size-padding4);
+              margin: 0px;
+              gap: var(--size-padding3);
+
+              // 처음, 마지막 요소 라운딩 처리
+              &:first-child {
+                border-top-left-radius: calc(var(--border-radius) - 1px);
+                border-bottom-left-radius: calc(var(--border-radius) - 1px);
+              }
+              &:last-child {
+                border-top-right-radius: calc(var(--border-radius) - 1px);
+                border-bottom-right-radius: calc(var(--border-radius) - 1px);
+              }
+
+              // 선택, 호버, 포커스시 박스 외각선
+              &.dx-item-selected,
+              &.dx-radiobutton-checked,
+              &:hover,
+              &:focus-within {
+                box-shadow: 0px 0px 0px 1px var(--color-accent);
+              }
+
+              .dx-radio-value-container {
+                padding: 0;
+
+                // checked가 아닐때 라디오 아이콘의 사이즈가 다른 문제 해결
+                .dx-radiobutton-icon {
+                  &:not(.dx-radiobutton-icon-checked) {
+                    &::before {
+                      border-color: var(--color-input-border);
+                    }
+                  }
+                  &::before {
+                    box-sizing: border-box;
+                  }
+                }
+              }
+
+              // 호버시 라디오 아이콘 색상 변경
+              &.dx-state-hover {
+                .dx-radiobutton-icon::before {
+                  border-color: var(--color-accent);
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // 검색 영역 버튼 폰트 사이즈 변경
+      .dx-button .dx-button-content .dx-button-text {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+/**
+ * moz content area
+ * search(filter)를 off 했을때 간격 유지를 위해 override
+ */
+.moz-frame-for-outer-control {
+  padding-top: 0px;
+}
+
+/**
+ * moz tabs
+ */
+.moz-layout-tabs {
+  background-color: transparent;
+  border-bottom: 1px solid var(--color-tabs-bottom);
+  padding: 0px var(--size-content-padding);
+
+  .dx-tabs-wrapper {
+    gap: var(--size-padding3);
+    height: calc(var(--size-card-title-height) - 1px);
+
+    .dx-tab {
+      margin: 0px;
+      height: inherit;
+      background-color: transparent;
+      width: 120px;
+      transform: none;
+      box-sizing: content-box;
+      border-bottom: 2px solid transparent;
+
+      .dx-tab-content div {
+        font-size: var(--font-size-heading04);
+      }
+
+      &.dx-tab-selected {
+        border-bottom: 2px solid var(--color-accent);
+        font-weight: bold;
+        height: inherit;
+
+        &::after {
+          display: none;
+        }
+
+        .dx-tab-content div {
+          color: var(--color-accent);
+        }
+      }
+      &.dx-state-hover {
+        background-color: transparent;
+        border-bottom: 2px solid var(--color-accent);
+      }
+    }
+  }
+}
+
+/**
+ * moz tabs chart 
+ */
+.moz-chart-root .moz-chart-svg {
+  .moz-text-legend-table .moz-text-legend-td .moz-text-legend-text {
+    font-weight: 500;
+  }
+  .moz-series .moz-series-rect {
+    rx: 0px;
+    ry: 0px;
+  }
+}
+
+/**
+ * DevExtreme style override
+ */
+.dx-texteditor-input:not(textarea) {
+  padding: 0px var(--size-padding4);
+}
+.dx-card {
+  & > .dx-card-title {
+    font-size: var(--font-size-heading05);
+  }
+}
+// popup
+.dx-popup-wrapper {
+  .dx-popup-normal {
+    .dx-popup-title {
+      height: var(--size-popup-title-height);
+    }
+  }
+}
+
+/**
+ * Wijmo grid style
+ */
+.wj-content {
+  border-radius: inherit;
+}
+.wj-flexgrid {
+  color: var(--color-grid-font);
+  .wj-colheaders {
+    // grid column header
+    .wj-cell.wj-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-right-color: var(--color-grid-header-border);
+      border-left-color: var(--color-grid-header-border);
+      font-weight: 500;
+      height: var(--size-grid-header-height); // not working, grid 문서 찾아봐야 함 2023-03-23 Hawon Kim
+      z-index: 2;
+
+      &.wj-frozen-col {
+        z-index: 3 !important;
+      }
+
+      // header aglin center
+      // .wj-cell-text {
+      //   order: 2;
+      //   font-weight: 500;
+      // }
+      // .spacer {
+      //   // width: 18px; // filter icon size is 18px
+      //   flex-grow: 0;
+      //   order: 1;
+      // }
+
+      &.wj-filter-on,
+      &.wj-filter-off {
+        .wj-elem-filter {
+          padding-left: 7px;
+          padding-right: 0px;
+          span.wj-glyph-filter {
+            &::after {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+
+      &.wj-filter-off {
+        .wj-elem-filter {
+          span.wj-glyph-filter {
+            &::after {
+              color: var(--color-font5);
+              content: "\e1d7";
+            }
+          }
+        }
+      }
+
+      &.wj-filter-on {
+        .wj-elem-filter {
+          span.wj-glyph-filter {
+            &::after {
+              content: "\e1d8";
+            }
+          }
+        }
+      }
+    }
+  }
+  .wj-topleft {
+    // top left header
+    .wj-cell.wj-header {
+      border-right-color: var(--color-grid-header-border);
+      border-left-color: var(--color-grid-header-border);
+    }
+  }
+  .wj-rowheaders {
+    // left header
+    .wj-cell.wj-header {
+      background-color: var(--color-back);
+    }
+  }
+
+  // checkbox in grid
+  label {
+    input[type="checkbox"] {
+      &:not(:checked) + span {
+        background-color: var(--color-back);
+        border-color: var(--color-input-border);
+        // &::before {
+        //   content: "\e1cf";
+        // }
+      }
+      & + span {
+        &::before {
+          font-size: 10px; // TODO: 아이콘 변경시 조정 바람
+          // content: "\e1ce";
+        }
+      }
+    }
+  }
+
+  &.moz-readonly-grid {
+    // [readonly grid] 왼쪽 row header 반복 배경
+    .wj-rowheaders {
+      .wj-row {
+        .wj-cell {
+          background-color: var(--color-back);
+        }
+        &:nth-child(2n) {
+          > div {
+            //.wj-cell 로 들어가야 하는데 selected보다
+            // 우선순위가 올라가버려서 강제로 내리기 위해 div 사용함
+            // 2023-03-13 11:24 Hawon Kim
+            background-color: #f8f8fd;
+          }
+        }
+      }
+    }
+    .wj-cells {
+      // [readonly grid] 셀 영역 반복 배경
+      .wj-row {
+        .wj-cell {
+          background-color: var(--color-back);
+        }
+        &:nth-child(2n + 1) {
+          .wj-cell {
+            background-color: #f8f8fd;
+          }
+        }
+      }
+    }
+  }
+
+  // state changed style
+  .wj-cells {
+    .wj-cell {
+      span {
+        color: var(--color-grid-font); // default font color
+      }
+      &.wj-state-selected, // 선택된 셀
+      &.wj-state-multi-selected // 드래그된 셀
+      {
+        // background-color: transparent;
+        background-color: var(--color-back);
+        color: var(--color-grid-font); // extend grid 안쓰거나 cell template 사용시
+        div,
+        span {
+          color: var(--color-grid-font); // extend grid 용
+        }
+      }
+
+      // 추가된 셀
+      &.cell-added {
+        background-color: var(--color-grid-added);
+      }
+      &.cell-updated {
+        background-color: var(--color-grid-updated);
+      }
+    }
+
+    .wj-row {
+      // 선택된 셀에 글자색 추가
+      .wj-cell {
+        &.wj-state-multi-selected,
+        &.wj-state-active {
+          color: var(--color-accent);
+          span.wj-cell-text {
+            color: var(--color-accent);
+          }
+        }
+      }
+      // row 선택되었을 경우 배경색 추가
+      &[aria-selected="true"] {
+        .wj-cell {
+          &.wj-state-multi-selected,
+          &.wj-state-active {
+            background-color: #eef1fd;
+          }
+        }
+      }
+    }
+
+    // row mouse hover
+    .wj-row {
+      &:hover {
+        .wj-cell:not(.wj-header) {
+          background-color: var(--color-grid-hover);
+        }
+      }
+    }
+  }
+
+  // header selected background color
+  div.wj-row {
+    div.wj-cell.wj-header {
+      &.wj-state-multi-selected {
+        background-color: var(--color-grid-header-selected);
+      }
+    }
+  }
+
+  // cell select border
+  .wj-marquee {
+    z-index: 2;
+    background-color: rgba(69, 104, 224, 0.09); // accent-color 9% alpha
+    box-shadow: inset 0 0 0 2px var(--color-accent);
+  }
+
+  // cell calendar icon
+  .wj-cell .wj-btn.wj-btn-glyph.wj-elem-dropdown {
+    padding-right: 0px;
+    .wj-glyph-down {
+      &::after {
+        content: "\e1d0";
+        font-size: 12px;
+        color: var(--color-font5);
+      }
+      &:hover {
+        background-color: transparent;
+        &::after {
+          color: var(--color-accent);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * dx icon override
+ */
+.dx-icon {
+  &.dx-icon-add::before {
+    font-family: "mozart-icons";
+    content: "\e1ca";
+  }
+  &.dx-icon-copy::before {
+    content: "\e1c2";
+  }
+  &.dx-icon-save::before {
+    content: "\e1c1";
+  }
+  &.dx-icon-cancel::before {
+    content: "\e1c0";
+  }
+  &.dx-icon-trash::before {
+    content: "\e1c7";
+  }
+  &.dx-icon-search::before {
+    content: "\e1c8";
+  }
+  &.dx-icon-edit::before {
+    content: "\e1c6";
+  }
+}
+.moz-filter-icon-tap::before {
+  content: "\e1d8";
+}
+.moz-filter-icon::before {
+  content: "\e1d7";
+}
+
+.mozart-icons {
+  color: var(--color-font5);
+}
+
+/**
+ * framework area
+ */
+// top menu
+.moz-root {
+  .moz-menu-location-top-top {
+    box-shadow: none;
+    border-bottom: 1px solid var(--color-tabs-bottom);
+
+    .moz-top-menu {
+      .dx-menu-items-container {
+        li .dx-item {
+          .moz-selected-menu {
+            box-shadow: 0 -2px 0 var(--color-accent) inset;
+          }
+          &.dx-state-hover {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+}
+// .moz-top-menu .dx-menu-items-container li .dx-item.dx-menu-item-expanded, .moz-top-menu .dx-menu-items-container li .dx-item.dx-menu-item.dx-state-hover {
+
+// }
+// side menu
+.moz-left-drawer {
+  .root-menu {
+    height: 45px;
+    box-sizing: border-box;
+    margin: 0px;
+    line-height: 45px;
+    padding: 0px;
+    padding-left: 20px;
+  }
+}
+// side arrow button
+.moz-topleft-trigger-area .moz-left-closer .left-arrow:before {
+  color: #b6b7c1;
+}
+// side menu
+.moz-emphasize-treeview {
+  padding: 0px;
+
+  .dx-treeview-node[aria-level="1"] {
+    .dx-treeview-toggle-item-visibility {
+      left: inherit;
+      right: 0px;
+
+      &::before {
+        font-size: 14px;
+        right: 16px;
+        left: inherit;
+        content: "\e1c4" !important;
+        color: #b6b7c1;
+      }
+
+      &.dx-treeview-toggle-item-visibility-opened {
+        &::before {
+          content: "\e1c3" !important;
+        }
+      }
+
+      // .dx-treeview-item {
+      //   &.dx-state-hover {
+      //     .second-node span {
+      //       color: red !important;
+      //     }
+      //   }
+      // }
+    }
+  }
+
+  .dx-treeview-node-container {
+    // 대메뉴 오픈
+    &.dx-treeview-node-container-opened {
+      .dx-treeview-node {
+        // 3차 없을때 2차 메뉴 선택되었을때
+        &.dx-state-selected .dx-treeview-item-content {
+          background-color: var(--color-drawer-selected-background);
+
+          .child-node {
+            background-color: transparent;
+            color: var(--color-drawer-menu-font-selected);
+            &::before {
+              background-color: var(--color-drawer-menu-font-selected);
+              width: 4px;
+              height: 4px;
+              border-radius: 1px;
+              margin-top: -2px;
+              display: block;
+            }
+            span {
+              color: var(--color-drawer-menu-font-selected);
+            }
+          }
+        }
+      }
+    }
+
+    .dx-treeview-node {
+      .dx-treeview-item-content,
+      .dx-treeview-item {
+        .child-node {
+          color: var(--color-drawer-menu-default);
+          span {
+            color: var(--color-drawer-menu-default);
+          }
+        }
+      }
+
+      // 2차 메뉴 호버
+      .dx-treeview-item {
+        &.dx-state-hover {
+          .dx-treeview-item-content {
+            background-color: #2c3858;
+          }
+        }
+      }
+
+      &.dx-state-selected .dx-treeview-item-content {
+        background-color: var(--color-drawer-selected-background);
+
+        .child-node {
+          background-color: transparent;
+          color: var(--color-drawer-menu-font-selected);
+          &::before {
+            display: none;
+          }
+          span {
+            color: var(--color-drawer-menu-font-selected);
+          }
+        }
+      }
+
+      // 3차 있을때 2차 열리면
+      .dx-treeview-node-container.dx-treeview-node-container-opened {
+        padding-left: 0px;
+
+        .dx-item-content {
+          padding-left: 10px;
+        }
+      }
+    }
+  }
+}
+
+.moz-emphasize-treeview .dx-treeview-node.dx-state-selected .dx-treeview-item .child-node {
+  background-color: transparent;
+}
+
+.moz-emphasize-treeview {
+  .dx-treeview-node-container {
+    .dx-treeview-node {
+      .dx-treeview-item-content,
+      .dx-treeview-item {
+        &.dx-state-hover {
+          background-color: #26314d;
+
+          .second-node {
+            span {
+              color: var(--color-drawer-menu-font-default);
+            }
+          }
+
+          & ~ .dx-treeview-toggle-item-visibility::before {
+            color: var(--color-drawer-menu-font-default);
+          }
+        }
+      }
+    }
+
+    // 대메뉴 오픈
+    // &.dx-treeview-node-container-opened {
+    //   .dx-treeview-node {
+    //     .dx-treeview-item.dx-state-hover {
+    //       background-color: #354261;
+
+    //       .second-node {
+    //         span {
+    //           font-weight: 500;
+    //           color: #ebeef8;
+    //         }
+    //       }
+
+    //       & ~ .dx-treeview-toggle-item-visibility::before {
+    //         color: #ebeef8;
+    //       }
+    //     }
+    //   }
+    // }
+  }
+}
+
+.moz-emphasize-treeview.dx-widget.dx-collection.dx-treeview
+  > div
+  > div
+  > div
+  > div.dx-scrollable-content
+  > ul
+  > li
+  > ul.dx-treeview-node-container-opened {
+  .moz-side-menu {
+    background-color: #26314d;
+  }
+  .dx-treeview-item.dx-state-hover {
+    .moz-side-menu {
+      background-color: #334165;
+      .child-node {
+        // 하위메뉴 호버시 폰트 색상
+        // &::before {
+        //   background-color: var(--color-drawer-menu-font-selected);
+        // }
+        // span {
+        //   color: var(--color-drawer-menu-font-selected);
+        // }
+      }
+    }
+  }
+}
+
+.moz-emphasize-treeview
+  .dx-treeview-node
+  .dx-treeview-node-container-opened
+  .dx-treeview-node
+  .dx-treeview-item
+  .child-node {
+  padding-left: 24px;
+
+  &::before {
+    width: 4px;
+    height: 4px;
+    border-radius: 1px;
+    margin-top: -2px;
+    background-color: #646c82;
+    content: "";
+    position: absolute;
+    margin-left: -15px;
+    top: 50%;
+  }
+}
+
+.moz-emphasize-treeview .dx-treeview-node .dx-treeview-item .second-node,
+.moz-emphasize-treeview .child-node {
+  span {
+    color: #b6b7c1;
+    font-size: 14px;
+  }
+}
+
+.moz-topleft-trigger-area.open {
+  left: 163px;
+}
+
+.moz-emphasize-treeview .dx-treeview-node .dx-treeview-item .second-node,
+.moz-emphasize-treeview .dx-treeview-node .dx-treeview-item .child-node,
+.moz-left-drawer .root-menu {
+  padding-left: 16px;
+}
+
+.moz-left-drawer .root-menu span {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+// controller 메뉴 사이 아이콘
+.breadcrumb-dividor {
+  margin: 0px 4px;
+  &::before {
+    content: "\e1cc";
+    pointer-events: none;
+    font-size: 10px;
+    font-family: "mozart-icons";
+    left: var(--size-card-rbl-padding);
+    display: flex;
+    -moz-align-items: center;
+    align-items: center;
+    color: var(--color-font5);
+  }
+}
+
+// 상단 탑 메뉴 폰트 굵기
+.moz-top-menu .dx-menu-items-container li .dx-item .dx-item-content div {
+  font-size: 15px;
+  font-weight: 300;
+}
+.moz-top-menu .dx-menu-items-container li .dx-item .moz-selected-menu div {
+  font-weight: 500;
+}
+
+// 팝업 닫기 버튼 정렬 수정
+.dx-popup-wrapper
+  .dx-popup-normal
+  .dx-toolbar
+  .dx-toolbar-items-container
+  .dx-toolbar-after
+  .dx-toolbar-button
+  .dx-closebutton
+  .dx-button-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// top menu
+.moz-menu-location-top-top .user-info-area {
+  border-left: none;
+  justify-content: flex-end;
+  width: auto;
+  padding-left: 0;
+  padding-right: 20px;
+  gap: 10px;
+
+  .top-menu-button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: var(--size-padding1);
+    border-radius: var(--border-radius);
+    font-size: 0px;
+
+    &:hover {
+      background-color: var(--color-border2);
+    }
+
+    .mozart-icons {
+      &.user-icon {
+        &::before {
+          content: "\e1d5";
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+.top-menu-context {
+  .dx-menu-items-container {
+    padding-bottom: 8px;
+    border: 1px solid #d5d5db;
+    border-radius: var(--border-radius);
+
+    li.dx-menu-item-wrapper {
+      .dx-menu-item {
+        padding: 0px 20px;
+      }
+
+      &:not(:first-child) {
+        .dx-menu-item-content {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          .mozart-icons {
+            font-size: 16px;
+            margin: 0px;
+            color: #8998b5;
+
+            &.password::after {
+              content: "\e1d2";
+            }
+            &.user-setting::after {
+              content: "\e1de";
+            }
+            &.setting::after {
+              content: "\e1d1";
+            }
+            &.logout::after {
+              content: "\e1df";
+            }
+          }
+
+          span {
+            font-weight: 300;
+            line-height: initial;
+            color: #6a7184;
+          }
+        }
+      }
+
+      &:first-child {
+        height: 65px;
+        border-bottom: 1px solid #d5d5db;
+        margin-bottom: 8px;
+        user-select: none;
+        cursor: default;
+
+        .dx-menu-item {
+          &.dx-state-hover {
+            background-color: transparent;
+          }
+
+          .dx-menu-item-content {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            gap: 2px;
+          }
+        }
+
+        .user-name,
+        .user-email {
+          height: 16px;
+          line-height: 16px;
+        }
+
+        .user-name {
+          font-weight: bold;
+          color: #28364e !important;
+        }
+        .user-email {
+          color: #6a7184 !important;
+        }
+      }
+
+      &:last-child {
+        .dx-menu-item-content {
+          i,
+          span {
+            color: #dc5a5a !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+// dropdown
+.dx-dropdownlist-popup-wrapper {
+  // top: var(--size-padding2) !important;
+  .dx-overlay-content {
+    // margin-top: var(--size-padding2);
+    padding: var(--size-padding2) 0px;
+    box-shadow: 0 3px 4px 0 rgba(57, 55, 122, 0.1);
+
+    .dx-popup-content {
+      height: 100% !important;
+
+      .dx-list-item {
+        height: 22px;
+
+        &.dx-list-item-selected {
+          position: relative;
+          &::after {
+            position: absolute;
+            content: "\e12c";
+            font-family: "mozart-icons";
+            right: 8px;
+            color: var(--color-accent);
+            display: block;
+            font-size: 12px;
+            width: 12px;
+            height: 12px;
+            top: calc(50% - 8px);
+            font-weight: bold;
+          }
+
+          // 선택되었으면서 호버
+          &.dx-state-hover {
+            background-color: var(--color-hover);
+          }
+        }
+
+        &.dx-state-hover {
+          background-color: var(--color-hover);
+        }
+
+        .dx-item-content {
+          padding: 0px 10px;
+          padding-right: 28px;
+          height: 100%;
+          color: #28364e;
+        }
+      }
+    }
+  }
+}
+
+.dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item.dx-list-item-selected {
+  background-color: transparent;
+}
+
+.dx-card {
+  border-radius: inherit;
+}
+
+.dx-overlay-modal .dx-popup-normal {
+  .dx-toolbar.dx-popup-title {
+    background-color: transparent;
+    .dx-toolbar-before {
+      .dx-item .dx-toolbar-item-content > div {
+        font-size: 16px;
+        color: var(--color-grid-header-font);
+      }
+    }
+    .dx-toolbar-after {
+      .dx-toolbar-button {
+        .dx-button {
+          &.dx-state-hover {
+            background-color: var(--color-border2);
+
+            i.dx-icon::before {
+              color: var(--color-font5);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .dx-popup-content {
+    .moz-area-padding {
+      padding: var(--size-padding9) var(--size-padding7);
+
+      // plan 관련 팝업일 경우 가로 두줄로 배치
+      &.plan-popup {
+        .dx-responsivebox {
+          .dx-collection {
+            display: grid !important;
+            grid-template-columns: 1fr 1fr;
+            column-gap: var(--size-padding5);
+            row-gap: var(--size-padding8);
+
+            .dx-box-item:last-child {
+              grid-column: 1 / 3;
+            }
+          }
+        }
+      }
+
+      .dx-responsivebox {
+        .dx-collection {
+          .dx-box-item {
+            .dx-box-item-content .dx-field-item {
+              flex-direction: column;
+              gap: var(--size-padding1);
+
+              &:not(.dx-first-row) {
+                padding-top: inherit;
+              }
+
+              label {
+                height: inherit;
+
+                .dx-field-item-label-text {
+                  font-size: 11px;
+                  font-weight: 500;
+                  color: #6a7184;
+                }
+              }
+
+              // 실제 컴포넌트 영역
+              .dx-widget:not(.dx-button, .dx-checkbox) {
+                box-sizing: content-box;
+                border-radius: var(--border-radius);
+                border-color: var(--color-input-border);
+
+                &:not(.dx-radiogroup-horizontal) {
+                  &:hover,
+                  &:focus-within {
+                    // 호버시 외각선
+                    border-color: var(--color-accent);
+                  }
+                }
+
+                // 인풋 컴포넌트
+                .dx-texteditor-container {
+                  .dx-texteditor-input {
+                    // input right padding
+                    padding-right: var(--size-padding4);
+                    min-height: calc(var(--size-input-height) - 2px);
+                    color: var(--color-grid-font);
+                  }
+
+                  .dx-dropdowneditor-button {
+                    padding-right: var(--size-padding4);
+                    width: 26px;
+                    min-width: 26px;
+
+                    .dx-button-content {
+                      .dx-dropdowneditor-icon {
+                        &::before {
+                          content: "\e1c4";
+                          font-size: 14px;
+                        }
+                      }
+                    }
+                  }
+                }
+                // 기본적으로 아이콘 배경색 무력화
+                .dx-texteditor-container {
+                  .dx-dropdowneditor-button {
+                    .dx-button-content {
+                      .dx-dropdowneditor-icon {
+                        background-color: transparent;
+                      }
+                    }
+                  }
+                }
+                // 인풋 박스 호버시
+                &.dx-state-hover,
+                &.dx-state-active,
+                &.dx-state-focused,
+                &.dx-dropdowneditor-active {
+                  .dx-texteditor-container {
+                    .dx-dropdowneditor-button {
+                      .dx-button-content {
+                        .dx-dropdowneditor-icon {
+                          // background-color: transparent;
+                          &::before {
+                            color: var(--color-accent);
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                // 캘린더 인풋 컴포넌트
+                &.dx-datebox-calendar {
+                  .dx-dropdowneditor-button {
+                    // calendar icon right padding
+                    // TODO: 아이콘 변경시 조정 바람 2023-03-10 15:17 Hawon Kim
+                    padding-right: var(--size-padding3);
+
+                    .dx-button-content {
+                      .dx-dropdowneditor-icon::before {
+                        content: "\e1c5";
+                        font-size: var(--size-icon-font-size);
+                        right: 0px;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .dx-popup-bottom {
+    .dx-button .dx-button-content {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.grid-select-pointer {
+  .wj-row[aria-selected="true"] {
+    .wj-cell {
+      cursor: pointer;
+    }
+  }
+}
+
+.moz-top-menu .dx-menu-items-container li .dx-item .dx-item-content div,
+.moz-controller-root .moz-controller .moz-controller-title {
+  font-size: 16px;
+}
+.dx-widget,
+.moz-controller-root .moz-controller .moz-controller-actions > .dx-button .dx-button-content .dx-button-text,
+.moz-emphasize-treeview .dx-treeview-node .dx-treeview-item .child-node {
+  font-size: 14px;
+}
+.dx-texteditor-input,
+.moz-controller-root .moz-horizontal-filter > div > label {
+  font-size: 12px;
+}
+
+.wj-flexgrid .wj-cell {
+  padding: 0px var(--size-padding4);
+}
+
+.moz-emphasize-treeview .dx-treeview-node .dx-treeview-item .second-node {
+  font-weight: 400;
+}
+.wj-flexgrid {
+  font-size: 12px;
+}
+
+.wj-grouppanel {
+  min-height: var(--size-grid-toolbar-height);
+  padding: var(--size-card-rbl-padding);
+  height: auto;
+
+  div[wj-part="div-markers"] {
+    gap: 10px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+// 팝업 내부의 input disabled style
+.moz-form .dx-item .dx-item-content .dx-texteditor.dx-state-disabled {
+  .dx-texteditor-container {
+    background-color: #f3f3f3;
+
+    .dx-texteditor-input {
+      background-color: #f3f3f3;
+    }
+
+    .dx-texteditor-buttons-container {
+      background-color: #f3f3f3;
+    }
+  }
+}

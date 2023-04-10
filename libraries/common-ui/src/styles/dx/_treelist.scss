@@ -1,0 +1,37 @@
+@import "../mixin";
+
+.dx-treelist {
+  background-color: transparent;
+  .dx-treelist-content .dx-treelist-table .dx-row .dx-command-select {
+    width: var(--size-checkbox-col-width);
+    min-width: var(--size-checkbox-col-width);
+    max-width: var(--size-checkbox-col-width);
+  }
+
+  .dx-widget {
+    font-size: var(--font-size-body03);
+  }
+
+  .dx-editor-cell {
+    .dx-texteditor {
+      background: var(--color-back);
+      .dx-texteditor-input {
+        background: var(--color-back);
+      }
+    }
+    .dx-checkbox {
+      margin-left: 10px;
+    }
+  }
+}
+
+.dx-treelist-container,
+.dx-treelist {
+  &.dx-filter-menu {
+    .dx-menu-item-has-icon {
+      .dx-icon {
+        color: var(--color-font5);
+      }
+    }
+  }
+}

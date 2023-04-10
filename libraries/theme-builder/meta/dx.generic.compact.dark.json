@@ -1,0 +1,182 @@
+{
+  "items": [
+    {
+      "key": "$accordion-title-color",
+      "value": "rgba(161, 182, 191, 1)"
+    },
+    {
+      "key": "$base-accent",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$base-text-color",
+      "value": "rgba(161, 172, 191, 1)"
+    },
+    {
+      "key": "$base-bg",
+      "value": "rgba(42, 51, 70, 1)"
+    },
+    {
+      "key": "$base-border-color",
+      "value": "rgba(58, 67, 87, 1)"
+    },
+    {
+      "key": "$base-success",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$base-warning",
+      "value": "rgba(242, 175, 68, 1)"
+    },
+    {
+      "key": "$base-danger",
+      "value": "rgba(224, 90, 105, 1)"
+    },
+    {
+      "key": "$base-hover-bg",
+      "value": "rgba(35, 45, 67, 1)"
+    },
+    {
+      "key": "$base-border-radius",
+      "value": "3px"
+    },
+    {
+      "key": "$badge-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$datagrid-row-selected-border-color",
+      "value": "rgba(42, 51, 70, 1)"
+    },
+    {
+      "key": "$datagrid-drag-header-border-color",
+      "value": "rgba(42, 51, 70, 0.5)"
+    },
+    {
+      "key": "$datagrid-row-focused-color",
+      "value": "rgba(161, 172, 191, 1)"
+    },
+    {
+      "key": "$datagrid-focused-border-color",
+      "value": "rgba(58, 67, 87, 1)"
+    },
+    {
+      "key": "$datagrid-search-color",
+      "value": "rgba(161, 172, 191, 1)"
+    },
+    {
+      "key": "$datagrid-row-error-bg",
+      "value": "rgba(224, 90, 105, 1)"
+    },
+    {
+      "key": "$datagrid-row-alternation-bg",
+      "value": "rgba(42, 51, 70, 1)"
+    },
+    {
+      "key": "$datagrid-group-row-color",
+      "value": "rgba(161, 172, 191, 1)"
+    },
+    {
+      "key": "$datagrid-nodata-color",
+      "value": "rgba(193, 150, 168, 1)"
+    },
+    {
+      "key": "$datagrid-selection-bg",
+      "value": "rgba(29, 41, 67, 1)"
+    },
+    {
+      "key": "$datagrid-row-focused-bg",
+      "value": "rgba(42, 51, 70, 1)"
+    },
+    {
+      "key": "$datagrid-summary-color",
+      "value": "rgba(42, 51, 70, 1)"
+    },
+    {
+      "key": "$datagrid-group-row-bg",
+      "value": "rgba(42, 51, 70, 1)"
+    },
+    {
+      "key": "$scheduler-workspace-focused-cell-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$scheduler-time-indicator-color",
+      "value": "rgba(1, 191, 192, 1)"
+    },
+    {
+      "key": "$scheduler-appointment-start-color",
+      "value": "rgba(0, 0, 0, 0)"
+    },
+    {
+      "key": "$scheduler-appointment-text-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$filterbuilder-text-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$filterbuilder-item-value-color",
+      "value": "rgba(95, 104, 124, 1)"
+    },
+    {
+      "key": "$filterbuilder-item-field-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$filterbuilder-item-operator-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$filterbuilder-remove-icon-color",
+      "value": "rgba(130, 139, 154, 1)"
+    },
+    {
+      "key": "$filterbuilder-plus-icon-color",
+      "value": "rgba(130, 139, 154, 1)"
+    },
+    {
+      "key": "$filterbuilder-group-operation-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$button-default-border-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$button-group-success-selected-bg",
+      "value": "rgba(42, 51, 70, 1)"
+    },
+    {
+      "key": "$button-group-default-selected-bg",
+      "value": "rgba(52, 51, 70, 1)"
+    },
+    {
+      "key": "$button-group-danger-selected-bg",
+      "value": "rgba(42, 51, 70, 1)"
+    },
+    {
+      "key": "$button-group-normal-selected-bg",
+      "value": "rgba(42, 51, 70, 1)"
+    },
+    {
+      "key": "$button-success-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$button-danger-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$button-default-color",
+      "value": "rgba(255, 255, 255, 1)"
+    }
+  ],
+  "baseTheme": "generic.dark.compact",
+  "outputColorScheme": "CompactDark",
+  "makeSwatch": false,
+  "version": "21.2.5",
+  "widgets": [],
+  "removeExternalResources": false
+}

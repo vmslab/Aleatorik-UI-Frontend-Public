@@ -1,0 +1,47 @@
+[
+  {
+    "processId": "start",
+    "name": "Start",
+    "categoryId": "",
+    "type": "",
+    "path": "/update",
+    "isAutoBlock": false,
+    "visibility": true
+  },
+  {
+    "processId": "stopService",
+    "name": "Stop Service",
+    "categoryId": "",
+    "type": "",
+    "path": "/update/stop",
+    "isAutoBlock": true,
+    "visibility": true
+  },
+  {
+    "processId": "updateServices",
+    "name": "Update Services",
+    "categoryId": "",
+    "type": "",
+    "path": "/update/service",
+    "isAutoBlock": true,
+    "visibility": false
+  },
+  {
+    "processId": "startService",
+    "name": "Start Service",
+    "categoryId": "",
+    "type": "",
+    "path": "/update/start",
+    "isAutoBlock": true,
+    "visibility": false
+  },
+  {
+    "processId": "finish",
+    "name": "Finish",
+    "categoryId": "",
+    "type": "",
+    "path": "/update/finish",
+    "isAutoBlock": false,
+    "visibility": false
+  }
+]

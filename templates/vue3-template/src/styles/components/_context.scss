@@ -1,0 +1,73 @@
+// 언어 선택 Context 메뉴
+.moz-lang-context {
+  .dx-submenu {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
+    border: none;
+
+    .dx-menu-item {
+      //padding: 4px 22px !important;
+    }
+
+    li > div {
+      padding-left: 13px;
+    }
+
+    .dx-state-hover {
+      div {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+// 사용자 Context 메뉴
+.moz-user-context {
+  background-color: var(--color-back);
+  .dx-submenu {
+    box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
+    border: none;
+  }
+
+  .dx-menu-item.dx-state-hover {
+    background-color: var(--color-accent2);
+  }
+
+  .menu-item-userinfo {
+    background-color: var(--color-back);
+    height: 66px;
+    padding: 15px 28px;
+
+    .company {
+      color: var(--color-font2);
+      font-weight: bold;
+    }
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  .menu-item {
+    font-size: var(--font-size-body04) !important;
+  }
+
+  .dx-menu-items-container li {
+    font-size: var(--font-size-body04);
+  }
+
+  .dx-menu-items-container li:last-of-type {
+    border-bottom: none !important;
+  }
+}
+
+// 즐겨찾기 Context 메뉴
+.moz-favorite-context {
+  .dx-menu-item {
+    .menu-item {
+      height: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0px 10px;
+    }
+  }
+}

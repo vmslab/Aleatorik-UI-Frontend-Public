@@ -1,0 +1,15 @@
+<template></template>
+
+<script setup lang="ts">
+import { MarkType } from "@mozart-ui/common-ui";
+
+const props = defineProps<{
+  value?: number;
+  name?: string;
+  type?: MarkType;
+  color?: string;
+  width?: number;
+  dashArray?: string;
+  ticks?: number;
+}>();
+</script>

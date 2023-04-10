@@ -1,0 +1,32 @@
+{
+  "name": "theme-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "bin": {
+    "app": "src/index.js"
+  },
+  "pkg": {
+    "assets": [
+      "node_modules/devextreme-themebuilder/data/scss/**/*"
+    ],
+    "targets": [
+      "node16-win-x64",
+      "node16-linux-x64",
+      "node16-macos-x64"
+    ]
+  },
+  "scripts": {
+    "build": "pkg package.json --out-path dist",
+    "test": "dist/theme-builder.exe -p ./meta/dx.generic.compact.dark.json -o ./dist/dx.generic.compact.dark.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "pkg": "^5.5.2"
+  },
+  "dependencies": {
+    "command-line-args": "^5.2.1",
+    "devextreme-themebuilder": "^21.2.5"
+  }
+}

@@ -1,0 +1,6 @@
+export const LINE_NO_DEFINES = [
+  { CMCODE_ID: "LINE_01", CMCODE_DESCR: "1호기" },
+  { CMCODE_ID: "LINE_02", CMCODE_DESCR: "2호기" },
+  { CMCODE_ID: "LINE_03", CMCODE_DESCR: "3호기" },
+  { CMCODE_ID: "LINE_04", CMCODE_DESCR: "4호기" },
+];

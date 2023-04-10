@@ -1,0 +1,14 @@
+{
+  "name": "@mozart-ui/common",
+  "private": true,
+  "version": "0.1.0",
+  "license": "ISC",
+  "main": "src/",
+  "devDependencies": {
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "rxjs": "^7.5.4",
+    "dayjs": "^1.11.6"
+  }
+}

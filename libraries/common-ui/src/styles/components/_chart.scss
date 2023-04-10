@@ -1,0 +1,166 @@
+@import "../mixin";
+
+$axisDefaultColor: var(--color-border2);
+$axisMargin: 4px;
+$lineWidth: 3px;
+$lineInnerCircleBack: #fff;
+
+.moz-chart-root {
+  width: 100%;
+  height: 100%;
+  .moz-chart-svg {
+    background-color: var(--color-back);
+    .moz-axis {
+      .moz-axis-line {
+        stroke: $axisDefaultColor;
+      }
+      .moz-axis-grid {
+        stroke: var(--color-border1);
+        stroke-dasharray: 5 3;
+      }
+      .moz-axis-path {
+        stroke: $axisDefaultColor;
+      }
+      .moz-axis-text {
+        fill: var(--color-font5);
+        font-size: var(--font-size-body02);
+      }
+      .moz-axis-top-text {
+        transform: translate(0px, -$axisMargin);
+      }
+      .moz-axis-right-text {
+        transform: translate($axisMargin, 0px);
+      }
+      .moz-axis-bottom-text {
+        transform: translate(0px, $axisMargin);
+      }
+      .moz-axis-left-text {
+        transform: translate(-$axisMargin, 0px);
+      }
+    }
+
+    .moz-axis-marker-line {
+      stroke: var(--color-error);
+    }
+
+    .moz-series {
+      .moz-series-rect {
+        rx: var(--border-radius);
+        ry: var(--border-radius);
+      }
+      .moz-series-line {
+        stroke-width: $lineWidth;
+        fill: none;
+      }
+      .moz-series-line-outer-circle {
+        r: 7px;
+      }
+      .moz-series-line-inner-circle {
+        r: 4px;
+        fill: $lineInnerCircleBack;
+      }
+      .moz-series-box-plot-path {
+        stroke-width: 2px;
+      }
+      .moz-series-box-plot-median {
+        stroke-width: 2px;
+        stroke: #fff;
+        stroke-dasharray: 4;
+      }
+      .moz-series-box-plot-circle {
+        r: 4px;
+        stroke: none;
+        stroke-width: 0px;
+      }
+      .moz-series-text {
+        font-size: var(--font-size-body02);
+        dominant-baseline: central;
+        text-anchor: middle;
+        &.moz-series-text-collision {
+          text-anchor: start;
+        }
+      }
+      .moz-accumulated-text {
+        font-size: var(--font-size-body02);
+        dominant-baseline: middle;
+        text-anchor: middle;
+      }
+    }
+
+    .moz-text {
+      fill: var(--color-font3);
+      dominant-baseline: text-before-edge;
+      text-anchor: middle;
+      font-size: var(--font-size-body02);
+      &.moz-text-title {
+        font-size: var(--font-size-heading02);
+      }
+      &.moz-text-axis {
+        font-size: var(--font-size-heading04);
+      }
+      &.moz-text-legend {
+        font-size: var(--font-size-heading04);
+      }
+    }
+
+    .moz-text-legend-table {
+      border-collapse: collapse;
+      .moz-text-legend-td {
+        @include flex-center-horizontal;
+        @include nowrap-text;
+        color: var(--color-font3);
+        padding-right: 16px;
+        @mixin moz-text-legend-shape {
+          height: var(--font-size-body02);
+          margin: 0px 4px;
+        }
+        .moz-text-legend-circle {
+          @include moz-text-legend-shape;
+          width: var(--font-size-body02);
+          border-radius: 50%;
+        }
+        .moz-text-legend-rect {
+          @include moz-text-legend-shape;
+          width: 24px;
+        }
+        .moz-text-legend-square {
+          @include moz-text-legend-shape;
+          width: var(--font-size-body02);
+          height: var(--font-size-body02);
+        }
+        .moz-text-legend-text {
+          font-size: var(--font-size-body02);
+        }
+      }
+    }
+
+    .moz-text-legend-line {
+      stroke-width: $lineWidth;
+    }
+
+    .moz-text-legend-inner-circle {
+      fill: $lineInnerCircleBack;
+    }
+
+    .moz-text-no-data {
+      dominant-baseline: central;
+      text-anchor: middle;
+      fill: var(--color-font3);
+      font-size: var(--font-size-heading04);
+    }
+
+    .moz-loading {
+      .moz-loading-circle {
+        fill: var(--color-font3);
+        &.loading {
+          fill: var(--color-accent);
+        }
+      }
+    }
+
+    .moz-chart-tooltip-line {
+      stroke: rgba(var(--color-border2-r), var(--color-border2-g), var(--color-border2-b), 0.9);
+      stroke-dasharray: 5 5;
+    }
+  }
+}

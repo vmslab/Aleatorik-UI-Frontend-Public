@@ -1,0 +1,112 @@
+@import "../mixin";
+@import "../function";
+
+.dx-filemanager {
+  .dx-filemanager-dirs-tree {
+    &.dx-treeview {
+      .dx-treeview-item-without-checkbox {
+        > .dx-treeview-item {
+          padding: 5px 5px 5px 1px;
+          margin-left: 10px;
+          &.dx-filemanager-focused-item {
+            background: var(--color-selected);
+          }
+          &.dx-state-hover {
+            background: var(--color-hover);
+          }
+        }
+      }
+    }
+  }
+
+  .dx-filemanager-toolbar {
+    min-height: 0px;
+    background: var(--color-border2);
+
+    .dx-button {
+      &.dx-button-mode-text {
+        &.dx-button-normal {
+          &.dx-button-has-text {
+            @include flex-center-horizontal;
+            .dx-button-content {
+              @include flex-center-horizontal;
+            }
+          }
+        }
+      }
+    }
+  }
+  & .dx-toolbar-items-container {
+    background: var(--color-border2);
+  }
+  & .dx-filemanager-toolbar {
+    &.dx-filemanager-file-toolbar,
+    &.dx-filemanager-file-toolbar .dx-toolbar,
+    & .dx-filemanager-toolbar-separator-item {
+      background: var(--color-border2);
+    }
+  }
+
+  .dx-filemanager-dirs-tree-item-text {
+    display: inline-block;
+    margin-left: 4px;
+  }
+  .dx-filemanager-file-actions-button {
+    .dx-button-content {
+      @include flex-center;
+    }
+  }
+
+  .dx-filemanager-container .dx-filemanager-dirs-panel {
+    padding: 5px 0px;
+  }
+
+  .dx-treeview-node {
+    .dx-treeview-item {
+      height: calc(var(--size-card-rbl-padding) + 2px);
+    }
+  }
+}
+
+.dx-filemanager-i {
+  &.dx-filemanager-i-progress,
+  &.dx-filemanager-i-refresh,
+  &.dx-icon.dx-filemanager-i-progress,
+  &.dx-icon.dx-filemanager-i-refresh {
+    background: none;
+    width: auto;
+    height: auto;
+    &::before {
+      @include moz-icon;
+      content: unicode("e1bb");
+    }
+  }
+}
+
+.dx-header-row > td > .dx-datagrid-text-content {
+  font-size: var(--font-size-body02);
+  color: var(--color-border4);
+}
+
+.dx-datagrid-table {
+  .dx-data-row {
+    height: calc(var(--size-filelist-item-height) + 6px);
+  }
+}
+
+.dx-treeview-toggle-item-visibility {
+  @include tree-icon(var(--color-font5), false);
+  font-size: var(--font-size-heading01);
+  margin-left: 5px;
+
+  &::before {
+    top: 55%;
+    content: unicode("e10e");
+  }
+
+  &.dx-treeview-toggle-item-visibility-opened::before {
+    @include tree-icon(var(--color-font5), false);
+    font-size: var(--font-size-heading01);
+    content: unicode("e10d");
+  }
+}

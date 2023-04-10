@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
+
+import "Protos/Common.proto";
+
+
+option csharp_namespace = "MozartUI.Services.Grpc";
+
+package mozartui.services;
+
+service DaemonService {
+  
+  // call get services api
+  rpc GetServices(Empty) returns (GetServicesResponse) {
+    option (google.api.http) = {
+			get: "/api/daemonService"
+	  };
+  }
+
+  // call install service api
+  rpc InstallService(DaemonServiceInfo) returns (ServiceResponse) {
+    option (google.api.http) = {
+			post: "/api/installService"
+			body: "*"
+	  };
+  }
+
+    // call start service api
+    rpc StartService(DaemonServiceInfo) returns (ServiceResponse) {
+      option (google.api.http) = {
+        post: "/api/startService"
+        body: "*"
+      };
+    }
+
+  // call stop service api
+  rpc StopService(DaemonServiceInfo) returns (ServiceResponse) {
+    option (google.api.http) = {
+			post: "/api/stopService"
+			body: "*"
+	  };
+  }
+
+  // call remove service api
+  rpc UninstallService(DaemonServiceInfo) returns (ServiceResponse) {
+    option (google.api.http) = {
+			post: "/api/uninstallService"
+			body: "*"
+	  };
+  }
+}
+
+message DaemonServiceInfo {
+  // notnull
+  string name = 1;
+  // notnull
+  string path = 2;
+  // nullable
+  google.protobuf.StringValue description = 3;
+}
+  
+enum ServiceStatus {
+  Active = 0;
+  Deactive = 1;
+}
+
+message DaemonInfo {
+  string name = 1;
+  ServiceStatus status = 2;
+}
+
+// 함수명 + response, request
+message GetServicesResponse { 
+  repeated DaemonInfo items = 1;
+}
+
+message ServiceResponse {
+  bool result = 1;
+}

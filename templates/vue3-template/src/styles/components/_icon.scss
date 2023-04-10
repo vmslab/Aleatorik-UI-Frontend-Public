@@ -1,0 +1,160 @@
+@import "../function";
+
+.moz-favorite {
+  &::before {
+    content: unicode("e126");
+  }
+  &-fill::before {
+    content: unicode("e122");
+    color: var(--color-accent);
+  }
+}
+
+.moz-theme {
+  &::before {
+    content: unicode("e10b");
+  }
+  &-tap::before {
+    content: unicode("e109");
+  }
+}
+
+.moz-compact {
+  &::before {
+    content: unicode("e13b");
+  }
+  &-normal::before {
+    content: unicode("e13c");
+  }
+}
+
+.moz-filter-icon {
+  &::before {
+    content: unicode("e103");
+  }
+  &-tap::before {
+    content: unicode("e10c");
+  }
+}
+
+.moz-language::before {
+  content: unicode("e108");
+}
+
+.moz-project::before {
+  content: unicode("e15e");
+}
+
+.moz-server::before {
+  content: unicode("e15f");
+}
+
+.moz-home::before {
+  content: unicode("e160");
+}
+
+.moz-down::before {
+  content: unicode("e10d");
+}
+
+.moz-setting-icon::before {
+  content: unicode("e182");
+}
+
+.context-button {
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  text-align: center;
+  display: inline-flex !important;
+
+  &::before {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding-left: 20px;
+    font-size: 14px;
+    color: var(--color-font5);
+  }
+}
+.top-app-button {
+  width: var(--size-button-top-app);
+  height: var(--size-button-top-app);
+  cursor: pointer;
+  margin-right: 10px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  display: inline-flex !important;
+
+  &:last-of-type {
+    margin-right: 0px;
+  }
+
+  &::before {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--size-icon-top-app);
+  }
+
+  &:hover {
+    background-color: var(--color-accent);
+    &::before {
+      color: var(--color-font-white);
+    }
+  }
+}
+.controller-title-button {
+  cursor: pointer;
+  margin-left: 4px;
+  color: var(--color-accent);
+  &:hover {
+    opacity: 0.6;
+  }
+}
+
+.top-menu {
+  font-size: var(--size-icon-top-app);
+}
+
+.menu-location-top::before {
+  font-size: 30px;
+  font-family: "mozart-icons";
+  color: var(--color-font4);
+  content: unicode("e150");
+}
+.menu-location-left::before {
+  font-size: 30px;
+  font-family: "mozart-icons";
+  color: var(--color-font4);
+  content: unicode("e151");
+}
+.menu-location-topandleft::before {
+  font-size: 30px;
+  font-family: "mozart-icons";
+  color: var(--color-font4);
+  content: unicode("e152");
+}
+
+.moz-system-manage-icon {
+  &.dx-icon::before {
+    font-size: 12px;
+  }
+}
+
+.moz-db-icon {
+  &.m-181_icon-oracle::before {
+    color: #e72e15;
+  }
+  &.m-179_icon-mariadb::before {
+    color: #99602a;
+  }
+  &.m-178_icon-postgresql::before {
+    color: #326791;
+  }
+  &.m-177_icon-sqlite::before {
+    color: #003b57;
+  }
+  &.moz-db-icon-title::before {
+    font-size: 22px;
+  }
+}

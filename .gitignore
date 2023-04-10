@@ -1,0 +1,40 @@
+.DS_Store
+node_modules
+**/coverage
+**/dist
+**/dist.*
+**/lib
+**/build
+**/src/generated
+**/src/shared/generated/**/*
+**/src/default_font
+**/src/fonts
+**/src/styles/css/**/*
+**/storybook-static
+**/config
+**/pkg
+**/resource
+**/assets/*.zip
+!scripts/config
+.eslintrc.js
+
+# local env files
+.env.local
+.env.*.local
+**/codegen.yml
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# backup files
+*.bak
+
+# Editor directories and files
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

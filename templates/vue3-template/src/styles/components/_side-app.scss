@@ -1,0 +1,22 @@
+.side-top-area {
+  margin: 0px;
+  height: var(--size-top-height);
+  background-color: var(--left-logo-color);
+  display: flex;
+  border-bottom: var(--border-outer);
+}
+
+.drawer-toggle-icon {
+  color: var(--color-accent);
+  font-size: 24px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  line-height: inherit !important;
+  display: inline-flex !important;
+}
+
+.drawer-logo-area {
+  cursor: pointer;
+  margin: auto 0px;
+}

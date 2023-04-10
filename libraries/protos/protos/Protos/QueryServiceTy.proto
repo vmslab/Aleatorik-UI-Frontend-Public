@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/struct.proto";
+
+import "Protos/Common.proto";
+
+option csharp_namespace = "MozartUI.Services.Grpc";
+
+package mozartui.services;
+
+message SortingInfo {
+  //
+  string selector = 1;
+  //
+  bool desc = 2;
+}
+
+message GroupingInfo {
+  //
+  string selector = 1;
+  //
+  bool desc = 2;
+  //
+  string groupInterval = 3;
+  //
+  google.protobuf.BoolValue isExpanded = 4;
+}
+
+message SummaryInfo {
+  // 
+  string selector = 1;
+  //
+  string summaryType = 2;
+}
+
+message TableInfo {
+  //
+  string name = 1;
+  //
+  repeated string select = 2;
+  //
+  repeated google.protobuf.Value keys = 3;
+  // An join type: "inner join", "left join", "right join", "outer join", "cross join"
+  string type = 4;
+  //
+  string alias = 5;
+}
+
+message LoadOptions {
+  //
+  bool requireTotalCount = 1;
+  //
+  bool requireGroupCount = 2;
+  //
+  bool isCountQuery = 3;
+  //
+  bool isSummaryQuery = 4;
+  //
+  int32 skip = 5;
+  //
+  int32 take = 6;
+  //
+  repeated SortingInfo sort = 7;
+  //
+  repeated GroupingInfo group = 8;
+  //
+  repeated google.protobuf.Value filter = 9;
+  //
+  repeated SummaryInfo totalSummary = 10;
+  //
+  repeated SummaryInfo groupSummary = 11;
+  // 
+  repeated string select = 12;
+  // 
+  repeated string preSelect = 13;
+  // 
+  google.protobuf.BoolValue remoteSelect = 14;
+  //
+  google.protobuf.BoolValue remoteGrouping = 15;
+  //
+  google.protobuf.BoolValue expandLinqSumType = 16;
+  // 
+  repeated string primaryKey = 17;
+  // 
+  string defaultSort = 18;
+  // 
+  google.protobuf.BoolValue stringToLower = 19;
+  // 
+  google.protobuf.BoolValue paginateViaPrimaryKey = 20;
+  //
+  google.protobuf.BoolValue sortByPrimaryKey = 21;
+  // 
+  bool allowAsyncOverSync = 22;
+  //
+  repeated TableInfo tables = 23;
+}

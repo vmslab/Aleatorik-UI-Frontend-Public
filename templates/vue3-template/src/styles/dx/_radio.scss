@@ -1,0 +1,35 @@
+.dx-radiobutton {
+  &.dx-state-focused:not(.dx-state-active) {
+    .dx-radiobutton-icon::before {
+      border: 1px solid var(--color-accent);
+    }
+  }
+}
+
+.dx-radiobutton-icon {
+  width: var(--size-radio-container);
+  height: var(--size-radio-container);
+}
+
+.dx-radiobutton-icon::before {
+  width: var(--size-radio-container);
+  height: var(--size-radio-container);
+  border: 1px solid var(--color-border3);
+}
+
+.dx-radiobutton-icon.dx-radiobutton-icon-checked::before {
+  width: var(--size-radio-container);
+  height: var(--size-radio-container);
+  border: 1px solid var(--color-accent);
+  box-sizing: border-box;
+}
+
+.dx-radiobutton-icon-checked {
+  .dx-radiobutton-icon-dot {
+    width: var(--size-radio-dot);
+    height: var(--size-radio-dot);
+    margin-top: var(--radio-dot-margin-top);
+    margin-left: var(--radio-dot-margin-left);
+    background-color: var(--color-accent);
+  }
+}

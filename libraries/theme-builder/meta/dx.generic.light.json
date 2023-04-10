@@ -1,0 +1,186 @@
+{
+  "items": [
+    {
+      "key": "$base-accent",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$base-text-color",
+      "value": "rgba(86, 95, 110, 1)"
+    },
+    {
+      "key": "$base-border-color",
+      "value": "rgba(225, 228, 234, 1)"
+    },
+    {
+      "key": "$base-success",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$base-warning",
+      "value": "rgba(242, 175, 68, 1)"
+    },
+    {
+      "key": "$base-hover-bg",
+      "value": "rgba(244, 255, 255, 0.04)"
+    },
+    {
+      "key": "$base-focus-color",
+      "value": "rgba(86, 95, 110, 1)"
+    },
+    {
+      "key": "$base-focus-bg",
+      "value": "rgba(228, 247, 247, 1)"
+    },
+    {
+      "key": "$base-border-radius",
+      "value": "5px"
+    },
+    {
+      "key": "$pager-page-selected-bg",
+      "value": "rgba(228, 247, 247, 1)"
+    },
+    {
+      "key": "$base-danger",
+      "value": "rgba(224, 90, 105, 1)"
+    },
+    {
+      "key": "$button-group-default-selected-bg",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$button-group-default-selected-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$button-group-normal-selected-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$button-group-normal-selected-bg",
+      "value": "rgba(255, 255, 255, 0.17)"
+    },
+    {
+      "key": "$button-group-success-selected-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$button-default-border-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$button-group-success-selected-bg",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$datagrid-columnchooser-item-color",
+      "value": "rgba(66, 76, 95, 1)"
+    },
+    {
+      "key": "$datagrid-menu-icon-color",
+      "value": "rgba(124, 130, 142, 1)"
+    },
+    {
+      "key": "$datagrid-nodata-color",
+      "value": "rgba(124, 130, 142, 1)"
+    },
+    {
+      "key": "$datagrid-drag-header-border-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$datagrid-cell-modified-border-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$datagrid-row-selected-color",
+      "value": "rgba(124, 130, 142, 1)"
+    },
+    {
+      "key": "$datagrid-selection-bg",
+      "value": "rgba(228, 247, 247, 1)"
+    },
+    {
+      "key": "$datagrid-row-alternation-bg",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$datagrid-hover-bg",
+      "value": "rgba(244, 255, 255, 1)"
+    },
+    {
+      "key": "$datagrid-search-bg",
+      "value": "rgba(224, 247, 247, 1)"
+    },
+    {
+      "key": "$datagrid-row-error-color",
+      "value": "rgba(224, 90, 105, 1)"
+    },
+    {
+      "key": "$datagrid-search-color",
+      "value": "rgba(228, 247, 247, 1)"
+    },
+    {
+      "key": "$datagrid-row-focused-bg",
+      "value": "rgba(228, 247, 247, 1)"
+    },
+    {
+      "key": "$datagrid-row-focused-color",
+      "value": "rgba(124, 130, 142, 1)"
+    },
+    {
+      "key": "$scheduler-accent-border-color",
+      "value": "rgba(237, 239, 242, 1)"
+    },
+    {
+      "key": "$scheduler-time-indicator-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$scheduler-workspace-focused-cell-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$scheduler-appointment-start-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$filterbuilder-text-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$filterbuilder-menu-icon-color",
+      "value": "rgba(153, 159, 170, 1)"
+    },
+    {
+      "key": "$filterbuilder-plus-icon-color",
+      "value": "rgba(153, 159, 170, 1)"
+    },
+    {
+      "key": "$filterbuilder-remove-icon-color",
+      "value": "rgba(153, 159, 170, 1)"
+    },
+    {
+      "key": "$filterbuilder-group-operation-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$filterbuilder-item-field-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$filterbuilder-item-operator-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$filterbuilder-item-value-color",
+      "value": "rgba(153, 159, 170, 1)"
+    }
+  ],
+  "baseTheme": "generic.light",
+  "outputColorScheme": "Light",
+  "makeSwatch": false,
+  "version": "21.2.5",
+  "widgets": [],
+  "removeExternalResources": false
+}

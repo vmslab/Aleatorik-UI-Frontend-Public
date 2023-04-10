@@ -1,0 +1,162 @@
+{
+  "items": [
+    {
+      "key": "$base-accent",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$base-text-color",
+      "value": "rgba(161, 172, 191, 1)"
+    },
+    {
+      "key": "$base-bg",
+      "value": "rgba(42, 51, 70, 1)"
+    },
+    {
+      "key": "$base-border-color",
+      "value": "rgba(58, 67, 87, 1)"
+    },
+    {
+      "key": "$base-success",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$base-warning",
+      "value": "rgba(242, 175, 68, 1)"
+    },
+    {
+      "key": "$base-danger",
+      "value": "rgba(224, 90, 105, 1)"
+    },
+    {
+      "key": "$base-focus-color",
+      "value": "rgba(161, 172, 191, 1)"
+    },
+    {
+      "key": "$base-border-radius",
+      "value": "5px"
+    },
+    {
+      "key": "$badge-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$base-hover-bg",
+      "value": "rgba(35, 45, 67, 1)"
+    },
+    {
+      "key": "$scheduler-appointment-text-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$scheduler-appointment-start-color",
+      "value": "rgba(255, 255, 255, 0.3)"
+    },
+    {
+      "key": "$scheduler-workspace-focused-cell-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$scheduler-time-indicator-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$datagrid-nodata-color",
+      "value": "rgba(139, 150, 168, 1)"
+    },
+    {
+      "key": "$datagrid-drag-header-border-color",
+      "value": "rgba(42, 51, 70, 1)"
+    },
+    {
+      "key": "$datagrid-cell-modified-border-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$datagrid-row-invalid-faded-border-color",
+      "value": "rgba(224, 90, 105, 1)"
+    },
+    {
+      "key": "$datagrid-selection-bg",
+      "value": "rgba(29, 41, 67, 1)"
+    },
+    {
+      "key": "$datagrid-row-selected-border-color",
+      "value": "rgba(42, 51, 70, 1)"
+    },
+    {
+      "key": "$datagrid-row-focused-color",
+      "value": "rgba(161, 172, 191, 1)"
+    },
+    {
+      "key": "$datagrid-row-focused-bg",
+      "value": "rgba(42, 51, 70, 1)"
+    },
+    {
+      "key": "$datagrid-focused-border-color",
+      "value": "rgba(58, 67, 87, 1)"
+    },
+    {
+      "key": "$datagrid-row-alternation-bg",
+      "value": "rgba(42, 51, 70, 1)"
+    },
+    {
+      "key": "$datagrid-group-row-color",
+      "value": "rgba(161, 172, 191, 1)"
+    },
+    {
+      "key": "$datagrid-group-row-bg",
+      "value": "rgba(42, 51, 70, 1)"
+    },
+    {
+      "key": "$datagrid-summary-color",
+      "value": "rgba(42, 51, 70, 0.7)"
+    },
+    {
+      "key": "$datagrid-search-color",
+      "value": "rgba(161, 172, 191, 1)"
+    },
+    {
+      "key": "$datagrid-row-error-bg",
+      "value": "rgba(224, 90, 105, 1)"
+    },
+    {
+      "key": "$filterbuilder-text-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$filterbuilder-text-focus-color",
+      "value": "rgba(255, 255, 255, 1)"
+    },
+    {
+      "key": "$filterbuilder-plus-icon-color",
+      "value": "rgba(130, 139, 154, 1)"
+    },
+    {
+      "key": "$filterbuilder-remove-icon-color",
+      "value": "rgba(130, 139, 154, 1)"
+    },
+    {
+      "key": "$filterbuilder-group-operation-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$filterbuilder-item-field-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$filterbuilder-item-operator-color",
+      "value": "rgba(0, 191, 192, 1)"
+    },
+    {
+      "key": "$filterbuilder-item-value-color",
+      "value": "rgba(95, 104, 124, 1)"
+    }
+  ],
+  "baseTheme": "generic.dark",
+  "outputColorScheme": "Dark",
+  "makeSwatch": false,
+  "version": "21.2.5",
+  "widgets": [],
+  "removeExternalResources": false
+}

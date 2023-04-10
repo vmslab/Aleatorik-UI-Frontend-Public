@@ -1,0 +1,17 @@
+.moz-filter {
+  position: fixed;
+  height: var(--size-content-inner-height-no-padding);
+  width: 400px;
+  right: var(--size-drawer-width);
+  bottom: 0;
+  background-color: var(--color-back);
+  z-index: 1000;
+  box-shadow: 0 10px 25px 0 rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateX(400px);
+  transition: 0.5s ease;
+  &.is-open {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

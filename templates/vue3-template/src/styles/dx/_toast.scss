@@ -1,0 +1,19 @@
+.dx-toast-wrapper {
+  .dx-toast-content {
+    .dx-toast-message {
+      color: var(--color-font-white);
+    }
+  }
+  .dx-toast-success {
+    background-color: var(--color-success);
+  }
+  .dx-toast-error {
+    background-color: var(--color-error);
+  }
+  .dx-toast-info {
+    background-color: var(--color-info);
+  }
+  .dx-toast-warning {
+    background-color: var(--color-warning);
+  }
+}

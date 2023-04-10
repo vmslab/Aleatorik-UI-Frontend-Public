@@ -1,0 +1,44 @@
+@import "../mixin";
+@import "../function";
+
+.moz-tree {
+  .moz-tree-container {
+    .moz-tree-node-item {
+      @include flex-center-horizontal;
+      height: 22px;
+      cursor: pointer;
+      &:hover {
+        background-color: var(--color-hover);
+      }
+      .moz-tree-node-item-text {
+        // font-size: 13px;
+      }
+      .moz-tree-node-item-btn {
+        @include mozart-icons;
+        margin: 0px 2px;
+      }
+      .moz-tree-node-item-icon {
+        @include mozart-icons;
+        margin-right: 2px;
+        font-size: 15px;
+      }
+      &.moz-tree-node-item-selected {
+        background-color: var(--color-selected);
+      }
+    }
+
+    // .moz-tree-node-parent {
+    //   .moz-tree-node-child {
+    //     display: block;
+    //   }
+    // }
+  }
+
+  &.moz-drawer {
+    .moz-tree-container {
+      .moz-tree-node-item {
+        height: var(--size-drawer-item-height);
+      }
+    }
+  }
+}

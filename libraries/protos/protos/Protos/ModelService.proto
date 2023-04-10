@@ -1,0 +1,243 @@
+﻿syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/any.proto";
+
+import "Protos/Common.proto";
+import "Protos/QueryServiceTy.proto";
+
+option csharp_namespace = "MozartUI.Services.Grpc";
+
+package mozartui.services;
+
+service ModelService {
+	// 
+	rpc GetModel(Empty) returns (ModelInfo) {
+		option (google.api.http) = {
+			get: "/api/getModel"
+		};
+	}
+	// 
+	rpc SaveModel(ModelInfo) returns (Result) {
+		option (google.api.http) = {
+			post: "/api/saveModel"
+			body: "*"
+		};
+	}
+  //
+  rpc AddConnection(ConnectionInfo) returns (Result) {
+    option (google.api.http) = {
+			post: "/api/addConnection"
+			body: "*"
+		};
+  }
+  //
+  rpc ModifyConnection(ConnectionInfo) returns (Result) {
+    option (google.api.http) = {
+			post: "/api/modifyConnection"
+			body: "*"
+		};
+  }
+  //
+  rpc RemoveConnection(ConnectionInfo) returns (Result) {
+    option (google.api.http) = {
+			post: "/api/removeConnection"
+			body: "*"
+		};
+  }
+  //
+  rpc TestConnection(ConnectionInfo) returns (Result) {
+    option (google.api.http) = {
+			post: "/api/testConnection"
+			body: "*"
+		};
+  }
+  //
+  rpc AddDataItem(EntityDef) returns (Result) {
+    option (google.api.http) = {
+			post: "/api/addDataItem"
+			body: "*"
+		};
+  }
+  //
+  rpc ModifyDataItem(EntityDef) returns (Result) {
+    option (google.api.http) = {
+			post: "/api/modifyDataItem"
+			body: "*"
+		};
+  }
+  //
+  rpc RemoveDataItem(EntityDef) returns (Result) {
+    option (google.api.http) = {
+			post: "/api/removeDataItem"
+			body: "*"
+		};
+  }
+	// 
+	rpc Migrate(MigrateInfo) returns (Result) {
+		option (google.api.http) = {
+			post: "/api/model/migrate"
+			body: "*"
+		};
+	}
+	// 
+	rpc GetItems(SqlRequest) returns (AnyArray) {
+		option (google.api.http) = {
+			post: "/api/model/items"
+			body: "*"
+		};
+	}
+	// 
+	rpc AddItem(SqlRequest) returns (Result) {
+		option (google.api.http) = {
+			post: "/api/model/item"
+			body: "*"
+		};
+	}
+	// 
+	rpc ModifyItem(SqlRequest) returns (Result) {
+		option (google.api.http) = {
+			put: "/api/model/item"
+			body: "*"
+		};
+	}
+	// 
+	rpc RemoveItem(SqlRequest) returns (Result) {
+		option (google.api.http) = {
+			delete: "/api/model/item"
+			body: "*"
+		};
+	}
+}
+
+message EntityPropDef {
+  //
+  string id = 1;
+  //
+  string name = 2;
+  //
+  google.protobuf.StringValue columnName = 3;
+  //
+  string entityName = 4;
+  //
+  string type = 5;
+  //
+  google.protobuf.Int32Value size = 6;
+  //
+  bool primaryKey = 7;
+  //
+  bool nullable = 8;
+}
+
+message EntityDef {
+  //
+  string id = 1;
+  //
+  string name = 2;
+  //
+  google.protobuf.StringValue group = 3;
+  //
+  google.protobuf.StringValue tableName = 4;
+  //
+  repeated EntityPropDef props = 5;
+}
+
+message SqlParam {
+  //
+  string name = 1;
+  //
+  string type = 2;
+}
+
+message SqlDef {
+  //
+  string id = 1;
+  //
+  string name = 2;
+  //
+  string contents = 3;
+  //
+  repeated SqlParam params = 4;
+}
+
+message ColumnDef {
+  //
+  string name = 1;
+  //
+  string type = 2;
+}
+
+message TableDef {
+  //
+  string schema = 1;
+  //
+  string name = 2;
+  //
+  repeated ColumnDef columns = 3;
+}
+
+message ConnectionInfo {
+  //
+  string id = 1;
+  //
+  string name = 2;
+  //
+  string dbType = 3;
+  //
+  string dataSource = 4;
+  //
+  google.protobuf.StringValue group = 5;
+  //
+  google.protobuf.StringValue userId = 6;
+  //
+  google.protobuf.StringValue password = 7;
+  //
+  google.protobuf.StringValue database = 8;
+  //
+  google.protobuf.StringValue sid = 9;
+  //
+  google.protobuf.StringValue serviceName = 10;
+  //
+  google.protobuf.StringValue schemaGroup = 11;
+}
+
+message ModelInfo {
+  //
+  repeated ConnectionInfo connectionInfos = 1;
+  //
+  repeated EntityDef entityDefs = 2;
+  //
+  repeated SqlDef sqlDefs = 3;
+}
+
+message MigrateInfo {
+  //
+  ConnectionInfo connectionInfo = 1;
+  //
+  repeated EntityDef entityDefs = 2;
+  //
+  bool isDown = 3;
+}
+
+message SqlRequest {
+  // 
+  string table = 1;
+  // 
+  string sql = 2;
+  // 
+  string connection = 3;
+  // 
+  LoadOptions options = 4;
+  // 
+  google.protobuf.Any obj = 5;
+  // 
+  google.protobuf.Any parameters = 6;
+}
+
+message MultiSqlRequest {
+  //
+  repeated SqlRequest sqls = 1;
+  //
+  google.protobuf.BoolValue transaction = 2;
+}

@@ -1,0 +1,115 @@
+@import "../mixin";
+
+.moz-root {
+  width: var(--size-width);
+  height: var(--size-height);
+}
+
+.moz-contents {
+  background-color: var(--color-contentback);
+  line-height: initial;
+}
+
+@mixin frame {
+  width: var(--size-content-width);
+  overflow: auto;
+  display: block;
+}
+
+.moz-frame {
+  height: var(--size-content-height);
+  padding: 0px var(--size-content-padding);
+  @include frame;
+  & .moz-split-box:last-child::after {
+    content: "";
+    min-width: var(--size-content-padding-no-scroll);
+    height: var(--size-content-padding-no-scroll);
+    display: block;
+  }
+}
+
+.moz-frame-for-outer-control {
+  height: var(--size-content-height-outer-controller);
+  padding: var(--size-content-padding);
+  @include frame;
+}
+
+.moz-frame-for-outer-control-tab {
+  height: var(--size-content-height-outer-controller-tab);
+  padding: var(--size-content-padding);
+  @include frame;
+}
+
+.moz-frame-for-inner-outer-control {
+  height: var(--size-content-inner-height-outer-controller);
+  width: var(--size-content-inner-width);
+  padding: var(--size-content-padding);
+  overflow: auto;
+  display: block;
+}
+
+.moz-frame-for-inner-outer-control-tab {
+  height: var(--size-content-inner-height-outer-controller-tab);
+  width: var(--size-content-inner-width);
+  padding: var(--size-content-padding);
+  overflow: auto;
+  display: block;
+}
+
+.moz-frame-for-outer-control-center {
+  height: var(--size-content-inner-height-outer-controller);
+  padding-top: var(--size-content-padding);
+  padding-bottom: var(--size-content-padding);
+  @include frame;
+  @include flex-center-vertical;
+}
+
+.moz-frame-no-control {
+  @include frame;
+  height: var(--size-content-height);
+  padding: var(--size-content-padding);
+}
+
+.moz-frame-inner-no-control {
+  @include frame;
+  height: var(--size-content-inner-height-no-controller-with-padding);
+  width: var(--size-content-inner-width);
+  padding: var(--size-content-padding);
+}
+
+@mixin frame-popup {
+  width: var(--size-width);
+  overflow: auto;
+  display: block;
+}
+
+.moz-frame-popup {
+  height: var(--size-height);
+  padding: 0px var(--size-content-padding);
+  @include frame-popup;
+}
+
+.moz-frame-popup-for-outer-control {
+  height: var(--size-height-outer-controller);
+  padding: var(--size-content-padding);
+  @include frame-popup;
+}
+
+.moz-frame-popup-no-control {
+  height: var(--size-height);
+  padding: var(--size-content-padding);
+  @include frame-popup;
+}
+
+.moz-area-padding {
+  padding: var(--size-card-top-padding) var(--size-card-rbl-padding) var(--size-card-rbl-padding)
+    var(--size-card-rbl-padding);
+}
+
+.moz-simple-padding {
+  padding: var(--size-card-rbl-padding);
+}
+
+.moz-innter-frame-center {
+  width: 1200px;
+}

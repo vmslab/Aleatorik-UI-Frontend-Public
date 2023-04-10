@@ -1,0 +1,27 @@
+.dx-list {
+  &.dx-list-select-decorator-enabled,
+  .dx-list-select-all {
+    &.dx-state-hover,
+    &.dx-state-focused {
+      .dx-checkbox-container {
+        .dx-checkbox-icon {
+          border-color: var(--color-accent);
+        }
+      }
+    }
+    .dx-list-item {
+      &.dx-state-focused,
+      &.dx-state-hover {
+        .dx-checkbox-icon {
+          border-color: var(--color-accent);
+        }
+      }
+    }
+  }
+  .dx-list-select-all {
+    &.dx-state-hover,
+    &.dx-state-focused {
+      background-color: var(--color-hover);
+    }
+  }
+}

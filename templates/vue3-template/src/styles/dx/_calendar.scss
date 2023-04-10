@@ -1,0 +1,51 @@
+@import "../mixin";
+
+.dx-calendar {
+  background-color: var(--color-back);
+  .dx-calendar-navigator {
+    .dx-calendar-caption-button.dx-state-hover {
+      .dx-button-content {
+        color: var(--color-font-white);
+        .dx-button-text {
+          color: var(--color-font-white);
+        }
+      }
+    }
+    .dx-button-content {
+      @include flex-center;
+    }
+  }
+  .dx-calendar-cell {
+    vertical-align: middle;
+    &.dx-calendar-other-view:not(.dx-calendar-selected-date) {
+      color: unset;
+    }
+  }
+
+  .dx-calendar-body {
+    thead {
+      tr {
+        th {
+          color: var(--colof-font4);
+          -webkit-box-shadow: inset 0 -1px 0 var(--color-border2);
+          box-shadow: inset 0 -1px 0 var(--color-border2);
+        }
+      }
+    }
+    .dx-calendar-cell {
+      &.dx-state-hover {
+        // background-color: var(--color-primary);
+        box-shadow: inset -1px 0 1000px var(--color-hover);
+      }
+    }
+  }
+
+  .dx-calendar-cell.dx-calendar-selected-date.dx-calendar-contoured-date,
+  .dx-calendar-cell.dx-calendar-selected-date.dx-calendar-today.dx-calendar-contoured-date {
+    box-shadow: none;
+    background-color: var(--color-accent);
+    span {
+      color: var(--color-font-white);
+    }
+  }
+}

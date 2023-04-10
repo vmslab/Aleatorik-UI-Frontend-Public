@@ -1,0 +1,39 @@
+.dx-toolbar {
+  .dx-toolbar-center {
+    .dx-button.dx-button-mode-contained {
+      border: 1px solid var(--color-border1);
+
+      &.dx-state-hover,
+      &.dx-state-focused {
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        color: var(--color-font-white);
+
+        .dx-button-content {
+          color: var(--color-font-white);
+          .dx-button-text {
+            color: var(--color-font-white);
+          }
+        }
+      }
+    }
+  }
+  .dx-toolbar-after {
+    .dx-icon-filter::before {
+      left: -10px;
+      top: 0px;
+      font-size: 38px;
+    }
+    /*
+    .dx-toolbar-button {
+      padding-left: var(--size-padding2);
+
+      .dx-item-content,
+      .dx-button {
+        //width: var(--size-button-control-size);
+        //height: var(--size-button-control-size);
+      }
+    }
+    */
+  }
+}

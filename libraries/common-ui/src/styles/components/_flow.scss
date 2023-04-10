@@ -1,0 +1,230 @@
+@import "../mixin";
+
+.flow-tabs {
+  @include flex-center-horizontal;
+  background: var(--color-backdark1);
+  .flow-tab {
+    @include flex-center;
+    border-right: 1px solid var(--color-border3);
+    cursor: pointer;
+    padding: 0px 20px;
+    &.selected {
+      font-weight: bold;
+    }
+    i:not(:first-child) {
+      margin-left: 4px;
+    }
+    i:first-child {
+      margin-right: 4px;
+    }
+  }
+}
+.parent-flow {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  touch-action: none;
+  outline: none;
+  position: relative;
+  background: var(--color-backdark1);
+  background-size: 25px 25px;
+  background-image: linear-gradient(to right, var(--color-border1) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-border1) 1px, transparent 1px);
+
+  .flow {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    user-select: none;
+    perspective: 0;
+
+    .parent-node {
+      position: relative;
+    }
+
+    .flow-node {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      background: var(--color-backdark1);
+      border: 1px solid var(--color-border3);
+      -webkit-box-shadow: 0 2px 15px 2px var(--color-border3);
+      box-shadow: 0 2px 15px 2px var(--color-border3);
+      min-height: 40px;
+      border-radius: 4px;
+      color: var(--color-font3);
+      z-index: 2;
+      padding: 0px;
+      width: auto;
+
+      &:hover {
+        cursor: move;
+      }
+
+      &.selected {
+        background: var(--color-backdark1);
+        border: 1px solid #4ea9ff;
+        -webkit-box-shadow: 0 2px 20px 2px #4ea9ff;
+        box-shadow: 0 2px 20px 2px #4ea9ff;
+        z-index: 3;
+        .title-box {
+          color: #22598c;
+        }
+      }
+
+      .inputs,
+      .outputs {
+        width: 0px;
+      }
+
+      .flow_content_node {
+        width: 100%;
+        display: block;
+      }
+
+      .input,
+      .output {
+        position: relative;
+        top: 2px;
+        height: 15px;
+        width: 15px;
+        background: var(--color-backdark1);
+        border-radius: 50%;
+        border: 2px solid var(--color-border3);
+        cursor: pointer;
+        z-index: 1;
+        margin-bottom: 5px;
+
+        &:hover {
+          background: #4ea9ff;
+        }
+      }
+
+      .output {
+        right: 10px;
+      }
+
+      .input {
+        left: -10px;
+      }
+    }
+
+    .flow-delete {
+      position: absolute;
+      @include flex-center;
+      right: -15px;
+      top: -15px;
+      width: 30px;
+      height: 30px;
+      border: 2px solid #4ea9ff;
+      background: var(--color-backdark1);
+      -webkit-box-shadow: 0 2px 20px 2px #4ea9ff;
+      box-shadow: 0 2px 20px 2px #4ea9ff;
+      color: var(--color-font3);
+      z-index: 4;
+      font-weight: bold;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    svg {
+      z-index: 0;
+      position: absolute;
+      overflow: visible !important;
+    }
+
+    .connection {
+      position: absolute;
+      pointer-events: none;
+
+      .main-path {
+        fill: none;
+        stroke: #4ea9ff;
+        stroke-width: 3px;
+        pointer-events: all;
+
+        &.selected {
+          stroke: #43b993;
+        }
+
+        &:hover {
+          stroke: #1266ab;
+          cursor: pointer;
+        }
+      }
+
+      .point {
+        cursor: move;
+        stroke: var(--color-border3);
+        stroke-width: 2;
+        fill: var(--color-backdark1);
+        pointer-events: all;
+
+        &.selected,
+        &:hover {
+          fill: #4ea9ff;
+        }
+      }
+    }
+  }
+
+  .toolbox {
+    position: absolute;
+    margin: 12px;
+    padding: 12px;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--color-border3);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 2px 15px 2px var(--color-border3);
+    box-shadow: 0 2px 15px 2px var(--color-border3);
+    .toolbox-icon {
+      margin: 5px;
+      font-size: 40px;
+      cursor: pointer;
+    }
+  }
+
+  .toolbar {
+    position: absolute;
+    margin: 12px;
+    padding: 4px;
+    top: 0px;
+    right: 0px;
+    z-index: 1;
+    @include flex-center-horizontal;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--color-border3);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 2px 15px 2px var(--color-border3);
+    box-shadow: 0 2px 15px 2px var(--color-border3);
+    .toolbar-button {
+      margin: 4px;
+      cursor: pointer;
+    }
+  }
+
+  .minimap {
+    border: 1px solid var(--color-border3);
+    border-radius: 4px;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: move;
+    z-index: 4;
+    -webkit-box-shadow: 0 2px 15px 2px var(--color-border3);
+    box-shadow: 0 2px 15px 2px var(--color-border3);
+    * {
+      cursor: move;
+      pointer-events: none;
+    }
+    .mask {
+      border: 1px solid #4ea9ff;
+      border-radius: 2px;
+      position: absolute;
+      pointer-events: none;
+    }
+  }
+}

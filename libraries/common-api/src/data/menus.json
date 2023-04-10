@@ -1,0 +1,58 @@
+[
+  {
+    "menuId": "example",
+    "name": "예제",
+    "categoryId": "",
+    "type": "Category",
+    "path": ""
+  },
+  {
+    "menuId": "home",
+    "name": "홈",
+    "categoryId": "example",
+    "type": "Menu",
+    "path": "/user"
+  },
+  {
+    "menuId": "modeler",
+    "name": "모델러",
+    "categoryId": "example",
+    "type": "Menu",
+    "path": "/user/modeler"
+  },
+  {
+    "menuId": "gantt",
+    "name": "간트",
+    "categoryId": "example",
+    "type": "Menu",
+    "path": "/user/gantt"
+  },
+  {
+    "menuId": "chart",
+    "name": "차트",
+    "categoryId": "example",
+    "type": "Menu",
+    "path": "/user/chart"
+  },
+  {
+    "menuId": "chart2",
+    "name": "차트2",
+    "categoryId": "example",
+    "type": "Menu",
+    "path": "/user/chart2"
+  },
+  {
+    "menuId": "gauge",
+    "name": "게이지",
+    "categoryId": "example",
+    "type": "Menu",
+    "path": "/user/gauge"
+  },
+  {
+    "menuId": "graph",
+    "name": "그래프",
+    "categoryId": "example",
+    "type": "Menu",
+    "path": "/user/graph"
+  }
+]

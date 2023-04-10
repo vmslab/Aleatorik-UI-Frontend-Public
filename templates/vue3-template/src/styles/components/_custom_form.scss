@@ -1,0 +1,122 @@
+$custom-form-margin: var(--size-input-margin);
+$custom-form-fold-size: var(--size-input-height);
+
+.moz-custom-form {
+  margin: $custom-form-margin;
+
+  &.moz-custom-form-fold {
+    margin-top: 0px;
+    margin-left: 0px;
+
+    .moz-custom-form-group {
+      margin-left: $custom-form-fold-size;
+    }
+  }
+
+  .moz-custom-form-title {
+    @include flex-center-horizontal;
+    @include nowrap-text;
+    font-weight: bold;
+    margin-bottom: $custom-form-margin;
+  }
+
+  .opened::before {
+    content: unicode("e10d");
+    color: var(--color-font5);
+    font-family: "mozart-icons";
+    font-size: $custom-form-fold-size;
+    position: relative;
+  }
+  .closed::before {
+    content: unicode("e13a");
+    color: var(--color-font5);
+    font-family: "mozart-icons";
+    font-size: $custom-form-fold-size;
+    position: relative;
+  }
+
+  .moz-custom-form-inner-line {
+    margin-top: $custom-form-margin;
+    // border-top: $mmc-inner-border;
+  }
+
+  .moz-custom-form-item {
+    &.moz-custom-form-item-horizontal {
+      @include flex-center-horizontal;
+      min-height: var(--size-input-height);
+    }
+    &.moz-custom-form-item-vertical {
+      .moz-custom-form-control {
+        margin-top: $custom-form-margin;
+      }
+    }
+
+    .moz-custom-form-label {
+      @include nowrap-text;
+      @include flex-center-horizontal;
+      > .dx-checkbox {
+        margin-right: 4px;
+      }
+      .moz-label-required {
+        color: var(--color-error);
+      }
+    }
+
+    .dx-state-readonly {
+      cursor: default;
+      border-style: solid;
+      border-color: var(--color-border2);
+      input,
+      textarea {
+        cursor: default;
+        background-color: var(--color-backdark1);
+        color: var(--color-font5);
+      }
+    }
+
+    .moz-custom-form-group-header {
+      @include flex-center-horizontal;
+      margin-bottom: $custom-form-margin;
+      font-weight: bold;
+      .moz-custom-form-group-header-button {
+        font-size: var(--font-size-button01);
+        border-radius: 3px;
+        border: solid 1px var(--colro-border3);
+        margin-right: 4px;
+        :hover {
+          background-color: var(--color-accent);
+          border: none;
+          color: var(--color-font-white);
+        }
+      }
+    }
+  }
+
+  .moz-form-btn-layout {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: $custom-form-margin;
+  }
+
+  .moz-custom-form-item:not(:first-child) {
+    margin-top: $custom-form-margin;
+  }
+
+  .dx-texteditor-input-container {
+    background-color: var(--color-card-content-input);
+  }
+
+  .dx-texteditor .dx-texteditor-container .dx-texteditor-buttons-container {
+    background-color: var(--color-card-content-input);
+  }
+}
+
+.moz-custom-form-line {
+  // border-top: $mmc-border;
+}
+
+.dx-card-text {
+  > .moz-custom-form {
+    margin: 0px;
+  }
+}
