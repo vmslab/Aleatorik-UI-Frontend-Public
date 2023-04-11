@@ -380,13 +380,13 @@ const onCellEditEnding = (grid: FlexGrid, e: CellEditEndingEventArgs) => {
   const column = e.getColumn().binding;
   const item = e.getRow().dataItem;
   if (!column || !item) return;
-
+  /*
   if (["admin"].indexOf(item.groupId) >= 0) {
     e.cancel = true;
     showMessage("'admin' group cannot be edited", false);
     return;
   }
-
+*/
   menuModule.beginEdit();
 
   if (["isRead", "isWrite"].indexOf(column) > -1) {
