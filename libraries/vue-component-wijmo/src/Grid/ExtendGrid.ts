@@ -1222,9 +1222,12 @@ export default class ExtendGrid {
       }
     }
 
+    let reqRemovedItems: any[] = [],
+      reqUpdatedItems: any[] = [],
+      reqAddedItems: any[] = [];
     if (this.gridOptions.onSaveEditData) {
       if (removedItems.length > 0) {
-        removedItems = removedItems.map(item => {
+        reqRemovedItems = removedItems.map(item => {
           const removedItem = {
             key: this.getOriginalDataKey(item),
           };
@@ -1232,7 +1235,7 @@ export default class ExtendGrid {
         });
       }
       if (updatedItems.length > 0) {
-        updatedItems = updatedItems.map(item => {
+        reqUpdatedItems = updatedItems.map(item => {
           let data = cloneDeep(item);
           delete data._RID;
           const updatedItem = {
@@ -1243,7 +1246,7 @@ export default class ExtendGrid {
         });
       }
       if (addedItems.length > 0) {
-        addedItems = addedItems.map(item => {
+        reqAddedItems = addedItems.map(item => {
           let data = cloneDeep(item);
           delete data._RID;
           const addedItem = {
@@ -1253,7 +1256,9 @@ export default class ExtendGrid {
         });
       }
 
-      let success = await Promise.resolve(this.gridOptions.onSaveEditData(addedItems, updatedItems, removedItems));
+      let success = await Promise.resolve(
+        this.gridOptions.onSaveEditData(reqAddedItems, reqUpdatedItems, reqRemovedItems),
+      );
       if (success === false) {
         console.log(success);
         return false;

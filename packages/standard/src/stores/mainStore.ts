@@ -496,13 +496,25 @@ export const useMenuStore = defineStore("menu", {
   },
 });
 
-export const getNavis = (menu: string, navis: string[]): string[] => {
+export const getNavis = (path: string, navis: string[]): string[] => {
+  const menuItems = useMenuItems();
+  const fitem = menuItems.items.find(item => item.path === path);
+  if (fitem) {
+    navis.push(fitem.name);
+    if (fitem.categoryId) {
+      return getCategoryNavis(fitem.categoryId!, navis);
+    }
+  }
+  return navis;
+};
+
+export const getCategoryNavis = (menu: string, navis: string[]): string[] => {
   const menuItems = useMenuItems();
   const fitem = menuItems.items.find(item => item.menuId === menu);
   if (fitem) {
     navis.push(fitem.name);
     if (fitem.categoryId) {
-      return getNavis(fitem.categoryId!, navis);
+      return getCategoryNavis(fitem.categoryId!, navis);
     }
   }
   return navis;

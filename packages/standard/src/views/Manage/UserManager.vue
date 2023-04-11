@@ -54,6 +54,7 @@
       :style="{ width: '100%', height: `calc(var(--size-content-inner-height-outer-controller) - 4px)` }"
       :itemsSource="userItems"
       :initialized="onInitialized"
+      :isReadOnly="!currentMenu?.isWrite"
       selectionMode="MultiRange"
       allowSorting="MultiColumn"
       keyActionTab="Cycle"
@@ -107,7 +108,7 @@ import "devextreme-vue/text-area";
 import { DxLoadPanel } from "devextreme-vue/load-panel";
 import { useTranslation } from "i18next-vue";
 import { showMessage } from "../../utils/dialog";
-import Controller from "../../components/Controller.vue";
+import { Controller } from "../../components";
 import DxButton from "devextreme-vue/button";
 
 import sha256 from "crypto-js/sha256";
@@ -118,7 +119,7 @@ import { useMenuStore } from "../../stores/mainStore";
 import { domain } from "../../utils/env";
 
 const menuModule = useMenuStore();
-const { isEditing } = storeToRefs(menuModule);
+const { currentMenu, isEditing } = storeToRefs(menuModule);
 
 const { t } = useTranslation();
 

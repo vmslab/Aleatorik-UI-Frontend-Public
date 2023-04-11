@@ -108,7 +108,7 @@
         dataType="Date"
         format="yyyy-MM-dd HH:mm:ss"
       />
-      <WjFlexGridColumn width="*" binding="isFinished" :header="$t('IsFinished')" dataType="Boolean" />
+      <WjFlexGridColumn width="*" binding="isFinished" :header="$t('Finished')" dataType="Boolean" />
       <WjFlexGridColumn
         width="*"
         binding="finishedDate"
@@ -136,7 +136,7 @@
 import { Get, Add, Modify, Remove } from "../../stores/templateStore";
 import { onMounted, ref, reactive } from "vue";
 import { useQuery, useQueryClient, useMutation } from "vue-query";
-import { ExtendGrid } from "@aleatorik-ui/vue-component-wijmo";
+import { ExtendGrid } from "@mozart-ui/vue-component-wijmo";
 import { WjFlexGrid, WjFlexGridColumn } from "@grapecity/wijmo.vue2.grid";
 import { WjMultiSelect } from "@grapecity/wijmo.vue2.input";
 import { FlexGrid } from "@grapecity/wijmo.grid";
@@ -145,7 +145,7 @@ import { InputDateTime } from "@grapecity/wijmo.input";
 import "devextreme-vue/text-area";
 import { DxLoadPanel } from "devextreme-vue/load-panel";
 import { useTranslation } from "i18next-vue";
-import { generateGUID } from "@aleatorik-ui/common-ui/src";
+import { generateGUID } from "@mozart-ui/common-ui/src";
 import { showMessage } from "../../utils/dialog";
 import Controller from "../../components/Controller.vue";
 import DxButton from "devextreme-vue/button";
@@ -293,7 +293,7 @@ const onInitialized = (flexGrid: FlexGrid) => {
           if (removeItems?.length > 0) {
             callResult.remove = 0;
             for await (const item of removeItems) {
-              await removeTodo.mutateAsync(item.data);
+              await removeTodo.mutateAsync(item.key);
             }
             showMessage(`Removed ${callResult.remove} Row${callResult.remove > 1 ? "s" : ""}`, callResult.remove > 0);
           }
@@ -302,6 +302,7 @@ const onInitialized = (flexGrid: FlexGrid) => {
           return false;
         }
 
+        menuModule.endEdit();
         options.loading = false;
         return true;
       },
