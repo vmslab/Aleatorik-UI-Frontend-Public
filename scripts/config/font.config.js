@@ -15,7 +15,7 @@ module.exports = {
     {
       project: "common-ui",
       dir: "libraries",
-      monorepo: "mozart-ui",
+      monorepo: "aleatorik-ui",
     },
     {
       project: "mozart-component-dev",
@@ -26,8 +26,8 @@ module.exports = {
       dir: "libraries",
     },
     {
-      project: "vue3-template",
-      dir: "templates",
+      project: "standard",
+      dir: "packages",
       monorepo: "internal",
     },
   ],
