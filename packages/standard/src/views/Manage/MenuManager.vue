@@ -418,11 +418,18 @@ const onFormatItem = (s: TreeView, e: FormatNodeEventArgs) => {
 
 const createMenuItems = (datas: IMenu[]): any[] => {
   try {
+    const datasMap: any = {};
+    datas.forEach(data => {
+      datasMap[data.menuId] = data;
+    });
+
     const cloneDatas = JSON.parse(JSON.stringify(datas));
     cloneDatas
       .filter((cdata: IMenu) => cdata.categoryId && cdata.categoryId.length > 0)
       .forEach((cdata: IMenu) => {
-        const parentData = datas.find(data => cdata.categoryId == data.menuId);
+        if (!cdata.categoryId) return;
+
+        const parentData = datasMap[cdata.categoryId];
         const childIdx = datas.findIndex(data => cdata.menuId == data.menuId);
         if (!parentData || childIdx < 0) return;
 
