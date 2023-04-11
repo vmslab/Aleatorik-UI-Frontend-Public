@@ -433,11 +433,18 @@ const onFormatItem = (s: FlexGrid, e: FormatItemEventArgs) => {
 
 const createMenuItems = (datas: any[]): any[] => {
   try {
+    const datasMap: any = {};
+    datas.forEach(data => {
+      datasMap[data.menuId] = data;
+    });
+
     const cloneDatas = JSON.parse(JSON.stringify(datas));
     cloneDatas
       .filter((cdata: any) => cdata.categoryId && cdata.categoryId.length > 0)
       .forEach((cdata: any) => {
-        const parentData = datas.find(data => cdata.categoryId == data.menuId);
+        if (!cdata.categoryId) return;
+
+        const parentData = datasMap[cdata.categoryId];
         const childIdx = datas.findIndex(data => cdata.menuId == data.menuId);
         if (!parentData || childIdx < 0) return;
 
