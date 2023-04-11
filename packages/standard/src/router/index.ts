@@ -62,6 +62,13 @@ const router = createRouter({
           component: () => import("../views/Manage/MenuManager.vue"),
           beforeEnter,
         },
+        {
+          path: "log",
+          name: "Log",
+          meta: { id: "log", module: this },
+          component: () => import("../views/Manage/LogViewer.vue"),
+          beforeEnter,
+        },
       ],
     },
     {
