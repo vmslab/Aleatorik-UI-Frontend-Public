@@ -27,13 +27,12 @@
   "scripts": {
     "clean": "rimraf node_modules && lerna clean --yes",
     "setup": "pnpm i",
-    "=== aleatorik-standard ===": "",
-    "dev:": "pnpm --filter standard dev",
-    "build:": "pnpm --filter standard build",
-    "=== etc ===": "",
     "build:font": "node scripts/font.js",
     "build:style": "node scripts/style.js",
-    "build:lang": "node scripts/lang.js"
+    "build:lang": "node scripts/lang.js",    
+    "=== aleatorik-standard ===": "",
+    "dev:": "pnpm --filter standard dev",
+    "build:": "pnpm --filter standard build"
   },
   "author": "",
   "license": "ISC",
