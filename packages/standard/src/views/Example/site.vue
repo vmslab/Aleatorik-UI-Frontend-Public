@@ -1,14 +1,14 @@
 <template>
   <Controller :show-filter="options.filter">
-    <button
+    <Button
       v-tooltip="{ text: $t('Add') }"
       class="moz-default-button"
-      icon="add"
+      icon="plus"
       :focusStateEnabled="false"
       :text="$t('Add')"
       @click="extendgrid?.addRow()"
     />
-    <button
+    <Button
       v-tooltip="{ text: $t('Remove') }"
       class="moz-default-button"
       icon="trash"
@@ -17,7 +17,7 @@
       :disabled="!options.activeDelete"
       @click="extendgrid?.removeRow()"
     />
-    <button
+    <Button
       v-tooltip="{ text: $t('Save') }"
       class="moz-default-button"
       icon="save"
@@ -26,7 +26,7 @@
       :disabled="!isEditing"
       @click="extendgrid?.saveEditData()"
     />
-    <button
+    <Button
       v-tooltip="{ text: $t('Cancel') }"
       class="moz-default-button"
       icon="cancel"
@@ -35,7 +35,7 @@
       :disabled="!isEditing"
       @click="extendgrid?.clearChanges()"
     />
-    <button
+    <Button
       v-tooltip="{ text: $t('Search') }"
       class="moz-default-button"
       icon="search"
@@ -74,9 +74,7 @@
   <div class="todo moz-frame-for-outer-control">
     <WjFlexGrid
       style="width: 100%; height: var(--size-content-height)"
-      :itemsSource="
-        todoItems?.filter(item => options.checkedItems.some(checkItem => checkItem.value === item.isFinished))
-      "
+      :itemsSource="cfgSiteMasterList"
       :initialized="onInitialized"
       selectionMode="MultiRange"
       allowSorting="MultiColumn"
@@ -91,27 +89,26 @@
       :cellEditEnded="onCellEditEnded"
       :isReadOnly="!currentMenu?.isWrite"
     >
-      <WjFlexGridColumn :visible="false" binding="id" header="id" />
-      <WjFlexGridColumn width="*" binding="title" :header="$t('Title')" :isRequired="true" />
-      <WjFlexGridColumn width="*" binding="priority" :header="$t('Priority')" dataType="Number" />
-      <WjFlexGridColumn width="*" binding="contents" :header="$t('Content')" :isRequired="false" />
+      <WjFlexGridColumn :width="100" binding="siteId" :header="$t('SiteId')" :isRequired="true" />
+      <WjFlexGridColumn :width="100" binding="siteType" :header="$t('SiteType')" />
       <WjFlexGridColumn
-        width="*"
-        binding="expectedDate"
-        :header="$t('ExpectedDate')"
+        :width="150"
+        binding="createTime"
+        :header="$t('CreateTime')"
         :editor="dateEditor"
         dataType="Date"
         format="yyyy-MM-dd HH:mm:ss"
       />
-      <WjFlexGridColumn width="*" binding="isFinished" :header="$t('IsFinished')" dataType="Boolean" />
+      <WjFlexGridColumn :width="100" binding="createUser" :header="$t('CreateUser')" />
       <WjFlexGridColumn
-        width="*"
-        binding="finishedDate"
-        :header="$t('finishedDate')"
+        :width="150"
+        binding="updateTime"
+        :header="$t('UpdateTime')"
         :editor="dateEditor"
         dataType="Date"
         format="yyyy-MM-dd HH:mm:ss"
       />
+      <WjFlexGridColumn :width="100" binding="updateUser" :header="$t('UpdateUser')" />
     </WjFlexGrid>
 
     <DxLoadPanel
@@ -128,7 +125,7 @@
 </template>
 
 <script setup lang="ts">
-import { Get, Add, Modify, Remove } from "../../stores/templateStore";
+import { Get, Add, Modify, Remove, Call } from "../../stores/queryStore";
 import { onMounted, ref, reactive } from "vue";
 import { useQuery, useQueryClient, useMutation } from "vue-query";
 import { ExtendGrid } from "@aleatorik-ui/vue-component-wijmo";
@@ -147,6 +144,7 @@ import DxButton from "devextreme-vue/button";
 
 import { storeToRefs } from "pinia";
 import { useMenuStore } from "../../stores/mainStore";
+import Button from "../../components/Button.vue";
 
 const menuModule = useMenuStore();
 const { isEditing, currentMenu } = storeToRefs(menuModule);
@@ -158,7 +156,7 @@ const finishedSelect = ref([
   { state: t("InProgress"), checked: true, value: false },
 ]);
 
-const todoItems = ref<any[] | null>([]);
+const cfgSiteMasterList = ref<any[] | null>([]);
 const grid = ref<FlexGrid | null>(null);
 const extendgrid = ref<ExtendGrid | null>(null);
 
@@ -177,22 +175,23 @@ const dateEditor = ref<InputDateTime>(
   }),
 );
 
-useQuery("Todo", ({ queryKey }) => Get(queryKey[0]), {
+useQuery("cfgSiteMaster", ({ queryKey }) => Call("cfgSiteMaster/list"), {
   refetchOnWindowFocus: false,
   onSuccess: result => {
     menuModule.endEdit();
-    if (result && result.data) todoItems.value = result.data;
-    else todoItems.value = [];
+
+    if (result && result.data) cfgSiteMasterList.value = result.data;
+    else cfgSiteMasterList.value = [];
 
     showMessage("Data load complete", true);
   },
   onError: err => {
     showMessage("An error occurred while loading data", false);
-    todoItems.value = [];
+    cfgSiteMasterList.value = [];
   },
 });
 
-const addTodo = useMutation(param => Add("Todo", param), {
+const add = useMutation(param => Call("cfgSiteMaster/add", param, "POST"), {
   onSuccess: result => {
     if (result && result.data > 0) callResult.add += result.data;
   },
@@ -201,7 +200,7 @@ const addTodo = useMutation(param => Add("Todo", param), {
   },
 });
 
-const modifyTodo = useMutation(param => Modify("Todo", param), {
+const modify = useMutation((param: any) => Call(`cfgSiteMaster/${param?.siteId}`, param, "PUT"), {
   onSuccess: result => {
     if (result && result.data > 0) callResult.update += result.data;
   },
@@ -210,7 +209,7 @@ const modifyTodo = useMutation(param => Modify("Todo", param), {
   },
 });
 
-const removeTodo = useMutation(param => Remove("Todo", param), {
+const remove = useMutation((param: any) => Call(`cfgSiteMaster/${param?.siteId}`, param, "DELETE"), {
   onSuccess: result => {
     if (result && result.data > 0) callResult.remove += result.data;
   },
@@ -227,28 +226,16 @@ const onInitialized = (flexGrid: FlexGrid) => {
   grid.value = flexGrid;
   flexGrid.beginningEdit.addHandler((s, e) => {
     switch (e.getColumn().binding) {
-      case "contents":
-        e.getRow().height = 150;
-        break;
     }
   });
   flexGrid.cellEditEnded.addHandler((s, e) => {
     switch (e.getColumn().binding) {
-      case "contents":
-        e.getRow().height = null;
-        break;
-      case "isFinished":
-        if (!e.getRow().dataItem["finishedDate"] && s.getCellData(e.row, e.col, false)) {
-          e.getRow().dataItem["finishedDate"] = new Date();
-          s.refreshCells(false);
-        }
-        break;
     }
   });
   extendgrid.value = new ExtendGrid({
     flexGrid,
     dataOptions: {
-      dataKey: "id",
+      dataKey: "siteId",
       validateKey: "save",
     },
     gridOptions: {
@@ -256,23 +243,22 @@ const onInitialized = (flexGrid: FlexGrid) => {
       onInitialized(extendGrid) {
         loadData();
       },
-      onInitialzeRowData: async () => {
-        let data: any = {};
+      // onInitialzeRowData: async () => {
+      //   let data: any = {};
 
-        data.id = generateGUID();
-        data.priority = 0;
-        data.isFinished = false;
-        data.expectedDate = new Date(new Date().setDate(new Date().getDate() + 7));
-
-        return data;
-      },
+      //   return data;
+      // },
       onSaveEditData: async (addItems, updateItems, removeItems) => {
         options.loading = true;
         try {
+          console.log("addItems", addItems);
+          console.log("updateItems", updateItems);
+          console.log("removeItems", removeItems);
+
           if (addItems?.length > 0) {
             callResult.add = 0;
             for await (const item of addItems) {
-              await addTodo.mutateAsync(item.data);
+              await add.mutateAsync(item.data);
             }
             showMessage(`Added ${callResult.add} Row${callResult.add > 1 ? "s" : ""}`, callResult.add > 0);
           }
@@ -280,7 +266,8 @@ const onInitialized = (flexGrid: FlexGrid) => {
           if (updateItems?.length > 0) {
             callResult.update = 0;
             for await (const item of updateItems) {
-              await modifyTodo.mutateAsync(item.data);
+              console.log("m", item);
+              await modify.mutateAsync(item.data);
             }
             showMessage(`Updated ${callResult.update} Row${callResult.update > 1 ? "s" : ""}`, callResult.update > 0);
           }
@@ -288,7 +275,9 @@ const onInitialized = (flexGrid: FlexGrid) => {
           if (removeItems?.length > 0) {
             callResult.remove = 0;
             for await (const item of removeItems) {
-              await removeTodo.mutateAsync(item.data);
+              console.log(removeItems);
+              console.log("d", item);
+              await remove.mutateAsync(item.key);
             }
             showMessage(`Removed ${callResult.remove} Row${callResult.remove > 1 ? "s" : ""}`, callResult.remove > 0);
           }
@@ -306,7 +295,7 @@ const onInitialized = (flexGrid: FlexGrid) => {
 
 const loadData = async () => {
   options.loading = true;
-  queryClient.invalidateQueries("Todo");
+  queryClient.invalidateQueries("cfgSiteMaster");
   options.loading = false;
 };
 
