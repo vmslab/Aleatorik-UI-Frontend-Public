@@ -111,7 +111,7 @@ const logDate = ref<Date>(new Date());
 const options = reactive({ loading: false, filter: true, activeDelete: false });
 const queryClient = useQueryClient();
 
-useQuery("Log", ({ queryKey }) => Get(queryKey[0], `webapi-${Globalize.format(logDate.value, "yyyyMMdd")}.json`), {
+useQuery("Log", ({ queryKey }) => Get(queryKey[0], `webapi-${Globalize.format(logDate.value, "yyyyMMdd")}`), {
   refetchOnWindowFocus: false,
   onSuccess: result => {
     menuModule.endEdit();
