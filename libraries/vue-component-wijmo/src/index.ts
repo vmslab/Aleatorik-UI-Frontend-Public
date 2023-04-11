@@ -1,7 +1,7 @@
-import IDE from "./IDE/IDE.vue";
+// import IDE from "./IDE/IDE.vue";
 // import SqlEditorWidget from "./IDE/Widget/SqlEditorWidget.vue";
 
-import Modeler from "./DataModeler/Modeler.vue";
+// import Modeler from "./DataModeler/Modeler.vue";
 
 import Gantt from "./Gantt/Gantt.vue";
 
@@ -30,9 +30,9 @@ import ExtendGrid from "./Grid/ExtendGrid";
 import Tooltip from "./directives/Tooltip";
 
 export {
-  IDE,
+  // IDE,
   // SqlEditorWidget,
-  Modeler,
+  // Modeler,
   Gantt,
   Splitter,
   SplitBox,

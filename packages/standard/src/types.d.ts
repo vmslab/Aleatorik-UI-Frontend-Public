@@ -359,14 +359,6 @@ export interface IFullScreenStyle {
   height: string;
 }
 
-// IDE
-
-export interface IIDEParams {
-  main: IDEMain;
-  menu: IDEMenu;
-  status: IDEStatus;
-}
-
 // Tree
 export interface INodeBase {
   id: string;

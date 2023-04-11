@@ -13,19 +13,6 @@ module.exports = {
   },
   copyInfos: [
     {
-      project: "common-ui",
-      dir: "libraries",
-      monorepo: "aleatorik-ui",
-    },
-    {
-      project: "mozart-component-dev",
-      dir: "libraries",
-    },
-    {
-      project: "mozart-component-wijmo",
-      dir: "libraries",
-    },
-    {
       project: "standard",
       dir: "packages",
       monorepo: "internal",

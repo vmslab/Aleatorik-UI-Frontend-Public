@@ -34,11 +34,11 @@
         <slot
           :name="`box${i + 1}`"
           :props="{
-            parentsWidth: box.width,
-            parentsHeight: box.height,
-            contentsHeight: box.height - options.titleHeight,
-            contentsInnerHeight: box.height - options.titleHeight - options.textPaddingHeight,
-            contentsInnerWidth: box.width - options.textPaddingWidth,
+            parentsWidth: box.width || 0,
+            parentsHeight: box.height || 0,
+            contentsHeight: box.height ? box.height - options.titleHeight : 0,
+            contentsInnerHeight: box.height ? box.height - options.titleHeight - options.textPaddingHeight : 0,
+            contentsInnerWidth: box.width ? box.width - options.textPaddingWidth : 0,
           }"
         ></slot>
       </Box>

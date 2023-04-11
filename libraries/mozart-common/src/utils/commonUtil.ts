@@ -9,10 +9,7 @@ export interface ITypeValue {
   value: any;
 }
 
-export function getStringToTypeValue(
-  value: string,
-  dateFormat: string = "YYYY-MM-DD A hh:mm:ss",
-): ITypeValue {
+export function getStringToTypeValue(value: string, dateFormat: string = "YYYY-MM-DD A hh:mm:ss"): ITypeValue {
   const typeValue: ITypeValue = {
     type: "",
     value: {},
@@ -49,8 +46,8 @@ export const setFocus = (el: HTMLElement) => {
     return true;
   } else {
     if (el.hasChildNodes()) {
-      for (const el2 of el.childNodes) {
-        if (setFocus(el2 as any)) {
+      for (const childIdx in el.childNodes) {
+        if (setFocus(el.childNodes[childIdx] as any)) {
           break;
         }
       }
@@ -65,20 +62,7 @@ export const generateGUID = (): string => {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   };
 
-  const guid = (
-    ran() +
-    ran() +
-    "-" +
-    ran() +
-    "-" +
-    ran() +
-    "-" +
-    ran() +
-    "-" +
-    ran() +
-    ran() +
-    ran()
-  ).toUpperCase();
+  const guid = (ran() + ran() + "-" + ran() + "-" + ran() + "-" + ran() + "-" + ran() + ran() + ran()).toUpperCase();
 
   return guid;
 };
@@ -114,17 +98,7 @@ export const encodeUnescapeBtoa = (text: string) => {
 };
 
 export const clamp = (value: number, min: number, max: number) => {
-  return min < max
-    ? value < min
-      ? min
-      : value > max
-      ? max
-      : value
-    : value < max
-    ? max
-    : value > min
-    ? min
-    : value;
+  return min < max ? (value < min ? min : value > max ? max : value) : value < max ? max : value > min ? min : value;
 };
 
 export const createCamelProps = <T>(props: Record<string, any>): T => {

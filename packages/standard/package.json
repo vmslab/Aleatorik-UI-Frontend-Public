@@ -13,7 +13,6 @@
     "@aleatorik-ui/common": "^0.1.0",
     "@aleatorik-ui/common-api": "^0.1.0",
     "@aleatorik-ui/common-ui": "^0.1.0",
-    "@aleatorik-ui/protos": "^0.1.0",
     "@aleatorik-ui/vue-component-wijmo": "^0.1.0",
     "crypto-js": "^4.1.1",
     "dayjs": "^1.11.6",

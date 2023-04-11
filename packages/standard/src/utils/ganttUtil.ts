@@ -1,6 +1,6 @@
-import GanttColumn from "../components/gantt/GanttColumn";
+import { Column } from "@aleatorik-ui/common-ui";
 
-export function calcRowCount(columns: GanttColumn[]): number {
+export function calcRowCount(columns: Column[]): number {
   return Math.max(
     ...columns.map(c => {
       if (c.children) {

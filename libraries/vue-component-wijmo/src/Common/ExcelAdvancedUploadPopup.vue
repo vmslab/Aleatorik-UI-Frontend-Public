@@ -130,7 +130,7 @@
         <DxProgressBar
           :min="0"
           :max="totalProgress"
-          :status-format="value => `In Progress : ${currentProgress} / ${totalProgress} (${(value * 100).toFixed(2)}%)`"
+          :status-format="(value: number) => `In Progress : ${currentProgress} / ${totalProgress} (${(value * 100).toFixed(2)}%)`"
           :value="currentProgress"
           @complete="onProgressComplete"
         />
