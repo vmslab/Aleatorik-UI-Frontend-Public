@@ -13,6 +13,11 @@ module.exports = {
   },
   copyInfos: [
     {
+      project: "common-ui",
+      dir: "libraries",
+      monorepo: "aleatorik-ui",
+    },
+    {
       project: "standard",
       dir: "packages",
       monorepo: "internal",
