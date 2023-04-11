@@ -72,6 +72,65 @@ const router = createRouter({
       ],
     },
     {
+      path: `${systemPath}/`,
+      name: "mdm",
+      component: () => import("../views/Main.vue"),
+      children: [
+        {
+          path: "mdm_Stage",
+          name: "스테이지",
+          meta: { id: "user", module: this },
+          component: () => import("../views/mdm/mdm_Stage.vue"),
+          beforeEnter,
+        },
+        {
+          path: "mdm_Site",
+          name: "사이트",
+          meta: { id: "user", module: this },
+          component: () => import("../views/mdm/mdm_Site.vue"),
+          beforeEnter,
+        },
+        {
+          path: "mdm_AllocGroup",
+          name: "할당그룹",
+          meta: { id: "user", module: this },
+          component: () => import("../views/mdm/mdm_AllocGroup.vue"),
+          beforeEnter,
+        },
+        {
+          path: "mdm_FactoryOper",
+          name: "공장운영정보",
+          meta: { id: "user", module: this },
+          component: () => import("../views/mdm/mdm_FactoryOper.vue"),
+          beforeEnter,
+        },
+        {
+          path: "mdm_CodeGroup",
+          name: "코드 그룹",
+          meta: { id: "user", module: this },
+          component: () => import("../views/mdm/mdm_CodeGroup.vue"),
+          beforeEnter,
+        },
+        {
+          path: "mdm_CodeGroup_Sub1",
+          name: "코드 관리",
+          meta: { id: "user", module: this },
+          component: () => import("../views/mdm/mdm_CodeGroup_Sub1.vue"),
+          beforeEnter,
+        },
+        {
+          path: "mdm_Property",
+          name: "속성 관리",
+          meta: { id: "user", module: this },
+          component: () => import("../views/mdm/mdm_Property.vue"),
+          beforeEnter,
+        },
+      ],
+    },
+
+
+
+    {
       path: `${systemPath}/example`,
       name: "Example",
       component: () => import("../views/Main.vue"),
