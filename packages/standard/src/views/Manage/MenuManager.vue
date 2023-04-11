@@ -227,7 +227,7 @@
 </template>
 
 <script setup lang="ts">
-import { Get, Save } from "../../stores/templateStore";
+import { Get, Save } from "../../stores/queryStore";
 import { onMounted, ref, reactive, nextTick } from "vue";
 import { useMutation, useQuery, useQueryClient } from "vue-query";
 

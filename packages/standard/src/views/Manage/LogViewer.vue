@@ -78,7 +78,7 @@
 </template>
 
 <script setup lang="ts">
-import { Get } from "../../stores/templateStore";
+import { Get } from "../../stores/queryStore";
 import { onMounted, ref, reactive } from "vue";
 import { useQuery, useQueryClient } from "vue-query";
 import { ExtendGrid } from "@aleatorik-ui/vue-component-wijmo";

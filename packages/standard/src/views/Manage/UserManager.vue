@@ -97,7 +97,7 @@
 </template>
 
 <script setup lang="ts">
-import { Get, Add, Modify, Remove } from "../../stores/templateStore";
+import { Get, Add, Modify, Remove } from "../../stores/queryStore";
 import { onMounted, ref, reactive } from "vue";
 import { useMutation, useQuery, useQueryClient } from "vue-query";
 import { ExtendGrid } from "@aleatorik-ui/vue-component-wijmo";
