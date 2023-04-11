@@ -8,6 +8,10 @@ import { IProperty } from "@aleatorik-ui/common";
 
 dayjs.extend(utc);
 
+export const Call = async (url: string, param?: any, method: Method = "get") => {
+  return await call(`/api/${url}`, method, param);
+};
+
 export const Get = async (type: string, param?: any, method: Method = "get") => {
   if (typeof param === "object" && method?.toLowerCase() === "get") method = "post";
   return await call(`/api/get${type}`, method, param);

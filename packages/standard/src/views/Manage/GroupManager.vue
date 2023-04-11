@@ -191,7 +191,7 @@
 </template>
 
 <script setup lang="ts">
-import { Get, Add, Modify, Remove, Save } from "../../stores/templateStore";
+import { Get, Add, Modify, Remove, Save } from "../../stores/queryStore";
 import { onMounted, ref, reactive } from "vue";
 import { useMutation, useQuery, useQueryClient } from "vue-query";
 import { WjFlexGrid, WjFlexGridColumn } from "@grapecity/wijmo.vue2.grid";

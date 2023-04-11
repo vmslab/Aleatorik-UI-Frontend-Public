@@ -18,7 +18,7 @@ import {
 import router from "../router";
 import { systemId } from "../utils/env";
 import { ITreeNode, makeMenuChildren, makeToHierarchicalFormat } from "../../src/utils/tree";
-import { Get } from "./templateStore";
+import { Get } from "./queryStore";
 export type IMenu = {
   systemId: string;
   menuId: string;
