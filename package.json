@@ -25,14 +25,15 @@
     "typescript": "^4.9.5"
   },
   "scripts": {
+    "=== aleatorik standard ===": "",
+    "dev:": "pnpm --filter standard dev",
+    "build:": "pnpm --filter standard build",
+    "=== package initialized ===": "",
     "clean": "rimraf node_modules && lerna clean --yes",
     "setup": "pnpm i",
     "build:font": "node scripts/font.js",
     "build:style": "node scripts/style.js",
-    "build:lang": "node scripts/lang.js",    
-    "=== aleatorik-standard ===": "",
-    "dev:": "pnpm --filter standard dev",
-    "build:": "pnpm --filter standard build"
+    "build:lang": "node scripts/lang.js"
   },
   "author": "",
   "license": "ISC",
