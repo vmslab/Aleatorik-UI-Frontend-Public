@@ -92,7 +92,7 @@ const router = createRouter({
           path: "site",
           name: "사이트 관리",
           meta: { id: "site", module: this },
-          component: () => import("../views/Example/site.vue"),
+          component: () => import("../views/Example/Site.vue"),
           beforeEnter,
         },
         {

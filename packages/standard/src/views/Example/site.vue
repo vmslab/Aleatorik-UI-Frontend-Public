@@ -63,7 +63,7 @@
         <WjMultiSelect
           placeholder=""
           :showSelectAllCheckbox="true"
-          :itemsSource="finishedSelect"
+          :itemsSource="siteIdSelect"
           displayMemberPath="state"
           checkedMemberPath="checked"
           :checkedItemsChanged="onCheckedItemsChanged"
@@ -125,7 +125,7 @@
 </template>
 
 <script setup lang="ts">
-import { Get, Add, Modify, Remove, Call } from "../../stores/queryStore";
+import { Call } from "../../stores/queryStore";
 import { onMounted, ref, reactive } from "vue";
 import { useQuery, useQueryClient, useMutation } from "vue-query";
 import { ExtendGrid } from "@aleatorik-ui/vue-component-wijmo";
@@ -137,10 +137,8 @@ import { InputDateTime } from "@grapecity/wijmo.input";
 import "devextreme-vue/text-area";
 import { DxLoadPanel } from "devextreme-vue/load-panel";
 import { useTranslation } from "i18next-vue";
-import { generateGUID } from "@aleatorik-ui/common-ui/src";
 import { showMessage } from "../../utils/dialog";
 import Controller from "../../components/Controller.vue";
-import DxButton from "devextreme-vue/button";
 
 import { storeToRefs } from "pinia";
 import { useMenuStore } from "../../stores/mainStore";
@@ -149,23 +147,13 @@ import Button from "../../components/Button.vue";
 const menuModule = useMenuStore();
 const { isEditing, currentMenu } = storeToRefs(menuModule);
 
+// 다국어
 const { t } = useTranslation();
 
-const finishedSelect = ref([
-  { state: t("Finished"), checked: true, value: true },
-  { state: t("InProgress"), checked: true, value: false },
-]);
-
-const cfgSiteMasterList = ref<any[] | null>([]);
+const cfgSiteMasterList = ref<any[] | null>([]); // data list
 const grid = ref<FlexGrid | null>(null);
 const extendgrid = ref<ExtendGrid | null>(null);
 
-const options = reactive({
-  loading: false,
-  filter: true,
-  activeDelete: false,
-  checkedItems: [{ value: false }, { value: true }] as any[],
-});
 const callResult = reactive({ add: 0, update: 0, remove: 0 });
 const queryClient = useQueryClient();
 
@@ -175,53 +163,26 @@ const dateEditor = ref<InputDateTime>(
   }),
 );
 
-useQuery("cfgSiteMaster", ({ queryKey }) => Call("cfgSiteMaster/list"), {
-  refetchOnWindowFocus: false,
-  onSuccess: result => {
-    menuModule.endEdit();
-
-    if (result && result.data) cfgSiteMasterList.value = result.data;
-    else cfgSiteMasterList.value = [];
-
-    showMessage("Data load complete", true);
-  },
-  onError: err => {
-    showMessage("An error occurred while loading data", false);
-    cfgSiteMasterList.value = [];
-  },
+// 페이지 기본 변수
+const options = reactive({
+  loading: false,
+  filter: true,
+  activeDelete: false,
+  checkedItems: [{ value: false }, { value: true }] as any[],
 });
 
-const add = useMutation(param => Call("cfgSiteMaster/add", param, "POST"), {
-  onSuccess: result => {
-    if (result && result.data > 0) callResult.add += result.data;
-  },
-  onError: err => {
-    showMessage("An error occurred while adding data", false);
-  },
-});
+// 조회조건
+const siteIdSelect = ref([
+  { state: t("Finished"), checked: true, value: true },
+  { state: t("InProgress"), checked: true, value: false },
+]);
 
-const modify = useMutation((param: any) => Call(`cfgSiteMaster/${param?.siteId}`, param, "PUT"), {
-  onSuccess: result => {
-    if (result && result.data > 0) callResult.update += result.data;
-  },
-  onError: err => {
-    showMessage("An error occurred while updating data", false);
-  },
-});
-
-const remove = useMutation((param: any) => Call(`cfgSiteMaster/${param?.siteId}`, param, "DELETE"), {
-  onSuccess: result => {
-    if (result && result.data > 0) callResult.remove += result.data;
-  },
-  onError: err => {
-    showMessage("An error occurred while removing data", false);
-  },
-});
-
+// init
 onMounted(async () => {
   await loadData();
 });
 
+// grid init
 const onInitialized = (flexGrid: FlexGrid) => {
   grid.value = flexGrid;
   flexGrid.beginningEdit.addHandler((s, e) => {
@@ -293,11 +254,59 @@ const onInitialized = (flexGrid: FlexGrid) => {
   });
 };
 
+// data loaded cache reset and reload
 const loadData = async () => {
   options.loading = true;
   queryClient.invalidateQueries("cfgSiteMaster");
   options.loading = false;
 };
+
+// data load api
+useQuery("cfgSiteMaster", ({ queryKey }) => Call("cfgSiteMaster/list"), {
+  refetchOnWindowFocus: false,
+  onSuccess: result => {
+    menuModule.endEdit();
+
+    if (result && result.data) cfgSiteMasterList.value = result.data;
+    else cfgSiteMasterList.value = [];
+
+    showMessage("Data load complete", true);
+  },
+  onError: err => {
+    showMessage("An error occurred while loading data", false);
+    cfgSiteMasterList.value = [];
+  },
+});
+
+// data add api
+const add = useMutation(param => Call("cfgSiteMaster/add", param, "POST"), {
+  onSuccess: result => {
+    if (result && result.data > 0) callResult.add += result.data;
+  },
+  onError: err => {
+    showMessage("An error occurred while adding data", false);
+  },
+});
+
+// data modify api
+const modify = useMutation((param: any) => Call(`cfgSiteMaster/${param?.siteId}`, param, "PUT"), {
+  onSuccess: result => {
+    if (result && result.data > 0) callResult.update += result.data;
+  },
+  onError: err => {
+    showMessage("An error occurred while updating data", false);
+  },
+});
+
+// data remove api
+const remove = useMutation((param: any) => Call(`cfgSiteMaster/${param?.siteId}`, param, "DELETE"), {
+  onSuccess: result => {
+    if (result && result.data > 0) callResult.remove += result.data;
+  },
+  onError: err => {
+    showMessage("An error occurred while removing data", false);
+  },
+});
 
 const onSelectionChanged = () => {
   const flexGrid = grid.value;
@@ -316,6 +325,7 @@ const onCellEditEnded = () => {
   if (isEditing.value != flag) menuModule.setIsEditing(flag);
 };
 
+// 조회조건 변경
 const onCheckedItemsChanged = (s: any) => {
   options.checkedItems = s.checkedItems;
 };
