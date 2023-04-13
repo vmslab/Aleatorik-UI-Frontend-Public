@@ -380,16 +380,12 @@ export const useMenuStore = defineStore("menu", {
           }
         }
 
-        let rootMenus = menuItems.items.filter((menu: IMenu) => !menu.categoryId);
-        this.changeRootMenu(rootMenus[rootIndex]);
-
         const path = router.currentRoute.value.path;
-
         if (path === "/" || path === `/${systemId}`) return;
 
-        let currentMenu = menuItems.items.find((menu: IMenu) => menu.path === path);
+        const currentMenu = menuItems.items.find((menu: IMenu) => menu.path === path);
         if (currentMenu) {
-          if (currentMenu.isRead) this.changeCurrentMenu(currentMenu);
+          if (currentMenu.isRead) this.setCurrentMenu(currentMenu);
           else router.push("/401");
         } else {
           router.push("/401");
@@ -496,8 +492,12 @@ export const useMenuStore = defineStore("menu", {
   },
 });
 
-export const getNavis = (path: string, navis: string[]): string[] => {
+export const getNavis = async (path: string, navis: string[]): Promise<string[]> => {
   const menuItems = useMenuItems();
+  if (menuItems.items.length === 0) {
+    const menuModule = useMenuStore();
+    await menuModule.loadData();
+  }
   const fitem = menuItems.items.find(item => item.path === path);
   if (fitem) {
     navis.push(fitem.name);

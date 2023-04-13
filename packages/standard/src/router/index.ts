@@ -5,8 +5,8 @@ import { systemId, title } from "../utils/env";
 
 const systemPath = import.meta.env.DEV && systemId ? `/${systemId}` : "";
 
-const beforeEnter = (to: any, from: any, next: any) => {
-  const navis = getNavis(to.path, []);
+const beforeEnter = async (to: any, from: any, next: any) => {
+  const navis = await getNavis(to.path, []);
   (to.meta as any).navis = navis;
   next();
 };

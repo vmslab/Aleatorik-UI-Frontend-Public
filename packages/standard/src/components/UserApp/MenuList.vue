@@ -62,24 +62,28 @@ const router = useRouter();
 
 const dxListView = ref(null);
 
-watch(currentMenu, () => {
-  nextTick(() => {
-    const tree = (dxListView.value as any).tree;
-    tree.selectNode(currentMenu.value?.menuId, tree.element);
-  });
-});
+watch(
+  currentMenu,
+  () => {
+    nextTick(() => {
+      const tree = (dxListView.value as any).tree;
+      tree.selectNode(currentMenu.value?.menuId, tree.element);
+    });
+  },
+  { immediate: true },
+);
 
 const redirectMenu = async (menu?: IMenu, params?: Record<string, any>) => {
-  if (!menu) return;
-  if (menu.type === "Category") return;
-  if (!menu.path) return;
+  if (!menu) return false;
+  if (menu.type === "Category") return false;
+  if (!menu.path) return false;
 
   if (isEditing.value) {
     const result = await showConfirm({
       title: `Cancel`,
       message: `Are you sure you want to <b>Leave</b> this page?`,
     });
-    if (!result) return;
+    if (!result) return false;
     menuModule.endEdit();
   }
 
@@ -89,6 +93,7 @@ const redirectMenu = async (menu?: IMenu, params?: Record<string, any>) => {
       ...params,
     },
   });
+  return true;
 };
 
 const onItemClick = async (e: any) => {
@@ -106,8 +111,8 @@ const onItemClick = async (e: any) => {
     };
   }
 
-  menuModule.setCurrentMenu(obj);
-  redirectMenu(obj);
+  const isChanged = await redirectMenu(obj);
+  if (isChanged) menuModule.setCurrentMenu(obj);
 };
 
 // const onHover = (e: any, item: any) => {
