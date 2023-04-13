@@ -337,6 +337,7 @@ import { generateGUID } from "@aleatorik-ui/common-ui";
 
 import { storeToRefs } from "pinia";
 import { useMenuStore } from "../../stores/mainStore";
+import { nextTick } from "process";
 
 const menuModule = useMenuStore();
 const { isEditing, currentMenu } = storeToRefs(menuModule);
@@ -628,61 +629,61 @@ const createFlatMenuItems = (datas: any[], categoryId: string = "", flatMenus: a
   return flatMenus;
 };
 
-const addNodeFirst = async () => {
-  if (!treeView) return;
-  const result = await validateNewNode();
-  if (result) return;
+// const addNodeFirst = async () => {
+//   if (!treeView) return;
+//   const result = await validateNewNode();
+//   if (result) return;
 
-  const newMenu = JSON.parse(JSON.stringify(newItem.value));
-  const node = treeView.selectedNode;
-  const parent = node?.parentNode;
+//   const newMenu = JSON.parse(JSON.stringify(newItem.value));
+//   const node = treeView.selectedNode;
+//   const parent = node?.parentNode;
 
-  if (!newMenu.path || newMenu.path.length === 0) {
-    newMenu.path = `${
-      parent && parent.dataItem.path !== "/" ? `${parent.dataItem.path}/` : `/${systemId}/`
-    }${newMenu.name.toLowerCase().replace(/ /gi, "")}`;
-  }
-  const targetNode = parent ? parent : treeView;
-  const selectedNode = targetNode ? targetNode.addChildNode(0, newMenu) : treeView.addChildNode(0, newMenu);
+//   if (!newMenu.path || newMenu.path.length === 0) {
+//     newMenu.path = `${
+//       parent && parent.dataItem.path !== "/" ? `${parent.dataItem.path}/` : `/${systemId}/`
+//     }${newMenu.name.toLowerCase().replace(/ /gi, "")}`;
+//   }
+//   const targetNode = parent ? parent : treeView;
+//   const selectedNode = targetNode ? targetNode.addChildNode(0, newMenu) : treeView.addChildNode(0, newMenu);
 
-  newItem.value = { ...newItem.value, menuId: "", name: "", path: "" };
+//   newItem.value = { ...newItem.value, menuId: "", name: "", path: "" };
 
-  treeView.refresh();
-  treeView.loadTree();
-  menuEditor?.hide();
+//   treeView.refresh();
+//   treeView.loadTree();
+//   menuEditor?.hide();
 
-  setTimeout(() => {
-    selectedNode.element.click();
-  }, 100);
-};
+//   setTimeout(() => {
+//     selectedNode.element.click();
+//   }, 100);
+// };
 
-const addNodeLast = async () => {
-  if (!treeView) return;
-  const result = await validateNewNode();
-  if (result) return;
+// const addNodeLast = async () => {
+//   if (!treeView) return;
+//   const result = await validateNewNode();
+//   if (result) return;
 
-  const newMenu = JSON.parse(JSON.stringify(newItem.value));
-  const node = treeView.selectedNode;
-  const parent = node?.parentNode;
+//   const newMenu = JSON.parse(JSON.stringify(newItem.value));
+//   const node = treeView.selectedNode;
+//   const parent = node?.parentNode;
 
-  if (!newMenu.path || newMenu.path.length === 0) {
-    newMenu.path = `${
-      parent && parent.dataItem.path !== "/" ? `${parent.dataItem.path}/` : `/${systemId}/`
-    }${newMenu.name.toLowerCase().replace(/ /gi, "")}`;
-  }
-  const targetNode = parent ? parent : treeView;
-  const index = targetNode && targetNode.nodes ? targetNode.nodes.length : treeView.nodes ? treeView.nodes.length : 0;
-  const selectedNode = targetNode ? targetNode.addChildNode(index, newMenu) : treeView.addChildNode(index, newMenu);
-  newItem.value = { ...newItem.value, menuId: "", name: "", path: "" };
+//   if (!newMenu.path || newMenu.path.length === 0) {
+//     newMenu.path = `${
+//       parent && parent.dataItem.path !== "/" ? `${parent.dataItem.path}/` : `/${systemId}/`
+//     }${newMenu.name.toLowerCase().replace(/ /gi, "")}`;
+//   }
+//   const targetNode = parent ? parent : treeView;
+//   const index = targetNode && targetNode.nodes ? targetNode.nodes.length : treeView.nodes ? treeView.nodes.length : 0;
+//   const selectedNode = targetNode ? targetNode.addChildNode(index, newMenu) : treeView.addChildNode(index, newMenu);
+//   newItem.value = { ...newItem.value, menuId: "", name: "", path: "" };
 
-  treeView.refresh();
-  treeView.loadTree();
-  menuEditor?.hide();
+//   treeView.refresh();
+//   treeView.loadTree();
+//   menuEditor?.hide();
 
-  setTimeout(() => {
-    selectedNode.element.click();
-  }, 100);
-};
+//   setTimeout(() => {
+//     selectedNode.element.click();
+//   }, 100);
+// };
 
 const addNodeNext = async () => {
   if (!treeView) return;
@@ -704,12 +705,14 @@ const addNodeNext = async () => {
   newItem.value = { ...newItem.value, menuId: "", name: "", path: "" };
 
   treeView.refresh();
-  treeView.loadTree();
+  treeView.loadTree(true);
   menuEditor?.hide();
 
-  setTimeout(() => {
-    selectedNode.element.click();
-  }, 100);
+  nextTick(() => {
+    if (!treeView) return;
+    const addedNode = findNode(treeView.nodes, newMenu.menuId);
+    addedNode?.element.click();
+  });
 };
 
 const addNodeChild = async () => {
@@ -731,12 +734,14 @@ const addNodeChild = async () => {
   newItem.value = { ...newItem.value, menuId: "", name: "", path: "" };
 
   treeView.refresh();
-  treeView.loadTree();
+  treeView.loadTree(true);
   menuEditor?.hide();
 
-  setTimeout(() => {
-    selectedNode.element.click();
-  }, 100);
+  nextTick(() => {
+    if (!treeView) return;
+    const addedNode = findNode(treeView.nodes, newMenu.menuId);
+    addedNode?.element.click();
+  });
 };
 
 const removeSelectedNode = async () => {
@@ -767,6 +772,19 @@ const removeChildItem = (menu: IMenu) => {
   }
 };
 
+const findNode = (nodes: TreeNode[], menuId: string): TreeNode | null => {
+  for (let i = 0; i < nodes.length; i++) {
+    const node = nodes[i];
+
+    if (node.dataItem.menuId === menuId) return node;
+    if (node.hasChildren) {
+      const childNode = findNode(node.nodes, menuId);
+      if (childNode) return childNode;
+    }
+  }
+  return null;
+};
+
 const validateNewNode = () => {
   return new Promise(async resolve => {
     const newMenu = newItem.value;
@@ -776,7 +794,7 @@ const validateNewNode = () => {
     if (!newMenu.name || newMenu.name.length === 0) {
       newMenu.name = `New Menu ${newItemNo.value++}`;
     }
-    if (menuItems.value && findMenuItem(menuItems.value, newMenu)) {
+    if (menuItems.value && validateMenuId(menuItems.value, newMenu.menuId)) {
       showMessage("Already Resisted MenuId", false);
       return resolve(true);
     }
@@ -784,11 +802,11 @@ const validateNewNode = () => {
   });
 };
 
-const findMenuItem = (menus: IMenu[], newItem: IMenu): boolean => {
+const validateMenuId = (menus: IMenu[], targetId: string): boolean => {
   return menus?.some(menu => {
-    if (menu.menuId === newItem.menuId) return true;
+    if (menu.menuId === targetId) return true;
     if (menu.children && menu.children.length > 0) {
-      return findMenuItem(menu.children, newItem);
+      return validateMenuId(menu.children, targetId);
     }
     return false;
   });
