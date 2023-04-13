@@ -5,3 +5,15 @@
 .moz-default-button.dx-state-disabled .dx-icon::before {
   color: var(--color-font4);
 }
+
+.menu-manager {
+  .category-item {
+    font-weight: bold;
+    background-color: var(--color-commonheader);
+    color: var(--color-font4);
+  }
+  .menu-item {
+    background-color: var(--color-back);
+    color: var(--color-font4);
+  }
+}
