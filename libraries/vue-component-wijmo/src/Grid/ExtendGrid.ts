@@ -1367,6 +1367,156 @@ export default class ExtendGrid {
     this.setOnEditing(this.isEditing);
   }
 
+  /**
+   * 변경사항 object 가져오기
+   * @returns { addedItems, updatedItems, removedItems }
+   */
+  public async getChangedData() {
+    this.flexGrid.finishEditing();
+    if (!this.dataOptions || this.dataKey.length === 0) throw new Error("dataKey is Required");
+
+    this.errors.clear();
+
+    let removedItems = [...this.removed.values()].filter(item => !this.added.has(item._RID));
+    let updatedItems = [...this.updated.values()].filter(item => !this.removed.has(item._RID));
+    let addedItems = [...this.added.values()].filter(item => !this.removed.has(item._RID));
+    let remainItems = [...this.removed.values()].filter(item => this.added.has(item._RID));
+
+    const grid = this.flexGrid,
+      cv = grid.collectionView;
+
+    if (!grid) throw new Error("FlexGrid is not defined");
+    if (!cv) throw new Error("CollectionView is not defined");
+
+    if (this.dataOptions.validateKey === "save") {
+      for await (const item of [...updatedItems, ...addedItems]) {
+        const dataKey = this.dataKey;
+
+        const rid = item._RID;
+
+        const targetKey = this.getDataKey(item);
+        const uniqueFilter = cv.sourceCollection.filter((source: any) => {
+          if (this.removed.has(source._RID)) return false;
+
+          const rowKey = this.getDataKey(source);
+          return targetKey === rowKey;
+        });
+        if (uniqueFilter.length > 1) {
+          this.errors.set(rid, new Set(dataKey));
+        } else {
+          dataKey.forEach(key => {
+            if (!item[key]) {
+              if (!this.errors.has(rid)) {
+                const errSet = new Set<string>();
+                errSet.add(key);
+                this.errors.set(rid, errSet);
+              } else {
+                this.errors.get(rid)?.add(key);
+              }
+            }
+          });
+        }
+      }
+
+      if (this.errors.size > 0) {
+        this.flexGrid.collectionView?.refresh();
+        this.flexGrid.refresh();
+        this.flexGrid.focus();
+        console.error(this.errors);
+        throw new Error("Validation error");
+      }
+    }
+
+    let reqRemovedItems: any[] = [],
+      reqUpdatedItems: any[] = [],
+      reqAddedItems: any[] = [];
+
+    if (removedItems.length > 0) {
+      reqRemovedItems = removedItems.map(item => {
+        const removedItem = {
+          key: this.getOriginalDataKey(item),
+        };
+        return removedItem;
+      });
+    }
+    if (updatedItems.length > 0) {
+      reqUpdatedItems = updatedItems.map(item => {
+        let data = cloneDeep(item);
+        delete data._RID;
+        const updatedItem = {
+          key: this.getOriginalDataKey(item),
+          data,
+        };
+        return updatedItem;
+      });
+    }
+    if (addedItems.length > 0) {
+      reqAddedItems = addedItems.map(item => {
+        let data = cloneDeep(item);
+        delete data._RID;
+        const addedItem = {
+          data,
+        };
+        return addedItem;
+      });
+    }
+
+    return {
+      addedItems: reqAddedItems,
+      updatedItems: reqUpdatedItems,
+      removedItems: reqRemovedItems,
+    };
+  }
+
+  /**
+   * 변경사항을 저장처리
+   */
+  public setChangeCommit() {
+    const grid = this.flexGrid,
+      cv = grid.collectionView;
+
+    let removedItems = [...this.removed.values()].filter(item => !this.added.has(item._RID));
+    let updatedItems = [...this.updated.values()].filter(item => !this.removed.has(item._RID));
+    let addedItems = [...this.added.values()].filter(item => !this.removed.has(item._RID));
+    let remainItems = [...this.removed.values()].filter(item => this.added.has(item._RID));
+
+    cv.deferUpdate(() => {
+      if (removedItems.length > 0) {
+        removedItems.forEach(item => {
+          this.removeDataFromSource(item._RID);
+        });
+      }
+      if (updatedItems.length > 0) {
+        updatedItems.forEach(item => {
+          delete item._RID;
+        });
+      }
+      if (addedItems.length > 0) {
+        addedItems.forEach(item => {
+          delete item._RID;
+        });
+      }
+      if (remainItems.length > 0) {
+        remainItems.forEach(item => {
+          this.removeDataFromSource(item._RID);
+        });
+      }
+    });
+
+    this.added.clear();
+    this.originalDataMap.clear();
+    this.updated.clear();
+    this.removed.clear();
+
+    this.selectedRows.forEach(r => (r.isSelected = false));
+
+    this.flexGrid.collectionView?.refresh();
+    this.flexGrid.refresh();
+    this.flexGrid.focus();
+
+    this.setOnEditing(this.isEditing);
+  }
+
   public setOnEditing(isEditing: boolean) {
     const params = {
       changed: isEditing,

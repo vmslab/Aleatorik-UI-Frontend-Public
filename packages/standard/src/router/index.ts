@@ -420,7 +420,7 @@ const router = createRouter({
           path: "menu",
           name: "Menu",
           meta: { id: "menu", module: this },
-          component: () => import("../views/Manage/MenuManager.vue"),
+          component: () => import("../views/Manage/MenuManagerNew.vue"),
           beforeEnter,
         },
         {

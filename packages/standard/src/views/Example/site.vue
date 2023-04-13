@@ -1,80 +1,43 @@
 <template>
-  <Controller :show-filter="options.filter">
-    <Button
-      v-tooltip="{ text: $t('Add') }"
-      class="moz-default-button"
-      icon="plus"
-      :focusStateEnabled="false"
-      :text="$t('Add')"
-      @click="extendgrid?.addRow()"
-    />
-    <Button
-      v-tooltip="{ text: $t('Remove') }"
-      class="moz-default-button"
-      icon="trash"
-      :focusStateEnabled="false"
-      :text="$t('Remove')"
-      :disabled="!options.activeDelete"
-      @click="extendgrid?.removeRow()"
-    />
-    <Button
-      v-tooltip="{ text: $t('Save') }"
-      class="moz-default-button"
-      icon="save"
-      :focusStateEnabled="false"
-      :text="$t('Save')"
-      :disabled="!isEditing"
-      @click="extendgrid?.saveEditData()"
-    />
-    <Button
-      v-tooltip="{ text: $t('Cancel') }"
-      class="moz-default-button"
-      icon="cancel"
-      :focusStateEnabled="false"
-      :text="$t('Cancel')"
-      :disabled="!isEditing"
-      @click="extendgrid?.clearChanges()"
-    />
-    <Button
-      v-tooltip="{ text: $t('Search') }"
-      class="moz-default-button"
-      icon="search"
-      :focusStateEnabled="false"
-      :text="$t('Search')"
-      @click="loadData()"
-    />
-    <template #title>
-      <i
-        v-if="options.filter"
-        v-tooltip="{ text: t('HideFilter') }"
-        @click="options.filter = !options.filter"
-        class="mozart-icons moz-filter-icon-tap controller-title-button"
-      />
-      <i
-        v-else
-        v-tooltip="{ text: t('ShowFilter') }"
-        @click="options.filter = !options.filter"
-        class="mozart-icons moz-filter-icon controller-title-button"
-      />
-    </template>
-    <template #filter>
-      <div>
-        <label>{{ $t("Finished") }} {{ $t("Status") }}</label>
-        <WjMultiSelect
-          placeholder=""
-          :showSelectAllCheckbox="true"
-          :itemsSource="siteIdSelect"
-          displayMemberPath="state"
-          checkedMemberPath="checked"
-          :checkedItemsChanged="onCheckedItemsChanged"
-        ></WjMultiSelect>
-      </div>
-    </template>
+  <Controller
+    :show-filter-button="false"
+    :actions="[
+      {
+        type: 'Add',
+        click: () => {
+          extendGrid?.addRow();
+        },
+      },
+      {
+        type: 'Remove',
+        disabled: !options.activeDelete,
+        click: onRemove,
+      },
+      {
+        type: 'Save',
+        disabled: !isEditing,
+        click: onSave,
+      },
+      {
+        type: 'Cancel',
+        disabled: !isEditing,
+        click: () => {
+          extendGrid?.clearChanges();
+        },
+      },
+      {
+        type: 'Search',
+        click: () => {
+          loadData();
+        },
+      },
+    ]"
+  >
   </Controller>
   <div class="todo moz-frame-for-outer-control">
     <WjFlexGrid
       style="width: 100%; height: var(--size-content-height)"
-      :itemsSource="cfgSiteMasterList"
+      :itemsSource="dataSource"
       :initialized="onInitialized"
       selectionMode="MultiRange"
       allowSorting="MultiColumn"
@@ -86,10 +49,9 @@
       :imeEnabled="true"
       :alternatingRowStep="0"
       :selectionChanged="onSelectionChanged"
-      :cellEditEnded="onCellEditEnded"
       :isReadOnly="!currentMenu?.isWrite"
     >
-      <WjFlexGridColumn :width="100" binding="siteId" :header="$t('SiteId')" :isRequired="true" />
+      <WjFlexGridColumn :width="100" binding="siteID" :header="$t('siteID')" :isRequired="true" />
       <WjFlexGridColumn :width="100" binding="siteType" :header="$t('SiteType')" />
       <WjFlexGridColumn
         :width="150"
@@ -98,8 +60,9 @@
         :editor="dateEditor"
         dataType="Date"
         format="yyyy-MM-dd HH:mm:ss"
+        :isReadOnly="true"
       />
-      <WjFlexGridColumn :width="100" binding="createUser" :header="$t('CreateUser')" />
+      <WjFlexGridColumn :width="100" binding="createUser" :header="$t('CreateUser')" :isReadOnly="true" />
       <WjFlexGridColumn
         :width="150"
         binding="updateTime"
@@ -107,54 +70,38 @@
         :editor="dateEditor"
         dataType="Date"
         format="yyyy-MM-dd HH:mm:ss"
+        :isReadOnly="true"
       />
-      <WjFlexGridColumn :width="100" binding="updateUser" :header="$t('UpdateUser')" />
+      <WjFlexGridColumn :width="100" binding="updateUser" :header="$t('UpdateUser')" :isReadOnly="true" />
     </WjFlexGrid>
 
-    <DxLoadPanel
-      :visible="options.loading"
-      :show-indicator="true"
-      :show-pane="true"
-      :shading="true"
-      :hideOnOutsideClick="false"
-      container=".todo"
-      shading-color="rgba(0,0,0,0.4)"
-      message="Please, wait..."
-    />
+    <LoadPanel :loading="options.loading" />
   </div>
 </template>
-
 <script setup lang="ts">
-import { Call } from "../../stores/queryStore";
 import { onMounted, ref, reactive } from "vue";
 import { useQuery, useQueryClient, useMutation } from "vue-query";
 import { ExtendGrid } from "@aleatorik-ui/vue-component-wijmo";
 import { WjFlexGrid, WjFlexGridColumn } from "@grapecity/wijmo.vue2.grid";
-import { WjMultiSelect } from "@grapecity/wijmo.vue2.input";
 import { FlexGrid } from "@grapecity/wijmo.grid";
 import { InputDateTime } from "@grapecity/wijmo.input";
 
-import "devextreme-vue/text-area";
-import { DxLoadPanel } from "devextreme-vue/load-panel";
 import { useTranslation } from "i18next-vue";
 import { showMessage } from "../../utils/dialog";
-import Controller from "../../components/Controller.vue";
-
 import { storeToRefs } from "pinia";
 import { useMenuStore } from "../../stores/mainStore";
-import Button from "../../components/Button.vue";
+import { Call } from "../../stores/queryStore";
 
+import Controller from "../../components/Controller.vue";
+import LoadPanel from "../../components/LoadPanel.vue";
+
+/**
+ * CONSTANT
+ */
 const menuModule = useMenuStore();
 const { isEditing, currentMenu } = storeToRefs(menuModule);
 
-// 다국어
-const { t } = useTranslation();
-
-const cfgSiteMasterList = ref<any[] | null>([]); // data list
-const grid = ref<FlexGrid | null>(null);
-const extendgrid = ref<ExtendGrid | null>(null);
-
-const callResult = reactive({ add: 0, update: 0, remove: 0 });
+const { t } = useTranslation(); // 다국어
 const queryClient = useQueryClient();
 
 const dateEditor = ref<InputDateTime>(
@@ -163,7 +110,9 @@ const dateEditor = ref<InputDateTime>(
   }),
 );
 
-// 페이지 기본 변수
+/**
+ * STATE
+ */
 const options = reactive({
   loading: false,
   filter: true,
@@ -171,84 +120,30 @@ const options = reactive({
   checkedItems: [{ value: false }, { value: true }] as any[],
 });
 
-// 조회조건
-const siteIdSelect = ref([
-  { state: t("Finished"), checked: true, value: true },
-  { state: t("InProgress"), checked: true, value: false },
-]);
+const dataSource = ref<any[] | null>([]); // data list
+const grid = ref<FlexGrid | null>(null);
+const extendGrid = ref<ExtendGrid | null>(null);
 
-// init
+/**
+ * Initialize
+ */
 onMounted(async () => {
   await loadData();
 });
 
-// grid init
+// grid initialize
 const onInitialized = (flexGrid: FlexGrid) => {
   grid.value = flexGrid;
-  flexGrid.beginningEdit.addHandler((s, e) => {
-    switch (e.getColumn().binding) {
-    }
-  });
-  flexGrid.cellEditEnded.addHandler((s, e) => {
-    switch (e.getColumn().binding) {
-    }
-  });
-  extendgrid.value = new ExtendGrid({
+  extendGrid.value = new ExtendGrid({
     flexGrid,
     dataOptions: {
-      dataKey: "siteId",
+      dataKey: "siteID",
       validateKey: "save",
     },
     gridOptions: {
       useParseDate: true,
       onInitialized(extendGrid) {
         loadData();
-      },
-      // onInitialzeRowData: async () => {
-      //   let data: any = {};
-
-      //   return data;
-      // },
-      onSaveEditData: async (addItems, updateItems, removeItems) => {
-        options.loading = true;
-        try {
-          console.log("addItems", addItems);
-          console.log("updateItems", updateItems);
-          console.log("removeItems", removeItems);
-
-          if (addItems?.length > 0) {
-            callResult.add = 0;
-            for await (const item of addItems) {
-              await add.mutateAsync(item.data);
-            }
-            showMessage(`Added ${callResult.add} Row${callResult.add > 1 ? "s" : ""}`, callResult.add > 0);
-          }
-
-          if (updateItems?.length > 0) {
-            callResult.update = 0;
-            for await (const item of updateItems) {
-              console.log("m", item);
-              await modify.mutateAsync(item.data);
-            }
-            showMessage(`Updated ${callResult.update} Row${callResult.update > 1 ? "s" : ""}`, callResult.update > 0);
-          }
-
-          if (removeItems?.length > 0) {
-            callResult.remove = 0;
-            for await (const item of removeItems) {
-              console.log(removeItems);
-              console.log("d", item);
-              await remove.mutateAsync(item.key);
-            }
-            showMessage(`Removed ${callResult.remove} Row${callResult.remove > 1 ? "s" : ""}`, callResult.remove > 0);
-          }
-        } catch {
-          options.loading = false;
-          return false;
-        }
-
-        options.loading = false;
-        return true;
       },
     },
   });
@@ -257,31 +152,32 @@ const onInitialized = (flexGrid: FlexGrid) => {
 // data loaded cache reset and reload
 const loadData = async () => {
   options.loading = true;
-  queryClient.invalidateQueries("cfgSiteMaster");
+  queryClient.invalidateQueries("MdmSite");
   options.loading = false;
 };
 
+/**
+ * API Call
+ */
 // data load api
-useQuery("cfgSiteMaster", ({ queryKey }) => Call("cfgSiteMaster/list"), {
+useQuery("MdmSite", ({ queryKey }) => Call("MdmSite"), {
   refetchOnWindowFocus: false,
   onSuccess: result => {
     menuModule.endEdit();
 
-    if (result && result.data) cfgSiteMasterList.value = result.data;
-    else cfgSiteMasterList.value = [];
-
-    showMessage("Data load complete", true);
+    if (result && result.data) dataSource.value = result.data;
+    else dataSource.value = [];
   },
   onError: err => {
     showMessage("An error occurred while loading data", false);
-    cfgSiteMasterList.value = [];
+    dataSource.value = [];
   },
 });
 
 // data add api
-const add = useMutation(param => Call("cfgSiteMaster/add", param, "POST"), {
+const addQuery = useMutation(param => Call("MdmSite", param, "POST"), {
   onSuccess: result => {
-    if (result && result.data > 0) callResult.add += result.data;
+    // console.log("addQuery success", result);
   },
   onError: err => {
     showMessage("An error occurred while adding data", false);
@@ -289,9 +185,9 @@ const add = useMutation(param => Call("cfgSiteMaster/add", param, "POST"), {
 });
 
 // data modify api
-const modify = useMutation((param: any) => Call(`cfgSiteMaster/${param?.siteId}`, param, "PUT"), {
+const modifyQuery = useMutation((param: any) => Call(`MdmSite/${param?.siteID}`, param, "PUT"), {
   onSuccess: result => {
-    if (result && result.data > 0) callResult.update += result.data;
+    // console.log("modifyQuery success", result);
   },
   onError: err => {
     showMessage("An error occurred while updating data", false);
@@ -299,14 +195,54 @@ const modify = useMutation((param: any) => Call(`cfgSiteMaster/${param?.siteId}`
 });
 
 // data remove api
-const remove = useMutation((param: any) => Call(`cfgSiteMaster/${param?.siteId}`, param, "DELETE"), {
+const removeQuery = useMutation((param: any) => Call(`MdmSite/${param?.siteID}`, param, "DELETE"), {
   onSuccess: result => {
-    if (result && result.data > 0) callResult.remove += result.data;
+    // console.log("removeQuery success", result);
   },
   onError: err => {
     showMessage("An error occurred while removing data", false);
   },
 });
+
+/**
+ * Event
+ */
+const onRemove = async () => {
+  const _rows = extendGrid.value?.flexGrid.selectedRows || [];
+
+  if (_rows?.length <= 0) {
+    showMessage(t("SelectRowForRemove"), false);
+    return false;
+  }
+
+  const row = _rows.map(row => row.dataItem);
+  for await (const item of row) {
+    await removeQuery.mutateAsync(item);
+  }
+  showMessage(t(`RemoveSucess`), true);
+
+  loadData();
+};
+
+const onSave = async () => {
+  const { addedItems, updatedItems } = await extendGrid?.value?.getChangedData();
+
+  if (addedItems?.length > 0) {
+    for await (const item of addedItems) {
+      await addQuery.mutateAsync(item.data);
+    }
+    showMessage(t(`AddSucess`), true);
+  }
+
+  if (updatedItems?.length > 0) {
+    for await (const item of updatedItems) {
+      await modifyQuery.mutateAsync(item.key);
+    }
+    showMessage(t(`UpdatedSuccess`), true);
+  }
+
+  await extendGrid.value?.setChangeCommit();
+};
 
 const onSelectionChanged = () => {
   const flexGrid = grid.value;
@@ -319,14 +255,9 @@ const onSelectionChanged = () => {
 };
 
 const onCellEditEnded = () => {
-  const exGrid = extendgrid.value;
+  const exGrid = extendGrid.value;
   if (!exGrid) return;
   const flag = exGrid.isEditing;
   if (isEditing.value != flag) menuModule.setIsEditing(flag);
-};
-
-// 조회조건 변경
-const onCheckedItemsChanged = (s: any) => {
-  options.checkedItems = s.checkedItems;
 };
 </script>

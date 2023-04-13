@@ -21,17 +21,30 @@
         </template>
         <slot name="title"></slot>
       </div>
-      <template v-if="filterObj">
-        <template v-for="(key, i) in Object.keys(filterObj)">
-          <div class="moz-controller-filter">
-            <span class="moz-controller-filter-key">{{ key }}</span>
-            <span class="moz-controller-filter-value">{{ filterObj[key] }}</span>
-          </div>
-        </template>
-      </template>
+
       <div class="spacer"></div>
       <div class="moz-controller-actions">
-        <slot></slot>
+        <button class="filter-icon" @click="showFilter = !showFilter" v-if="showFilterButton">
+          <i
+            v-tooltip="{ text: showFilter ? $t('HideFilter') : $t('ShowFilter') }"
+            class="mozart-icons"
+            :class="{
+              'moz-filter-icon': !showFilter,
+              'moz-filter-icon-tap': showFilter,
+            }"
+          />
+        </button>
+
+        <div class="spacer" v-if="showFilterButton" />
+
+        <Button
+          v-for="(action, index) in actionButtons"
+          :key="`action_${index}`"
+          class="moz-default-button"
+          @click="action.click"
+          v-bind="action"
+        />
+        <slot name="action"></slot>
       </div>
     </div>
     <div v-if="showFilter" class="moz-horizontal-filter" ref="filter">
@@ -41,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeMount, onMounted, onUnmounted, computed, watch, toRefs, nextTick } from "vue";
+import { ref, onBeforeMount, onMounted, onUnmounted, computed, watch, toRefs, nextTick, reactive, Ref } from "vue";
 import { storeToRefs } from "pinia";
 import { resizeVerticalSize } from "../utils/themeSet";
 import { useTranslation } from "i18next-vue";
@@ -49,27 +62,72 @@ import { useLayoutStore, useMenuLocationStore } from "../stores/mainStore";
 import { useRouter } from "vue-router";
 import { EventBus } from "@aleatorik-ui/common-ui";
 import debounce from "lodash/debounce";
+import Button from "./Button.vue";
+
+/**
+ * CONSTANT
+ */
+interface Actions {
+  type: "Add" | "Remove" | "Edit" | "Save" | "Cancel" | "Search";
+  icon?: string;
+  text?: string;
+  disabled?: boolean;
+  click?: Function;
+}
+
+interface Props {
+  height?: number;
+  setControlHeight?: Function;
+  showFilterButton?: boolean;
+  actions?: Actions[];
+}
 
 const layout = useLayoutStore();
 const menuLocation = useMenuLocationStore();
 const router = useRouter();
-
-// interface Props {
-//   height?: number;
-//   showFilter: boolean;
-//   setControlHeight?: (value: number) => void;
-//   filterObj?: Record<string, any>;
-// }
-// const { height = 66, showFilter = false, setControlHeight, filterObj } = defineProps<Props>();
-
 const { t } = useTranslation();
-const props = defineProps({
-  height: { type: Number, default: 66 },
-  setControlHeight: { type: Function, required: false },
-  filterObj: { type: Object, required: false },
-  showFilter: { type: Boolean, default: false },
+
+/**
+ * props
+ */
+const props = withDefaults(defineProps<Props>(), {
+  height: 66,
+  showFilterButton: true,
 });
-const { height, showFilter, setControlHeight, filterObj } = toRefs(props);
+const { height, setControlHeight, showFilterButton, actions } = toRefs(props);
+
+/**
+ * state
+ */
+const showFilter = ref(showFilterButton.value);
+const filter = ref();
+const actionButtons: Ref<any[]> = ref([]);
+
+const handleResize = debounce(() => resizeLayout(true), 200);
+
+/**
+ * life hook
+ */
+onBeforeMount(() => {
+  EventBus.register("theme-changed", onThemeChanged);
+
+  if (setControlHeight?.value) {
+    setControlHeight.value(height.value);
+  }
+});
+
+onMounted(() => {
+  resizeLayout();
+  window.addEventListener("resize", handleResize);
+});
+
+onUnmounted(() => {
+  EventBus.remove("theme-changed", onThemeChanged);
+  window.removeEventListener("resize", handleResize);
+  // if (observer) {
+  //   observer.disconnect();
+  // }
+});
 
 watch([showFilter], () => {
   nextTick(() => {
@@ -78,11 +136,38 @@ watch([showFilter], () => {
   });
 });
 
-// const observer: ResizeObserver = new ResizeObserver((entries: ResizeObserverEntry[], observer: ResizeObserver) => {
-//   resizeLayout(true);
-//   EventBus.fire("horizontal-filter-toggle");
-// });
-const filter = ref();
+watch([actions], () => {
+  nextTick(() => {
+    actionButtons.value =
+      actions?.value?.map(action => {
+        const _action = {
+          icon: null,
+          text: t(action.type),
+          ...action,
+        };
+        switch (action.type) {
+          case "Add":
+            _action.icon = "plus";
+            break;
+          case "Remove":
+            _action.icon = "trash";
+            break;
+          case "Save":
+            _action.icon = "save";
+            break;
+          case "Cancel":
+            _action.icon = "cancel";
+            break;
+          case "Search":
+            _action.icon = "search";
+            break;
+        }
+
+        return _action;
+      }) || [];
+  });
+});
+
 const title = computed(() => {
   const navis = (router.currentRoute.value.meta.navis as any[]) || [];
   if (
@@ -91,7 +176,7 @@ const title = computed(() => {
     menuLocation.menuLocation === "topandtree"
   ) {
     let result: string[] = [];
-    navis.reverse().forEach((element, index) => {
+    navis.reverse()?.forEach((element, index) => {
       result.push(t(element) as string);
     });
     return result;
@@ -122,39 +207,4 @@ const onClickToggleDrawer = () => {
 const onThemeChanged = (evt: any) => {
   resizeLayout();
 };
-
-const onToggleDrawer = () => {
-  // drawer = false;
-  layout.setLayout({
-    ...storeToRefs(layout),
-    drawer: false,
-  });
-};
-
-onBeforeMount(() => {
-  EventBus.register("theme-changed", onThemeChanged);
-
-  if (setControlHeight?.value) {
-    setControlHeight.value(height.value);
-  }
-});
-
-const handleResize = debounce(() => resizeLayout(true), 200);
-
-onMounted(() => {
-  resizeLayout();
-  window.addEventListener("resize", handleResize);
-
-  // if (filter.value) {
-  //   observer.observe(filter.value as Element);
-  // }
-});
-
-onUnmounted(() => {
-  EventBus.remove("theme-changed", onThemeChanged);
-  window.removeEventListener("resize", handleResize);
-  // if (observer) {
-  //   observer.disconnect();
-  // }
-});
 </script>
