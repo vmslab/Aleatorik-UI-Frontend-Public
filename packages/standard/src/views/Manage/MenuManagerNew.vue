@@ -38,7 +38,7 @@
       :text="$t('Refresh')"
       @click="loadData"
     />
-    <template #title>
+    <!-- <template #title>
       <i
         v-if="options.filter"
         v-tooltip="{ text: t('HideFilter') }"
@@ -51,8 +51,8 @@
         @click="options.filter = !options.filter"
         class="mozart-icons moz-filter-icon controller-title-button"
       />
-    </template>
-    <template #filter>
+    </template> -->
+    <!-- <template #filter>
       <div>
         <label>{{ $t("Menu") }} {{ $t("ID") }}</label>
         <DxTextBox v-model="newItem.menuId" />
@@ -111,7 +111,7 @@
           @click="addNodeChild"
         />
       </div>
-    </template>
+    </template> -->
   </Controller>
   <div class="menu-manager moz-frame-for-outer-control" style="display: flex" ref="container">
     <div class="dx-card" :style="{ width: '100%', height: `var(--size-content-inner-height-outer-controller)` }">
@@ -150,6 +150,7 @@
     </div>
     <WjPopup
       style="min-width: 400px; max-width: 400px; width: 400px"
+      :removeOnHide="true"
       :initialized="onInitializedPopup"
       showTrigger="None"
       :hideTrigger="options.keepPopup ? 'None' : 'Blur'"
@@ -168,10 +169,31 @@
           :show-colon-after-label="false"
           @field-data-changed="onFieldDataChanged"
         >
-          <DxItem data-field="name">
+          <DxItem
+            data-field="menuId"
+            :tabindex="4"
+            :editor-options="{
+              onKeyPress: onValueChanged,
+            }"
+          >
+            <DxRequiredRule message="Menu Id is required" />
+          </DxItem>
+          <DxItem
+            data-field="name"
+            :tabindex="1"
+            :editor-options="{
+              onKeyPress: onValueChanged,
+            }"
+          >
             <DxRequiredRule message="Menu Name is required" />
           </DxItem>
-          <DxItem data-field="path">
+          <DxItem
+            data-field="path"
+            :tabindex="2"
+            :editor-options="{
+              onKeyPress: onValueChanged,
+            }"
+          >
             <DxRequiredRule message="Menu Path is required" />
           </DxItem>
         </DxForm>
@@ -205,6 +227,7 @@
             @click="removeSelectedNode"
           />
           <DxButton
+            :tabindex="3"
             class="moz-default-button"
             icon="close"
             :focusStateEnabled="false"
@@ -282,8 +305,8 @@
 </template>
 
 <script setup lang="ts">
-import { Get, Save } from "../../stores/templateStore";
-import { onMounted, ref, reactive, nextTick } from "vue";
+import { Get, Save } from "../../stores/queryStore";
+import { onMounted, ref, reactive } from "vue";
 import { useMutation, useQuery, useQueryClient } from "vue-query";
 
 import { CancelEventArgs, EventArgs, PopupPosition, Tooltip, format } from "@grapecity/wijmo";
@@ -297,7 +320,7 @@ import {
 } from "@grapecity/wijmo.nav";
 import { Popup } from "@grapecity/wijmo.input";
 import { WjTreeView } from "@grapecity/wijmo.vue2.nav";
-import { WjPopup, WjMenu, WjMenuItem } from "@grapecity/wijmo.vue2.input";
+import { WjPopup } from "@grapecity/wijmo.vue2.input";
 
 import { DxForm, DxItem, DxLabel, DxRequiredRule } from "devextreme-vue/form";
 import { DxContextMenu } from "devextreme-vue/context-menu";
@@ -309,10 +332,8 @@ import { useTranslation } from "i18next-vue";
 import { showMessage, showConfirm } from "../../utils/dialog";
 import { Controller } from "../../components";
 import DxButton from "devextreme-vue/button";
-import DxTextBox from "devextreme-vue/text-box";
-import DxSelectBox from "devextreme-vue/select-box";
 import { systemId } from "../../utils/env";
-import { generateGUID } from "@mozart-ui/common-ui";
+import { generateGUID } from "@aleatorik-ui/common-ui";
 
 import { storeToRefs } from "pinia";
 import { useMenuStore } from "../../stores/mainStore";
@@ -440,10 +461,12 @@ const onHiding = (s: Popup, e: CancelEventArgs) => {
 };
 const addNextItem = async (e: any) => {
   newItem.value.type = e.itemData.value;
+  menuModule.beginEdit();
   await addNodeNext();
 };
 const addChildItem = async (e: any) => {
   newItem.value.type = e.itemData.value;
+  menuModule.beginEdit();
   await addNodeChild();
 };
 
@@ -543,6 +566,10 @@ const showMenuEditor = (s: TreeView) => {
   menuEditor.owner = owner;
   menuEditor.show();
   options.isValid = false;
+};
+
+const onValueChanged = (e: any) => {
+  menuModule.beginEdit();
 };
 
 const onFieldDataChanged = (e: any) => {
