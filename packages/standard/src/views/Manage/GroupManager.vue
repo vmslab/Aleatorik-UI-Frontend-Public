@@ -258,7 +258,7 @@ const menuSortingRule = (x: any, y: any) => {
     : 0;
 };
 
-useQuery("GroupBySystem", ({ queryKey }) => Get(queryKey[0], { systemId: systemId }), {
+useQuery("Group", ({ queryKey }) => Get(queryKey[0], systemId), {
   refetchOnWindowFocus: false,
   onSuccess: (result: any) => {
     menuModule.endEdit();
@@ -271,7 +271,6 @@ useQuery("GroupBySystem", ({ queryKey }) => Get(queryKey[0], { systemId: systemI
           options.selectedGroup = result.data[0];
         }
 
-        // queryClient.invalidateQueries("MenuMap");
         await getMenuMap.mutateAsync({ systemId: systemId, groupId: options.selectedGroupKeys[0] } as any);
       }, 100);
     } else groupItems.value = [];
@@ -294,23 +293,6 @@ const getMenuMap = useMutation(param => Get("MenuMap", param), {
     groupItems.value = [];
   },
 });
-// useQuery(
-//   "MenuMap",
-//   ({ queryKey }) => Get(queryKey[0] as string, { systemId: systemId, groupId: selectedGroupKey.value }),
-//   {
-//     enabled: !!selectedGroupKey.value,
-//     onSuccess: (result: any) => {
-//       if (result && result.data && result.data.length > 0) {
-//         menuMapItems.value = createMenuItems(result.data.map(setMenuMapId));
-//       } else menuMapItems.value = [];
-
-//       showMessage(`Group '${options.selectedGroup.name}' Data load complete`, true);
-//     },
-//     onError: (err: any) => {
-//       showMessage("An error occurred while loading data", false);
-//     },
-//   },
-// );
 
 const setMenuMapId = (d: any) => {
   if (!d.groupId || d.groupId.length === 0) d.groupId = options.selectedGroupKeys[0];
