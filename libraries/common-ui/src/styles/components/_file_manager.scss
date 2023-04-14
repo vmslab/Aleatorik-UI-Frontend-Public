@@ -1,4 +1,4 @@
-@import "../mixin";
+@import "src/styles/abstracts/mixin";
 
 .moz-file-manager {
   .dx-treelist-icon-container {
@@ -111,13 +111,8 @@
         vertical-align: middle;
         border-width: 0px 1px 0px 0px;
         border-style: solid;
-        border-image: linear-gradient(
-            to bottom,
-            transparent 40%,
-            var(--color-border2) 40% 72%,
-            transparent 72% 100%
-          )
-          1 100% !important;
+        border-image: linear-gradient(to bottom, transparent 40%, var(--color-border2) 40% 72%, transparent 72% 100%) 1
+          100% !important;
 
         .dx-treelist-text-content {
           color: var(--color-font2);
@@ -175,13 +170,8 @@
         &.dx-selection {
           &.dx-row:not(.dx-row-focused).dx-column-lines > td,
           .dx-treelist-rowsview .dx-selection.dx-row:not(.dx-row-focused).dx-column-lines > tr > td,
-          .dx-treelist-rowsview
-            .dx-selection.dx-row:not(.dx-row-focused):hover.dx-column-lines
-            > td,
-          .dx-treelist-rowsview
-            .dx-selection.dx-row:not(.dx-row-focused):hover.dx-column-lines
-            > tr
-            > td {
+          .dx-treelist-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover.dx-column-lines > td,
+          .dx-treelist-rowsview .dx-selection.dx-row:not(.dx-row-focused):hover.dx-column-lines > tr > td {
             background-color: var(--color-selected) !important;
             border-color: var(--color-selected) !important;
           }

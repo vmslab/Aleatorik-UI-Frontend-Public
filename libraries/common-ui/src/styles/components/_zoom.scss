@@ -1,4 +1,4 @@
-@import "../mixin";
+@import "src/styles/abstracts/mixin";
 
 .moz-zoom {
   @include flex-center-horizontal;

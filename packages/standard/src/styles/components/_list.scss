@@ -1,5 +1,5 @@
-@import "../mixin";
-@import "../function";
+@import "src/styles/abstracts/mixin";
+@import "src/styles/abstracts/function";
 
 .moz-none-border-list {
   .dx-item.dx-list-item {
@@ -95,8 +95,7 @@
     }
   }
   .dx-list-search {
-    margin: var(--size-card-top-padding) var(--size-card-rbl-padding) 10px
-      var(--size-card-rbl-padding);
+    margin: var(--size-card-top-padding) var(--size-card-rbl-padding) 10px var(--size-card-rbl-padding);
     .dx-texteditor-container {
       .dx-texteditor-input-container {
         .dx-placeholder {

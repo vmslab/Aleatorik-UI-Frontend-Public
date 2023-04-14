@@ -7,7 +7,7 @@
 | The full license is in the file LICENSE, distributed with this software.
 |----------------------------------------------------------------------------*/
 
-@import "../function";
+@import "src/styles/abstracts/function";
 
 /* <DEPRECATED> */
 .p-Menu, /* </DEPRECATED> */
@@ -76,7 +76,7 @@
 .p-Menu-item[data-type='separator'] > div::after,
 /* </DEPRECATED> */
 .lm-Menu-item[data-type='separator'] > div::after {
-  content: '';
+  content: "";
   display: block;
   position: relative;
   top: 4px;

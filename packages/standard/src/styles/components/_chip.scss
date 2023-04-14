@@ -1,4 +1,4 @@
-@import "../mixin";
+@import "src/styles/abstracts/mixin";
 
 @mixin chip($color) {
   @include flex-center;

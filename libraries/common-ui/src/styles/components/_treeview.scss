@@ -1,5 +1,5 @@
-@import "../function";
-@import "../mixin";
+@import "src/styles/abstracts/function";
+@import "src/styles/abstracts/mixin";
 
 .moz-treeview {
   .dx-scrollable-content > .dx-treeview-node-container {

@@ -1,4 +1,4 @@
-@import "../function";
+@import "src/styles/abstracts/function";
 
 .moz-treelist {
   .dx-treelist-header-panel {
@@ -148,13 +148,8 @@
         font-size: var(--font-size-body02);
         border-width: 0px 1px 0px 0px;
         border-style: solid;
-        border-image: linear-gradient(
-            to bottom,
-            transparent 40%,
-            var(--color-border2) 40% 72%,
-            transparent 72% 100%
-          )
-          1 100%;
+        border-image: linear-gradient(to bottom, transparent 40%, var(--color-border2) 40% 72%, transparent 72% 100%) 1
+          100%;
         .dx-treelist-text-content {
           color: var(--color-grid-header-font);
           vertical-align: middle;
@@ -524,7 +519,9 @@
         color: var(--color-accent);
       }
     }
-    &.dx-state-hover:not(.dx-selection):not(.dx-row-inserted):not(.dx-row-removed):not(.dx-edit-row):not(.dx-row-focused)
+    &.dx-state-hover:not(.dx-selection):not(.dx-row-inserted):not(.dx-row-removed):not(.dx-edit-row):not(
+        .dx-row-focused
+      )
       > td:not(.dx-focused) {
       @include row-hover;
     }

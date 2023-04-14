@@ -1,4 +1,4 @@
-@import "../function";
+@import "src/styles/abstracts/function";
 
 .moz-form {
   &.moz-margin-form {
@@ -170,7 +170,7 @@
     .dx-field-item:not(.dx-first-row) {
       padding-top: var(--size-input-margin);
     }
-    .dx-field-item{
+    .dx-field-item {
       .dx-label-h-align {
         &.virtical-top {
           align-items: flex-start;

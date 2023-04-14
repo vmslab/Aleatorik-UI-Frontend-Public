@@ -1,4 +1,4 @@
-@import "../mixin";
+@import "src/styles/abstracts/mixin";
 
 .flow-tabs {
   @include flex-center-horizontal;
