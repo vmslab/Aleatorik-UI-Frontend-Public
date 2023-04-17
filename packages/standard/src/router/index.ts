@@ -145,6 +145,20 @@ const router = createRouter({
           beforeEnter,
         },
         {
+          path: "BomSub4",
+          name: "BOM ROUTING",
+          meta: { id: "BomRoutingMaster", module: this },
+          component: () => import("../views/mdm/MdmBomSub4.vue"),
+          beforeEnter,
+        },
+        {
+          path: "BomSub5",
+          name: "BOM ROUTING PROPERTY VALUE",
+          meta: { id: "BomRoutingSub1", module: this },
+          component: () => import("../views/mdm/MdmBomSub5.vue"),
+          beforeEnter,
+        },
+        {
           path: "RoutingMaster",
           name: "ROUTING MASTER",
           meta: { id: "Routing", module: this },
@@ -165,20 +179,6 @@ const router = createRouter({
           component: () => import("../views/mdm/MdmRoutingSub2.vue"),
           beforeEnter,
         },
-        {
-          path: "BomRoutingMaster",
-          name: "BOM ROUTING",
-          meta: { id: "BomRoutingMaster", module: this },
-          component: () => import("../views/mdm/MdmBomRoutingMaster.vue"),
-          beforeEnter,
-        },
-        {
-          path: "BomRoutingSub1",
-          name: "BOM ROUTING PROPERTY VALUE",
-          meta: { id: "BomRoutingSub1", module: this },
-          component: () => import("../views/mdm/MdmBomRoutingSub1.vue"),
-          beforeEnter,
-        },
         /** -------------------------------------------------------------------------------------------- */
         {
           path: "Wip",
@@ -189,20 +189,27 @@ const router = createRouter({
         },
         /** -------------------------------------------------------------------------------------------- */
         {
-          path: "Demand",
-          name: "DEMAND 정보",
-          meta: { id: "Demand", module: this },
-          component: () => import("../views/mdm/MdmDemand.vue"),
-          beforeEnter,
-        },
-        {
           path: "CustInfo",
           name: "고객 정보",
           meta: { id: "CustInfo", module: this },
           component: () => import("../views/mdm/MdmCustInfo.vue"),
           beforeEnter,
         },
+        {
+          path: "Demand",
+          name: "DEMAND 정보",
+          meta: { id: "Demand", module: this },
+          component: () => import("../views/mdm/MdmDemand.vue"),
+          beforeEnter,
+        },
         /** -------------------------------------------------------------------------------------------- */
+        {
+          path: "ResGroupMaster",
+          name: "RESOURCE GROUP MASTER",
+          meta: { id: "ResGroupMaster", module: this },
+          component: () => import("../views/mdm/MdmResGroupMaster.vue"),
+          beforeEnter,
+        },
         {
           path: "ResMaster",
           name: "RESOURCE MASTER",
@@ -211,17 +218,17 @@ const router = createRouter({
           beforeEnter,
         },
         {
-          path: "ResSub1",
+          path: "OperResMaster",
           name: "OPERATION RESOURCE",
-          meta: { id: "ResSub1", module: this },
-          component: () => import("../views/mdm/MdmResSub1.vue"),
+          meta: { id: "OperResMaster", module: this },
+          component: () => import("../views/mdm/MdmOperResMaster.vue"),
           beforeEnter,
         },
         {
-          path: "ResSub2",
+          path: "OperResSub1",
           name: "OPERATION RESOURCE PROPERTY VALUE",
-          meta: { id: "ResSub2", module: this },
-          component: () => import("../views/mdm/MdmResSub2.vue"),
+          meta: { id: "OperResSub1", module: this },
+          component: () => import("../views/mdm/MdmOperResSub1.vue"),
           beforeEnter,
         },
         {
@@ -380,7 +387,7 @@ const router = createRouter({
         },
         /** -------------------------------------------------------------------------------------------- */
         {
-          path: "MainReport",
+          path: "IodReport",
           name: "입력/결과 데이터 조회",
           meta: { id: "MainReport", module: this },
           component: () => import("../views/iod/IodReport.vue"),
@@ -444,34 +451,6 @@ const router = createRouter({
           path: "",
           name: "Example Home",
           component: () => import("../views/Home.vue"),
-        },
-        {
-          path: "todo",
-          name: "Todo",
-          meta: { id: "todo", module: this },
-          component: () => import("../views/exp/Todo.vue"),
-          beforeEnter,
-        },
-        {
-          path: "site",
-          name: "사이트 관리",
-          meta: { id: "site", module: this },
-          component: () => import("../views/exp/Site.vue"),
-          beforeEnter,
-        },
-        {
-          path: "layout",
-          name: "Layout",
-          meta: { id: "layout", module: this },
-          component: () => import("../views/exp/Layout.vue"),
-          beforeEnter,
-        },
-        {
-          path: "layoutOuterController",
-          name: "LayoutOuterController",
-          meta: { id: "layoutOuterController", module: this },
-          component: () => import("../views/exp/LayoutOuterController.vue"),
-          beforeEnter,
         },
         {
           path: "gantt",
