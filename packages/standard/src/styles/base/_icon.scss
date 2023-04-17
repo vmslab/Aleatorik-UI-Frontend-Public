@@ -21,7 +21,7 @@
     content: unicode("e113");
   }
 
-  &.icon-filter::before {
+  &.icon-filter-old::before {
     @include moz-icon;
     content: unicode("e103");
   }
@@ -414,8 +414,24 @@
     content: unicode("e1c1");
   }
   // TODO: 모든 아이콘 추가 바람
+  &.icon-favorite::before {
+    @include moz-icon;
+    content: unicode("e1d3");
+  }
+  &.icon-filter::before {
+    @include moz-icon;
+    content: unicode("e1d4");
+  }
   &.icon-user::before {
     @include moz-icon;
     content: unicode("e1d5");
+  }
+  &.icon-table-filter-off::before {
+    @include moz-icon;
+    content: unicode("e1d7");
+  }
+  &.icon-table-filter-on::before {
+    @include moz-icon;
+    content: unicode("e1d8");
   }
 }

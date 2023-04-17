@@ -9,28 +9,38 @@
         @click="onClickToggleDrawer"
       ></div>
       <div class="moz-controller-title">
-        <template v-for="(t, i) in title">
+        <template v-for="(t, i) in title" :key="i">
           <template v-if="title.length - 1 === i">
-            <span :style="menuLocation.menuLocation === 'left' ? '' : 'color: var(--color-accent);'">
+            <span
+              :class="{
+                accent: menuLocation.menuLocation !== 'left',
+              }"
+            >
               {{ t }}
             </span>
           </template>
           <template v-else>
-            <span style="font-weight: normal; margin-right: 4px">{{ `${t} / ` }}</span>
+            <span>{{ t }}</span>
+            <span class="breadcrumb-dividor"></span>
           </template>
         </template>
+        <slot name="favorite">
+          <button class="favorite-icon title-icon" v-tooltip="{ text: $t('즐겨찾기') }">
+            <i class="mozart-icons icon-favorite" />
+          </button>
+        </slot>
         <slot name="title"></slot>
       </div>
 
       <div class="spacer"></div>
       <div class="moz-controller-actions">
-        <button class="filter-icon" @click="showFilter = !showFilter" v-if="showFilterButton">
+        <button class="filter-icon title-icon" @click="showFilter = !showFilter" v-if="showFilterButton">
           <i
             v-tooltip="{ text: showFilter ? $t('HideFilter') : $t('ShowFilter') }"
             class="mozart-icons"
             :class="{
-              'moz-filter-icon': !showFilter,
-              'moz-filter-icon-tap': showFilter,
+              'icon-table-filter-off': !showFilter,
+              'icon-table-filter-on': showFilter,
             }"
           />
         </button>

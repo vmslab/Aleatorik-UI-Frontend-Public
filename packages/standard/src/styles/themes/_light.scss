@@ -31,6 +31,12 @@ $colors-light: (
   // LNB 강조 글자 색상
   drawer-font-normal: #b6b7c1,
   // LNB 기본 글자 색상
+  controller-title-font-normal: #6a7184,
+  // Controller title 영역 기본 글자 색상
+  controller-background: transparent,
+  // Controller 배경 색상
+  controller-title-button-background: #e3e3ea,
+  // Controller title 영역 버튼 호버시 배경 색상
   primary: #0e1e40,
   primary50: #e8ebf0,
   primary100: #c4cedc,
@@ -68,7 +74,7 @@ $colors-light: (
   drawer-font: #fff,
   drawer-selected-menu-font: #fff,
   drawer-selected-category-font: #555,
-  icon-text: #828b9a,
+  icon-text: #8998b5,
   icon-back: #fff,
   icon-disabled-back: #f5f6f8,
   icon-disabled-text: #d0d2db,

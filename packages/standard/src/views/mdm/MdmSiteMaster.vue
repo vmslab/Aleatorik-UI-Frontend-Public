@@ -1,6 +1,6 @@
 <template>
   <Controller
-    :show-filter-button="false"
+    :show-filter-button="true"
     :actions="[
       {
         type: 'Add',
@@ -51,7 +51,7 @@
       :selectionChanged="onSelectionChanged"
       :isReadOnly="!currentMenu?.isWrite"
     >
-      <WjFlexGridColumn :width="100" binding="siteID" :header="$t('siteID')" :isRequired="true" />
+      <WjFlexGridColumn :width="100" binding="siteID" :header="$t('SiteID')" :isRequired="true" />
       <WjFlexGridColumn :width="100" binding="siteType" :header="$t('SiteType')" />
       <WjFlexGridColumn
         :width="150"

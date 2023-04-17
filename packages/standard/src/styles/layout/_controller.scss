@@ -1,12 +1,8 @@
 @import "src/styles/abstracts/mixin";
 
-@mixin controller($bottom-border) {
+@mixin controller {
   .moz-controller {
-    @if ($bottom-border) {
-      height: calc(var(--size-control-height) - 1px);
-    } @else {
-      height: var(--size-control-height);
-    }
+    height: var(--size-control-height);
     width: var(--size-content-inner-width);
     @include flex-center-horizontal;
     justify-content: space-between;
@@ -63,10 +59,63 @@
 
     .moz-controller-title {
       @include moz-controller-title;
+      height: 100%;
+
+      .accent {
+        color: var(--color-accent);
+      }
+
+      // controller 메뉴 사이 아이콘
+      .breadcrumb-dividor {
+        margin: 0px 4px;
+        &::before {
+          content: "\e1cc";
+          pointer-events: none;
+          font-size: 10px;
+          font-family: "mozart-icons";
+          left: var(--size-card-rbl-padding);
+          display: flex;
+          -moz-align-items: center;
+          align-items: center;
+          color: var(--color-font5);
+        }
+      }
+
+      .favorite-icon {
+        margin-left: 5px;
+
+        i {
+          font-size: 20px;
+        }
+      }
     }
 
     .moz-controller-actions {
       @include flex-center-horizontal;
+      gap: var(--size-padding2);
+
+      .filter-icon {
+        i {
+          font-size: 20px;
+          color: var(--color-font5);
+
+          &.icon-table-filter-on {
+            color: var(--color-accent);
+          }
+        }
+      }
+    }
+
+    .title-icon {
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: var(--size-padding1);
+      border-radius: var(--border-radius);
+
+      &:hover {
+        background-color: var(--color-controller-title-button-background);
+      }
     }
 
     .moz-controller-filter {
@@ -119,9 +168,8 @@
 
 .moz-controller-root {
   padding: 0px var(--size-content-padding);
-  background-color: var(--color-controlback);
-  border-bottom: 1px solid var(--color-border3);
-  @include controller(true);
+  background-color: var(--color-controller-background);
+  @include controller;
   @include filter;
 }
 
@@ -130,7 +178,7 @@
     padding: 0px;
     background-color: transparent;
     border-bottom: none;
-    @include controller(false);
+    @include controller;
     @include filter;
   }
 }

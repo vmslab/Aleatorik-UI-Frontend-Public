@@ -142,10 +142,11 @@
   margin-left: var(--size-controller-left-padding);
   padding-right: 50px;
   text-align: left;
-  color: var(--color-font2);
+  color: var(--color-controller-title-font-normal);
   div,
   span {
-    color: var(--color-font2);
+    color: var(--color-controller-title-font-normal);
+    font-weight: var(--font-medium);
   }
 }
 
