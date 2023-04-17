@@ -173,7 +173,7 @@ export const useThemeStore = defineStore("theme", {
     themeData: IThemeData;
   } => ({
     theme: "light",
-    compact: "compact",
+    compact: "normal",
     themeData: {
       common: {},
       light: {},

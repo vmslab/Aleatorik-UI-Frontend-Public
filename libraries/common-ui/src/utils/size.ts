@@ -42,30 +42,32 @@ export const setCssSizeVariable = (params: {
   const contentsInnerWidth = contentWidth - paddingDouble;
   const contentsInnerHeightNoPadding = contentHeight - controlHeight;
 
+  console.log("setCssSizeVariable");
+
   // dev
   const shellHeight = height - menuHeight - statusHeight;
 
   document.documentElement.style.setProperty("--size-width", `${width}px`);
   document.documentElement.style.setProperty("--size-height", `${height}px`);
-  document.documentElement.style.setProperty("--size-top-height", `${topHeight}px`);
-  document.documentElement.style.setProperty("--size-control-height", `${controlHeight}px`);
-  document.documentElement.style.setProperty("--size-drawer-width", `${drawerWidth}px`);
-  document.documentElement.style.setProperty("--size-height-without-top", `${withoutTopHeight}px`);
-  document.documentElement.style.setProperty("--size-content-padding", `${contentsPadding}px`);
-  document.documentElement.style.setProperty("--size-content-padding-reverse", `-${contentsPadding}px`);
-  document.documentElement.style.setProperty("--size-content-padding-no-scroll", `${contentPaddingNoScroll}px`);
+  // // document.documentElement.style.setProperty("--size-top-height", `${topHeight}px`);
+  // // document.documentElement.style.setProperty("--size-control-height", `${controlHeight}px`);
+  // document.documentElement.style.setProperty("--size-drawer-width", `${drawerWidth}px`);
+  // document.documentElement.style.setProperty("--size-height-without-top", `${withoutTopHeight}px`);
+  // document.documentElement.style.setProperty("--size-content-padding", `${contentsPadding}px`);
+  // document.documentElement.style.setProperty("--size-content-padding-reverse", `-${contentsPadding}px`);
+  // document.documentElement.style.setProperty("--size-content-padding-no-scroll", `${contentPaddingNoScroll}px`);
   document.documentElement.style.setProperty("--size-content-height", `${contentHeight}px`);
   document.documentElement.style.setProperty("--size-content-width", `${contentWidth}px`);
   document.documentElement.style.setProperty("--size-content-inner-height", `${contentsInnerHeight}px`);
   document.documentElement.style.setProperty("--size-content-inner-width", `${contentsInnerWidth}px`);
-  document.documentElement.style.setProperty(
-    "--size-content-inner-height-no-padding",
-    `${contentsInnerHeightNoPadding}px`,
-  );
+  // document.documentElement.style.setProperty(
+  //   "--size-content-inner-height-no-padding",
+  //   `${contentsInnerHeightNoPadding}px`,
+  // );
 
-  // dev
-  document.documentElement.style.setProperty("--size-side-tab-bar-width", `${sideTabBarWidth}px`);
-  document.documentElement.style.setProperty("--size-menu-height", `${menuHeight}px`);
-  document.documentElement.style.setProperty("--size-status-height", `${statusHeight}px`);
-  document.documentElement.style.setProperty("--size-shell-height", `${shellHeight}px`);
+  // // dev
+  // document.documentElement.style.setProperty("--size-side-tab-bar-width", `${sideTabBarWidth}px`);
+  // document.documentElement.style.setProperty("--size-menu-height", `${menuHeight}px`);
+  // document.documentElement.style.setProperty("--size-status-height", `${statusHeight}px`);
+  // document.documentElement.style.setProperty("--size-shell-height", `${shellHeight}px`);
 };

@@ -11,11 +11,13 @@
   --font-size-body04: 12px;
   --font-size-button01: 12px;
 
+  --font-size-menu1: 16px;
+
   /* Common */
   --size-content-padding-no-scroll: 12px;
   --size-width: 100%;
   --size-height: 100%;
-  --size-drawer-width: 260px;
+  --size-drawer-width: 200px;
   --size-height-without-top: 100%;
   --size-content-height: 100%;
   --size-content-width: 100%;
@@ -24,9 +26,12 @@
   --size-content-inner-width: 100%;
 
   /* Top */
-  --size-top-height: 44px;
+  --size-top-height: 45px;
   --size-control-height: 66px;
   --size-top-padding-right: 20px;
+
+  --size-top-menu-between-gap: 26px;
+  --size-top-menu-margin-horizontal: 13px;
 
   /* Drawer */
   --size-drawer-category-height: 50px;

@@ -1,4 +1,26 @@
+/**
+ * light theme 컬러 설정 파일
+ *
+ * ex)
+ * primary: #0e1e40;
+ * ↓
+ * --color-primary: #0e1e40;
+ * --color-primary-rgb: 14, 30, 64;
+ * --color-primary-r: 14;
+ * --color-primary-g: 30;
+ * --color-primary-b: 64;
+ */
 $colors-light: (
+  accent: #4568e0,
+  // 메인 색상
+  hover: #4568e01a,
+  // 호버 색상
+  selected: #4568e017,
+  // 선택 색상
+  background: #fff,
+  // 기본 배경 색상
+  menu-border: #e2e1ee,
+  // 메뉴 외각선 색상
   primary: #0e1e40,
   primary50: #e8ebf0,
   primary100: #c4cedc,
@@ -10,7 +32,6 @@ $colors-light: (
   primary700: #314d79,
   primary800: #2b436c,
   secondary: #233253,
-  accent: #00bfc0,
   accent1: #e4f7f7,
   accent2: #f4ffff,
   back: #ffffff,
@@ -21,8 +42,6 @@ $colors-light: (
   border1: #eceef2,
   border2: #e1e4ea,
   border3: #c6ced8,
-  hover: #f4ffff,
-  selected: #e4f7f7,
   error: #e05a69,
   info: #2488eb,
   success: #00bfc0,

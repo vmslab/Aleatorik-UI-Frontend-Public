@@ -26,7 +26,7 @@
     content: unicode("e103");
   }
 
-  &.icon-save::before {
+  &.icon-save-old::before {
     @include moz-icon;
     content: unicode("e105");
   }
@@ -76,7 +76,7 @@
     content: unicode("e123");
   }
 
-  &.icon-cancel::before {
+  &.icon-cancel-old::before {
     @include moz-icon;
     content: unicode("e166");
   }
@@ -342,54 +342,54 @@
   &.icon-parentfolder::before {
     @include moz-icon;
     content: unicode("e1ba");
-    &.icon-filter-operation-contains::before {
-      @include moz-icon;
-      content: unicode("e1a9");
-    }
-    &.icon-filter-operation-not-contains::before {
-      @include moz-icon;
-      content: unicode("e1aa");
-    }
-    &.icon-filter-operation-starts-with::before {
-      @include moz-icon;
-      content: unicode("e1ab");
-    }
-    &.icon-filter-operation-ends-with::before {
-      @include moz-icon;
-      content: unicode("e1ac");
-    }
-    &.icon-filter-operation-equals::before {
-      @include moz-icon;
-      content: unicode("e1a2");
-    }
-    &.icon-filter-operation-not-equals::before {
-      @include moz-icon;
-      content: unicode("e1a3");
-    }
-    &.icon-filter-operation-less::before {
-      @include moz-icon;
-      content: unicode("e1a4");
-    }
-    &.icon-filter-operation-greater::before {
-      @include moz-icon;
-      content: unicode("e1a5");
-    }
-    &.icon-filter-operation-less-equal::before {
-      @include moz-icon;
-      content: unicode("e1a6");
-    }
-    &.icon-filter-operation-greater-equal::before {
-      @include moz-icon;
-      content: unicode("e1a7");
-    }
-    &.icon-filter-operation-between::before {
-      @include moz-icon;
-      content: unicode("e1a8");
-    }
-    &.icon-filter-operation-default::before {
-      @include moz-icon;
-      content: unicode("e106");
-    }
+  }
+  &.icon-filter-operation-contains::before {
+    @include moz-icon;
+    content: unicode("e1a9");
+  }
+  &.icon-filter-operation-not-contains::before {
+    @include moz-icon;
+    content: unicode("e1aa");
+  }
+  &.icon-filter-operation-starts-with::before {
+    @include moz-icon;
+    content: unicode("e1ab");
+  }
+  &.icon-filter-operation-ends-with::before {
+    @include moz-icon;
+    content: unicode("e1ac");
+  }
+  &.icon-filter-operation-equals::before {
+    @include moz-icon;
+    content: unicode("e1a2");
+  }
+  &.icon-filter-operation-not-equals::before {
+    @include moz-icon;
+    content: unicode("e1a3");
+  }
+  &.icon-filter-operation-less::before {
+    @include moz-icon;
+    content: unicode("e1a4");
+  }
+  &.icon-filter-operation-greater::before {
+    @include moz-icon;
+    content: unicode("e1a5");
+  }
+  &.icon-filter-operation-less-equal::before {
+    @include moz-icon;
+    content: unicode("e1a6");
+  }
+  &.icon-filter-operation-greater-equal::before {
+    @include moz-icon;
+    content: unicode("e1a7");
+  }
+  &.icon-filter-operation-between::before {
+    @include moz-icon;
+    content: unicode("e1a8");
+  }
+  &.icon-filter-operation-default::before {
+    @include moz-icon;
+    content: unicode("e106");
   }
   &.icon-spinnext::before {
     @include moz-icon;
@@ -400,5 +400,22 @@
   &.icon-txtfile::before {
     @include moz-icon;
     content: unicode("e1be");
+  }
+  &.icon-performance-report::before {
+    @include moz-icon;
+    content: unicode("e1bf");
+  }
+  &.icon-cancel::before {
+    @include moz-icon;
+    content: unicode("e1c0");
+  }
+  &.icon-save::before {
+    @include moz-icon;
+    content: unicode("e1c1");
+  }
+  // TODO: 모든 아이콘 추가 바람
+  &.icon-user::before {
+    @include moz-icon;
+    content: unicode("e1d5");
   }
 }

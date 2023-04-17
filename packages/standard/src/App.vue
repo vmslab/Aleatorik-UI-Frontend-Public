@@ -97,7 +97,10 @@ const setTheme = () => {
     init(url.host);
   }
 
-  theme.theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  // TODO: 다크 모드 작업 후 이 코드 주석 해제 할것.
+  // 브라우저 설정에 따라 라이트/다크모드 변경
+  // theme.theme = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  theme.theme = "light";
 
   theme.setTheme({
     ...theme,
