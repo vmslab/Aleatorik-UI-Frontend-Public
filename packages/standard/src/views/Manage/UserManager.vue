@@ -1,53 +1,37 @@
 <template>
-  <Controller :show-filter="options.filter">
-    <DxButton
-      v-tooltip="{ text: $t('Add') }"
-      class="moz-default-button"
-      icon="add"
-      type="default"
-      :focusStateEnabled="false"
-      :text="$t('Add')"
-      @click="extendgrid?.addRow()"
-    />
-    <DxButton
-      v-tooltip="{ text: $t('Remove') }"
-      class="moz-default-button"
-      icon="trash"
-      type="default"
-      :focusStateEnabled="false"
-      :text="$t('Remove')"
-      :disabled="!options.activeDelete"
-      @click="extendgrid?.removeRow()"
-    />
-    <DxButton
-      v-tooltip="{ text: $t('Save') }"
-      class="moz-default-button"
-      icon="save"
-      type="default"
-      :focusStateEnabled="false"
-      :text="$t('Save')"
-      :disabled="!isEditing"
-      @click="extendgrid?.saveEditData()"
-    />
-    <DxButton
-      v-tooltip="{ text: $t('Cancel') }"
-      class="moz-default-button"
-      icon="cancel"
-      type="default"
-      :focusStateEnabled="false"
-      :text="$t('Cancel')"
-      :disabled="!isEditing"
-      @click="extendgrid?.clearChanges()"
-    />
-    <DxButton
-      v-tooltip="{ text: $t('Refresh') }"
-      class="moz-default-button"
-      icon="refresh"
-      type="default"
-      :focusStateEnabled="false"
-      :text="$t('Refresh')"
-      @click="loadData()"
-    />
+  <Controller
+    :actions="[
+      {
+        type: 'Add',
+        click: () => {
+          extendGrid?.addRow();
+        },
+      },
+      {
+        type: 'Remove',
+        disabled: !options.activeDelete,
+        click: onRemove,
+      },
+      {
+        type: 'Save',
+        disabled: !isEditing,
+        click: onSave,
+      },
+      {
+        type: 'Cancel',
+        disabled: !isEditing,
+        click: () => {
+          extendGrid?.clearChanges();
+        },
+      },
+      {
+        type: 'Search',
+        click: () => {
+          loadData();
+        },
+      },
+    ]"
+  >
   </Controller>
   <div class="user-manager moz-frame-for-outer-control">
     <WjFlexGrid
@@ -70,7 +54,7 @@
       :prepareCellForEdit="onPrepareCellForEdit"
       :itemFormatter="onItemFormatter"
     >
-      <WjFlexGridColumn width="*" binding="email" :header="$t('Email')" :isReadOnly="true" :isRequired="true" />
+      <WjFlexGridColumn width="*" binding="email" :header="$t('Email')" :isRequired="true" />
       <WjFlexGridColumn width="*" binding="password" :header="$t('Password')" :isRequired="true" />
       <WjFlexGridColumn width="*" binding="name" :header="$t('Name')" :isRequired="true" />
       <WjFlexGridColumn
@@ -97,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import { Get, Add, Modify, Remove } from "../../stores/queryStore";
+import { Get, Add, Modify, Remove, Call } from "../../stores/queryStore";
 import { onMounted, ref, reactive } from "vue";
 import { useMutation, useQuery, useQueryClient } from "vue-query";
 import { ExtendGrid } from "@aleatorik-ui/vue-component-wijmo";
@@ -128,7 +112,7 @@ const groupMap = ref<DataMap | null>(null);
 const userItems = ref<any[] | null>([]);
 const groupItems = ref<any[] | null>([]);
 const grid = ref<FlexGrid | null>(null);
-const extendgrid = ref<ExtendGrid | null>(null);
+const extendGrid = ref<ExtendGrid | null>(null);
 
 const options = reactive({ loading: false, filter: true, activeDelete: false });
 const callResult = reactive({ add: 0, update: 0, remove: 0 });
@@ -138,7 +122,7 @@ useQuery("User", ({ queryKey }) => Get(queryKey[0]), {
   refetchOnWindowFocus: false,
   onSuccess: result => {
     menuModule.endEdit();
-    if (result && result.data) userItems.value = result.data;
+    if (result && result.data) userItems.value = result.data.map(item => ({ ...item, isReadOnly: true }));
     else userItems.value = [];
 
     queryClient.invalidateQueries("GroupBySystem");
@@ -148,7 +132,7 @@ useQuery("User", ({ queryKey }) => Get(queryKey[0]), {
     userItems.value = [];
   },
 });
-useQuery("GroupBySystem", ({ queryKey }) => Get(queryKey[0], { systemId: systemId }), {
+useQuery("GroupBySystem", ({ queryKey }) => Call(`GetGroup/${systemId}`), {
   refetchOnWindowFocus: false,
   enabled: !!userItems,
   onSuccess: result => {
@@ -197,7 +181,7 @@ onMounted(async () => {
 
 const onInitialized = (flexGrid: FlexGrid) => {
   grid.value = flexGrid;
-  extendgrid.value = new ExtendGrid({
+  extendGrid.value = new ExtendGrid({
     flexGrid,
     dataOptions: {
       dataKey: "email",
@@ -208,39 +192,6 @@ const onInitialized = (flexGrid: FlexGrid) => {
       onInitialized(extendGrid) {
         loadData();
       },
-      onSaveEditData: async (addItems, updateItems, removeItems) => {
-        try {
-          if (addItems?.length > 0) {
-            callResult.add = 0;
-            for await (const item of addItems) {
-              await addUser.mutateAsync(item.data);
-            }
-            showMessage(`Added ${callResult.add} Row${callResult.add > 1 ? "s" : ""}`, callResult.add > 0);
-          }
-
-          if (updateItems?.length > 0) {
-            callResult.update = 0;
-            for await (const item of updateItems) {
-              await modifyUser.mutateAsync(item.data);
-            }
-            showMessage(`Updated ${callResult.update} Row${callResult.update > 1 ? "s" : ""}`, callResult.update > 0);
-          }
-
-          if (removeItems?.length > 0) {
-            callResult.remove = 0;
-            for await (const item of removeItems) {
-              await removeUser.mutateAsync(item.data);
-            }
-            showMessage(`Removed ${callResult.remove} Row${callResult.remove > 1 ? "s" : ""}`, callResult.remove > 0);
-          }
-
-          menuModule.endEdit();
-          return true;
-        } catch (e) {
-          console.log(e);
-          return false;
-        }
-      },
     },
   });
 };
@@ -249,6 +200,44 @@ const loadData = async () => {
   options.loading = true;
   queryClient.invalidateQueries("User");
   options.loading = false;
+};
+
+const onRemove = async () => {
+  const _rows = extendGrid.value?.flexGrid.selectedRows || [];
+
+  if (_rows?.length <= 0) {
+    showMessage(t("SelectRowForRemove"), false);
+    return false;
+  }
+
+  const row = _rows.map(row => row.dataItem);
+  for await (const item of row) {
+    await removeUser.mutateAsync(item);
+  }
+  showMessage(t(`RemoveSucess`), true);
+
+  loadData();
+};
+
+const onSave = async () => {
+  const { addedItems, updatedItems } = await extendGrid?.value?.getChangedData();
+
+  if (addedItems?.length > 0) {
+    for await (const item of addedItems) {
+      await addUser.mutateAsync(item.data);
+    }
+    showMessage(t(`AddSucess`), true);
+  }
+
+  if (updatedItems?.length > 0) {
+    for await (const item of updatedItems) {
+      await modifyUser.mutateAsync(item.key);
+    }
+    showMessage(t(`UpdatedSuccess`), true);
+  }
+
+  await extendGrid.value?.setChangeCommit();
+  menuModule.endEdit();
 };
 
 const onSelectionChanged = () => {
@@ -262,7 +251,7 @@ const onSelectionChanged = () => {
 };
 
 const onCellEditEnded = () => {
-  const exGrid = extendgrid.value;
+  const exGrid = extendGrid.value;
   if (!exGrid) return;
   const flag = exGrid.isEditing;
   if (isEditing.value != flag) menuModule.beginEdit();
