@@ -1,5 +1,6 @@
-@import "../mixin";
-@import "../function";
+@import "src/styles/abstracts/mixin";
+@import "src/styles/abstracts/function";
+@import "src/fonts/mozart-icons.sass";
 
 .mozart-icons {
   color: var(--color-icon-text);

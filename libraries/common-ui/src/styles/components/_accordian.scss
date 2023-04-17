@@ -1,4 +1,4 @@
-@import "../mixin";
+@import "src/styles/abstracts/mixin";
 
 .moz-card-accordian {
   background-color: var(--color-back);
@@ -10,7 +10,7 @@
           background-color: var(--color-accent2);
         }
       }
-      &.dx-state-focused{
+      &.dx-state-focused {
         &.dx-accordion-item {
           border-color: unset;
         }

@@ -1,4 +1,4 @@
-@import "../mixin";
+@import "src/styles/abstracts/mixin";
 
 @mixin moz-menu-highlight($highlight-color, $underbar: false) {
   background-color: transparent;

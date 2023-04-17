@@ -2,11 +2,12 @@
 @import "src/styles/abstracts/function";
 
 .moz-top-app {
-  width: var(--size-content-width);
+  // width: var(--size-content-width);
   height: var(--size-top-height);
   @include flex-center-horizontal;
   background-color: var(--color-back);
-  padding: 0px 24px;
+  // padding: 0px 24px;
+  padding-right: 24px;
   border-bottom: var(--border-outer);
 
   .moz-navigator {

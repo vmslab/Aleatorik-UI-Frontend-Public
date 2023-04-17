@@ -1,7 +1,7 @@
 //https://sass-lang.com/documentation/breaking-changes/slash-div
 //https://stackoverflow.com/questions/61330432/sasserror-there-is-no-module-with-the-namespace-math
 @use "sass:math";
-@import "../mixin";
+@import "src/styles/abstracts/mixin";
 
 .moz-color-picker {
   display: inline-block;

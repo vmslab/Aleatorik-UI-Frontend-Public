@@ -1,4 +1,4 @@
-@import "../function";
+@import "src/styles/abstracts/function";
 
 .lm-AccordionPanel .lm-AccordionPanel-title {
   box-sizing: border-box;
@@ -20,8 +20,7 @@
 }
 
 .lm-AccordionPanel .lm-AccordionPanel-title:focus,
-.lm-AccordionPanel
-  .lm-AccordionPanel-title:last-of-type:focus:not(.lm-mod-expanded) {
+.lm-AccordionPanel .lm-AccordionPanel-title:last-of-type:focus:not(.lm-mod-expanded) {
   border: 1px solid lightskyblue;
 }
 
@@ -29,16 +28,12 @@
   border-bottom: 1px solid #c0c0c0;
 }
 
-.lm-AccordionPanel
-  .lm-AccordionPanel-title.lm-mod-expanded
-  .lm-AccordionPanel-titleCollapser:before {
+.lm-AccordionPanel .lm-AccordionPanel-title.lm-mod-expanded .lm-AccordionPanel-titleCollapser:before {
   content: unicode("e180");
   font-family: "mozart-icons";
 }
 
-.lm-AccordionPanel
-  .lm-AccordionPanel-title
-  .lm-AccordionPanel-titleCollapser:before {
+.lm-AccordionPanel .lm-AccordionPanel-title .lm-AccordionPanel-titleCollapser:before {
   content: unicode("e17e");
   font-family: "mozart-icons";
 }

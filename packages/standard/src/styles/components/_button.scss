@@ -1,5 +1,5 @@
-@import "../mixin";
-@import "../function";
+@import "src/styles/abstracts/mixin";
+@import "src/styles/abstracts/function";
 .moz-link-button {
   .dx-button-content {
     color: var(--color-accent);
