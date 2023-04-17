@@ -54,20 +54,8 @@ export const useLayoutStore = defineStore("layout", {
   }),
   getters: {
     renderType(layout) {
-      const user = useUserStore();
       return () => {
-        if (layout.width > 0 && layout.height > 0) {
-          if (layout.login) {
-            if (user.role === "User") {
-              return 2;
-            } else if (user.role === "Dev") {
-              return 3;
-            }
-          } else {
-            return 1;
-          }
-        }
-        return 0;
+        return layout.login ? 1 : 0;
       };
     },
   },

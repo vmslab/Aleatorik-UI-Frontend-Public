@@ -92,7 +92,6 @@ const { isLoading, isError, data, error } = useQuery(["login", token], Refresh, 
 });
 
 const setTheme = () => {
-  handleResize();
   if (isElectron) {
     const url = new URL((import.meta as any).env.VITE_GRPC_SERVER);
     init(url.host);
@@ -108,12 +107,10 @@ const setTheme = () => {
 };
 
 const routePath = async () => {
-  setTheme();
-
   const baseUrl = `/${systemId || ""}`;
 
   switch (renderType.value()) {
-    case 2:
+    case 1:
       if (path.path.startsWith(`${baseUrl}`)) {
         router.push(path.path);
       } else {
@@ -123,7 +120,6 @@ const routePath = async () => {
       break;
     default:
       if (location.pathname !== `/`) {
-        path.setPath({ path: `${location.pathname}` });
         router.push(`/`);
       }
       break;
@@ -133,6 +129,8 @@ const routePath = async () => {
 watch(
   renderType.value,
   () => {
+    handleResize();
+    setTheme();
     routePath();
   },
   { immediate: true },
