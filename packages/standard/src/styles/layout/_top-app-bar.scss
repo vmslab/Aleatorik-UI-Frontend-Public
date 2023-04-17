@@ -6,7 +6,7 @@
   height: var(--size-top-height);
   @include flex-center-horizontal;
   background-color: var(--color-background);
-  border-bottom: 1px solid var(--color-menu-border);
+  border-bottom: 1px solid var(--color-top-menu-border);
   box-sizing: border-box;
 
   .drawer-logo-area {
@@ -42,6 +42,7 @@
 
             font-size: var(--font-size-menu1);
             font-weight: var(--font-regular);
+            color: var(--color-top-menu-font-normal);
           }
 
           .dx-context-menu-container-border {

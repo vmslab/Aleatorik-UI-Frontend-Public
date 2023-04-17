@@ -105,8 +105,8 @@ export default class Tree {
     };
 
     const createNode = (nodeParams: {
-      btn: HTMLElement;
-      icon: HTMLElement;
+      // btn: HTMLElement;
+      // icon: HTMLElement;
       onClick: (evt: any) => void;
     }): HTMLElement => {
       const text = createSpan({ className: "moz-tree-node-item-text" }, params.node.name);
@@ -115,10 +115,10 @@ export default class Tree {
           className: "moz-tree-node-item",
           "data-id": params.node.id,
           "data-type": params.node.type,
-          style: { paddingLeft: `${10 * params.level}px` },
+          // style: { paddingLeft: `${10 * params.level}px` },
         },
-        nodeParams.btn,
-        nodeParams.icon,
+        // nodeParams.btn,
+        // nodeParams.icon,
         text,
       );
       node.addEventListener("click", nodeParams.onClick);
@@ -137,39 +137,39 @@ export default class Tree {
 
     if (params.children && params.children.length > 0) {
       const group = createDiv({ className: "moz-tree-node-parent" });
-      const btn = createI({
-        className: `moz-tree-node-item-btn ${
-          params.node.expanded ? "m-130_icon-arrow-down" : "m-131_icon-arrow-right"
-        }`,
-      });
-      const icon = createI({
-        className: `moz-tree-node-item-icon ${
-          params.node.expanded
-            ? `${params.node.activeIcon || "m-047_icon-folder-open"}${
-                params.node.activeIconClass ? ` ${params.node.activeIconClass}` : ""
-              }`
-            : `${params.node.icon || "m-043_icon-folder"}${params.node.iconClass ? ` ${params.node.iconClass}` : ""}`
-        }`,
-      });
+      // const btn = createI({
+      //   className: `moz-tree-node-item-btn ${
+      //     params.node.expanded ? "m-130_icon-arrow-down" : "m-131_icon-arrow-right"
+      //   }`,
+      // });
+      // const icon = createI({
+      //   className: `moz-tree-node-item-icon ${
+      //     params.node.expanded
+      //       ? `${params.node.activeIcon || "m-047_icon-folder-open"}${
+      //           params.node.activeIconClass ? ` ${params.node.activeIconClass}` : ""
+      //         }`
+      //       : `${params.node.icon || "m-043_icon-folder"}${params.node.iconClass ? ` ${params.node.iconClass}` : ""}`
+      //   }`,
+      // });
       const childEl = createDiv({
         className: "moz-tree-node-child",
         style: { display: `${params.node.expanded ? "block" : "none"}` },
       });
       const node = createNode({
-        btn,
-        icon,
+        // btn,
+        // icon,
         onClick: (evt: any) => {
           if (childEl.style.display === "block") {
-            btn.className = "moz-tree-node-item-btn m-131_icon-arrow-right";
-            icon.className = `moz-tree-node-item-icon ${params.node.icon || "m-043_icon-folder"}${
-              params.node.iconClass ? ` ${params.node.iconClass}` : ""
-            }`;
+            // btn.className = "moz-tree-node-item-btn m-131_icon-arrow-right";
+            // icon.className = `moz-tree-node-item-icon ${params.node.icon || "m-043_icon-folder"}${
+            //   params.node.iconClass ? ` ${params.node.iconClass}` : ""
+            // }`;
             childEl.style.display = "none";
           } else {
-            btn.className = "moz-tree-node-item-btn m-130_icon-arrow-down";
-            icon.className = `moz-tree-node-item-icon ${params.node.activeIcon || "m-047_icon-folder-open"}${
-              params.node.activeIconClass ? ` ${params.node.activeIconClass}` : ""
-            }`;
+            // btn.className = "moz-tree-node-item-btn m-130_icon-arrow-down";
+            // icon.className = `moz-tree-node-item-icon ${params.node.activeIcon || "m-047_icon-folder-open"}${
+            //   params.node.activeIconClass ? ` ${params.node.activeIconClass}` : ""
+            // }`;
             childEl.style.display = "block";
           }
           params.selectFunc(params.node.id, params.element);
@@ -192,8 +192,8 @@ export default class Tree {
         }`,
       });
       const node = createNode({
-        btn,
-        icon,
+        // btn,
+        // icon,
         onClick: (evt: any) => {
           params.selectFunc(params.node.id, params.element);
           if (!params.onItemClick) return;

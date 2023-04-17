@@ -152,7 +152,7 @@ const onInitialized = (flexGrid: FlexGrid) => {
 // data loaded cache reset and reload
 const loadData = async () => {
   options.loading = true;
-  queryClient.invalidateQueries("MdmSite");
+  queryClient.invalidateQueries("MdmSiteMaster");
   options.loading = false;
 };
 
@@ -160,7 +160,7 @@ const loadData = async () => {
  * API Call
  */
 // data load api
-useQuery("MdmSite", ({ queryKey }) => Call("MdmSite"), {
+useQuery("MdmSiteMaster", ({ queryKey }) => Call("MdmSiteMaster"), {
   refetchOnWindowFocus: false,
   onSuccess: result => {
     menuModule.endEdit();
@@ -175,7 +175,7 @@ useQuery("MdmSite", ({ queryKey }) => Call("MdmSite"), {
 });
 
 // data add api
-const addQuery = useMutation(param => Call("MdmSite", param, "POST"), {
+const addQuery = useMutation(param => Call("MdmSiteMaster", param, "POST"), {
   onSuccess: result => {
     // console.log("addQuery success", result);
   },
@@ -185,7 +185,7 @@ const addQuery = useMutation(param => Call("MdmSite", param, "POST"), {
 });
 
 // data modify api
-const modifyQuery = useMutation((param: any) => Call(`MdmSite/${param?.siteID}`, param, "PUT"), {
+const modifyQuery = useMutation((param: any) => Call(`MdmSiteMaster/${param?.siteID}`, param, "PUT"), {
   onSuccess: result => {
     // console.log("modifyQuery success", result);
   },
@@ -195,7 +195,7 @@ const modifyQuery = useMutation((param: any) => Call(`MdmSite/${param?.siteID}`,
 });
 
 // data remove api
-const removeQuery = useMutation((param: any) => Call(`MdmSite/${param?.siteID}`, param, "DELETE"), {
+const removeQuery = useMutation((param: any) => Call(`MdmSiteMaster/${param?.siteID}`, param, "DELETE"), {
   onSuccess: result => {
     // console.log("removeQuery success", result);
   },

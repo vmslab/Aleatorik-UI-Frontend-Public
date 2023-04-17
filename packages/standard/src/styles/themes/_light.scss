@@ -19,8 +19,18 @@ $colors-light: (
   // 선택 색상
   background: #fff,
   // 기본 배경 색상
-  menu-border: #e2e1ee,
-  // 메뉴 외각선 색상
+  top-menu-border: #e2e1ee,
+  // 탑 메뉴 외각선 색상
+  top-menu-font-normal: #6a7184,
+  // 탑 메뉴 기본 글자 색상
+  drawer-backgournd-selcted: #26314d,
+  // LNB 선택된 배경 색상
+  drawer-background: #1b2337,
+  // LNB 배경 색상
+  drawer-font-selected: #ebeef8,
+  // LNB 강조 글자 색상
+  drawer-font-normal: #b6b7c1,
+  // LNB 기본 글자 색상
   primary: #0e1e40,
   primary50: #e8ebf0,
   primary100: #c4cedc,
