@@ -318,7 +318,7 @@ const router = createRouter({
      *        결과분석 및 리포트
      */
     {
-      path: `${systemPath}/aor`,
+      path: `${systemPath}/rar`,
       name: "aor",
       component: () => import("../views/Main.vue"),
       children: [
@@ -332,35 +332,35 @@ const router = createRouter({
           path: "PlanDashboard",
           name: "Plan Dashboard",
           meta: { id: "PlanDashboard", module: this },
-          component: () => import("../views/aor/AorPlanDashboard.vue"),
+          component: () => import("../views/rar/RarPlanDashboard.vue"),
           beforeEnter,
         },
         {
           path: "RtfReport",
           name: "RTF현황",
           meta: { id: "RtfReport", module: this },
-          component: () => import("../views/aor/AorRtfReport.vue"),
+          component: () => import("../views/rar/RarRtfReport.vue"),
           beforeEnter,
         },
         {
           path: "ResAllocInfo",
           name: "장비 할당 현황",
           meta: { id: "ResAllocInfo", module: this },
-          component: () => import("../views/aor/AorResAllocInfo.vue"),
+          component: () => import("../views/rar/RarResAllocInfo.vue"),
           beforeEnter,
         },
         {
           path: "ResGantt",
           name: "장비 간트 차트",
           meta: { id: "ResGantt", module: this },
-          component: () => import("../views/aor/AorResGantt.vue"),
+          component: () => import("../views/rar/RarResGantt.vue"),
           beforeEnter,
         },
         {
           path: "BomMapView",
           name: "BOM Map 조회",
           meta: { id: "BomMapView", module: this },
-          component: () => import("../views/aor/AorBomMapView.vue"),
+          component: () => import("../views/rar/RarBomMapView.vue"),
           beforeEnter,
         },
       ],
@@ -369,7 +369,7 @@ const router = createRouter({
      *        입력/결과 데이터 조회
      */
     {
-      path: `${systemPath}/out`,
+      path: `${systemPath}/iod`,
       name: "out",
       component: () => import("../views/Main.vue"),
       children: [
@@ -383,7 +383,7 @@ const router = createRouter({
           path: "MainReport",
           name: "입력/결과 데이터 조회",
           meta: { id: "MainReport", module: this },
-          component: () => import("../views/out/OutMainReport.vue"),
+          component: () => import("../views/iod/IodReport.vue"),
           beforeEnter,
         },
       ],
@@ -392,7 +392,7 @@ const router = createRouter({
      *        관리자 메뉴
      */
     {
-      path: `${systemPath}/manage`,
+      path: `${systemPath}/sam`,
       name: "Manage",
       component: () => import("../views/Main.vue"),
       children: [
@@ -406,28 +406,28 @@ const router = createRouter({
           path: "user",
           name: "User",
           meta: { id: "user", module: this },
-          component: () => import("../views/Manage/UserManager.vue"),
+          component: () => import("../views/sam/UserManager.vue"),
           beforeEnter,
         },
         {
           path: "group",
           name: "Group",
           meta: { id: "group", module: this },
-          component: () => import("../views/Manage/GroupManager.vue"),
+          component: () => import("../views/sam/GroupManager.vue"),
           beforeEnter,
         },
         {
           path: "menu",
           name: "Menu",
           meta: { id: "menu", module: this },
-          component: () => import("../views/Manage/MenuManagerNew.vue"),
+          component: () => import("../views/sam/MenuManagerNew.vue"),
           beforeEnter,
         },
         {
           path: "log",
           name: "Log",
           meta: { id: "log", module: this },
-          component: () => import("../views/Manage/LogViewer.vue"),
+          component: () => import("../views/sam/LogViewer.vue"),
           beforeEnter,
         },
       ],
@@ -436,7 +436,7 @@ const router = createRouter({
      *        예제
      */
     {
-      path: `${systemPath}/example`,
+      path: `${systemPath}/exp`,
       name: "Example",
       component: () => import("../views/Main.vue"),
       children: [
@@ -449,63 +449,63 @@ const router = createRouter({
           path: "todo",
           name: "Todo",
           meta: { id: "todo", module: this },
-          component: () => import("../views/Example/Todo.vue"),
+          component: () => import("../views/exp/Todo.vue"),
           beforeEnter,
         },
         {
           path: "site",
           name: "사이트 관리",
           meta: { id: "site", module: this },
-          component: () => import("../views/Example/Site.vue"),
+          component: () => import("../views/exp/Site.vue"),
           beforeEnter,
         },
         {
           path: "layout",
           name: "Layout",
           meta: { id: "layout", module: this },
-          component: () => import("../views/Example/Layout.vue"),
+          component: () => import("../views/exp/Layout.vue"),
           beforeEnter,
         },
         {
           path: "layoutOuterController",
           name: "LayoutOuterController",
           meta: { id: "layoutOuterController", module: this },
-          component: () => import("../views/Example/LayoutOuterController.vue"),
+          component: () => import("../views/exp/LayoutOuterController.vue"),
           beforeEnter,
         },
         {
           path: "gantt",
           name: "Gantt",
           meta: { id: "gantt", module: this },
-          component: () => import("../views/Example/Gantt.vue"),
+          component: () => import("../views/exp/Gantt.vue"),
           beforeEnter,
         },
         {
           path: "chart",
           name: "Chart",
           meta: { id: "chart", module: this },
-          component: () => import("../views/Example/Chart.vue"),
+          component: () => import("../views/exp/Chart.vue"),
           beforeEnter,
         },
         {
           path: "chart2",
           name: "Chart2",
           meta: { id: "chart2", module: this },
-          component: () => import("../views/Example/Chart2.vue"),
+          component: () => import("../views/exp/Chart2.vue"),
           beforeEnter,
         },
         {
           path: "gauge",
           name: "Gauge",
           meta: { id: "gauge", module: this },
-          component: () => import("../views/Example/Gauge.vue"),
+          component: () => import("../views/exp/Gauge.vue"),
           beforeEnter,
         },
         {
           path: "graph",
           name: "Graph",
           meta: { id: "graph", module: this },
-          component: () => import("../views/Example/Graph.vue"),
+          component: () => import("../views/exp/Graph.vue"),
           beforeEnter,
         },
       ],
