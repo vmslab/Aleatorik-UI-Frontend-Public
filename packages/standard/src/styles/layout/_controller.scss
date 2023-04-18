@@ -45,18 +45,6 @@
       }
     }
 
-    .moz-controller-actions {
-      > .dx-widget,
-      > div,
-      > span {
-        margin-right: 10px;
-
-        &:last-of-type {
-          margin-right: 0px;
-        }
-      }
-    }
-
     .moz-controller-title {
       @include moz-controller-title;
       height: 100%;
@@ -94,6 +82,19 @@
       @include flex-center-horizontal;
       gap: var(--size-padding2);
 
+      .spacer {
+        width: 1px;
+        height: 14px;
+        background-color: var(--color-controller-button-spacer-background);
+        // margin-left: calc(
+        //   var(--size-padding4) - var(--size-padding2)
+        // ); // 원래 디자인상 padding4(10px) 이지만 gap(padding2, 6px)이 있으므로 계산해서 넣어준다.
+        margin-right: calc(
+          var(--size-padding6) - var(--size-padding2)
+        ); // 원래 디자인상 padding6(14px) 이지만 gap(padding2, 6px)이 있으므로 계산해서 넣어준다.
+        border-radius: 100px;
+      }
+
       .filter-icon {
         i {
           font-size: 20px;
@@ -118,30 +119,6 @@
       }
     }
 
-    .moz-controller-filter {
-      @include flex-center-horizontal;
-      background-color: var(--color-back);
-      height: var(--size-filter-height);
-      border-radius: 13px;
-      margin-top: 2px;
-      margin-right: 5px;
-
-      .moz-controller-filter-key {
-        color: var(--color-grid-header-font);
-        font-size: var(--font-size-button01);
-        font-weight: bold;
-        margin: 0px 8px 0px 10px;
-        cursor: default;
-      }
-      .moz-controller-filter-value {
-        color: var(--color-font3);
-        font-size: var(--font-size-body03);
-        margin-right: 10px;
-        // margin-top: -3px;
-        cursor: default;
-      }
-    }
-
     .moz-left-toggle-icon {
       cursor: pointer;
       &::before {
@@ -163,6 +140,193 @@
     flex-wrap: wrap;
     padding: 4px 0px;
     @include toolbar-contents;
+  }
+  .moz-controller-filter {
+    border-radius: var(--border-filter-radius);
+    padding: var(--size-filter-padding);
+    background-color: var(--color-filter-background);
+    border: 1px solid var(--color-filter-border);
+    gap: var(--size-filter-gap);
+    margin-bottom: var(--size-content-padding);
+
+    // 컴포넌트 영역 루트
+    > div {
+      align-items: flex-start;
+      flex-direction: column;
+      margin: 0;
+      display: flex;
+      gap: var(--size-padding1);
+      height: inherit;
+
+      // 컴포넌트 라벨
+      > label {
+        height: inherit;
+        border: inherit;
+        background-color: inherit;
+        padding: inherit;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--color-font2);
+        line-height: 15px;
+      }
+
+      // 컴포넌트에 라벨 없을 경우 컴포넌트 아래로 내리기
+      &:not(:has(> label)) > .dx-widget {
+        margin-top: calc(15px + var(--size-padding1));
+      }
+
+      // 실제 컴포넌트 영역
+      > .dx-widget:not(.dx-button, .dx-checkbox) {
+        box-sizing: content-box;
+        border-radius: var(--border-radius);
+        border-color: var(--color-input-border);
+
+        &:not(.dx-radiogroup-horizontal) {
+          // .dx-radiogroup-horizontal은 가로로 늘어나는 컴포넌트이기 때문에 기본 가로 사이즈 없음
+          width: 120px; // input default size
+
+          &:hover,
+          &:focus-within {
+            // 호버시 외각선
+            border-color: var(--color-accent);
+          }
+        }
+
+        // 인풋 컴포넌트
+        .dx-texteditor-container {
+          .dx-texteditor-input {
+            // input right padding
+            padding-right: var(--size-padding4);
+            min-height: calc(var(--size-input-height) - 2px);
+            color: var(--color-grid-font);
+          }
+
+          .dx-dropdowneditor-button {
+            padding-right: var(--size-padding4);
+            width: 26px;
+            min-width: 26px;
+
+            .dx-button-content {
+              .dx-dropdowneditor-icon {
+                &::before {
+                  content: "\e1c4";
+                  font-size: 14px;
+                }
+              }
+            }
+          }
+        }
+        // 기본적으로 아이콘 배경색 무력화
+        .dx-texteditor-container {
+          .dx-dropdowneditor-button {
+            .dx-button-content {
+              .dx-dropdowneditor-icon {
+                background-color: transparent;
+              }
+            }
+          }
+        }
+        // 인풋 박스 호버시
+        &.dx-state-hover,
+        &.dx-state-active,
+        &.dx-state-focused,
+        &.dx-dropdowneditor-active {
+          .dx-texteditor-container {
+            .dx-dropdowneditor-button {
+              .dx-button-content {
+                .dx-dropdowneditor-icon {
+                  // background-color: transparent;
+                  &::before {
+                    color: var(--color-accent);
+                  }
+                }
+              }
+            }
+          }
+        }
+        // 캘린더 인풋 컴포넌트
+        &.dx-datebox-calendar {
+          .dx-dropdowneditor-button {
+            // calendar icon right padding
+            // TODO: 아이콘 변경시 조정 바람 2023-03-10 15:17 Hawon Kim
+            padding-right: var(--size-padding3);
+
+            .dx-button-content {
+              .dx-dropdowneditor-icon::before {
+                content: "\e1c5";
+                font-size: var(--size-icon-font-size);
+                right: 0px;
+              }
+            }
+          }
+        }
+
+        // 라디오박스 컴포넌트
+        &.dx-radiogroup-horizontal {
+          padding: 0px;
+          background: var(--color-back);
+
+          .dx-collection {
+            height: 100%;
+
+            .dx-radiobutton {
+              height: 100%;
+              margin-right: 0px;
+              padding: 0px var(--size-padding4);
+              margin: 0px;
+              gap: var(--size-padding3);
+
+              // 처음, 마지막 요소 라운딩 처리
+              &:first-child {
+                border-top-left-radius: calc(var(--border-radius) - 1px);
+                border-bottom-left-radius: calc(var(--border-radius) - 1px);
+              }
+              &:last-child {
+                border-top-right-radius: calc(var(--border-radius) - 1px);
+                border-bottom-right-radius: calc(var(--border-radius) - 1px);
+              }
+
+              // 선택, 호버, 포커스시 박스 외각선
+              &.dx-item-selected,
+              &.dx-radiobutton-checked,
+              &:hover,
+              &:focus-within {
+                box-shadow: 0px 0px 0px 1px var(--color-accent);
+              }
+
+              .dx-radio-value-container {
+                padding: 0;
+
+                // checked가 아닐때 라디오 아이콘의 사이즈가 다른 문제 해결
+                .dx-radiobutton-icon {
+                  &:not(.dx-radiobutton-icon-checked) {
+                    &::before {
+                      border-color: var(--color-input-border);
+                    }
+                  }
+                  &::before {
+                    box-sizing: border-box;
+                  }
+                }
+              }
+
+              // 호버시 라디오 아이콘 색상 변경
+              &.dx-state-hover {
+                .dx-radiobutton-icon::before {
+                  border-color: var(--color-accent);
+                }
+              }
+            }
+          }
+        }
+      }
+
+      // 검색 영역 버튼 폰트 사이즈 변경
+      .dx-button .dx-button-content .dx-button-text {
+        font-size: 14px;
+        font-weight: 100;
+      }
+    }
   }
 }
 

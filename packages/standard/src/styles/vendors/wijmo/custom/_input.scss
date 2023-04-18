@@ -36,7 +36,7 @@ input[type="checkbox"]:checked + span {
     @include moz-icon;
     content: unicode("e12c");
     font-size: 12px;
-    color: var(--color-top-arrow);
+    color: var(--color-font-accent-background);
   }
 }
 

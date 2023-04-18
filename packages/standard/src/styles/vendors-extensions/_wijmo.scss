@@ -1,0 +1,241 @@
+/**
+ * Wijmo grid style
+ */
+.wj-flexgrid {
+  color: var(--color-grid-font);
+  border-color: var(--color-grid-border);
+  border-radius: var(--border-grid-radius);
+  font-size: var(--size-grid-font);
+
+  .wj-colheaders {
+    // grid column header
+    .wj-cell.wj-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-right-color: var(--color-grid-header-border);
+      border-left-color: var(--color-grid-header-border);
+      font-weight: 500;
+      height: var(--size-grid-header-height); // not working, grid 문서 찾아봐야 함 2023-03-23 Hawon Kim
+      z-index: 2;
+      background-color: var(--color-grid-header-background);
+
+      &.wj-frozen-col {
+        z-index: 3 !important;
+      }
+
+      // header aglin center
+      // .wj-cell-text {
+      //   order: 2;
+      //   font-weight: 500;
+      // }
+      // .spacer {
+      //   // width: 18px; // filter icon size is 18px
+      //   flex-grow: 0;
+      //   order: 1;
+      // }
+
+      &.wj-filter-on,
+      &.wj-filter-off {
+        .wj-elem-filter {
+          padding-left: 7px;
+          padding-right: 0px;
+          span.wj-glyph-filter {
+            &::after {
+              font-size: 12px;
+            }
+          }
+        }
+      }
+
+      &.wj-filter-off {
+        .wj-elem-filter {
+          span.wj-glyph-filter {
+            &::after {
+              color: var(--color-font5);
+              content: "\e1d7";
+            }
+          }
+        }
+      }
+
+      &.wj-filter-on {
+        .wj-elem-filter {
+          span.wj-glyph-filter {
+            &::after {
+              content: "\e1d8";
+            }
+          }
+        }
+      }
+    }
+  }
+  .wj-topleft {
+    // top left header
+    .wj-cell.wj-header {
+      border-right-color: var(--color-grid-header-border);
+      border-left-color: var(--color-grid-header-border);
+      background-color: var(--color-grid-header-background);
+    }
+  }
+  .wj-rowheaders {
+    // left header
+    .wj-cell.wj-header {
+      background-color: var(--color-back);
+    }
+  }
+
+  // checkbox in grid
+  label {
+    input[type="checkbox"] {
+      &:not(:checked) + span {
+        background-color: var(--color-back);
+        border-color: var(--color-input-border);
+        // &::before {
+        //   content: "\e1cf";
+        // }
+      }
+      & + span {
+        &::before {
+          font-size: 10px; // TODO: 아이콘 변경시 조정 바람
+          // content: "\e1ce";
+        }
+      }
+    }
+  }
+
+  &.moz-readonly-grid {
+    // [readonly grid] 왼쪽 row header 반복 배경
+    .wj-rowheaders {
+      .wj-row {
+        .wj-cell {
+          background-color: var(--color-back);
+        }
+        &:nth-child(2n) {
+          > div {
+            //.wj-cell 로 들어가야 하는데 selected보다
+            // 우선순위가 올라가버려서 강제로 내리기 위해 div 사용함
+            // 2023-03-13 11:24 Hawon Kim
+            background-color: #f8f8fd;
+          }
+        }
+      }
+    }
+    .wj-cells {
+      // [readonly grid] 셀 영역 반복 배경
+      .wj-row {
+        .wj-cell {
+          background-color: var(--color-back);
+        }
+        &:nth-child(2n + 1) {
+          .wj-cell {
+            background-color: #f8f8fd;
+          }
+        }
+      }
+    }
+  }
+
+  // state changed style
+  .wj-cells {
+    .wj-cell {
+      span {
+        color: var(--color-grid-font); // default font color
+      }
+      &.wj-state-selected, // 선택된 셀
+      &.wj-state-multi-selected // 드래그된 셀
+      {
+        // background-color: transparent;
+        background-color: var(--color-back);
+        color: var(--color-grid-font); // extend grid 안쓰거나 cell template 사용시
+        div,
+        span {
+          color: var(--color-grid-font); // extend grid 용
+        }
+      }
+
+      // 추가된 셀
+      &.cell-added {
+        background-color: var(--color-grid-added);
+      }
+      &.cell-updated {
+        background-color: var(--color-grid-updated);
+      }
+    }
+
+    .wj-row {
+      // 선택된 셀에 글자색 추가
+      .wj-cell {
+        &.wj-state-multi-selected,
+        &.wj-state-active {
+          color: var(--color-accent);
+          span.wj-cell-text {
+            color: var(--color-accent);
+          }
+        }
+      }
+      // row 선택되었을 경우 배경색 추가
+      &[aria-selected="true"] {
+        .wj-cell {
+          &.wj-state-multi-selected,
+          &.wj-state-active {
+            background-color: #eef1fd;
+          }
+        }
+      }
+    }
+
+    // row mouse hover
+    .wj-row {
+      &:hover {
+        .wj-cell:not(.wj-header) {
+          background-color: var(--color-grid-hover);
+        }
+      }
+    }
+  }
+
+  // header selected background color
+  div.wj-row {
+    div.wj-cell.wj-header {
+      &.wj-state-multi-selected {
+        background-color: var(--color-grid-header-selected);
+      }
+    }
+  }
+
+  // cell select border
+  .wj-marquee {
+    z-index: 2;
+    background-color: rgba(69, 104, 224, 0.09); // accent-color 9% alpha
+    box-shadow: inset 0 0 0 2px var(--color-accent);
+  }
+
+  // cell calendar icon
+  .wj-cell .wj-btn.wj-btn-glyph.wj-elem-dropdown {
+    padding-right: 0px;
+    .wj-glyph-down {
+      &::after {
+        content: "\e1d0";
+        font-size: 12px;
+        color: var(--color-font5);
+      }
+      &:hover {
+        background-color: transparent;
+        &::after {
+          color: var(--color-accent);
+        }
+      }
+    }
+  }
+
+  // normal cell
+  .wj-cell {
+    padding: var(--size-grid-cell-padding);
+  }
+}
+
+// 컬럼 필터 팝업
+.wj-columnfiltereditor {
+  font-size: 12px;
+}

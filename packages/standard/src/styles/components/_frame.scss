@@ -31,6 +31,7 @@
 .moz-frame-for-outer-control {
   height: var(--size-content-height-outer-controller);
   padding: var(--size-content-padding);
+  padding-top: 0px;
   @include frame;
 }
 
