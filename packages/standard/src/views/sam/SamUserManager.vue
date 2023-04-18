@@ -122,7 +122,7 @@ useQuery("User", ({ queryKey }) => Get(queryKey[0]), {
   refetchOnWindowFocus: false,
   onSuccess: result => {
     menuModule.endEdit();
-    if (result && result.data) userItems.value = result.data.map(item => ({ ...item, isReadOnly: true }));
+    if (result && result.data) userItems.value = result.data.map((item: any) => ({ ...item, isReadOnly: true }));
     else userItems.value = [];
 
     queryClient.invalidateQueries("GroupBySystem");

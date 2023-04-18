@@ -438,7 +438,7 @@ const createMenuItems = (datas: IMenu[]): any[] => {
         if (!parentData.children) parentData.children = [];
 
         parentData.children.push(...childData);
-        parentData.children.sort((x, y) => x.sequence - y.sequence);
+        parentData.children.sort((x: any, y: any) => x.sequence - y.sequence);
       });
     datas.sort((x, y) => x.sequence - y.sequence);
     return datas;
