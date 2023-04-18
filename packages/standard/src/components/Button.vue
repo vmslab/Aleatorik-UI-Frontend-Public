@@ -1,5 +1,5 @@
 <template>
-  <button v-bind="$props">
+  <button class="moz-default-button" v-bind="$props">
     <i v-if="!!icon" :class="`mozart-icons icon-${icon}`" />
     <span>
       {{ text || label }}

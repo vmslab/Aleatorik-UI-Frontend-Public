@@ -37,6 +37,10 @@ $colors-light: (
   // Controller 배경 색상
   controller-title-button-background: #e3e3ea,
   // Controller title 영역 버튼 호버시 배경 색상
+  font-background: #28364e,
+  // ↑ background 색상이 배경으로 깔릴때 글자 색상
+  button-disabled-background: #e0e1ec,
+  // ↑ 버튼 비활성화 시 배경 색상
   primary: #0e1e40,
   primary50: #e8ebf0,
   primary100: #c4cedc,
