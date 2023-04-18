@@ -185,9 +185,6 @@ const userMenus = [
   { text: t(`Logout`), id: "logout", css: "logout" },
 ];
 
-const sessionId = generateGUID();
-// const serverParameter = new StreamingParameter<Record<string, any>, ServerTimeResponse>(sessionId, {});
-
 const menuLocationStore = useMenuLocationStore();
 const { menuLocation } = storeToRefs(menuLocationStore);
 

@@ -19,15 +19,7 @@ export type {
 export { Gauge, Bar, Arc, Mark } from "@aleatorik-ui/common-ui";
 export type { IGaugeProps, IBarProps, IArcProps, IMarkProps } from "@aleatorik-ui/common-ui";
 
-export {
-  Cell,
-  Column,
-  GridHeader,
-  GridBody,
-  GanttHeader,
-  GanttBody,
-  Gantt,
-} from "@aleatorik-ui/common-ui";
+export { Cell, Column, GridHeader, GridBody, GanttHeader, GanttBody, Gantt } from "@aleatorik-ui/common-ui";
 
 export type { IGanttProps } from "@aleatorik-ui/common-ui";
 
@@ -40,8 +32,6 @@ export { Flow, FlowClone, FlowMinimap } from "@aleatorik-ui/common-ui";
 import Editor from "./components/Editor/Editor";
 
 import Graph from "./components/Graph/Graph";
-
-import Snippets from "./components/SQL/Snippets";
 
 import dedent from "./utils/dedent";
 
@@ -116,8 +106,6 @@ export type {
   IConnectionInfo,
   IEntityDef,
   IEntityPropDef,
-  ISqlDef,
-  ISqlParam,
   IField,
   ITable,
   ISchema,
@@ -225,15 +213,4 @@ export { replaceGenericLight, replaceGenericDark } from "@aleatorik-ui/common-ui
 
 export type { ElementDefinition, ElementsDefinition, Stylesheet, LayoutOptions } from "cytoscape";
 
-export {
-  FilterState,
-  CalendarEvent,
-  LayoutBox,
-  MenuItem,
-  FileSystem,
-  EventBus,
-  dedent,
-  Editor,
-  Graph,
-  Snippets,
-};
+export { FilterState, CalendarEvent, LayoutBox, MenuItem, FileSystem, EventBus, dedent, Editor, Graph };
