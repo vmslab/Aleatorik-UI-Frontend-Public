@@ -127,7 +127,7 @@
         &::after {
           font-family: "mozart-icons";
           content: unicode("e106");
-          margin-right: var(--size-cell-padding);
+          margin-right: var(--size-input-padding);
           color: var(--color-font5);
         }
         > input {
@@ -144,7 +144,7 @@
     .wj-listbox-item {
       @include flex-center-horizontal;
       height: var(--size-grid-row-height);
-      padding: 0px var(--size-cell-padding);
+      padding: 0px var(--size-input-padding);
       width: 100% !important;
       &.wj-state-selected {
         background-color: var(--color-selected);

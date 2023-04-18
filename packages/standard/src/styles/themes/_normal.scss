@@ -45,6 +45,10 @@
   --size-padding-2to1: 8px;
   --size-filter-height: 26px;
 
+  /* Controller filter */
+  --size-filter-padding: 10px 12px;
+  --size-filter-gap: 6px;
+
   /* Card */
   --size-card-title-height: 55px;
   --size-card-title-left-padding: 28px;
@@ -60,13 +64,15 @@
 
   /* Button */
   --size-button-top-app: 40px;
-  --size-button-control-size: 32px;
-  --size-button-height: 30px;
-  --size-button-width: 86px;
+  --size-button-control-size: 28px;
+  --size-button-height: 28px;
+  --size-button-width: 70px;
+  --size-button-gap: 8px;
+  --size-button-padding: 0px 10px;
 
   /* Grid */
-  --size-grid-header-height: 50px;
-  --size-grid-row-height: 40px;
+  --size-grid-header-height: 28px;
+  --size-grid-row-height: 32px;
   --size-simple-item-height: 40px;
   --size-filelist-header-height: 32px;
   --size-filelist-item-height: 28px;
@@ -74,10 +80,12 @@
   --size-dropdown-button-left: 5px;
   --size-select-dropdown-left: 5px;
   --size-header-indicator-top: 18px;
+  --size-grid-cell-padding: 0px 10px;
+  --size-grid-font: 12px;
 
   /* Padding */
   --size-icon-button-padding: 7px;
-  --size-content-padding: 16px;
+  --size-content-padding: 10px;
   --size-padding-3to2: 12px;
   --size-8to7: 32px;
   --size-6to5: 24px;
@@ -102,10 +110,11 @@
   /* Input */
   --size-dropdown-container: 32px;
   --size-arrow-btn: 18px;
-  --size-checkbox: 20px;
+  --size-checkbox: 12px;
   --size-input-height: 34px;
   --size-radio-container: 20px;
   --size-radio-dot: 10px;
+  --size-input-padding: 8px;
   --radio-dot-margin-top: -15px;
   --radio-dot-margin-left: 5px;
 

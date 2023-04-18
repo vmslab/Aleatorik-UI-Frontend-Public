@@ -57,7 +57,7 @@
         <slot name="action"></slot>
       </div>
     </div>
-    <div v-if="showFilter" class="moz-horizontal-filter" ref="filter">
+    <div v-if="showFilter" class="moz-horizontal-filter moz-controller-filter" ref="filter">
       <slot name="filter"></slot>
     </div>
   </div>

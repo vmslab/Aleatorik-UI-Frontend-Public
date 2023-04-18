@@ -12,31 +12,65 @@
  */
 $colors-light: (
   accent: #4568e0,
-  // 메인 색상
+  // ↑ 메인 색상
   hover: #4568e01a,
-  // 호버 색상
+  // ↑ 호버 색상
   selected: #4568e017,
-  // 선택 색상
+  // ↑ 선택 색상
   background: #fff,
-  // 기본 배경 색상
+  // ↑ 기본 배경 색상
   top-menu-border: #e2e1ee,
-  // 탑 메뉴 외각선 색상
+  // ↑ 탑 메뉴 외각선 색상
   top-menu-font-normal: #6a7184,
-  // 탑 메뉴 기본 글자 색상
+  // ↑ 탑 메뉴 기본 글자 색상
   drawer-backgournd-selcted: #26314d,
-  // LNB 선택된 배경 색상
+  // ↑ LNB 선택된 배경 색상
   drawer-background: #1b2337,
-  // LNB 배경 색상
+  // ↑ LNB 배경 색상
   drawer-font-selected: #ebeef8,
-  // LNB 강조 글자 색상
+  // ↑ LNB 강조 글자 색상
   drawer-font-normal: #b6b7c1,
-  // LNB 기본 글자 색상
+  // ↑ LNB 기본 글자 색상
   controller-title-font-normal: #6a7184,
-  // Controller title 영역 기본 글자 색상
+  // ↑ Controller title 영역 기본 글자 색상
   controller-background: transparent,
-  // Controller 배경 색상
+  // ↑ Controller 배경 색상
   controller-title-button-background: #e3e3ea,
-  // Controller title 영역 버튼 호버시 배경 색상
+  // ↑ Controller title 영역 버튼 호버시 배경 색상
+  controller-button-spacer-background: #bac6d4,
+  // ↑ Controller actions 버튼과 filter 버튼 사이 spacer 배경 색상
+  filter-background: #f4f4f7,
+  // 검색 영역 배경 색상
+  filter-border: #e3e3ea,
+  // 검색 영역 외각선 색상
+  font-accent-background: #ffffff,
+  // ↑ accent 색상이 배경으로 깔릴때 글자 색상
+  font-background: #28364e,
+  // ↑ background 색상이 배경으로 깔릴때 글자 색상
+  button-disabled-background: #e0e1ec,
+  // ↑ 버튼 비활성화 시 배경 색상
+  font-button-disabled: #a7b1bc,
+  // ↑ 버튼 비활성화 시 글자 색상
+  grid-border: #e3e3ea,
+  // 그리드 외각선 색상
+  grid-header-background: #eaebf3,
+  // 그리드 헤더 배경 색상
+  grid-header-selected: #d3d5e5,
+  // 그리드 선택시 헤더 강조 색상
+  grid-header-border: #d5d5db,
+  // 그리드 헤더에서 사용하는 border 색상 (셀 영역은 border2)
+  grid-header-font: #6a7184,
+  // 그리드 헤더 폰트 색상
+  grid-font: #28364e,
+  // 검색 인풋, 그리드 기본 폰트 색상
+  grid-hover: #e2e7fa,
+  // 그리드 row hover시 색상
+  grid-added: transparent,
+  // 그리드 추가된 셀
+  grid-updated: #45e0c026,
+  // 그리드 수정된 셀
+  input-border: #bac6d4,
+  // input 외각선 색상
   primary: #0e1e40,
   primary50: #e8ebf0,
   primary100: #c4cedc,
