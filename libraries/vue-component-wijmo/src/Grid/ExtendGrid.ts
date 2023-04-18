@@ -1371,7 +1371,7 @@ export default class ExtendGrid {
    * 변경사항 object 가져오기
    * @returns { addedItems, updatedItems, removedItems }
    */
-  public async getChangedData() {
+  public async getChangedData(): Promise<{ addedItems: any[]; updatedItems: any[]; removedItems: any[] }> {
     this.flexGrid.finishEditing();
     if (!this.dataOptions || this.dataKey.length === 0) throw new Error("dataKey is Required");
 

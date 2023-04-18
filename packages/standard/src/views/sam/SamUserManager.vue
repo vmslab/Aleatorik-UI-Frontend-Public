@@ -220,7 +220,7 @@ const onRemove = async () => {
 };
 
 const onSave = async () => {
-  const { addedItems, updatedItems } = await extendGrid?.value?.getChangedData();
+  const { addedItems, updatedItems } = await extendGrid?.value?.getChangedData()!;
 
   if (addedItems?.length > 0) {
     for await (const item of addedItems) {
