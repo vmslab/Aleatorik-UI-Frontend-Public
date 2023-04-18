@@ -1,6 +1,6 @@
 <template>
   <Controller
-    :show-filter-button="true"
+    :show-filter-button="false"
     :actions="[
       {
         type: 'Add',
@@ -17,13 +17,6 @@
         type: 'Save',
         disabled: !isEditing,
         click: onSave,
-      },
-      {
-        type: 'Cancel',
-        disabled: !isEditing,
-        click: () => {
-          extendGrid?.clearChanges();
-        },
       },
       {
         type: 'Search',
@@ -50,6 +43,8 @@
       :alternatingRowStep="0"
       :selectionChanged="onSelectionChanged"
       :isReadOnly="!currentMenu?.isWrite"
+      showSelectedHeaders="All"
+      :showMarquee="true"
     >
       <WjFlexGridColumn :width="100" binding="siteID" :header="$t('SiteID')" :isRequired="true" />
       <WjFlexGridColumn :width="100" binding="siteType" :header="$t('SiteType')" />
