@@ -123,6 +123,7 @@ const routePath = async () => {
       break;
     default:
       if (location.pathname !== `/`) {
+        path.setPath({ path: `${location.pathname}` });
         router.push(`/`);
       }
       break;

@@ -1,38 +1,49 @@
-import { FlexGrid, HeadersVisibility, GroupRow, Row, CellRange, Column } from "@grapecity/wijmo.grid";
-import { Selector } from "@grapecity/wijmo.grid.selector";
-import { SortDescription, toggleClass, isDate, DataType, setCss, Aggregate } from "@grapecity/wijmo";
-import { InputDateTime } from "@grapecity/wijmo.input";
-import { GroupPanel } from "@grapecity/wijmo.grid.grouppanel";
-import { FlexGridFilter, FilterType } from "@grapecity/wijmo.grid.filter";
-import { AutoSizeMode, HitTestInfo } from "@grapecity/wijmo.grid";
+import {
+  FlexGrid,
+  HeadersVisibility,
+  GroupRow,
+  Row,
+  CellRange,
+  Column,
+  AutoSizeMode,
+  HitTestInfo,
+  SelectionMode,
+  AllowSorting,
+  KeyAction
+} from '@grapecity/wijmo.grid';
+import { Selector } from '@grapecity/wijmo.grid.selector';
+import { SortDescription, toggleClass, isDate, DataType, setCss, Aggregate } from '@grapecity/wijmo';
+import { InputDateTime } from '@grapecity/wijmo.input';
+import { GroupPanel } from '@grapecity/wijmo.grid.grouppanel';
+import { FlexGridFilter, FilterType } from '@grapecity/wijmo.grid.filter';
 
-import ExtendGridContextMenu, { ContextMenuProps } from "./ExtendGridContextMenu";
-import ExtendGroupContextMenu, { GroupContextMenuProps } from "./ExtendGroupContextMenu";
-import { removeAllClass, getTooltipPosition, calcTextSize, EventBus } from "mozart-common";
-import notify from "devextreme/ui/notify";
+import ExtendGridContextMenu, { ContextMenuProps } from './ExtendGridContextMenu';
+import ExtendGroupContextMenu, { GroupContextMenuProps } from './ExtendGroupContextMenu';
+import { removeAllClass, getTooltipPosition, calcTextSize, EventBus } from 'mozart-common';
+import notify from 'devextreme/ui/notify';
 
-import cloneDeep from "lodash/cloneDeep";
-import throttle from "lodash/throttle";
-import debounce from "lodash/debounce";
+import cloneDeep from 'lodash/cloneDeep';
+import throttle from 'lodash/throttle';
+import debounce from 'lodash/debounce';
 
-import CustomMergeManager from "./CustomMergeManager";
-import RestVirtualCollectionView from "./RestVirtualCollectionView";
+import CustomMergeManager from './CustomMergeManager';
+import RestVirtualCollectionView from './RestVirtualCollectionView';
 
-export type DataMode = "standard" | "virtual";
-export type ValidateMode = "none" | "edit" | "save";
-export type TooltipMode = "always" | "ellipsis" | "none";
+export type DataMode = 'standard' | 'virtual';
+export type ValidateMode = 'none' | 'edit' | 'save';
+export type TooltipMode = 'always' | 'ellipsis' | 'none';
 
 export interface ILayoutStorage {
   key?: string;
-  mode: "localStorage" | "uiframework" | "none";
+  mode: 'localStorage' | 'uiframework' | 'none';
 }
 export interface ILoadingMode {
-  mode: "throttle" | "debounce";
+  mode: 'throttle' | 'debounce';
   delay: number;
 }
 export interface ISnackBarParams {
   message: string;
-  type: "error" | "warning" | "success" | "info";
+  type: 'error' | 'warning' | 'success' | 'info';
 }
 
 /**
@@ -55,6 +66,17 @@ export class GridOptions {
   setGroupPanelOptions?: any;
   setMergePreAffected?: boolean;
 
+  selectionMode?: SelectionMode | string;
+  allowSorting?: AllowSorting | string;
+  keyActionEnter?: KeyAction | string;
+  keyActionTab?: KeyAction | string;
+  deferResizing?: boolean;
+  quickAutoSize?: boolean;
+  imeEnabled?: boolean;
+  alternatingRowStep?: number;
+  showSelectedHeaders?: HeadersVisibility | string;
+  showMarquee?: boolean;
+
   onColumnHeaderClick?(flexGrid: FlexGrid, hitTest: HitTestInfo, e: MouseEvent): void;
   onColumnHeaderDblClick?(flexGrid: FlexGrid, hitTest: HitTestInfo, e: MouseEvent): void;
   onCellClick?(flexGrid: FlexGrid, hitTest: HitTestInfo, e: MouseEvent): void;
@@ -68,7 +90,7 @@ export class GridOptions {
    * {@link ExtendGrid}
    * Grid UI 설정
    *
-   * @param {boolean?} useSelector CheckBox를 보이는지 여부
+   * @param {boolean?} useSelector CheckBox를 보이는지 여부, (true일 경우 FlexGrid.headersVisibility = All)
    * @param {boolean?} useGroupPanel Group Panel을 생성하는지 여부
    * @param {boolean?} useContextMenu Context Menu를 생성하는지 여부
    * @param {boolean?} useFilter Colun Filter를 생성하는지 여부
@@ -77,11 +99,23 @@ export class GridOptions {
    * @param {TooltipMode?} useCellTooltip Cell Tooltip을 생성하는지 여부
    * @param {boolean?} useCellTemplateTooltip Cell Template에 정의한 tooltip을 사용하는지 여부
    * @param {boolean | Array<string> | undefined} useMerge Cell Merge를 설정하는지 여부
+   * @param {boolean?} setMergePreAffected useMerge 시, 대상 Column이 2개 이상일 경우에 앞 Column의 Merge에 영향을 받는지 여부
    *
    * @param {boolean?} useParseDate data에 Date string이 있을 경우, Date 객체로 Parsing할지 여부
    *
    * @param {ContextMenuProps?} setContextMenuProps Conetext Menu 설정
    * @param {any?} setGroupPanelOptions Group Panel 설정
+   *
+   * @param {SelectionMode | string | undefined} selectionMode FlexGrid.selectionMode 설정
+   * @param {AllowSorting | string | undefined} allowSorting FlexGrid.allowSorting 설정
+   * @param {KeyAction | string | undefined} keyActionEnter FlexGrid.keyActionEnter 설정
+   * @param {KeyAction | string | undefined} keyActionTab FlexGrid.keyActionTab 설정
+   * @param {boolean?} deferResizing FlexGrid.deferResizing 설정
+   * @param {boolean?} quickAutoSize FlexGrid.quickAutoSize 설정
+   * @param {boolean?} imeEnabled FlexGrid.imeEnabled 설정
+   * @param {HeadersVisibility | string | undefined} showSelectedHeaders FlexGrid.showSelectedHeaders 설정
+   * @param {boolean?} showMarquee FlexGrid.showMarquee 설정
+   * @doc https://demo.grapecity.co.kr/wijmo/api/classes/wijmo_grid.flexgrid.html FlexGrid 관련 Property는 해당 문서 참고
    *
    * @param {Function?} onInitialized Grid 초기 설정 후, 이벤트
    * @param {Function?} onInitialzeRowData addRow 시, 생성되는 row의 초기값 설정
@@ -145,10 +179,10 @@ export class DataOptions {
    * @param {string?} removeRowClassName removed row의 css class name
    */
   constructor(option: DataOptions) {
-    this.mode = option.mode || "standard";
-    this.loadingMode = option.loadingMode || { mode: "throttle", delay: 200 };
+    this.mode = option.mode || 'standard';
+    this.loadingMode = option.loadingMode || { mode: 'throttle', delay: 200 };
     this.dataKey = option.dataKey;
-    this.validateKey = option.validateKey || "none";
+    this.validateKey = option.validateKey || 'none';
     this.validateClassName = option.validateClassName;
 
     this.addRowClassName = option.addRowClassName;
@@ -171,11 +205,20 @@ export default class ExtendGrid {
     useFilter: true,
     useFooter: false,
     useAutoColumnFit: false,
-    useCellTooltip: "ellipsis",
+    useCellTooltip: 'ellipsis',
     useCellTemplateTooltip: false,
     useMerge: false,
     useParseDate: true,
     setMergePreAffected: true,
+    selectionMode: SelectionMode.MultiRange,
+    allowSorting: AllowSorting.MultiColumn,
+    keyActionEnter: KeyAction.MoveDown,
+    keyActionTab: KeyAction.CycleEditable,
+    deferResizing: true,
+    quickAutoSize: true,
+    imeEnabled: true,
+    showSelectedHeaders: HeadersVisibility.All,
+    showMarquee: true
   };
   public dataOptions: DataOptions | null;
   private setOptions: any = {};
@@ -208,15 +251,15 @@ export default class ExtendGrid {
   public groupContextMenu: ExtendGroupContextMenu | undefined;
   public filter: FlexGridFilter | undefined;
 
-  public tooltip: TooltipMode = "none";
-  public layoutMode: ILayoutStorage = { mode: "none" };
+  public tooltip: TooltipMode = 'none';
+  public layoutMode: ILayoutStorage = { mode: 'none' };
 
   private added: Map<string, any> = new Map();
   private updated: Map<string, any> = new Map();
   private removed: Map<string, any> = new Map();
   private errors: Map<string, Set<string>> = new Map();
 
-  public gridContainerHeight: string = "";
+  public gridContainerHeight: string = '';
 
   public get isEditing(): boolean {
     return this.added.size > 0 || this.updated.size > 0 || this.removed.size > 0;
@@ -235,7 +278,7 @@ export default class ExtendGrid {
     return addedItems.map((item: any) => {
       delete item._RID;
       return {
-        data: item,
+        data: item
       };
     });
   }
@@ -244,7 +287,7 @@ export default class ExtendGrid {
     return updatedItems.map((item: any) => {
       const updatedItem = {
         key: this.getOriginalDataKey(item),
-        data: item,
+        data: item
       };
       delete item._RID;
       return updatedItem;
@@ -254,7 +297,7 @@ export default class ExtendGrid {
     const removedItems = cloneDeep([...this.removed.values()]).filter((item: any) => !this.added.has(item._RID));
     return removedItems.map((item: any) => {
       const removedItem = {
-        key: this.getOriginalDataKey(item),
+        key: this.getOriginalDataKey(item)
       };
       delete item._RID;
       return removedItem;
@@ -263,7 +306,7 @@ export default class ExtendGrid {
 
   private uuidv4() {
     return `${1e7}-${1e3}-${4e3}-${8e3}-${1e11}`.replace(/[018]/g, (c: any) =>
-      (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16),
+      (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16)
     );
   }
 
@@ -299,11 +342,11 @@ export default class ExtendGrid {
     this.dataOptions = option.dataOptions || null;
     this.gridOptions = Object.assign(this.gridOptions, option.gridOptions);
 
-    if (document.readyState === "complete") {
+    if (document.readyState === 'complete') {
       this.onLoaded();
     } else {
-      document.addEventListener("readystatechange", () => {
-        if (document.readyState === "complete") this.onLoaded();
+      document.addEventListener('readystatechange', () => {
+        if (document.readyState === 'complete') this.onLoaded();
       });
     }
   }
@@ -352,7 +395,7 @@ export default class ExtendGrid {
     if (gridOptions.useFooter) {
       this.setFooter();
     }
-    if (gridOptions.useCellTooltip !== "none") {
+    if (gridOptions.useCellTooltip !== 'none') {
       this.setCellTooltip(gridOptions.useCellTooltip);
     }
     if (gridOptions.useMerge) {
@@ -361,10 +404,38 @@ export default class ExtendGrid {
     if (gridOptions.useParseDate) {
       this.addParseDateHandler();
     }
+    if (gridOptions.selectionMode) {
+      this.setSelectionMode(gridOptions.selectionMode);
+    }
+    if (gridOptions.allowSorting) {
+      this.setAllowSorting(gridOptions.allowSorting);
+    }
+    if (gridOptions.keyActionEnter) {
+      this.setKeyActionTab(gridOptions.keyActionEnter);
+    }
+    if (gridOptions.keyActionTab) {
+      this.setKeyActionTab(gridOptions.keyActionTab);
+    }
+    if (gridOptions.deferResizing) {
+      this.setDeferResizing(gridOptions.deferResizing);
+    }
+    if (gridOptions.quickAutoSize) {
+      this.setQuickAutoSize(gridOptions.quickAutoSize);
+    }
+    if (gridOptions.imeEnabled) {
+      this.setImeEnabled(gridOptions.imeEnabled);
+    }
+    if (gridOptions.showSelectedHeaders) {
+      this.setShowSelectedHeaders(gridOptions.showSelectedHeaders);
+    }
+    if (gridOptions.showMarquee) {
+      this.setShowMarquee(gridOptions.showMarquee);
+    }
   }
 
   /**
    * Row Header에 Selector를 생성
+   * 호출 시, FlexGrid.headersVisibility = All이 적용
    */
   public setSelector() {
     if (this.setOptions.selector) return;
@@ -393,8 +464,8 @@ export default class ExtendGrid {
    * @param {any} options Group Panel Option
    */
   public setGroupPanel(options: any) {
-    const node = this.groupPanel ? this.groupPanel.hostElement : document.createElement("div");
-    node.style.cssText = "display: none;";
+    const node = this.groupPanel ? this.groupPanel.hostElement : document.createElement('div');
+    node.style.cssText = 'display: none;';
 
     if (options && !options.grid) {
       options.grid = this.flexGrid;
@@ -431,16 +502,16 @@ export default class ExtendGrid {
    * @param {ContextMenuProps} props Context Menu Props
    */
   public setContextMenu(props: ContextMenuProps = {}) {
-    if (typeof props.useGroupColumn === "undefined" && !this.gridOptions.useGroupPanel) {
+    if (typeof props.useGroupColumn === 'undefined' && !this.gridOptions.useGroupPanel) {
       props.useGroupColumn = false;
     }
     // if (typeof props.useFixedColumn === "undefined" && !this.flexGrid.allowPinning) {
     //   props.useFixedColumn = false;
     // }
-    if (typeof props.useLayout === "undefined") {
+    if (typeof props.useLayout === 'undefined') {
       this.layoutMode = props.useLayout = {
-        key: "main",
-        mode: process.env.NODE_ENV === "development" ? "localStorage" : "uiframework",
+        key: 'main',
+        mode: process.env.NODE_ENV === 'development' ? 'localStorage' : 'uiframework'
       };
     }
     this.contextMenu = new ExtendGridContextMenu(this, props);
@@ -452,7 +523,7 @@ export default class ExtendGrid {
   public setGridFilter() {
     if (!this.filter) {
       this.filter = new FlexGridFilter(this.flexGrid);
-      if (this.dataOptions?.mode === "virtual") {
+      if (this.dataOptions?.mode === 'virtual') {
         this.filter.defaultFilterType = FilterType.Condition;
       }
     }
@@ -467,7 +538,7 @@ export default class ExtendGrid {
     if (!this.footerRow) {
       this.footerRow = new GroupRow();
       this.flexGrid.columnFooters.rows.push(this.footerRow);
-      this.flexGrid.columnFooters.hostElement.style.fontWeight = "bold";
+      this.flexGrid.columnFooters.hostElement.style.fontWeight = 'bold';
     }
     if (this.setOptions.footer) return;
     this.setOptions.footer = true;
@@ -487,7 +558,7 @@ export default class ExtendGrid {
 
     this.flexGrid.deferUpdate(() => {
       for (let col = 0; col < this.flexGrid.columns.length; col++) {
-        let maxContent = "";
+        let maxContent = '';
         for (let row = startIndex; row < endIndex; row++) {
           const content = this.flexGrid.getCellData(row, col, true);
 
@@ -495,8 +566,8 @@ export default class ExtendGrid {
         }
 
         const width = calcTextSize(maxContent, {
-          fontSize: "var(--font-size-body03)",
-          padding: "0px 20px",
+          fontSize: 'var(--font-size-body03)',
+          padding: '0px 20px'
         }).width;
         this.flexGrid.columns[col].width = width;
       }
@@ -507,16 +578,16 @@ export default class ExtendGrid {
    * Cell Tooltip 생성
    * @param {TooltipMode} useCellTooltip Tooltip Mode 설정
    */
-  public setCellTooltip(useCellTooltip: TooltipMode = "ellipsis") {
+  public setCellTooltip(useCellTooltip: TooltipMode = 'ellipsis') {
     this.tooltip = useCellTooltip;
     this.flexGrid.formatItem.removeHandler(this.setTooltip, this);
-    if (this.tooltip === "none") return;
+    if (this.tooltip === 'none') return;
 
     this.flexGrid.formatItem.addHandler(this.setTooltip, this);
   }
 
   private searchTooltipAttr = (el: HTMLElement | Element): HTMLElement | Element | void => {
-    const tooltipContent = el.hasAttribute("tooltip");
+    const tooltipContent = el.hasAttribute('tooltip');
     if (tooltipContent) return el;
 
     if (el.children.length <= 0) return;
@@ -536,31 +607,31 @@ export default class ExtendGrid {
 
     ele.onmouseenter = (evt: MouseEvent) => {
       let tooltipContent = ele.textContent;
-      let showAlways = this.tooltip === "always";
+      let showAlways = this.tooltip === 'always';
 
       if (this.gridOptions.useCellTemplateTooltip) {
         const tooltipEle = this.searchTooltipAttr(ele);
         if (tooltipEle) {
-          tooltipContent = tooltipEle.getAttribute("tooltip");
-          showAlways = tooltipEle.hasAttribute("always");
+          tooltipContent = tooltipEle.getAttribute('tooltip');
+          showAlways = tooltipEle.hasAttribute('always');
         }
       }
 
       if (!tooltipContent) return;
 
-      const span = ele.querySelector(".wj-cell-text");
+      const span = ele.querySelector('.wj-cell-text');
       if (!span) return;
       if (!showAlways && span.offsetWidth >= span.scrollWidth) {
         return;
       }
 
-      removeAllClass("tooltip");
+      removeAllClass('tooltip');
 
-      const divEl = document.createElement("div");
-      divEl.classList.add("tooltip");
+      const divEl = document.createElement('div');
+      divEl.classList.add('tooltip');
       divEl.innerHTML = tooltipContent;
       document.body.appendChild(divEl);
-      const { xKey, xPos, yKey, yPos } = getTooltipPosition(divEl, evt, "elupdown", true);
+      const { xKey, xPos, yKey, yPos } = getTooltipPosition(divEl, evt, 'elupdown', true);
 
       let arrow = `tooltip-${yKey}-${xKey}-tb`;
       divEl.className = `tooltip ${arrow}`;
@@ -568,10 +639,10 @@ export default class ExtendGrid {
       divEl.style[yKey as any] = `${yPos}px`;
     };
     ele.onmouseleave = () => {
-      removeAllClass("tooltip");
+      removeAllClass('tooltip');
     };
     ele.onclick = () => {
-      removeAllClass("tooltip");
+      removeAllClass('tooltip');
     };
   }
 
@@ -591,15 +662,15 @@ export default class ExtendGrid {
 
   private centerCell(s: any, e: any) {
     if (e.cell.children.length == 0) {
-      e.cell.innerHTML = "<div>" + e.cell.innerHTML + "</div>";
+      e.cell.innerHTML = '<div>' + e.cell.innerHTML + '</div>';
       setCss(e.cell, {
-        display: "table",
-        tableLayout: "fixed",
+        display: 'table',
+        tableLayout: 'fixed'
       });
       setCss(e.cell.children[0], {
-        display: "table-cell",
-        textAlign: "center",
-        verticalAlign: "middle",
+        display: 'table-cell',
+        textAlign: 'center',
+        verticalAlign: 'middle'
       });
     }
   }
@@ -620,6 +691,107 @@ export default class ExtendGrid {
     this.setOptions.parseDate = false;
   }
 
+  /**
+   * Cell 선택 시, 동작 설정
+   * @doc https://demo.grapecity.co.kr/wijmo/api/classes/wijmo_grid.flexgrid.html#selectionmode
+   */
+  public setSelectionMode(selectionMode: SelectionMode | string) {
+    if (!this.flexGrid) throw new Error('FlexGrid is not defined');
+    if (typeof selectionMode === 'string') {
+      this.flexGrid.selectionMode = SelectionMode[selectionMode as keyof typeof SelectionMode];
+    } else {
+      this.flexGrid.selectionMode = selectionMode;
+    }
+  }
+
+  /**
+   * Column Header 클릭 시, Sorting 기능 동작 설정
+   * @doc https://demo.grapecity.co.kr/wijmo/api/classes/wijmo_grid.flexgrid.html#allowsorting
+   */
+  public setAllowSorting(allowSorting: AllowSorting | string) {
+    if (!this.flexGrid) throw new Error('FlexGrid is not defined');
+    if (typeof allowSorting === 'string') {
+      this.flexGrid.allowSorting = AllowSorting[allowSorting as keyof typeof AllowSorting];
+    } else {
+      this.flexGrid.allowSorting = allowSorting;
+    }
+  }
+
+  /**
+   * Enter 키 입력 시, 동작 설정
+   * @doc https://demo.grapecity.co.kr/wijmo/api/classes/wijmo_grid.flexgrid.html#keyactionenter
+   */
+  public setKeyActionEnter(keyActionEnter: KeyAction | string) {
+    if (!this.flexGrid) throw new Error('FlexGrid is not defined');
+    if (typeof keyActionEnter === 'string') {
+      this.flexGrid.keyActionEnter = KeyAction[keyActionEnter as keyof typeof KeyAction];
+    } else {
+      this.flexGrid.keyActionEnter = keyActionEnter;
+    }
+  }
+
+  /**
+   * Tab 키 입력 시, 동작 설정
+   * @doc https://demo.grapecity.co.kr/wijmo/api/classes/wijmo_grid.flexgrid.html#keyactiontab
+   */
+  public setKeyActionTab(keyActionTab: KeyAction | string) {
+    if (!this.flexGrid) throw new Error('FlexGrid is not defined');
+    if (typeof keyActionTab === 'string') {
+      this.flexGrid.keyActionTab = KeyAction[keyActionTab as keyof typeof KeyAction];
+    } else {
+      this.flexGrid.keyActionTab = keyActionTab;
+    }
+  }
+
+  /**
+   * Row/Column 크기 조정 시, 입력이 끝날 때, Grid에 크기가 조정되도록 설정 (false면, 입력하는 중에도 크기가 조정)
+   * @doc https://demo.grapecity.co.kr/wijmo/api/classes/wijmo_grid.flexgrid.html#deferresizing
+   */
+  public setDeferResizing(deferResizing: boolean) {
+    if (!this.flexGrid) throw new Error('FlexGrid is not defined');
+    this.flexGrid.deferResizing = deferResizing;
+  }
+
+  /**
+   * AutoSize 기능 사용 시, 성능 최적화
+   * @doc https://demo.grapecity.co.kr/wijmo/api/classes/wijmo_grid.flexgrid.html#quickautosize
+   */
+  public setQuickAutoSize(quickAutoSize: boolean) {
+    if (!this.flexGrid) throw new Error('FlexGrid is not defined');
+    this.flexGrid.quickAutoSize = quickAutoSize;
+  }
+
+  /**
+   * 다국어 입력 허용 (일본어, 중국어, 한국어, 대만어, ...)
+   * @doc https://demo.grapecity.co.kr/wijmo/api/classes/wijmo_grid.flexgrid.html#imeenabled
+   */
+  public setImeEnabled(imeEnabled: boolean) {
+    if (!this.flexGrid) throw new Error('FlexGrid is not defined');
+    this.flexGrid.imeEnabled = imeEnabled;
+  }
+
+  /**
+   * 현재 선택된 영역의 Header 표시 설정
+   * @doc https://demo.grapecity.co.kr/wijmo/api/classes/wijmo_grid.flexgrid.html#showselectedheaders
+   */
+  public setShowSelectedHeaders(showSelectedHeaders: HeadersVisibility | string) {
+    if (!this.flexGrid) throw new Error('FlexGrid is not defined');
+    if (typeof showSelectedHeaders === 'string') {
+      this.flexGrid.showSelectedHeaders = HeadersVisibility[showSelectedHeaders as keyof typeof HeadersVisibility];
+    } else {
+      this.flexGrid.showSelectedHeaders = showSelectedHeaders;
+    }
+  }
+
+  /**
+   * 현재 선택된 영역의 윤곽선 표시 여부
+   * @doc https://demo.grapecity.co.kr/wijmo/api/classes/wijmo_grid.flexgrid.html#showmarquee
+   */
+  public setShowMarquee(showMarquee: boolean) {
+    if (!this.flexGrid) throw new Error('FlexGrid is not defined');
+    this.flexGrid.showMarquee = showMarquee;
+  }
+
   private setInitializeHandler() {
     this.addPinningColumnHandler();
 
@@ -632,14 +804,14 @@ export default class ExtendGrid {
     this.flexGrid.pinningColumn.removeHandler(this.pinningColumnHandler, this);
     this.flexGrid.pinningColumn.addHandler(this.pinningColumnHandler, this);
 
-    if (this.dataOptions?.mode === "virtual") {
+    if (this.dataOptions?.mode === 'virtual') {
       if (this.dataOptions.loadingMode) {
         const mode = this.dataOptions.loadingMode.mode;
         const delay = this.dataOptions.loadingMode.delay;
-        if (mode === "throttle") {
+        if (mode === 'throttle') {
           this.flexGrid.scrollPositionChanged.removeAllHandlers();
           this.flexGrid.scrollPositionChanged.addHandler(throttle(this.virtualSetWindow, delay), this);
-        } else if (mode === "debounce") {
+        } else if (mode === 'debounce') {
           this.flexGrid.scrollPositionChanged.removeAllHandlers();
           this.flexGrid.scrollPositionChanged.addHandler(debounce(this.virtualSetWindow, delay), this);
         }
@@ -658,28 +830,28 @@ export default class ExtendGrid {
       return;
     }
 
-    this.flexGrid.hostElement.addEventListener("click", this.onGridClick.bind(this));
-    this.flexGrid.hostElement.addEventListener("dblclick", this.onGridDblClick.bind(this));
+    this.flexGrid.hostElement.addEventListener('click', this.onGridClick.bind(this));
+    this.flexGrid.hostElement.addEventListener('dblclick', this.onGridDblClick.bind(this));
   }
 
   private addSpanTag(s: any, e: any) {
     let textContent,
       cellContent,
-      aggregateHead = "",
-      aggregateTail = "",
-      spacer = "";
+      aggregateHead = '',
+      aggregateTail = '',
+      spacer = '';
     if (e.panel === s.columnHeaders) {
       const column = e.getColumn();
 
       textContent = column.header;
-      cellContent = e.cell.innerHTML.replace("&nbsp;", "");
+      cellContent = e.cell.innerHTML.replace('&nbsp;', '');
       spacer = "<div class='spacer'></div>";
     }
     if (e.panel === s.columnFooters) {
       const aggregate = e.getColumn().aggregate;
       switch (e.getColumn().aggregate) {
         case Aggregate.Cnt:
-          aggregateTail = " Rows";
+          aggregateTail = ' Rows';
           break;
         default:
           aggregateHead = `${Aggregate[aggregate]} : `;
@@ -696,7 +868,7 @@ export default class ExtendGrid {
 
     const parseContent = `<span class='wj-cell-text'>${aggregateHead}${textContent}${aggregateTail}</span>${spacer}${cellContent.substr(
       0,
-      index,
+      index
     )}${cellContent.substr(index + textContent.length, cellContent.length)}`;
 
     e.cell.innerHTML = parseContent;
@@ -754,9 +926,9 @@ export default class ExtendGrid {
 
   private refreshData() {
     for (const column of this.flexGrid.columns) {
-      if (column.editor instanceof InputDateTime) column.align = "between";
-      if (column.dataMap) column.align = "between";
-      if (!column.cellTemplate && !(column as any)["$__cellTemplCell"]) {
+      if (column.editor instanceof InputDateTime) column.align = 'between';
+      if (column.dataMap) column.align = 'between';
+      if (!column.cellTemplate && !(column as any)['$__cellTemplCell']) {
         column.cellTemplate = "<span class='wj-cell-text'>${text}</span>";
       }
     }
@@ -775,7 +947,7 @@ export default class ExtendGrid {
       }
     });
 
-    if (this.dataOptions?.mode === "virtual") {
+    if (this.dataOptions?.mode === 'virtual') {
       this.virtualSetWindow(this.flexGrid);
     }
     if (this.setOptions.validateUniqueKey) {
@@ -857,16 +1029,16 @@ export default class ExtendGrid {
 
   private setInitialzeData(dataOptions: DataOptions) {
     this.setTrackChanges();
-    if (dataOptions && dataOptions.validateKey === "edit") {
+    if (dataOptions && dataOptions.validateKey === 'edit') {
       this.validateUniqueKey();
     }
     if (dataOptions && dataOptions.dataKey) {
-      if (typeof dataOptions.dataKey === "string") this.dataKey = [dataOptions.dataKey];
+      if (typeof dataOptions.dataKey === 'string') this.dataKey = [dataOptions.dataKey];
       else this.dataKey = dataOptions.dataKey;
 
-      const ridCol = this.flexGrid.columns.find((column: any) => column.binding === "_RID");
+      const ridCol = this.flexGrid.columns.find((column: any) => column.binding === '_RID');
       if (ridCol) ridCol.visible = false;
-      else this.flexGrid.columns.push(new Column({ binding: "_RID", visible: false }));
+      else this.flexGrid.columns.push(new Column({ binding: '_RID', visible: false }));
     }
   }
 
@@ -918,10 +1090,10 @@ export default class ExtendGrid {
         }
       }
 
-      toggleClass(e.cell, this.dataOptions?.validateClassName || "cell-error", errors);
-      toggleClass(e.cell, this.dataOptions?.addRowClassName || "cell-removed", removed);
-      toggleClass(e.cell, this.dataOptions?.updateClassName || "cell-added", added);
-      toggleClass(e.cell, this.dataOptions?.removeRowClassName || "cell-updated", updated);
+      toggleClass(e.cell, this.dataOptions?.validateClassName || 'cell-error', errors);
+      toggleClass(e.cell, this.dataOptions?.addRowClassName || 'cell-removed', removed);
+      toggleClass(e.cell, this.dataOptions?.updateClassName || 'cell-added', added);
+      toggleClass(e.cell, this.dataOptions?.removeRowClassName || 'cell-updated', updated);
     }
   }
 
@@ -950,7 +1122,7 @@ export default class ExtendGrid {
         this.removed.delete(item._RID);
       }
     }
-    this.checkChanges(item, binding, this.originalData || "", newValue || "");
+    this.checkChanges(item, binding, this.originalData || '', newValue || '');
 
     this.setOnEditing(this.isEditing);
   }
@@ -1023,8 +1195,8 @@ export default class ExtendGrid {
   private validationKeyHandler() {
     const cv = this.flexGrid.collectionView;
 
-    if (!this.flexGrid) throw new Error("FlexGrid is not defined");
-    if (!cv) throw new Error("CollectionView is not defined");
+    if (!this.flexGrid) throw new Error('FlexGrid is not defined');
+    if (!cv) throw new Error('CollectionView is not defined');
 
     (cv as any).getError = (item: any, prop: string, parsing: boolean) => {
       const dataKey = this.dataKey;
@@ -1032,7 +1204,7 @@ export default class ExtendGrid {
       if (!item[prop]) {
         this.flexGrid.startEditing(true, undefined, prop);
         this.onError = true;
-        return "Key is Required";
+        return 'Key is Required';
       }
       if (dataKey.length > 0) {
         const targetKey = this.getDataKey(item);
@@ -1045,9 +1217,9 @@ export default class ExtendGrid {
         if (uniqueFilter.length > 1) {
           this.flexGrid.startEditing(true, undefined, prop);
           this.onError = true;
-          return "This key is already exist";
+          return 'This key is already exist';
         }
-        return "";
+        return '';
       }
     };
   }
@@ -1057,13 +1229,11 @@ export default class ExtendGrid {
       try {
         const newRID = this.uuidv4();
 
-        const initRowData = this.gridOptions?.onInitialzeRowData
-          ? await Promise.resolve(this.gridOptions?.onInitialzeRowData())
-          : {};
+        const initRowData = this.gridOptions?.onInitialzeRowData ? await Promise.resolve(this.gridOptions?.onInitialzeRowData()) : {};
 
         const newRowData = {
           ...initRowData,
-          _RID: newRID,
+          _RID: newRID
         };
         const view = this.flexGrid?.collectionView;
         if (!view) return;
@@ -1085,7 +1255,7 @@ export default class ExtendGrid {
 
   private _rowIndex: number | undefined;
   private _addRowThrottle = throttle(async () => {
-    if (typeof this._rowIndex === "undefined" || this._rowIndex < 0) return;
+    if (typeof this._rowIndex === 'undefined' || this._rowIndex < 0) return;
     await this._addRow(this._rowIndex);
   }, 100);
 
@@ -1169,7 +1339,7 @@ export default class ExtendGrid {
    */
   public async saveEditData() {
     this.flexGrid.finishEditing();
-    if (!this.dataOptions || this.dataKey.length === 0) throw new Error("dataKey is Required");
+    if (!this.dataOptions || this.dataKey.length === 0) throw new Error('dataKey is Required');
 
     this.errors.clear();
 
@@ -1181,10 +1351,10 @@ export default class ExtendGrid {
     const grid = this.flexGrid,
       cv = grid.collectionView;
 
-    if (!grid) throw new Error("FlexGrid is not defined");
-    if (!cv) throw new Error("CollectionView is not defined");
+    if (!grid) throw new Error('FlexGrid is not defined');
+    if (!cv) throw new Error('CollectionView is not defined');
 
-    if (this.dataOptions.validateKey === "save") {
+    if (this.dataOptions.validateKey === 'save') {
       for await (const item of [...updatedItems, ...addedItems]) {
         const dataKey = this.dataKey;
 
@@ -1229,7 +1399,7 @@ export default class ExtendGrid {
       if (removedItems.length > 0) {
         reqRemovedItems = removedItems.map(item => {
           const removedItem = {
-            key: this.getOriginalDataKey(item),
+            key: this.getOriginalDataKey(item)
           };
           return removedItem;
         });
@@ -1240,7 +1410,7 @@ export default class ExtendGrid {
           delete data._RID;
           const updatedItem = {
             key: this.getOriginalDataKey(item),
-            data,
+            data
           };
           return updatedItem;
         });
@@ -1250,15 +1420,13 @@ export default class ExtendGrid {
           let data = cloneDeep(item);
           delete data._RID;
           const addedItem = {
-            data,
+            data
           };
           return addedItem;
         });
       }
 
-      let success = await Promise.resolve(
-        this.gridOptions.onSaveEditData(reqAddedItems, reqUpdatedItems, reqRemovedItems),
-      );
+      let success = await Promise.resolve(this.gridOptions.onSaveEditData(reqAddedItems, reqUpdatedItems, reqRemovedItems));
       if (success === false) {
         console.log(success);
         return false;
@@ -1312,17 +1480,15 @@ export default class ExtendGrid {
 
     this.errors.clear();
 
-    let removedItems = [...this.removed.values()].filter(
-      item => !this.added.has(item._RID) && !this.updated.has(item._RID),
-    );
+    let removedItems = [...this.removed.values()].filter(item => !this.added.has(item._RID) && !this.updated.has(item._RID));
     let updatedItems = [...this.updated.values()];
     let addedItems = [...this.added.values()];
 
     const grid = this.flexGrid,
       cv = grid.collectionView;
 
-    if (!grid) throw new Error("FlexGrid is not defined");
-    if (!cv) throw new Error("CollectionView is not defined");
+    if (!grid) throw new Error('FlexGrid is not defined');
+    if (!cv) throw new Error('CollectionView is not defined');
 
     if (removedItems.length > 0) {
       removedItems.forEach(item => {
@@ -1373,7 +1539,7 @@ export default class ExtendGrid {
    */
   public async getChangedData(): Promise<{ addedItems: any[]; updatedItems: any[]; removedItems: any[] }> {
     this.flexGrid.finishEditing();
-    if (!this.dataOptions || this.dataKey.length === 0) throw new Error("dataKey is Required");
+    if (!this.dataOptions || this.dataKey.length === 0) throw new Error('dataKey is Required');
 
     this.errors.clear();
 
@@ -1385,10 +1551,10 @@ export default class ExtendGrid {
     const grid = this.flexGrid,
       cv = grid.collectionView;
 
-    if (!grid) throw new Error("FlexGrid is not defined");
-    if (!cv) throw new Error("CollectionView is not defined");
+    if (!grid) throw new Error('FlexGrid is not defined');
+    if (!cv) throw new Error('CollectionView is not defined');
 
-    if (this.dataOptions.validateKey === "save") {
+    if (this.dataOptions.validateKey === 'save') {
       for await (const item of [...updatedItems, ...addedItems]) {
         const dataKey = this.dataKey;
 
@@ -1423,7 +1589,7 @@ export default class ExtendGrid {
         this.flexGrid.refresh();
         this.flexGrid.focus();
         console.error(this.errors);
-        throw new Error("Validation error");
+        throw new Error('Validation error');
       }
     }
 
@@ -1434,7 +1600,7 @@ export default class ExtendGrid {
     if (removedItems.length > 0) {
       reqRemovedItems = removedItems.map(item => {
         const removedItem = {
-          key: this.getOriginalDataKey(item),
+          key: this.getOriginalDataKey(item)
         };
         return removedItem;
       });
@@ -1445,7 +1611,7 @@ export default class ExtendGrid {
         delete data._RID;
         const updatedItem = {
           key: this.getOriginalDataKey(item),
-          data,
+          data
         };
         return updatedItem;
       });
@@ -1455,7 +1621,7 @@ export default class ExtendGrid {
         let data = cloneDeep(item);
         delete data._RID;
         const addedItem = {
-          data,
+          data
         };
         return addedItem;
       });
@@ -1464,7 +1630,7 @@ export default class ExtendGrid {
     return {
       addedItems: reqAddedItems,
       updatedItems: reqUpdatedItems,
-      removedItems: reqRemovedItems,
+      removedItems: reqRemovedItems
     };
   }
 
@@ -1519,9 +1685,9 @@ export default class ExtendGrid {
 
   public setOnEditing(isEditing: boolean) {
     const params = {
-      changed: isEditing,
+      changed: isEditing
     };
-    EventBus.fire("set-changed", { params });
+    EventBus.fire('set-changed', { params });
   }
 
   private getLocalStorageKey(key: string) {
@@ -1530,9 +1696,9 @@ export default class ExtendGrid {
 
   public async removeLayout(layoutMode: ILayoutStorage) {
     try {
-      if (layoutMode.mode === "localStorage") {
-        localStorage.removeItem(this.getLocalStorageKey(layoutMode.key || "main"));
-      } else if (layoutMode.mode === "uiframework") {
+      if (layoutMode.mode === 'localStorage') {
+        localStorage.removeItem(this.getLocalStorageKey(layoutMode.key || 'main'));
+      } else if (layoutMode.mode === 'uiframework') {
         await this.removeLayoutData(layoutMode.key);
       } else {
         return;
@@ -1542,20 +1708,20 @@ export default class ExtendGrid {
     }
   }
 
-  private removeLayoutData = (key: string = "main") => {
-    if (!key) key = "main";
+  private removeLayoutData = (key: string = 'main') => {
+    if (!key) key = 'main';
     return new Promise(async (resolve: any, reject: any) => {
       try {
         const setting: any = await this.loadSetting();
         setting.layout[key] = {};
         const params = {
           params: {
-            setting,
+            setting
           },
-          resolve,
+          resolve
         };
 
-        EventBus.fire("save-user-setting", { params });
+        EventBus.fire('save-user-setting', { params });
       } catch (err) {
         reject(new Error(`${err}`));
       }
@@ -1568,13 +1734,13 @@ export default class ExtendGrid {
       filterDefinition: this.filter?.filterDefinition,
       sortDescriptions: this.flexGrid.collectionView.sortDescriptions.map((sortDesc: any) => {
         return { property: sortDesc.property, ascending: sortDesc.ascending };
-      }),
+      })
     };
 
     try {
-      if (layoutMode.mode === "localStorage") {
-        localStorage.setItem(this.getLocalStorageKey(layoutMode.key || "main"), JSON.stringify(layoutData));
-      } else if (layoutMode.mode === "uiframework") {
+      if (layoutMode.mode === 'localStorage') {
+        localStorage.setItem(this.getLocalStorageKey(layoutMode.key || 'main'), JSON.stringify(layoutData));
+      } else if (layoutMode.mode === 'uiframework') {
         await this.saveLayoutData(JSON.stringify(layoutData), layoutMode.key);
       } else {
         return;
@@ -1584,8 +1750,8 @@ export default class ExtendGrid {
     }
   }
 
-  private saveLayoutData = (layout: any, key: string = "main") => {
-    if (!key) key = "main";
+  private saveLayoutData = (layout: any, key: string = 'main') => {
+    if (!key) key = 'main';
     return new Promise(async (resolve: any, reject: any) => {
       try {
         const setting: any = await this.loadSetting();
@@ -1593,12 +1759,12 @@ export default class ExtendGrid {
 
         const params = {
           params: {
-            setting,
+            setting
           },
-          resolve,
+          resolve
         };
 
-        EventBus.fire("save-user-setting", { params });
+        EventBus.fire('save-user-setting', { params });
       } catch (err) {
         reject(new Error(`${err}`));
       }
@@ -1607,9 +1773,9 @@ export default class ExtendGrid {
 
   public async loadLayout(layoutMode: ILayoutStorage) {
     let layoutData: any = null;
-    if (layoutMode.mode === "localStorage") {
-      layoutData = localStorage.getItem(this.getLocalStorageKey(layoutMode.key || "main"));
-    } else if (layoutMode.mode === "uiframework") {
+    if (layoutMode.mode === 'localStorage') {
+      layoutData = localStorage.getItem(this.getLocalStorageKey(layoutMode.key || 'main'));
+    } else if (layoutMode.mode === 'uiframework') {
       layoutData = await this.loadLayoutData(layoutMode.key);
     }
 
@@ -1624,7 +1790,7 @@ export default class ExtendGrid {
     return layoutData;
   }
 
-  private loadLayoutData = (key: string = "main") => {
+  private loadLayoutData = (key: string = 'main') => {
     return new Promise(async (resolve: any, reject: any) => {
       try {
         const setting: any = await this.loadSetting();
@@ -1640,7 +1806,7 @@ export default class ExtendGrid {
   };
 
   public applyLayout(layout: any) {
-    if (!layout || typeof layout !== "object") return false;
+    if (!layout || typeof layout !== 'object') return false;
     if (!this.flexGrid.collectionView) return false;
 
     try {
@@ -1677,12 +1843,12 @@ export default class ExtendGrid {
     let timer: NodeJS.Timeout;
     const res = await Promise.race([
       promise,
-      new Promise<"timeout">(resolve => {
-        timer = setTimeout(() => resolve("timeout"), ms);
-      }),
+      new Promise<'timeout'>(resolve => {
+        timer = setTimeout(() => resolve('timeout'), ms);
+      })
     ] as const).finally(() => clearTimeout(timer));
 
-    if (res === "timeout") {
+    if (res === 'timeout') {
       return false;
     }
     return res;
@@ -1694,9 +1860,9 @@ export default class ExtendGrid {
         try {
           let result = (await new Promise((resolve: any) => {
             const params = {
-              resolve,
+              resolve
             };
-            EventBus.fire("load-user-setting", { params });
+            EventBus.fire('load-user-setting', { params });
           })) as any;
 
           if (!result) {
@@ -1714,7 +1880,7 @@ export default class ExtendGrid {
           reject(new Error(`${err}`));
         }
       }),
-      1000,
+      1000
     );
   };
 
@@ -1723,17 +1889,17 @@ export default class ExtendGrid {
       message: params.message,
       type: params.type,
       displayTime: 2000,
-      width: "auto",
+      width: 'auto',
       minWidth: 150,
       animation: {
         show: {
-          type: "fade",
+          type: 'fade',
           duration: 400,
           from: 0,
-          to: 1,
+          to: 1
         },
-        hide: { type: "fade", duration: 40, to: 0 },
-      },
+        hide: { type: 'fade', duration: 40, to: 0 }
+      }
     });
   }
 }

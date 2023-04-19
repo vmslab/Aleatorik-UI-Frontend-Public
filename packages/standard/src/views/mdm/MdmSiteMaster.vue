@@ -32,19 +32,9 @@
       style="width: 100%; height: calc(var(--size-content-inner-height-outer-controller) - 4px)"
       :itemsSource="dataSource"
       :initialized="onInitialized"
-      selectionMode="MultiRange"
-      allowSorting="MultiColumn"
-      keyActionTab="CycleEditable"
-      :allowDelete="true"
       :autoGenerateColumns="false"
-      :deferResizing="true"
-      :quickAutoSize="true"
-      :imeEnabled="true"
-      :alternatingRowStep="0"
       :selectionChanged="onSelectionChanged"
       :isReadOnly="!currentMenu?.isWrite"
-      showSelectedHeaders="All"
-      :showMarquee="true"
     >
       <WjFlexGridColumn :width="200" binding="siteID" :header="$t('SiteID')" :isRequired="true" />
       <WjFlexGridColumn

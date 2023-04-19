@@ -165,9 +165,14 @@ import { useRouter } from "vue-router";
 import { showConfirm } from "../../utils/dialog";
 import { systemId } from "../../utils/env";
 import { useTranslation } from "i18next-vue";
+import { StreamingParameter } from "@aleatorik-ui/common";
+import { ServerTime } from "@aleatorik-ui/common-api";
 
 // dev func
 const hasNotification = ref(false);
+
+const sessionId = generateGUID();
+const serverParameter = new StreamingParameter<Record<string, any>, any>(sessionId, {});
 
 const user = useUserStore();
 const server = useServerStore();
@@ -200,16 +205,16 @@ onMounted(async () => {
   const current = menuItems.items.find(t => t.path === router.currentRoute.value.path)!;
   menuModule.setCurrentMenu(current);
 
-  // serverParameter.onRecived = param => {
-  //   server.setServer({
-  //     time: dayjs(param.time),
-  //   });
-  // };
-  // await ServerTime(serverParameter);
+  serverParameter.onRecived = param => {
+    server.setServer({
+      time: dayjs(param.time),
+    });
+  };
+  await ServerTime(serverParameter);
 });
 
 onUnmounted(() => {
-  // serverParameter.isComplate = true;
+  serverParameter.isComplate = true;
 });
 
 const getImgSrc = () => {
