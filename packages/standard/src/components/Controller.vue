@@ -101,7 +101,7 @@ const { t } = useTranslation();
  */
 const props = withDefaults(defineProps<Props>(), {
   height: 66,
-  showFilterButton: true,
+  showFilterButton: false,
 });
 const { height, setControlHeight, showFilterButton, actions } = toRefs(props);
 
