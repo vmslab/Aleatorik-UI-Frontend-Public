@@ -197,13 +197,19 @@ const title = computed(() => {
 
 const resizeLayout = (zero: boolean = false) => {
   const filterEl = filter.value as HTMLElement;
+  let filterHeight = 0;
+
   if (filterEl) {
-    resizeVerticalSize(filterEl.clientHeight);
-  } else {
-    if (zero) {
-      resizeVerticalSize(0);
-    }
+    const filterStyle = getComputedStyle(filterEl);
+    filterHeight =
+      filterEl?.clientHeight +
+      parseInt(filterStyle.marginBottom) +
+      parseInt(filterStyle.marginTop) +
+      parseInt(filterStyle.borderBottomWidth) +
+      parseInt(filterStyle.borderTopWidth);
   }
+
+  resizeVerticalSize(filterHeight);
 };
 
 const onClickToggleDrawer = () => {
