@@ -50,7 +50,6 @@
         <Button
           v-for="(action, index) in actionButtons"
           :key="`action_${index}`"
-          class="moz-default-button"
           @click="action.click"
           v-bind="action"
         />
@@ -78,7 +77,7 @@ import Button from "./Button.vue";
  * CONSTANT
  */
 interface Actions {
-  type: "Add" | "Remove" | "Edit" | "Save" | "Cancel" | "Search";
+  action: "Add" | "Remove" | "Edit" | "Save" | "Cancel" | "Search";
   icon?: string;
   text?: string;
   disabled?: boolean;
@@ -152,10 +151,10 @@ watch([actions], () => {
       actions?.value?.map(action => {
         const _action = {
           icon: null,
-          text: t(action.type),
+          text: t(action.action),
           ...action,
         };
-        switch (action.type) {
+        switch (action.action) {
           case "Add":
             _action.icon = "plus";
             break;

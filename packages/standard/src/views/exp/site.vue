@@ -3,30 +3,30 @@
     :show-filter-button="false"
     :actions="[
       {
-        type: 'Add',
+        action: 'Add',
         click: () => {
           extendGrid?.addRow();
         },
       },
       {
-        type: 'Remove',
+        action: 'Remove',
         disabled: !options.activeDelete,
         click: onRemove,
       },
       {
-        type: 'Save',
+        action: 'Save',
         disabled: !isEditing,
         click: onSave,
       },
       {
-        type: 'Cancel',
+        action: 'Cancel',
         disabled: !isEditing,
         click: () => {
           extendGrid?.clearChanges();
         },
       },
       {
-        type: 'Search',
+        action: 'Search',
         click: () => {
           loadData();
         },

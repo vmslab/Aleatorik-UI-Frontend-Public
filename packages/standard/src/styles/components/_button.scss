@@ -146,7 +146,7 @@
   }
 }
 
-.moz-default-button {
+.moz-button {
   @include flex-center;
   text-align: center;
   height: var(--size-button-height);
@@ -156,26 +156,46 @@
   border-radius: var(--border-radius);
   border: none;
   cursor: pointer;
-
-  background-color: var(--color-accent);
-  color: var(--color-font-accent-background);
   line-height: var(--size-button-height);
   font-weight: var(--font-thin);
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &.moz-default-button {
+    background-color: var(--color-accent);
+    color: var(--color-font-accent-background);
+
+    &:hover {
+      background: mixb(var(--color-accent), 0.1);
+    }
+
+    &:disabled {
+      background-color: var(--color-button-disabled-background);
+      color: var(--color-font-button-disabled);
+
+      .mozart-icons::before {
+        color: var(--color-font-button-disabled);
+      }
+    }
+  }
+
+  &.moz-text-button {
+    background-color: transparent;
+    color: var(--color-font-background);
+
+    &:hover {
+      background: mixb(transparent, 0.1);
+    }
+
+    &:disabled {
+      // TODO: link button disabled design
+    }
+  }
 
   .mozart-icons::before {
     font-size: 14px;
     color: var(--color-font-accent-background);
-  }
-
-  &:hover {
-    background: mixb(var(--color-accent), 0.1);
-  }
-  &:disabled {
-    background-color: var(--color-button-disabled-background);
-    color: var(--color-font-button-disabled);
-
-    .mozart-icons::before {
-      color: var(--color-font-button-disabled);
-    }
   }
 }
