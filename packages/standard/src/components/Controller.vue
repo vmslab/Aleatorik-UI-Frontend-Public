@@ -36,7 +36,6 @@
       <div class="moz-controller-actions">
         <button class="filter-icon title-icon" @click="showFilter = !showFilter" v-if="showFilterButton">
           <i
-            v-tooltip="{ text: showFilter ? $t('HideFilter') : $t('ShowFilter') }"
             class="mozart-icons"
             :class="{
               'icon-table-filter-off': !showFilter,

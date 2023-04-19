@@ -3,23 +3,23 @@
     :show-filter-button="false"
     :actions="[
       {
-        type: 'Add',
+        action: 'Add',
         click: () => {
           extendGrid?.addRow();
         },
       },
       {
-        type: 'Remove',
+        action: 'Remove',
         disabled: !options.activeDelete,
         click: onRemove,
       },
       {
-        type: 'Save',
+        action: 'Save',
         disabled: !isEditing,
         click: onSave,
       },
       {
-        type: 'Search',
+        action: 'Search',
         click: () => {
           loadData();
         },
@@ -46,8 +46,7 @@
       showSelectedHeaders="All"
       :showMarquee="true"
     >
-      <WjFlexGridColumn :width="100" binding="siteID" :header="$t('SiteID')" :isRequired="true" />
-      <WjFlexGridColumn :width="100" binding="siteType" :header="$t('SiteType')" />
+      <WjFlexGridColumn :width="200" binding="siteID" :header="$t('SiteID')" :isRequired="true" />
       <WjFlexGridColumn
         :width="150"
         binding="createTime"
@@ -55,9 +54,10 @@
         :editor="dateEditor"
         dataType="Date"
         format="yyyy-MM-dd HH:mm:ss"
+        align="center"
         :isReadOnly="true"
       />
-      <WjFlexGridColumn :width="100" binding="createUser" :header="$t('CreateUser')" :isReadOnly="true" />
+      <WjFlexGridColumn :width="200" binding="createUser" :header="$t('CreateUser')" :isReadOnly="true" />
       <WjFlexGridColumn
         :width="150"
         binding="updateTime"
@@ -65,9 +65,10 @@
         :editor="dateEditor"
         dataType="Date"
         format="yyyy-MM-dd HH:mm:ss"
+        align="center"
         :isReadOnly="true"
       />
-      <WjFlexGridColumn :width="100" binding="updateUser" :header="$t('UpdateUser')" :isReadOnly="true" />
+      <WjFlexGridColumn :width="200" binding="updateUser" :header="$t('UpdateUser')" />
     </WjFlexGrid>
 
     <LoadPanel :loading="options.loading" />
@@ -82,7 +83,7 @@ import { FlexGrid } from "@grapecity/wijmo.grid";
 import { InputDateTime } from "@grapecity/wijmo.input";
 
 import { useTranslation } from "i18next-vue";
-import { showMessage } from "../../utils/dialog";
+import { showDialog, showMessage } from "../../utils/dialog";
 import { storeToRefs } from "pinia";
 import { useMenuStore } from "../../stores/mainStore";
 import { Call } from "../../stores/queryStore";
@@ -175,7 +176,7 @@ const addQuery = useMutation(param => Call("MdmSiteMaster", param, "POST"), {
     // console.log("addQuery success", result);
   },
   onError: err => {
-    showMessage("An error occurred while adding data", false);
+    showMessage(t(`addError`), false);
   },
 });
 
@@ -185,7 +186,7 @@ const modifyQuery = useMutation((param: any) => Call(`MdmSiteMaster/${param?.sit
     // console.log("modifyQuery success", result);
   },
   onError: err => {
-    showMessage("An error occurred while updating data", false);
+    showMessage(t(`UpdateError`), false);
   },
 });
 
@@ -195,7 +196,7 @@ const removeQuery = useMutation((param: any) => Call(`MdmSiteMaster/${param?.sit
     // console.log("removeQuery success", result);
   },
   onError: err => {
-    showMessage("An error occurred while removing data", false);
+    showMessage(t(`RemoveError`), false);
   },
 });
 
@@ -210,13 +211,28 @@ const onRemove = async () => {
     return false;
   }
 
-  const row = _rows.map(row => row.dataItem);
-  for await (const item of row) {
-    await removeQuery.mutateAsync(item);
-  }
-  showMessage(t(`RemoveSucess`), true);
+  const result = await showDialog({
+    type: "warning",
+    action: "confirm",
+    message:
+      _rows.length > 1
+        ? t(`confirmDeleteMultiRows`, {
+            count: _rows.length,
+          })
+        : t(`confirmDeleteSingleRow`, {
+            id: _rows[0]?.dataItem?.siteID,
+          }),
+  });
 
-  loadData();
+  if (result) {
+    const row = _rows.map(row => row.dataItem);
+    for await (const item of row) {
+      await removeQuery.mutateAsync(item);
+    }
+    showMessage(t(`RemoveSuccess`), true);
+
+    loadData();
+  }
 };
 
 const onSave = async () => {
@@ -226,14 +242,14 @@ const onSave = async () => {
     for await (const item of addedItems) {
       await addQuery.mutateAsync(item.data);
     }
-    showMessage(t(`AddSucess`), true);
+    showMessage(t(`AddSuccess`), true);
   }
 
   if (updatedItems?.length > 0) {
     for await (const item of updatedItems) {
-      await modifyQuery.mutateAsync(item.key);
+      await modifyQuery.mutateAsync(item.data);
     }
-    showMessage(t(`UpdatedSuccess`), true);
+    showMessage(t(`UpdateSuccess`), true);
   }
 
   await extendGrid.value?.setChangeCommit();
