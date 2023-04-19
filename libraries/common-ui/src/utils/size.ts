@@ -42,8 +42,6 @@ export const setCssSizeVariable = (params: {
   const contentsInnerWidth = contentWidth - paddingDouble;
   const contentsInnerHeightNoPadding = contentHeight - controlHeight;
 
-  console.log("setCssSizeVariable");
-
   // dev
   const shellHeight = height - menuHeight - statusHeight;
 

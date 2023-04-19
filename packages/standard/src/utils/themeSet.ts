@@ -236,7 +236,8 @@ export const setVerticalSizeDetail = (params: {
   const contentInnerHeightOuterController = contentHeightOuterController - contentsPadding * 2;
   const contentInnerHeightOuterControllerTab = contentInnerHeightOuterController - tabHeight;
   const contentsInnerHeight = contentHeight - controlHeight - filterHeight - contentsPadding;
-  const contentsInnerHeightDoublePadding = contentHeight - controlHeight - filterHeight - contentsPadding * 2;
+  // const contentsInnerHeightDoublePadding = contentHeight - controlHeight - filterHeight - contentsPadding * 2;
+  const contentsInnerHeightSinglePadding = contentHeight - controlHeight - filterHeight - contentsPadding * 1;
   const contentsInnerHeightNoController = contentHeight - contentsPadding;
   const contentsInnerHeightNoControllerWithPadding = contentHeight - contentsPadding * 2;
   const contentsInnerHeightNoPadding = contentHeight - controlHeight - filterHeight;
@@ -259,7 +260,7 @@ export const setVerticalSizeDetail = (params: {
   document.documentElement.style.setProperty("--size-content-inner-height", `${contentsInnerHeight}px`);
   document.documentElement.style.setProperty(
     "--size-content-inner-height-outer-controller",
-    `${contentsInnerHeightDoublePadding}px`,
+    `${contentsInnerHeightSinglePadding}px`,
   );
   document.documentElement.style.setProperty(
     "--size-content-height-outer-controller-tab",

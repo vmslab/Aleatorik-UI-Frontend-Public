@@ -3,7 +3,7 @@
 @mixin controller {
   .moz-controller {
     height: var(--size-control-height);
-    width: var(--size-content-inner-width);
+    width: calc(var(--size-content-width) - var(--size-content-padding) * 2);
     @include flex-center-horizontal;
     justify-content: space-between;
 
@@ -148,6 +148,7 @@
     border: 1px solid var(--color-filter-border);
     gap: var(--size-filter-gap);
     margin-bottom: var(--size-content-padding);
+    width: calc(var(--size-content-width) - var(--size-content-padding) * 2);
 
     // 컴포넌트 영역 루트
     > div {

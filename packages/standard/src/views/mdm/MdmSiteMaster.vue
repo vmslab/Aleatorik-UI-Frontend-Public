@@ -29,7 +29,7 @@
   </Controller>
   <div class="todo moz-frame-for-outer-control">
     <WjFlexGrid
-      style="width: 100%; height: var(--size-content-height)"
+      style="width: 100%; height: calc(var(--size-content-inner-height-outer-controller) - 4px)"
       :itemsSource="dataSource"
       :initialized="onInitialized"
       selectionMode="MultiRange"
