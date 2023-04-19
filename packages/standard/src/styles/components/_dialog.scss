@@ -1,0 +1,20 @@
+.moz-dialog {
+  & > div:not(:last-child) {
+    border-bottom: 1px solid #eee;
+  }
+
+  .moz-dialog-header {
+    background-color: transparent;
+  }
+
+  .moz-dialog-body {
+    padding: 2em;
+  }
+
+  .moz-dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 0;
+  }
+}
