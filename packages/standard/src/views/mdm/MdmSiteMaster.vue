@@ -6,35 +6,35 @@
         action: 'Add',
         click: () => {
           extendGrid?.addRow();
-        },
+        }
       },
       {
         action: 'Remove',
         disabled: !options.activeDelete,
-        click: onRemove,
+        click: onRemove
       },
       {
         action: 'Save',
         disabled: !isEditing,
-        click: onSave,
+        click: onSave
       },
       {
         action: 'Search',
         click: () => {
           loadData();
-        },
-      },
+        }
+      }
     ]"
   >
   </Controller>
-  <div class="todo moz-frame-for-outer-control">
+  <div class="moz-frame-for-outer-control">
     <WjFlexGrid
       style="width: 100%; height: calc(var(--size-content-inner-height-outer-controller) - 4px)"
       :itemsSource="dataSource"
       :initialized="onInitialized"
       selectionMode="MultiRange"
       allowSorting="MultiColumn"
-      keyActionTab="Cycle"
+      keyActionTab="CycleEditable"
       :allowDelete="true"
       :autoGenerateColumns="false"
       :deferResizing="true"
@@ -51,7 +51,6 @@
         :width="150"
         binding="createTime"
         :header="$t('CreateTime')"
-        :editor="dateEditor"
         dataType="Date"
         format="yyyy-MM-dd HH:mm:ss"
         align="center"
@@ -62,7 +61,6 @@
         :width="150"
         binding="updateTime"
         :header="$t('UpdateTime')"
-        :editor="dateEditor"
         dataType="Date"
         format="yyyy-MM-dd HH:mm:ss"
         align="center"
@@ -75,21 +73,21 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref, reactive } from "vue";
-import { useQuery, useQueryClient, useMutation } from "vue-query";
-import { ExtendGrid } from "@aleatorik-ui/vue-component-wijmo";
-import { WjFlexGrid, WjFlexGridColumn } from "@grapecity/wijmo.vue2.grid";
-import { FlexGrid } from "@grapecity/wijmo.grid";
-import { InputDateTime } from "@grapecity/wijmo.input";
+import { onMounted, ref, reactive } from 'vue';
+import { useQuery, useQueryClient, useMutation } from 'vue-query';
+import { ExtendGrid } from '@aleatorik-ui/vue-component-wijmo';
+import { WjFlexGrid, WjFlexGridColumn } from '@grapecity/wijmo.vue2.grid';
+import { FlexGrid } from '@grapecity/wijmo.grid';
+import { InputDateTime } from '@grapecity/wijmo.input';
 
-import { useTranslation } from "i18next-vue";
-import { showDialog, showMessage } from "../../utils/dialog";
-import { storeToRefs } from "pinia";
-import { useMenuStore } from "../../stores/mainStore";
-import { Call } from "../../stores/queryStore";
+import { useTranslation } from 'i18next-vue';
+import { showDialog, showMessage } from '../../utils/dialog';
+import { storeToRefs } from 'pinia';
+import { useMenuStore } from '../../stores/mainStore';
+import { Call } from '../../stores/queryStore';
 
-import Controller from "../../components/Controller.vue";
-import LoadPanel from "../../components/LoadPanel.vue";
+import Controller from '../../components/Controller.vue';
+import LoadPanel from '../../components/LoadPanel.vue';
 
 /**
  * CONSTANT
@@ -101,9 +99,9 @@ const { t } = useTranslation(); // 다국어
 const queryClient = useQueryClient();
 
 const dateEditor = ref<InputDateTime>(
-  new InputDateTime(document.createElement("div"), {
-    format: "yyyy-MM-dd HH:mm:ss",
-  }),
+  new InputDateTime(document.createElement('div'), {
+    format: 'yyyy-MM-dd HH:mm:ss'
+  })
 );
 
 /**
@@ -113,7 +111,7 @@ const options = reactive({
   loading: false,
   filter: true,
   activeDelete: false,
-  checkedItems: [{ value: false }, { value: true }] as any[],
+  checkedItems: [{ value: false }, { value: true }] as any[]
 });
 
 const dataSource = ref<any[] | null>([]); // data list
@@ -133,22 +131,22 @@ const onInitialized = (flexGrid: FlexGrid) => {
   extendGrid.value = new ExtendGrid({
     flexGrid,
     dataOptions: {
-      dataKey: "siteID",
-      validateKey: "save",
+      dataKey: 'siteID',
+      validateKey: 'save'
     },
     gridOptions: {
       useParseDate: true,
       onInitialized(extendGrid) {
         loadData();
-      },
-    },
+      }
+    }
   });
 };
 
 // data loaded cache reset and reload
 const loadData = async () => {
   options.loading = true;
-  queryClient.invalidateQueries("MdmSiteMaster");
+  queryClient.invalidateQueries('MdmSiteMaster');
   options.loading = false;
 };
 
@@ -156,7 +154,7 @@ const loadData = async () => {
  * API Call
  */
 // data load api
-useQuery("MdmSiteMaster", ({ queryKey }) => Call("MdmSiteMaster"), {
+useQuery('MdmSiteMaster', ({ queryKey }) => Call('MdmSiteMaster'), {
   refetchOnWindowFocus: false,
   onSuccess: result => {
     menuModule.endEdit();
@@ -165,39 +163,39 @@ useQuery("MdmSiteMaster", ({ queryKey }) => Call("MdmSiteMaster"), {
     else dataSource.value = [];
   },
   onError: err => {
-    showMessage("An error occurred while loading data", false);
+    showMessage('An error occurred while loading data', false);
     dataSource.value = [];
-  },
+  }
 });
 
 // data add api
-const addQuery = useMutation(param => Call("MdmSiteMaster", param, "POST"), {
+const addQuery = useMutation(param => Call('MdmSiteMaster', param, 'POST'), {
   onSuccess: result => {
     // console.log("addQuery success", result);
   },
   onError: err => {
     showMessage(t(`addError`), false);
-  },
+  }
 });
 
 // data modify api
-const modifyQuery = useMutation((param: any) => Call(`MdmSiteMaster/${param?.siteID}`, param, "PUT"), {
+const modifyQuery = useMutation((param: any) => Call(`MdmSiteMaster/${param?.siteID}`, param, 'PUT'), {
   onSuccess: result => {
     // console.log("modifyQuery success", result);
   },
   onError: err => {
     showMessage(t(`UpdateError`), false);
-  },
+  }
 });
 
 // data remove api
-const removeQuery = useMutation((param: any) => Call(`MdmSiteMaster/${param?.siteID}`, param, "DELETE"), {
+const removeQuery = useMutation((param: any) => Call(`MdmSiteMaster/${param?.siteID}`, param, 'DELETE'), {
   onSuccess: result => {
     // console.log("removeQuery success", result);
   },
   onError: err => {
     showMessage(t(`RemoveError`), false);
-  },
+  }
 });
 
 /**
@@ -207,21 +205,21 @@ const onRemove = async () => {
   const _rows = extendGrid.value?.flexGrid.selectedRows || [];
 
   if (_rows?.length <= 0) {
-    showMessage(t("SelectRowForRemove"), false);
+    showMessage(t('SelectRowForRemove'), false);
     return false;
   }
 
   const result = await showDialog({
-    type: "warning",
-    action: "confirm",
+    type: 'warning',
+    action: 'confirm',
     message:
       _rows.length > 1
         ? t(`confirmDeleteMultiRows`, {
-            count: _rows.length,
+            count: _rows.length
           })
         : t(`confirmDeleteSingleRow`, {
-            id: _rows[0]?.dataItem?.siteID,
-          }),
+            id: _rows[0]?.dataItem?.siteID
+          })
   });
 
   if (result) {
