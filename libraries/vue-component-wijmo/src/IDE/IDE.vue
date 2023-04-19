@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, render, h, useSlots, defineExpose } from "vue";
+import { ref, onMounted, render, h, useSlots } from "vue";
 import { IDEMain, IDEMenu, IDEStatus, IIDEParams, IMenuItem, ICommandOptions } from "@aleatorik-ui/common-ui";
 // import HelloWorldWidget from "./Widget/HelloWorldWidget.vue";
 

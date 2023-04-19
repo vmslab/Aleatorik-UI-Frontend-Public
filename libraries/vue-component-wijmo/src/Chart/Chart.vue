@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, useSlots, watch, defineExpose } from "vue";
+import { ref, onMounted, onUnmounted, useSlots, watch } from "vue";
 import {
   Chart as ChartComponent,
   Axis as AxisComponent,

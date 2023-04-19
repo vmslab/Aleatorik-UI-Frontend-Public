@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, useSlots, watch, getCurrentInstance, defineExpose } from "vue";
+import { ref, onMounted, onUnmounted, useSlots, watch, getCurrentInstance } from "vue";
 import {
   Gauge as GaugeComponent,
   Bar as BarComponent,

@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, defineExpose } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { Graph as GraphComponent, ElementDefinition, ElementsDefinition } from "@aleatorik-ui/common-ui";
 import { IGraphProps, createCamelProps } from "@aleatorik-ui/common-ui";
 

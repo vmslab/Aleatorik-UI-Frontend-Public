@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, useSlots, Comment, render, watch, defineExpose } from "vue";
+import { ref, onMounted, onUnmounted, useSlots, Comment, render, watch } from "vue";
 import {
   Splitter as SplitterComponent,
   Pane as PaneComponent,

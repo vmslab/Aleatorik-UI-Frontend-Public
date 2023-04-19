@@ -18,7 +18,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
 import { useSignout } from "../utils/user";
 
 const { signout } = useSignout();

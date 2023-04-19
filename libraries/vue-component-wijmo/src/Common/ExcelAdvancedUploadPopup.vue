@@ -184,7 +184,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, onUnmounted, computed, defineEmits } from "vue";
+import { ref, onMounted, onUnmounted, computed } from "vue";
 import { useTranslation } from "i18next-vue";
 import { showConfirm } from "../utils/dialogUtil";
 import { DxButton } from "devextreme-vue/button";

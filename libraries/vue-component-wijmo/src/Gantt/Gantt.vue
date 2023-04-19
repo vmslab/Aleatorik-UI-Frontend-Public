@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, defineExpose } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { DayjsRange } from "@aleatorik-ui/common";
 import { Gantt as GanttComponent } from "@aleatorik-ui/common-ui";
 import {

@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted, defineExpose } from "vue";
+import { ref, watch, onMounted, onUnmounted } from "vue";
 import { Tree as TreeComponent } from "@aleatorik-ui/common-ui";
 import { ITreeProps, createCamelProps } from "@aleatorik-ui/common-ui";
 

@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onMounted, onUnmounted, defineExpose } from "vue";
+import { ref, watch, onMounted, onUnmounted } from "vue";
 import { ColorPicker as ColorPickerComponent } from "@aleatorik-ui/common-ui";
 import { IColorPickerOptions, createCamelProps, Color } from "@aleatorik-ui/common-ui";
 
