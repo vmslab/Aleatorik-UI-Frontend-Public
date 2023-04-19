@@ -203,7 +203,7 @@
           </div>
           <div class="dx-card-text">
             <ul>
-              <li v-for="item in removeItems">
+              <li v-for="item in removeItems" v-bind:key="item.menuId">
                 {{ item.name }} (<b>{{ item.menuId }}</b
                 >, "{{ item.path }}")
               </li>
@@ -232,13 +232,7 @@ import { onMounted, ref, reactive, nextTick } from "vue";
 import { useMutation, useQuery, useQueryClient } from "vue-query";
 
 import { WjTreeView } from "@grapecity/wijmo.vue2.nav";
-import {
-  TreeView,
-  TreeNodeDragDropEventArgs,
-  FormatNodeEventArgs,
-  DropPosition,
-  TreeNodeEventArgs,
-} from "@grapecity/wijmo.nav";
+import { TreeView, TreeNodeDragDropEventArgs, FormatNodeEventArgs, DropPosition, TreeNodeEventArgs } from "@grapecity/wijmo.nav";
 
 import "devextreme-vue/text-area";
 import { DxLoadPanel } from "devextreme-vue/load-panel";
@@ -473,9 +467,7 @@ const addNodeFirst = async () => {
   const parent = node?.parentNode;
 
   if (!newMenu.path || newMenu.path.length === 0) {
-    newMenu.path = `${parent && parent.dataItem.path !== "/" ? `${parent.dataItem.path}/` : `/${systemId}/`}${
-      newMenu.menuId
-    }`;
+    newMenu.path = `${parent && parent.dataItem.path !== "/" ? `${parent.dataItem.path}/` : `/${systemId}/`}${newMenu.menuId}`;
   }
   const targetNode = parent ? parent : treeView;
   const selectedNode = targetNode ? targetNode.addChildNode(0, newMenu) : treeView.addChildNode(0, newMenu);
@@ -496,9 +488,7 @@ const addNodeLast = async () => {
   const parent = node?.parentNode;
 
   if (!newMenu.path || newMenu.path.length === 0) {
-    newMenu.path = `${parent && parent.dataItem.path !== "/" ? `${parent.dataItem.path}/` : `/${systemId}/`}${
-      newMenu.menuId
-    }`;
+    newMenu.path = `${parent && parent.dataItem.path !== "/" ? `${parent.dataItem.path}/` : `/${systemId}/`}${newMenu.menuId}`;
   }
   const targetNode = parent ? parent : treeView;
   let index = targetNode && targetNode.nodes ? targetNode.nodes.length : treeView.nodes ? treeView.nodes.length : 0;
@@ -519,9 +509,7 @@ const addNodeNext = async () => {
   const parent = node?.parentNode;
 
   if (!newMenu.path || newMenu.path.length === 0) {
-    newMenu.path = `${parent && parent.dataItem.path !== "/" ? `${parent.dataItem.path}/` : `/${systemId}/`}${
-      newMenu.menuId
-    }`;
+    newMenu.path = `${parent && parent.dataItem.path !== "/" ? `${parent.dataItem.path}/` : `/${systemId}/`}${newMenu.menuId}`;
   }
   const targetNode = parent ? parent : treeView;
   let index = node.index + 1;
@@ -541,9 +529,7 @@ const addNodeChild = async () => {
   const node = treeView.selectedNode;
 
   if (!newMenu.path || newMenu.path.length === 0) {
-    newMenu.path = `${node && node.dataItem.path !== "/" ? `${node.dataItem.path}/` : `/${systemId}/`}${
-      newMenu.menuId
-    }`;
+    newMenu.path = `${node && node.dataItem.path !== "/" ? `${node.dataItem.path}/` : `/${systemId}/`}${newMenu.menuId}`;
   }
   const targetNode = node ? node : treeView;
   let index = targetNode && targetNode.nodes ? targetNode.nodes.length : treeView.nodes ? treeView.nodes.length : 0;
