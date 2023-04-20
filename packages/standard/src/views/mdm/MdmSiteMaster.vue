@@ -146,6 +146,8 @@ const onInitialized = (flexGrid: FlexGrid) => {
 const loadData = async () => {
   options.loading = true;
   queryClient.invalidateQueries('MdmSiteMaster');
+  extendGrid.value?.clearChanges();
+  onCellEditEnded();
   options.loading = false;
 };
 
@@ -269,5 +271,9 @@ const onCellEditEnded = () => {
   if (!exGrid) return;
   const flag = exGrid.isEditing;
   if (isEditing.value != flag) menuModule.setIsEditing(flag);
+};
+
+const beginningEdit = (grid: any, e: any) => {
+  disableKeyColumnEdit(grid, e, gridKeys);
 };
 </script>
