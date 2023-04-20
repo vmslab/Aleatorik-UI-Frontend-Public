@@ -37,6 +37,7 @@
       :selectionChanged="onSelectionChanged"
       :isReadOnly="!currentMenu?.isWrite"
       :beginningEdit="beginningEdit"
+      :pastingCell="pastingCell"
     >
       <WjFlexGridColumn :width="200" binding="siteID" :header="$t('SiteID')" :isRequired="true" />
       <WjFlexGridColumn
@@ -271,6 +272,10 @@ const onCellEditEnded = () => {
   if (!exGrid) return;
   const flag = exGrid.isEditing;
   if (isEditing.value != flag) menuModule.setIsEditing(flag);
+};
+
+const pastingCell = (grid: any, e: any) => {
+  disableKeyColumnEdit(grid, e, gridKeys);
 };
 
 const beginningEdit = (grid: any, e: any) => {
