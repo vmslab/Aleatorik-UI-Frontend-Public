@@ -199,7 +199,7 @@ export default class ExtendGrid {
   private initialize = false;
 
   public gridOptions: GridOptions = {
-    useSelector: true,
+    useSelector: false,
     useGroupPanel: true,
     useContextMenu: true,
     useFilter: true,

@@ -10,7 +10,6 @@
       },
       {
         action: 'Remove',
-        disabled: !options.activeDelete,
         click: onRemove
       },
       {
