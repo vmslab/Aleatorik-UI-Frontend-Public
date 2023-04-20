@@ -30,11 +30,13 @@
   <div class="moz-frame-for-outer-control">
     <WjFlexGrid
       style="width: 100%; height: calc(var(--size-content-inner-height-outer-controller) - 4px)"
+      :autoGenerateColumns="false"
+      :alternatingRowStep="0"
       :itemsSource="dataSource"
       :initialized="onInitialized"
-      :autoGenerateColumns="false"
       :selectionChanged="onSelectionChanged"
       :isReadOnly="!currentMenu?.isWrite"
+      :beginningEdit="beginningEdit"
     >
       <WjFlexGridColumn :width="200" binding="siteID" :header="$t('SiteID')" :isRequired="true" />
       <WjFlexGridColumn
@@ -78,6 +80,7 @@ import { Call } from '../../stores/queryStore';
 
 import Controller from '../../components/Controller.vue';
 import LoadPanel from '../../components/LoadPanel.vue';
+import { disableKeyColumnEdit } from '@/utils/commonFunc';
 
 /**
  * CONSTANT
@@ -107,6 +110,7 @@ const options = reactive({
 const dataSource = ref<any[] | null>([]); // data list
 const grid = ref<FlexGrid | null>(null);
 const extendGrid = ref<ExtendGrid | null>(null);
+const gridKeys: string[] = ['siteID'];
 
 /**
  * Initialize
@@ -121,13 +125,18 @@ const onInitialized = (flexGrid: FlexGrid) => {
   extendGrid.value = new ExtendGrid({
     flexGrid,
     dataOptions: {
-      dataKey: 'siteID',
+      dataKey: gridKeys,
       validateKey: 'save'
     },
     gridOptions: {
       useParseDate: true,
       onInitialized(extendGrid) {
         loadData();
+      },
+      onInitialzeRowData() {
+        return {
+          _isAdded: true
+        };
       }
     }
   });
@@ -228,6 +237,7 @@ const onSave = async () => {
 
   if (addedItems?.length > 0) {
     for await (const item of addedItems) {
+      delete item.data._isAdded;
       await addQuery.mutateAsync(item.data);
     }
     showMessage(t(`AddSuccess`), true);
@@ -241,6 +251,7 @@ const onSave = async () => {
   }
 
   await extendGrid.value?.setChangeCommit();
+  onCellEditEnded();
 };
 
 const onSelectionChanged = () => {
