@@ -31,10 +31,7 @@
         @click="onLogin"
       >
       </dx-button>
-      <div
-        className="moz-login-control"
-        style="width: 430px; margin-top: 35px; display: flex; justify-content: space-between"
-      >
+      <div className="moz-login-control" style="width: 430px; margin-top: 35px; display: flex; justify-content: space-between">
         <div style="margin: auto 0px">
           <dx-check-box v-model:value="compSaveId" :text="t('SaveID')" :width="100" />
         </div>
@@ -55,14 +52,7 @@ import { DxCheckBox } from "devextreme-vue/check-box";
 
 import { Login as LoginCall, getCookie, setCookie, parseExpires, removeCookie } from "@aleatorik-ui/common-api";
 import { encodeUnescapeBtoa, decodeEscapeAtob } from "@aleatorik-ui/common-ui";
-import {
-  useLayoutStore,
-  useLoadStore,
-  useAlarmStore,
-  useUserStore,
-  useMenuStore,
-  useThemeStore,
-} from "../stores/mainStore";
+import { useLayoutStore, useLoadStore, useAlarmStore, useUserStore, useMenuStore, useThemeStore } from "../stores/mainStore";
 
 import sha256 from "crypto-js/sha256";
 import router from "../router";
@@ -88,7 +78,7 @@ let saveId = savedId.value ? true : false;
 const failedLogin = (message: string) => {
   alarm.setAlarm({
     message,
-    type: "error",
+    type: "error"
   });
 };
 
@@ -99,7 +89,7 @@ const mutation = useMutation(LoginCall, {
       setCookie("refresh_token", refreshToken, {
         path: "/",
         sameSite: "strict",
-        expires: parseExpires(result.data.expiration),
+        expires: parseExpires(result.data.expiration)
       });
       if (saveId) {
         setCookie("save_id", encodeUnescapeBtoa(id.value), { sameSite: "strict" });
@@ -109,11 +99,11 @@ const mutation = useMutation(LoginCall, {
       user.setUser({
         name: result.data.name,
         email: result.data.email,
-        role: result.data.role,
+        role: result.data.role
       });
       layout.setLayout({
         ...storeToRefs(layout),
-        login: true,
+        login: true
       });
     } else {
       failedLogin("SignIn Failed!");
@@ -125,17 +115,17 @@ const mutation = useMutation(LoginCall, {
   onError: (err: any) => {
     failedLogin(err.message);
     load.setLoad({ loading: false });
-  },
+  }
 });
 
 const onLogin = async () => {
-  if (!id || !pw) return;
+  if (!id.value || !pw.value) return;
   load.setLoad({ loading: true });
   mutation.mutate({ Email: id.value, Password: sha256(pw.value).toString() });
 };
 
 const onCheckId = () => {
-  if (!id) return;
+  if (!id.value) return;
   if (id.value.search("@") === -1) {
     id.value += `@${domain}`;
   }
@@ -143,6 +133,6 @@ const onCheckId = () => {
 
 const compSaveId = computed({
   get: () => saveId,
-  set: val => (saveId = val),
+  set: val => (saveId = val)
 });
 </script>
