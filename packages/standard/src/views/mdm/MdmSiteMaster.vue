@@ -200,7 +200,7 @@ const removeQuery = useMutation((param: any) => Call(`MdmSiteMaster/${param?.sit
 });
 
 /**
- * Event
+ * Callback
  */
 const onRemove = async () => {
   const _rows = extendGrid.value?.flexGrid.selectedRows || [];
@@ -256,6 +256,9 @@ const onSave = async () => {
   onCellEditEnded();
 };
 
+/**
+ * Event
+ */
 const onSelectionChanged = () => {
   const flexGrid = grid.value;
   if (!flexGrid) return;
