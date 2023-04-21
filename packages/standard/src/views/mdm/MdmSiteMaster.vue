@@ -80,7 +80,7 @@ import { Call } from '../../stores/queryStore';
 
 import Controller from '../../components/Controller.vue';
 import LoadPanel from '../../components/LoadPanel.vue';
-import { disableKeyColumnEdit } from '@/utils/commonFunc';
+import { disableKeyColumnEdit } from '../../utils/commonFunc';
 
 /**
  * CONSTANT
