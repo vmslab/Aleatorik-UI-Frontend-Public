@@ -1,26 +1,26 @@
-@import "./mixin";
+@import './mixin';
 
 div.tooltip {
-  color: var(--color-font-1-reverse);
+  color: var(--color-font-background-reverse);
   div,
   span,
   td,
   th {
-    color: var(--color-font-1-reverse);
+    color: var(--color-font-background-reverse);
   }
   font-size: 13px;
   line-height: 19px;
   position: absolute;
   text-align: left;
   padding: 12px;
-  background: var(--color-back-reverse);
+  background: var(--color-background-reverse);
   pointer-events: none;
   box-shadow: 2px 2px 7px var(--color-shadow);
   z-index: 999999;
 
   br {
     display: block;
-    content: " ";
+    content: ' ';
     line-height: 8px;
     margin: 8px 0;
   }
@@ -43,7 +43,7 @@ div.tooltip-top-left::before {
 }
 div.tooltip-top-left::after {
   @include tooltip-arrow(true, true, 10px, 0px);
-  border-right-color: var(--color-back-reverse);
+  border-right-color: var(--color-background-reverse);
   border-top: 0;
   border-left: 0;
 }
@@ -59,7 +59,7 @@ div.tooltip-top-right::before {
 }
 div.tooltip-top-right::after {
   @include tooltip-arrow(true, false, 10px, 0px);
-  border-left-color: var(--color-back-reverse);
+  border-left-color: var(--color-background-reverse);
   border-top: 0;
   border-right: 0;
 }
@@ -75,7 +75,7 @@ div.tooltip-bottom-left::before {
 }
 div.tooltip-bottom-left::after {
   @include tooltip-arrow(false, true, 10px, 0px);
-  border-right-color: var(--color-back-reverse);
+  border-right-color: var(--color-background-reverse);
   border-bottom: 0;
   border-left: 0;
 }
@@ -91,7 +91,7 @@ div.tooltip-bottom-right::before {
 }
 div.tooltip-bottom-right::after {
   @include tooltip-arrow(false, false, 10px, 0px);
-  border-left-color: var(--color-back-reverse);
+  border-left-color: var(--color-background-reverse);
   border-bottom: 0;
   border-right: 0;
 }
@@ -107,7 +107,7 @@ div.tooltip-top-left-tb::before {
 }
 div.tooltip-top-left-tb::after {
   @include tooltip-arrow-tb(true, true, 10px, 0px);
-  border-left-color: var(--color-back-reverse);
+  border-left-color: var(--color-background-reverse);
   border-bottom: 0;
   border-right: 0;
 }
@@ -123,7 +123,7 @@ div.tooltip-top-right-tb::before {
 }
 div.tooltip-top-right-tb::after {
   @include tooltip-arrow-tb(true, false, 10px, 0px);
-  border-right-color: var(--color-back-reverse);
+  border-right-color: var(--color-background-reverse);
   border-bottom: 0;
   border-left: 0;
 }
@@ -139,7 +139,7 @@ div.tooltip-bottom-left-tb::before {
 }
 div.tooltip-bottom-left-tb::after {
   @include tooltip-arrow-tb(false, true, 10px, 0px);
-  border-left-color: var(--color-back-reverse);
+  border-left-color: var(--color-background-reverse);
   border-top: 0;
   border-right: 0;
 }
@@ -155,7 +155,7 @@ div.tooltip-bottom-right-tb::before {
 }
 div.tooltip-bottom-right-tb::after {
   @include tooltip-arrow-tb(false, false, 10px, 0px);
-  border-right-color: var(--color-back-reverse);
+  border-right-color: var(--color-background-reverse);
   border-top: 0;
   border-left: 0;
 }

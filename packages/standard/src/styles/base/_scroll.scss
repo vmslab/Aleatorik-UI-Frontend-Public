@@ -7,7 +7,7 @@
 }
 ::-webkit-scrollbar-thumb {
   border-radius: var(--scrollbar-radius);
-  background-color: var(--scrollbar-color);
+  background-color: var(--color-scrollbar);
 }
 ::-webkit-scrollbar-button {
   width: 0;
@@ -16,5 +16,5 @@
 /* Firefox scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--scrollbar-color);
+  scrollbar-color: var(--color-scrollbar);
 }
