@@ -53,7 +53,7 @@
           span.wj-glyph-filter {
             &::after {
               color: var(--color-font5);
-              content: "\e1d7";
+              content: '\e1d7';
             }
           }
         }
@@ -63,7 +63,7 @@
         .wj-elem-filter {
           span.wj-glyph-filter {
             &::after {
-              content: "\e1d8";
+              content: '\e1d8';
             }
           }
         }
@@ -80,14 +80,28 @@
   }
   .wj-rowheaders {
     // left header
-    .wj-cell.wj-header {
-      background-color: var(--color-back);
+    .wj-row {
+      .wj-cell.wj-header {
+        background-color: var(--color-back);
+      }
+
+      &:not(:last-child) {
+        .wj-cell.wj-header {
+          border-bottom: none;
+        }
+      }
     }
+    // .wj-cell.wj-header {
+    //   background-color: var(--color-back);
+
+    //   // background-color: var(--color-grid-header-background);
+    //   // border-bottom-color: var(--color-grid-header-border);
+    // }
   }
 
   // checkbox in grid
   label {
-    input[type="checkbox"] {
+    input[type='checkbox'] {
       &:not(:checked) + span {
         background-color: var(--color-back);
         border-color: var(--color-input-border);
@@ -175,7 +189,7 @@
         }
       }
       // row 선택되었을 경우 배경색 추가
-      &[aria-selected="true"] {
+      &[aria-selected='true'] {
         .wj-cell {
           &.wj-state-multi-selected,
           &.wj-state-active {
@@ -216,7 +230,7 @@
     padding-right: 0px;
     .wj-glyph-down {
       &::after {
-        content: "\e1d0";
+        content: '\e1d0';
         font-size: 12px;
         color: var(--color-font5);
       }

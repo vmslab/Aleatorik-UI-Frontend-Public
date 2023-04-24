@@ -1,5 +1,5 @@
 :root,
-[font="normal"] {
+[font='normal'] {
   /* Font */
   --font-size-heading01: 24px;
   --font-size-heading02: 20px;
@@ -16,7 +16,7 @@
   /* Common */
   --size-content-padding-no-scroll: 12px;
   --size-width: 100%;
-  --size-height: 100%;
+  --size-height: 204px;
   --size-drawer-width: 200px;
   --size-height-without-top: 100%;
   --size-content-height: 100%;
@@ -58,7 +58,8 @@
 
   /* Icon */
   --size-icon-button: 30px;
-  --size-icon-font-size: 19px;
+  --size-icon-font-size: 20px;
+  --size-small-icon-font-size: 14px;
   --size-icon-controller-font-size: 22px;
   --size-icon-top-app: 28px;
 
@@ -106,15 +107,21 @@
 
   /* Popup */
   --size-toolbar-bottom: 62px;
+  --size-popup-title-height: 45px;
+  --size-popup-left-padding: 16px;
+  --size-popup-right-padding: 16px;
+  --font-size-popup-header: 16px;
 
   /* Input */
   --size-dropdown-container: 32px;
   --size-arrow-btn: 18px;
   --size-checkbox: 12px;
-  --size-input-height: 34px;
+  --size-input-height: 28px;
   --size-radio-container: 20px;
   --size-radio-dot: 10px;
   --size-input-padding: 8px;
+  --size-input-label-font: 12px;
+  --size-input-input-font: 12px;
   --radio-dot-margin-top: -15px;
   --radio-dot-margin-left: 5px;
 

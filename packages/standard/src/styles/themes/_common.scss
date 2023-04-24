@@ -2,9 +2,10 @@
   /* Radius */
   --border-checkbox: 2px;
   --border-radius: 4px;
-  --border-radius-outer: 9px;
+  --border-radius-outer: 5px;
   --border-grid-radius: 0px;
   --border-filter-radius: 0px;
+  --scrollbar-radius: 0px;
 
   /* Border */
   --border-outer: none;
@@ -25,4 +26,7 @@
   --size-padding8: 20px;
   --size-padding9: 26px;
   --size-padding10: 44px;
+
+  /* scroll bar */
+  --scrollbar-size: 8px;
 }

@@ -1,0 +1,106 @@
+.moz-input {
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 0;
+  display: flex;
+  gap: var(--size-padding1);
+
+  // 컴포넌트 라벨
+  > label {
+    height: inherit;
+    border: inherit;
+    background-color: inherit;
+    padding: inherit;
+    font-size: var(--size-input-label-font);
+    line-height: var(--size-input-label-font);
+    color: var(--color-input-label-font);
+    font-weight: var(--font-medium);
+  }
+
+  // 컴포넌트 혹은 버튼에 라벨 없을 경우 컴포넌트 아래로 내리기
+  &:not(:has(> label)) > .dx-widget,
+  &:not(:has(> label)) > .moz-button {
+    margin-top: calc(var(--size-input-label-font) + var(--size-padding1));
+  }
+
+  // Wijmo 컴포넌트 영역
+  > .wj-control,
+  > textarea {
+    min-height: calc(var(--size-input-height));
+    height: calc(var(--size-input-height));
+    color: var(--color-grid-font);
+    border-color: var(--color-input-border);
+    border-radius: var(--border-radius);
+
+    .wj-input-group {
+      // 텍스트 인풋
+      input.wj-form-control {
+        min-height: calc(var(--size-input-height) - 2px);
+        height: calc(var(--size-input-height) - 2px);
+        font-size: var(--size-input-input-font);
+        color: var(--color-input-font);
+      }
+
+      // 텍스트 인풋 오른쪽 버튼 영역
+      .wj-input-group-btn:last-child:not(:first-child) > .wj-btn {
+        min-height: inherit;
+
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+
+    // input이고 양쪽 step 버튼이 활성화되지 않을때만
+    &:not(.wj-input-show-spinner) {
+      .wj-input-group {
+        // 텍스트 인풋 오른쪽 버튼에서 보더 제거
+        .wj-input-group-btn:last-child:not(:first-child) > .wj-btn {
+          border-left: none;
+        }
+      }
+    }
+
+    // 날짜 입력일 경우 달력 아이콘
+    &.wj-inputdate {
+      .wj-input-group-btn {
+        .wj-glyph-down:after {
+          content: unicode('e1d0');
+          font-size: 14px;
+          color: var(--color-input-icon);
+        }
+      }
+    }
+
+    &.wj-input-show-spinner {
+      .wj-input-group-btn {
+        button.wj-btn.wj-btn-default {
+          &:enabled,
+          &:enabled:hover {
+            background-color: var(--color-accent);
+            color: var(--color-font-accent-background);
+            border: none;
+          }
+        }
+      }
+    }
+
+    // 필터 영역에 있는 wj 컴포넌트 호버, 포커스 했을때
+    &:hover,
+    &:focus-within,
+    &.wj-state-focused {
+      border-color: var(--color-accent);
+
+      .wj-input-group-btn {
+        .wj-glyph-down:after {
+          color: var(--color-accent);
+        }
+      }
+    }
+  }
+
+  > textarea {
+    padding: var(--size-input-padding);
+    height: inherit;
+  }
+}

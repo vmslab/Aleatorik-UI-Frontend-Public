@@ -1,4 +1,4 @@
-@import "src/styles/abstracts/mixin";
+@import 'src/styles/abstracts/mixin';
 
 @mixin controller {
   .moz-controller {
@@ -57,10 +57,10 @@
       .breadcrumb-dividor {
         margin: 0px 4px;
         &::before {
-          content: "\e1cc";
+          content: '\e1cc';
           pointer-events: none;
           font-size: 10px;
-          font-family: "mozart-icons";
+          font-family: 'mozart-icons';
           left: var(--size-card-rbl-padding);
           display: flex;
           -moz-align-items: center;
@@ -115,7 +115,7 @@
       border-radius: var(--border-radius);
 
       &:hover {
-        background-color: var(--color-controller-title-button-background);
+        background-color: var(--color-button-icon-hover-background);
       }
     }
 
@@ -123,8 +123,8 @@
       cursor: pointer;
       &::before {
         margin-right: var(--size-padding3);
-        content: unicode("e110");
-        font-family: "mozart-icons";
+        content: unicode('e110');
+        font-family: 'mozart-icons';
         color: var(--color-font5);
         font-size: var(--size-icon-controller-font-size);
         @include flex-center-horizontal;
@@ -165,18 +165,19 @@
         border: inherit;
         background-color: inherit;
         padding: inherit;
-        font-size: 11px;
+        font-size: var(--size-input-label-font);
         font-weight: 500;
-        color: var(--color-font2);
+        color: var(--color-input-label-font);
         line-height: 15px;
       }
 
-      // 컴포넌트에 라벨 없을 경우 컴포넌트 아래로 내리기
-      &:not(:has(> label)) > .dx-widget {
+      // 컴포넌트 혹은 버튼에 라벨 없을 경우 컴포넌트 아래로 내리기
+      &:not(:has(> label)) > .dx-widget,
+      &:not(:has(> label)) > .moz-button {
         margin-top: calc(15px + var(--size-padding1));
       }
 
-      // 실제 컴포넌트 영역
+      // dx 컴포넌트 영역
       > .dx-widget:not(.dx-button, .dx-checkbox) {
         box-sizing: content-box;
         border-radius: var(--border-radius);
@@ -210,7 +211,7 @@
             .dx-button-content {
               .dx-dropdowneditor-icon {
                 &::before {
-                  content: "\e1c4";
+                  content: '\e1c4';
                   font-size: 14px;
                 }
               }
@@ -254,7 +255,7 @@
 
             .dx-button-content {
               .dx-dropdowneditor-icon::before {
-                content: "\e1c5";
+                content: '\e1c5';
                 font-size: var(--size-icon-font-size);
                 right: 0px;
               }
@@ -322,10 +323,56 @@
         }
       }
 
-      // 검색 영역 버튼 폰트 사이즈 변경
-      .dx-button .dx-button-content .dx-button-text {
-        font-size: 14px;
-        font-weight: 100;
+      // Wijmo 컴포넌트 영역
+      > .wj-control {
+        min-height: calc(var(--size-input-height) - 2px);
+        height: calc(var(--size-input-height) - 2px);
+        color: var(--color-grid-font);
+        border-color: var(--color-input-border);
+
+        .wj-input-group {
+          // 텍스트 인풋
+          input.wj-form-control {
+            min-height: calc(var(--size-input-height) - 2px);
+            height: calc(var(--size-input-height) - 2px);
+            font-size: var(--size-input-input-font);
+            color: var(--color-input-font);
+          }
+
+          // 텍스트 인풋 오른쪽 버튼 영역
+          .wj-input-group-btn > .wj-btn {
+            min-height: inherit;
+            border-left: none;
+
+            &:hover {
+              background-color: transparent;
+            }
+          }
+        }
+
+        // 날짜 입력일 경우 달력 아이콘
+        &.wj-inputdate {
+          .wj-input-group-btn {
+            .wj-glyph-down:after {
+              content: unicode('e1d0');
+              font-size: 14px;
+              color: var(--color-input-icon);
+            }
+          }
+        }
+
+        // 필터 영역에 있는 wj 컴포넌트 호버, 포커스 했을때
+        &:hover,
+        &:focus-within,
+        &.wj-state-focused {
+          border-color: var(--color-accent);
+
+          .wj-input-group-btn {
+            .wj-glyph-down:after {
+              color: var(--color-accent);
+            }
+          }
+        }
       }
     }
   }

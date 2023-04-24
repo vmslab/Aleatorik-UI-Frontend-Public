@@ -1,3 +1,7 @@
+.wj-popup:has(> .moz-dialog) {
+  border: none;
+}
+
 .moz-dialog {
   & > div:not(:last-child) {
     border-bottom: 1px solid #eee;
@@ -5,10 +9,46 @@
 
   .moz-dialog-header {
     background-color: transparent;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+
+    padding: 0px;
+    padding-left: var(--size-popup-left-padding);
+    padding-right: var(--size-popup-right-padding);
+    height: var(--size-popup-title-height);
+    font-size: var(--font-size-popup-header);
+    color: var(--color-popup-header-font);
+    font-weight: var(--font-medium);
+
+    .title {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      button.close {
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: var(--size-padding1);
+        border-radius: var(--border-radius);
+
+        i::before {
+          font-size: var(--size-small-icon-font-size);
+        }
+
+        &:hover {
+          background-color: var(--color-button-icon-hover-background);
+        }
+      }
+    }
   }
 
   .moz-dialog-body {
     padding: 2em;
+    padding-left: var(--size-popup-left-padding);
+    padding-right: var(--size-popup-right-padding);
   }
 
   .moz-dialog-footer {
@@ -16,5 +56,8 @@
     justify-content: flex-end;
     gap: 10px;
     margin-top: 0;
+
+    padding-left: var(--size-popup-left-padding);
+    padding-right: var(--size-popup-right-padding);
   }
 }

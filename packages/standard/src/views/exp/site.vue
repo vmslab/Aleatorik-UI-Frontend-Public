@@ -6,31 +6,31 @@
         action: 'Add',
         click: () => {
           extendGrid?.addRow();
-        },
+        }
       },
       {
         action: 'Remove',
         disabled: !options.activeDelete,
-        click: onRemove,
+        click: onRemove
       },
       {
         action: 'Save',
         disabled: !isEditing,
-        click: onSave,
+        click: onSave
       },
       {
         action: 'Cancel',
         disabled: !isEditing,
         click: () => {
           extendGrid?.clearChanges();
-        },
+        }
       },
       {
         action: 'Search',
         click: () => {
           loadData();
-        },
-      },
+        }
+      }
     ]"
   >
   </Controller>
@@ -79,24 +79,24 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref, reactive } from "vue";
-import { useQuery, useQueryClient, useMutation } from "vue-query";
-import { ExtendGrid } from "@aleatorik-ui/vue-component-wijmo";
-import { WjFlexGrid, WjFlexGridColumn } from "@grapecity/wijmo.vue2.grid";
-import { FlexGrid } from "@grapecity/wijmo.grid";
-import { InputDateTime } from "@grapecity/wijmo.input";
+import { onMounted, ref, reactive } from 'vue';
+import { useQuery, useQueryClient, useMutation } from 'vue-query';
+import { ExtendGrid } from '@aleatorik-ui/vue-component-wijmo';
+import { WjFlexGrid, WjFlexGridColumn } from '@grapecity/wijmo.vue2.grid';
+import { FlexGrid } from '@grapecity/wijmo.grid';
+import { InputDateTime } from '@grapecity/wijmo.input';
 
-import { useTranslation } from "i18next-vue";
-import { showMessage } from "../../utils/dialog";
-import { storeToRefs } from "pinia";
-import { useMenuStore } from "../../stores/mainStore";
-import { Call } from "../../stores/queryStore";
+import { useTranslation } from 'i18next-vue';
+import { showMessage } from '../../utils/dialog';
+import { storeToRefs } from 'pinia';
+import { useMenuStore } from '../../stores/mainStore';
+import { Call } from '../../stores/queryStore';
 
-import Controller from "../../components/Controller.vue";
-import LoadPanel from "../../components/LoadPanel.vue";
+import Controller from '../../components/Controller.vue';
+import LoadPanel from '../../components/LoadPanel.vue';
 
 /**
- * CONSTANT
+ * define CONSTANT
  */
 const menuModule = useMenuStore();
 const { isEditing, currentMenu } = storeToRefs(menuModule);
@@ -105,9 +105,9 @@ const { t } = useTranslation(); // 다국어
 const queryClient = useQueryClient();
 
 const dateEditor = ref<InputDateTime>(
-  new InputDateTime(document.createElement("div"), {
-    format: "yyyy-MM-dd HH:mm:ss",
-  }),
+  new InputDateTime(document.createElement('div'), {
+    format: 'yyyy-MM-dd HH:mm:ss'
+  })
 );
 
 /**
@@ -117,7 +117,7 @@ const options = reactive({
   loading: false,
   filter: true,
   activeDelete: false,
-  checkedItems: [{ value: false }, { value: true }] as any[],
+  checkedItems: [{ value: false }, { value: true }] as any[]
 });
 
 const dataSource = ref<any[] | null>([]); // data list
@@ -137,22 +137,22 @@ const onInitialized = (flexGrid: FlexGrid) => {
   extendGrid.value = new ExtendGrid({
     flexGrid,
     dataOptions: {
-      dataKey: "siteID",
-      validateKey: "save",
+      dataKey: 'siteID',
+      validateKey: 'save'
     },
     gridOptions: {
       useParseDate: true,
       onInitialized(extendGrid) {
         loadData();
-      },
-    },
+      }
+    }
   });
 };
 
 // data loaded cache reset and reload
 const loadData = async () => {
   options.loading = true;
-  queryClient.invalidateQueries("MdmSite");
+  queryClient.invalidateQueries('MdmSite');
   options.loading = false;
 };
 
@@ -160,7 +160,7 @@ const loadData = async () => {
  * API Call
  */
 // data load api
-useQuery("MdmSite", ({ queryKey }) => Call("MdmSite"), {
+useQuery('MdmSite', ({ queryKey }) => Call('MdmSite'), {
   refetchOnWindowFocus: false,
   onSuccess: result => {
     menuModule.endEdit();
@@ -169,49 +169,49 @@ useQuery("MdmSite", ({ queryKey }) => Call("MdmSite"), {
     else dataSource.value = [];
   },
   onError: err => {
-    showMessage("An error occurred while loading data", false);
+    showMessage('An error occurred while loading data', false);
     dataSource.value = [];
-  },
+  }
 });
 
 // data add api
-const addQuery = useMutation(param => Call("MdmSite", param, "POST"), {
+const addQuery = useMutation(param => Call('MdmSite', param, 'POST'), {
   onSuccess: result => {
     // console.log("addQuery success", result);
   },
   onError: err => {
-    showMessage("An error occurred while adding data", false);
-  },
+    showMessage('An error occurred while adding data', false);
+  }
 });
 
 // data modify api
-const modifyQuery = useMutation((param: any) => Call(`MdmSite/${param?.siteID}`, param, "PUT"), {
+const modifyQuery = useMutation((param: any) => Call(`MdmSite/${param?.siteID}`, param, 'PUT'), {
   onSuccess: result => {
     // console.log("modifyQuery success", result);
   },
   onError: err => {
-    showMessage("An error occurred while updating data", false);
-  },
+    showMessage('An error occurred while updating data', false);
+  }
 });
 
 // data remove api
-const removeQuery = useMutation((param: any) => Call(`MdmSite/${param?.siteID}`, param, "DELETE"), {
+const removeQuery = useMutation((param: any) => Call(`MdmSite/${param?.siteID}`, param, 'DELETE'), {
   onSuccess: result => {
     // console.log("removeQuery success", result);
   },
   onError: err => {
-    showMessage("An error occurred while removing data", false);
-  },
+    showMessage('An error occurred while removing data', false);
+  }
 });
 
 /**
- * Event
+ * Callback
  */
 const onRemove = async () => {
   const _rows = extendGrid.value?.flexGrid.selectedRows || [];
 
   if (_rows?.length <= 0) {
-    showMessage(t("SelectRowForRemove"), false);
+    showMessage(t('SelectRowForRemove'), false);
     return false;
   }
 
@@ -244,6 +244,9 @@ const onSave = async () => {
   await extendGrid.value?.setChangeCommit();
 };
 
+/**
+ * Event
+ */
 const onSelectionChanged = () => {
   const flexGrid = grid.value;
   if (!flexGrid) return;

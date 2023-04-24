@@ -84,7 +84,7 @@ import LoadPanel from '../../components/LoadPanel.vue';
 import { disableKeyColumnEdit } from '../../utils/commonFunc';
 
 /**
- * CONSTANT
+ * define CONSTANT
  */
 const menuModule = useMenuStore();
 const { isEditing, currentMenu } = storeToRefs(menuModule);

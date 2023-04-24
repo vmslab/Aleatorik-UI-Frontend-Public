@@ -27,7 +27,7 @@
       :minHeight="400"
       :boxes="[
         { type: 'rate', size: 1, minHeight: 200 },
-        { type: 'rate', size: 1, minHeight: 200 },
+        { type: 'rate', size: 1, minHeight: 200 }
       ]"
       resizable
       horizontal
@@ -35,16 +35,10 @@
       <template #box1="{ props }">
         <div class="dx-card" :style="{ width: '100%', height: `${props.parentsHeight}px` }">
           <div class="dx-card-title">
-            <div class="dx-card-title-text">{{ $t("Group") }} {{ $t("List") }}</div>
+            <div class="dx-card-title-text">{{ $t('Group') }} {{ $t('List') }}</div>
             <div class="spacer"></div>
             <div class="dx-card-title-action">
-              <DxButton
-                id="addGroupBtn"
-                v-tooltip="{ text: $t('Add') }"
-                icon="add"
-                stylingMode="text"
-                @click="showGroupEdit(true)"
-              />
+              <DxButton id="addGroupBtn" v-tooltip="{ text: $t('Add') }" icon="add" stylingMode="text" @click="showGroupEdit(true)" />
               <Popup :visible="popup.groupPopupVisible" title="Group Editor" @hiding="popup.groupPopupVisible = false">
                 <div class="moz-area-padding">
                   <DxForm
@@ -58,7 +52,7 @@
                     <DxItem
                       data-field="name"
                       :editor-options="{
-                        disabled: !popup.isAddGroup,
+                        disabled: !popup.isAddGroup
                       }"
                       :label="{ text: `${$t('Group')} ${$t('Name')}` }"
                     >
@@ -75,7 +69,7 @@
                     text: $t('Apply'),
                     stylingMode: 'outlined',
                     class: 'moz-button',
-                    onClick: onApplyGroup,
+                    onClick: onApplyGroup
                   }"
                 />
                 <DxToolbarItem
@@ -86,7 +80,7 @@
                     text: $t('Close'),
                     stylingMode: 'outlined',
                     class: 'moz-button',
-                    onClick: onCloseGroup,
+                    onClick: onCloseGroup
                   }"
                 />
               </Popup>
@@ -141,7 +135,7 @@
       <template #box2="{ props }">
         <div class="dx-card" :style="{ width: '100%', height: `${props.parentsHeight}px` }">
           <div class="dx-card-title">
-            <div class="dx-card-title-text">{{ $t("Group") }} {{ $t("Detail") }}</div>
+            <div class="dx-card-title-text">{{ $t('Group') }} {{ $t('Detail') }}</div>
           </div>
           <div class="dx-card-text">
             <WjFlexGrid
@@ -165,12 +159,7 @@
               <WjFlexGridColumn width="*" binding="name" :header="`${$t(`Menu`)} ${$t(`Name`)}`" :isReadOnly="true" />
               <WjFlexGridColumn width="*" binding="path" :header="`${$t(`Menu`)} ${$t(`Name`)}`" :isReadOnly="true" />
               <WjFlexGridColumn width="*" binding="isRead" :header="$t(`IsRead`)" dataType="Boolean"></WjFlexGridColumn>
-              <WjFlexGridColumn
-                width="*"
-                binding="isWrite"
-                :header="$t(`IsWrite`)"
-                dataType="Boolean"
-              ></WjFlexGridColumn>
+              <WjFlexGridColumn width="*" binding="isWrite" :header="$t(`IsWrite`)" dataType="Boolean"></WjFlexGridColumn>
             </WjFlexGrid>
           </div>
         </div>
@@ -191,29 +180,29 @@
 </template>
 
 <script setup lang="ts">
-import { Get, Add, Modify, Remove, Save } from "../../stores/queryStore";
-import { onMounted, ref, reactive } from "vue";
-import { useMutation, useQuery, useQueryClient } from "vue-query";
-import { WjFlexGrid, WjFlexGridColumn } from "@grapecity/wijmo.vue2.grid";
-import { CellEditEndingEventArgs, FlexGrid, FormatItemEventArgs } from "@grapecity/wijmo.grid";
+import { Get, Add, Modify, Remove, Save } from '../../stores/queryStore';
+import { onMounted, ref, reactive } from 'vue';
+import { useMutation, useQuery, useQueryClient } from 'vue-query';
+import { WjFlexGrid, WjFlexGridColumn } from '@grapecity/wijmo.vue2.grid';
+import { CellEditEndingEventArgs, FlexGrid, FormatItemEventArgs } from '@grapecity/wijmo.grid';
 
-import "devextreme-vue/text-area";
-import { DxList } from "devextreme-vue/list";
-import { DxLoadPanel } from "devextreme-vue/load-panel";
-import { DxToolbarItem } from "devextreme-vue/popup";
-import { DxForm, DxItem, DxRequiredRule } from "devextreme-vue/form";
-import ValidationEngine from "devextreme/ui/validation_engine";
+import 'devextreme-vue/text-area';
+import { DxList } from 'devextreme-vue/list';
+import { DxLoadPanel } from 'devextreme-vue/load-panel';
+import { DxToolbarItem } from 'devextreme-vue/popup';
+import { DxForm, DxItem, DxRequiredRule } from 'devextreme-vue/form';
+import ValidationEngine from 'devextreme/ui/validation_engine';
 
-import { useTranslation } from "i18next-vue";
-import { showConfirm, showMessage } from "../../utils/dialog";
-import { Controller, Popup } from "../../components";
-import { SplitBox } from "@aleatorik-ui/vue-component-wijmo";
-import DxButton from "devextreme-vue/button";
-import { systemId } from "../../utils/env";
-import { generateGUID } from "@aleatorik-ui/common-ui";
+import { useTranslation } from 'i18next-vue';
+import { showConfirm, showMessage } from '../../utils/dialog';
+import { Controller, DxPopup as Popup } from '../../components';
+import { SplitBox } from '@aleatorik-ui/vue-component-wijmo';
+import DxButton from 'devextreme-vue/button';
+import { systemId } from '../../utils/env';
+import { generateGUID } from '@aleatorik-ui/common-ui';
 
-import { storeToRefs } from "pinia";
-import { useMenuStore } from "../../stores/mainStore";
+import { storeToRefs } from 'pinia';
+import { useMenuStore } from '../../stores/mainStore';
 
 const menuModule = useMenuStore();
 const { isEditing, currentMenu } = storeToRefs(menuModule);
@@ -232,17 +221,17 @@ const options = reactive({
   loading: false,
   filter: true,
   selectedGroupKeys: [] as any[],
-  selectedGroup: {} as any,
+  selectedGroup: {} as any
 });
 const popup = reactive({
   groupPopupVisible: false,
-  isAddGroup: false,
+  isAddGroup: false
 });
 const queryClient = useQueryClient();
 
 const menuSortingRule = (x: any, y: any) => {
-  const adminMenuName = "admin";
-  const defaultMenuName = "default";
+  const adminMenuName = 'admin';
+  const defaultMenuName = 'default';
   return x.name === adminMenuName
     ? -1
     : y.name === adminMenuName
@@ -258,7 +247,7 @@ const menuSortingRule = (x: any, y: any) => {
     : 0;
 };
 
-useQuery("Group", ({ queryKey }) => Get(queryKey[0], systemId), {
+useQuery('Group', ({ queryKey }) => Get(queryKey[0], systemId), {
   refetchOnWindowFocus: false,
   onSuccess: (result: any) => {
     menuModule.endEdit();
@@ -266,7 +255,7 @@ useQuery("Group", ({ queryKey }) => Get(queryKey[0], systemId), {
       groupItems.value = result.data.sort(menuSortingRule);
       setTimeout(async () => {
         if (!options.selectedGroupKeys || options.selectedGroupKeys.length === 0) {
-          const groupId = result.data[0]?.groupId || "";
+          const groupId = result.data[0]?.groupId || '';
           options.selectedGroupKeys = [groupId];
           options.selectedGroup = result.data[0];
         }
@@ -276,11 +265,11 @@ useQuery("Group", ({ queryKey }) => Get(queryKey[0], systemId), {
     } else groupItems.value = [];
   },
   onError: (err: any) => {
-    showMessage("An error occurred while loading data", false);
-  },
+    showMessage('An error occurred while loading data', false);
+  }
 });
 
-const getMenuMap = useMutation(param => Get("MenuMap", param), {
+const getMenuMap = useMutation(param => Get('MenuMap', param), {
   onSuccess: result => {
     if (result && result.data && result.data.length > 0) {
       menuMapItems.value = createMenuItems(result.data.map(setMenuMapId));
@@ -289,9 +278,9 @@ const getMenuMap = useMutation(param => Get("MenuMap", param), {
     showMessage(`Group '${options.selectedGroup.name}' Data load complete`, true);
   },
   onError: err => {
-    showMessage("An error occurred while loading data", false);
+    showMessage('An error occurred while loading data', false);
     groupItems.value = [];
-  },
+  }
 });
 
 const setMenuMapId = (d: any) => {
@@ -301,41 +290,41 @@ const setMenuMapId = (d: any) => {
   return d;
 };
 
-const addGroup = useMutation(param => Add("Group", param), {
+const addGroup = useMutation(param => Add('Group', param), {
   onSuccess: result => {
     if (result && result.data > 0) showMessage(`Added group item.`, result.data > 0);
   },
   onError: err => {
-    showMessage("An error occurred while adding data", false);
-  },
+    showMessage('An error occurred while adding data', false);
+  }
 });
 
-const modifyGroup = useMutation(param => Modify("Group", param), {
+const modifyGroup = useMutation(param => Modify('Group', param), {
   onSuccess: result => {
     if (result && result.data > 0) showMessage(`Updated group item.`, result.data > 0);
   },
   onError: err => {
-    showMessage("An error occurred while updating data", false);
-  },
+    showMessage('An error occurred while updating data', false);
+  }
 });
 
-const removeGroup = useMutation(param => Remove("Group", param), {
+const removeGroup = useMutation(param => Remove('Group', param), {
   onSuccess: result => {
     if (result && result.data > 0) showMessage(`Removed group item,`, result.data > 0);
   },
   onError: err => {
-    showMessage("An error occurred while removing data", false);
-  },
+    showMessage('An error occurred while removing data', false);
+  }
 });
 
-const saveMenuMap = useMutation(param => Save("MenuMap", param), {
+const saveMenuMap = useMutation(param => Save('MenuMap', param), {
   onSuccess: result => {
-    if (result) showMessage(`Affected ${result.data} Row${result.data > 1 ? "s" : ""}`, result.data > 0);
+    if (result) showMessage(`Affected ${result.data} Row${result.data > 1 ? 's' : ''}`, result.data > 0);
     menuModule.endEdit();
   },
   onError: err => {
-    showMessage("An error occurred while saving data", false);
-  },
+    showMessage('An error occurred while saving data', false);
+  }
 });
 
 onMounted(async () => {
@@ -344,7 +333,7 @@ onMounted(async () => {
 
 const loadData = async () => {
   options.loading = true;
-  queryClient.invalidateQueries("GroupBySystem");
+  queryClient.invalidateQueries('GroupBySystem');
   options.loading = false;
 };
 
@@ -371,11 +360,11 @@ const onCellEditEnding = (grid: FlexGrid, e: CellEditEndingEventArgs) => {
 */
   menuModule.beginEdit();
 
-  if (["isRead", "isWrite"].indexOf(column) > -1) {
+  if (['isRead', 'isWrite'].indexOf(column) > -1) {
     if (grid.activeEditor.checked) updateParentProperty(item, column, grid.activeEditor.checked);
     updateChildProperty(item, column, grid.activeEditor.checked);
   }
-  if (column === "isStartup") grid.rows.forEach(row => (row.dataItem.isStartup = e.getRow() === row));
+  if (column === 'isStartup') grid.rows.forEach(row => (row.dataItem.isStartup = e.getRow() === row));
 };
 
 const updateParentProperty = (item: any, prop: string, value: any) => {
@@ -401,16 +390,16 @@ const updateChildProperty = (item: any, prop: string, value: any) => {
 const onFormatItem = (s: FlexGrid, e: FormatItemEventArgs) => {
   const item = e.getRow().dataItem;
   if (e.panel.cellType !== 1) {
-    e.cell.classList.add("wj-align-center");
+    e.cell.classList.add('wj-align-center');
     return;
   }
   if (item.children && item.children.length > 0) {
-    e.cell.style.backgroundColor = "var(--color-commonheader)";
+    e.cell.style.backgroundColor = 'var(--color-commonheader)';
   } else {
-    e.cell.style.backgroundColor = "var(--color-back)";
+    e.cell.style.backgroundColor = 'var(--color-back)';
   }
 
-  e.cell.style.color = "var(--color-font4)";
+  e.cell.style.color = 'var(--color-font4)';
 };
 
 const createMenuItems = (datas: any[]): any[] => {
@@ -450,7 +439,7 @@ const onGroupClick = async (e: any) => {
   const item = e.itemData;
 
   if (isEditing.value) {
-    const result = await showConfirm({ message: "Current changes will be reset. continue?", title: "Change Group" });
+    const result = await showConfirm({ message: 'Current changes will be reset. continue?', title: 'Change Group' });
     if (!result) return;
   }
 
@@ -469,13 +458,13 @@ const showGroupEdit = (isAdd: boolean, item?: any) => {
   groupFormData.value = {
     groupId: isAdd ? generateGUID() : item.groupId,
     systemId: systemId,
-    name: isAdd ? "" : item.name,
-    description: isAdd ? "" : item.description,
+    name: isAdd ? '' : item.name,
+    description: isAdd ? '' : item.description
   };
 };
 
 const onRemoveGroup = async (item: any) => {
-  const result = await showConfirm({ message: `Remove ${item.name}.\nContinue?`, title: "Remove" });
+  const result = await showConfirm({ message: `Remove ${item.name}.\nContinue?`, title: 'Remove' });
   if (!result) return;
 
   removeGroup.mutateAsync(item);
@@ -484,7 +473,7 @@ const onRemoveGroup = async (item: any) => {
 };
 
 const onApplyGroup = async () => {
-  const valid = ValidationEngine.validateGroup("validationGroup");
+  const valid = ValidationEngine.validateGroup('validationGroup');
   if (!valid.isValid) {
     showMessage(`${t(`InvalidDataMessage`)}`, false);
     return;
@@ -505,7 +494,7 @@ const onCloseGroup = () => {
 
 const saveGroupData = () => {
   if (!menuMapItems.value) {
-    showMessage("Not found data", false);
+    showMessage('Not found data', false);
     return;
   }
   options.loading = true;
@@ -513,7 +502,7 @@ const saveGroupData = () => {
   options.loading = false;
 };
 
-const createFlatMenuItems = (datas: any[], categoryId: string = "", flatMenus: any[] = []): any[] => {
+const createFlatMenuItems = (datas: any[], categoryId: string = '', flatMenus: any[] = []): any[] => {
   if (!datas || datas.length === 0) return [];
   try {
     datas.forEach((data, sequence) => {

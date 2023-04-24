@@ -8,9 +8,9 @@
   </button>
 </template>
 <script setup lang="ts">
-import { toRefs } from "vue";
+import { toRefs } from 'vue';
 
-type ButtonType = "default" | "text";
+type ButtonType = 'default' | 'text' | 'outline' | 'none';
 
 const props = defineProps<{
   icon?: string;
@@ -18,17 +18,23 @@ const props = defineProps<{
   label?: string;
   type?: ButtonType;
 }>();
-const { icon, text, label, type: ButtonType = "default" } = toRefs(props);
+const { icon, text, label, type: ButtonType = 'default' } = toRefs(props);
 
 const getClassNameByType = (type: ButtonType): string => {
-  let className = "";
+  let className = '';
   switch (type) {
-    case "text":
-      className = "moz-text-button";
+    case 'text':
+      className = 'moz-text-button';
       break;
-    case "default":
+    case 'outline':
+      className = 'moz-outline-button';
+      break;
+    case 'none':
+      className = '';
+      break;
+    case 'default':
     default:
-      className = "moz-default-button";
+      className = 'moz-default-button';
       break;
   }
 
