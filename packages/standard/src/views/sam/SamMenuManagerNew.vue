@@ -1,122 +1,33 @@
 <template>
-  <Controller :show-filter="options.filter">
-    <DxButton
-      v-tooltip="{ text: $t('Save') }"
-      class="moz-default-button"
-      icon="save"
-      type="default"
-      :focusStateEnabled="false"
-      :disabled="!isEditing"
-      :text="$t('Save')"
-      @click="saveData"
-    />
+  <Controller
+    :show-filter-button="false"
+    :actions="[
+      {
+        action: 'Save',
+        click: saveData
+      },
+      {
+        action: 'Import',
+        click: () => {
+          file.click();
+        }
+      },
+      {
+        action: 'Export',
+        click: exportData
+      },
+      {
+        action: 'Search',
+        click: loadData
+      }
+    ]"
+  >
     <input ref="file" type="file" :onchange="uploadFile" style="display: none" />
-    <DxButton
-      v-tooltip="{ text: $t('Import') }"
-      class="moz-default-button"
-      icon="import"
-      type="default"
-      :focusStateEnabled="false"
-      :text="$t('Import')"
-      @click="file.click()"
-    />
-    <DxButton
-      v-tooltip="{ text: $t('Export') }"
-      class="moz-default-button"
-      icon="export"
-      type="default"
-      :focusStateEnabled="false"
-      :text="$t('Export')"
-      @click="exportData"
-    />
-    <DxButton
-      v-tooltip="{ text: $t('Refresh') }"
-      class="moz-default-button"
-      icon="refresh"
-      type="default"
-      :focusStateEnabled="false"
-      :text="$t('Refresh')"
-      @click="loadData"
-    />
-    <!-- <template #title>
-      <i
-        v-if="options.filter"
-        v-tooltip="{ text: t('HideFilter') }"
-        @click="options.filter = !options.filter"
-        class="mozart-icons moz-filter-icon-tap controller-title-button"
-      />
-      <i
-        v-else
-        v-tooltip="{ text: t('ShowFilter') }"
-        @click="options.filter = !options.filter"
-        class="mozart-icons moz-filter-icon controller-title-button"
-      />
-    </template> -->
-    <!-- <template #filter>
-      <div>
-        <label>{{ $t("Menu") }} {{ $t("ID") }}</label>
-        <DxTextBox v-model="newItem.menuId" />
-      </div>
-      <div>
-        <label>{{ $t("Menu") }} {{ $t("Name") }}</label>
-        <DxTextBox v-model="newItem.name" />
-      </div>
-      <div>
-        <label>{{ $t("Menu") }} {{ $t("Path") }}</label>
-        <DxTextBox v-model="newItem.path" />
-      </div>
-      <div>
-        <label>{{ $t("Menu") }} {{ $t("Type") }}</label>
-        <DxSelectBox v-model="newItem.type" :items="['Menu', 'Category']" />
-      </div>
-
-      <div>
-        <DxButton
-          v-tooltip="{ text: `${$t('Add')}(${$t('Top')})` }"
-          class="moz-default-button"
-          icon="add"
-          type="default"
-          :focusStateEnabled="false"
-          :text="`${$t('Add')}(${$t('Top')})`"
-          @click="addNodeFirst"
-        />
-        <DxButton
-          v-tooltip="{ text: `${$t('Add')}(${$t('Bottom')})` }"
-          class="moz-default-button"
-          icon="add"
-          type="default"
-          :focusStateEnabled="false"
-          :text="`${$t('Add')}(${$t('Bottom')})`"
-          @click="addNodeLast"
-        />
-      </div>
-      <div>
-        <DxButton
-          v-tooltip="{ text: `${$t('Add')}(${$t('Next')})` }"
-          class="moz-default-button"
-          icon="add"
-          type="default"
-          :focusStateEnabled="false"
-          :text="`${$t('Add')}(${$t('Next')})`"
-          @click="addNodeNext"
-        />
-        <DxButton
-          v-tooltip="{ text: `${$t('Add')}(${$t('Child')})` }"
-          class="moz-default-button"
-          icon="add"
-          type="default"
-          :focusStateEnabled="false"
-          :text="`${$t('Add')}(${$t('Child')})`"
-          :disabled="!(options.selectedType === 'Category')"
-          @click="addNodeChild"
-        />
-      </div>
-    </template> -->
   </Controller>
   <div class="menu-manager moz-frame-for-outer-control" style="display: flex" ref="container">
     <div class="dx-card" :style="{ width: '100%', height: `var(--size-content-inner-height-outer-controller)` }">
       <div class="dx-card-title">
-        <div class="dx-card-title-text">{{ $t("Menu") }} {{ $t("Setting") }}</div>
+        <div class="dx-card-title-text">{{ $t('Menu') }} {{ $t('Setting') }}</div>
         <div class="spacer"></div>
         <div class="dx-card-title-action">
           <DxButton
@@ -173,7 +84,7 @@
             data-field="menuId"
             :tabindex="4"
             :editor-options="{
-              onKeyPress: onValueChanged,
+              onKeyPress: onValueChanged
             }"
           >
             <DxRequiredRule message="Menu Id is required" />
@@ -182,7 +93,7 @@
             data-field="name"
             :tabindex="1"
             :editor-options="{
-              onKeyPress: onValueChanged,
+              onKeyPress: onValueChanged
             }"
           >
             <DxRequiredRule message="Menu Name is required" />
@@ -191,7 +102,7 @@
             data-field="path"
             :tabindex="2"
             :editor-options="{
-              onKeyPress: onValueChanged,
+              onKeyPress: onValueChanged
             }"
           >
             <DxRequiredRule message="Menu Path is required" />
@@ -219,13 +130,7 @@
           <!-- @click="addNodeChild" -->
         </div>
         <div>
-          <DxButton
-            class="moz-default-button"
-            icon="trash"
-            :focusStateEnabled="false"
-            :text="$t('Remove')"
-            @click="removeSelectedNode"
-          />
+          <DxButton class="moz-default-button" icon="trash" :focusStateEnabled="false" :text="$t('Remove')" @click="removeSelectedNode" />
           <DxButton
             :tabindex="3"
             class="moz-default-button"
@@ -305,39 +210,32 @@
 </template>
 
 <script setup lang="ts">
-import { Get, Save } from "../../stores/queryStore";
-import { onMounted, ref, reactive } from "vue";
-import { useMutation, useQuery, useQueryClient } from "vue-query";
+import { Get, Save } from '../../stores/queryStore';
+import { onMounted, ref, reactive } from 'vue';
+import { useMutation, useQuery, useQueryClient } from 'vue-query';
 
-import { CancelEventArgs, EventArgs, PopupPosition, Tooltip, format } from "@grapecity/wijmo";
-import {
-  TreeView,
-  TreeNodeDragDropEventArgs,
-  FormatNodeEventArgs,
-  DropPosition,
-  TreeNodeEventArgs,
-  TreeNode,
-} from "@grapecity/wijmo.nav";
-import { Popup } from "@grapecity/wijmo.input";
-import { WjTreeView } from "@grapecity/wijmo.vue2.nav";
-import { WjPopup } from "@grapecity/wijmo.vue2.input";
+import { CancelEventArgs, EventArgs, PopupPosition, Tooltip, format } from '@grapecity/wijmo';
+import { TreeView, TreeNodeDragDropEventArgs, FormatNodeEventArgs, DropPosition, TreeNodeEventArgs, TreeNode } from '@grapecity/wijmo.nav';
+import { Popup } from '@grapecity/wijmo.input';
+import { WjTreeView } from '@grapecity/wijmo.vue2.nav';
+import { WjPopup } from '@grapecity/wijmo.vue2.input';
 
-import { DxForm, DxItem, DxLabel, DxRequiredRule } from "devextreme-vue/form";
-import { DxContextMenu } from "devextreme-vue/context-menu";
-import ValidationEngine from "devextreme/ui/validation_engine";
+import { DxForm, DxItem, DxLabel, DxRequiredRule } from 'devextreme-vue/form';
+import { DxContextMenu } from 'devextreme-vue/context-menu';
+import ValidationEngine from 'devextreme/ui/validation_engine';
 
-import "devextreme-vue/text-area";
-import { DxLoadPanel } from "devextreme-vue/load-panel";
-import { useTranslation } from "i18next-vue";
-import { showMessage, showConfirm } from "../../utils/dialog";
-import { Controller } from "../../components";
-import DxButton from "devextreme-vue/button";
-import { systemId } from "../../utils/env";
-import { generateGUID } from "@aleatorik-ui/common-ui";
+import 'devextreme-vue/text-area';
+import { DxLoadPanel } from 'devextreme-vue/load-panel';
+import { useTranslation } from 'i18next-vue';
+import { showMessage, showConfirm } from '../../utils/dialog';
+import { Controller } from '../../components';
+import DxButton from 'devextreme-vue/button';
+import { systemId } from '../../utils/env';
+import { generateGUID } from '@aleatorik-ui/common-ui';
 
-import { storeToRefs } from "pinia";
-import { useMenuStore } from "../../stores/mainStore";
-import { nextTick } from "process";
+import { storeToRefs } from 'pinia';
+import { useMenuStore } from '../../stores/mainStore';
+import { nextTick } from 'process';
 
 const menuModule = useMenuStore();
 const { isEditing, currentMenu } = storeToRefs(menuModule);
@@ -352,24 +250,24 @@ interface IMenu {
   type: string;
   separator: boolean;
   children?: IMenu[];
-  state: "loaded" | "added" | "removed";
+  state: 'loaded' | 'added' | 'removed';
 }
 
 const newItem = ref<IMenu>({
-  menuId: "",
+  menuId: '',
   systemId: systemId,
-  name: "",
-  path: "",
+  name: '',
+  path: '',
   sequence: 0,
-  type: "Menu",
+  type: 'Menu',
   separator: false,
   children: [],
-  state: "added",
+  state: 'added'
 });
 const newItemNo = ref(1);
 const addItemTypes = ref([
-  { text: `${t("Menu")}`, value: "Menu" },
-  { text: `${t("Category")}`, value: "Category" },
+  { text: `${t('Menu')}`, value: 'Menu' },
+  { text: `${t('Category')}`, value: 'Category' }
 ]);
 
 const menuItems = ref<IMenu[] | null>([]);
@@ -391,11 +289,11 @@ const options = reactive({
   activeDelete: false,
   displayMemberName: true,
   keepPopup: false,
-  selectedType: null,
+  selectedType: null
 });
 const queryClient = useQueryClient();
 
-useQuery("Menu", ({ queryKey }) => Get(queryKey[0], systemId), {
+useQuery('Menu', ({ queryKey }) => Get(queryKey[0], systemId), {
   refetchOnWindowFocus: false,
   onSuccess: result => {
     menuModule.endEdit();
@@ -403,9 +301,9 @@ useQuery("Menu", ({ queryKey }) => Get(queryKey[0], systemId), {
     if (result && result.data) {
       const parseDatas = createMenuItems(
         result.data.map((d: IMenu) => {
-          d.state = "loaded";
+          d.state = 'loaded';
           return d;
-        }),
+        })
       );
       menuItems.value = parseDatas;
 
@@ -414,25 +312,25 @@ useQuery("Menu", ({ queryKey }) => Get(queryKey[0], systemId), {
       }, 100);
     } else menuItems.value = [];
 
-    showMessage("Data load complete", true);
+    showMessage('Data load complete', true);
   },
   onError: err => {
     removeItems.value = [];
-    showMessage("An error occurred while loading data", false);
+    showMessage('An error occurred while loading data', false);
     menuItems.value = [];
-  },
+  }
 });
 
-const saveMenu = useMutation(param => Save("Menu", param), {
+const saveMenu = useMutation(param => Save('Menu', param), {
   onSuccess: result => {
     removeItems.value = [];
-    if (result) showMessage(`Affected ${result.data} Row${result.data > 1 ? "s" : ""}`, result.data > 0);
+    if (result) showMessage(`Affected ${result.data} Row${result.data > 1 ? 's' : ''}`, result.data > 0);
     menuModule.endEdit();
   },
   onError: err => {
     removeItems.value = [];
-    showMessage("An error occurred while saving data", false);
-  },
+    showMessage('An error occurred while saving data', false);
+  }
 });
 
 onMounted(async () => {
@@ -441,10 +339,10 @@ onMounted(async () => {
 
 const onInitialized = (view: TreeView) => {
   treeView = view;
-  const frameEl = container.value || document.getElementsByClassName("menu-manager")[0];
+  const frameEl = container.value || document.getElementsByClassName('menu-manager')[0];
   if (!frameEl) return;
 
-  frameEl.addEventListener("contextmenu", e => {
+  frameEl.addEventListener('contextmenu', e => {
     options.displayMemberName = !options.displayMemberName;
     e.preventDefault();
   });
@@ -453,7 +351,7 @@ const onInitializedPopup = (popup: Popup) => {
   menuEditor = popup;
 };
 const onHiding = (s: Popup, e: CancelEventArgs) => {
-  const valid = ValidationEngine.validateGroup("validationMenu");
+  const valid = ValidationEngine.validateGroup('validationMenu');
   if (!valid.isValid) {
     e.cancel = true;
     return;
@@ -473,7 +371,7 @@ const addChildItem = async (e: any) => {
 
 const loadData = async () => {
   options.loading = true;
-  queryClient.invalidateQueries("Menu");
+  queryClient.invalidateQueries('Menu');
   options.loading = false;
 };
 
@@ -483,13 +381,13 @@ const saveData = () => {
 };
 
 const exportData = () => {
-  const a = document.createElement("a");
+  const a = document.createElement('a');
   a.href = URL.createObjectURL(
     new Blob([JSON.stringify(menuItems.value, null, 2)], {
-      type: "application/json",
-    }),
+      type: 'application/json'
+    })
   );
-  a.setAttribute("download", `${systemId}_menus.json`);
+  a.setAttribute('download', `${systemId}_menus.json`);
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -499,7 +397,7 @@ const uploadFile = async (e: any) => {
   if (!file.value.length || !file.value.files.length) return;
 
   if (isEditing.value) {
-    const result = await showConfirm({ message: "Current changes will be reset. continue?", title: "Import" });
+    const result = await showConfirm({ message: 'Current changes will be reset. continue?', title: 'Import' });
     if (!result) return;
   }
   menuModule.endEdit();
@@ -529,8 +427,8 @@ const uploadFile = async (e: any) => {
 };
 
 const onFormatItem = (s: TreeView, e: FormatNodeEventArgs) => {
-  const isCategory = e.dataItem.type === "Category";
-  if (isCategory) e.element.style.fontWeight = "700";
+  const isCategory = e.dataItem.type === 'Category';
+  if (isCategory) e.element.style.fontWeight = '700';
 };
 
 const onLoadedItems = (s: TreeView, e: EventArgs) => {
@@ -540,13 +438,11 @@ const onLoadedItems = (s: TreeView, e: EventArgs) => {
 
   for (let node = treeView.nodes[0]; node; node = node.next(false)) {
     const tooltipContent = format(
-      `<b>${t("Menu")} ${t("Type")}:</b> {type}<br> <b>${t("Menu")} ${t("Name")}:</b> {name}<br><b>${t(
-        "Path",
-      )}:</b> {path}`,
-      node.dataItem,
+      `<b>${t('Menu')} ${t('Type')}:</b> {type}<br> <b>${t('Menu')} ${t('Name')}:</b> {name}<br><b>${t('Path')}:</b> {path}`,
+      node.dataItem
     );
 
-    const owner = node.element.getElementsByTagName("span")[0] || node.element;
+    const owner = node.element.getElementsByTagName('span')[0] || node.element;
     tooltip.setTooltip(owner, tooltipContent);
   }
 };
@@ -563,7 +459,7 @@ const showMenuEditor = (s: TreeView) => {
   selectedItem.value = s.selectedItem;
   selectedNode.value = s.selectedNode;
 
-  const owner = s.selectedNode.element.getElementsByTagName("span")[0] || s.selectedNode.element;
+  const owner = s.selectedNode.element.getElementsByTagName('span')[0] || s.selectedNode.element;
   menuEditor.owner = owner;
   menuEditor.show();
   options.isValid = false;
@@ -575,8 +471,8 @@ const onValueChanged = (e: any) => {
 
 const onFieldDataChanged = (e: any) => {
   switch (e.dataField) {
-    case "name":
-    case "path":
+    case 'name':
+    case 'path':
       selectedNode.value?.refresh();
       break;
   }
@@ -614,7 +510,7 @@ const createMenuItems = (datas: IMenu[]): any[] => {
   return [];
 };
 
-const createFlatMenuItems = (datas: any[], categoryId: string = "", flatMenus: any[] = []): any[] => {
+const createFlatMenuItems = (datas: any[], categoryId: string = '', flatMenus: any[] = []): any[] => {
   if (!datas || datas.length === 0) return [];
   try {
     datas.forEach((data, sequence) => {
@@ -695,14 +591,14 @@ const addNodeNext = async () => {
   const parent = node?.parentNode;
 
   if (!newMenu.path || newMenu.path.length === 0) {
-    newMenu.path = `${
-      parent && parent.dataItem.path !== "/" ? `${parent.dataItem.path}/` : `/${systemId}/`
-    }${newMenu.name.toLowerCase().replace(/ /gi, "")}`;
+    newMenu.path = `${parent && parent.dataItem.path !== '/' ? `${parent.dataItem.path}/` : `/${systemId}/`}${newMenu.name
+      .toLowerCase()
+      .replace(/ /gi, '')}`;
   }
   const targetNode = parent ? parent : treeView;
   const index = node.index + 1;
   const selectedNode = targetNode ? targetNode.addChildNode(index, newMenu) : treeView.addChildNode(index, newMenu);
-  newItem.value = { ...newItem.value, menuId: "", name: "", path: "" };
+  newItem.value = { ...newItem.value, menuId: '', name: '', path: '' };
 
   treeView.refresh();
   treeView.loadTree(true);
@@ -724,14 +620,14 @@ const addNodeChild = async () => {
   const node = treeView.selectedNode;
 
   if (!newMenu.path || newMenu.path.length === 0) {
-    newMenu.path = `${node && node.dataItem.path !== "/" ? `${node.dataItem.path}/` : `/${systemId}/`}${newMenu.name
+    newMenu.path = `${node && node.dataItem.path !== '/' ? `${node.dataItem.path}/` : `/${systemId}/`}${newMenu.name
       .toLowerCase()
-      .replace(/ /gi, "")}`;
+      .replace(/ /gi, '')}`;
   }
   const targetNode = node ? node : treeView;
   const index = targetNode && targetNode.nodes ? targetNode.nodes.length : treeView.nodes ? treeView.nodes.length : 0;
   const selectedNode = targetNode ? targetNode.addChildNode(index, newMenu) : treeView.addChildNode(index, newMenu);
-  newItem.value = { ...newItem.value, menuId: "", name: "", path: "" };
+  newItem.value = { ...newItem.value, menuId: '', name: '', path: '' };
 
   treeView.refresh();
   treeView.loadTree(true);
@@ -748,7 +644,7 @@ const removeSelectedNode = async () => {
   if (!treeView) return;
 
   const node = treeView.selectedNode;
-  const result = await showConfirm({ message: `Remove ${node.dataItem.name}.\nContinue?`, title: "Remove" });
+  const result = await showConfirm({ message: `Remove ${node.dataItem.name}.\nContinue?`, title: 'Remove' });
   if (!result) return;
 
   removeChildItem(node.dataItem);
@@ -766,8 +662,8 @@ const removeChildItem = (menu: IMenu) => {
     });
   }
 
-  if (menu.state === "loaded") {
-    menu.state = "removed";
+  if (menu.state === 'loaded') {
+    menu.state = 'removed';
     removeItems.value?.push(menu);
   }
 };
@@ -795,7 +691,7 @@ const validateNewNode = () => {
       newMenu.name = `New Menu ${newItemNo.value++}`;
     }
     if (menuItems.value && validateMenuId(menuItems.value, newMenu.menuId)) {
-      showMessage("Already Resisted MenuId", false);
+      showMessage('Already Resisted MenuId', false);
       return resolve(true);
     }
     return resolve(false);
@@ -813,7 +709,7 @@ const validateMenuId = (menus: IMenu[], targetId: string): boolean => {
 };
 
 const onDragOver = (s: TreeView, e: TreeNodeDragDropEventArgs) => {
-  if (e.dropTarget.dataItem.type !== "Category" && e.position == DropPosition.Into) {
+  if (e.dropTarget.dataItem.type !== 'Category' && e.position == DropPosition.Into) {
     e.position = DropPosition.Before;
   }
 };

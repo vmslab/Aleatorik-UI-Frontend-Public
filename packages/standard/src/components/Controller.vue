@@ -2,9 +2,7 @@
   <div class="moz-controller-root">
     <div class="moz-controller">
       <div
-        v-if="
-          !layout.drawer && (menuLocation.menuLocation === 'topandleft' || menuLocation.menuLocation === 'topandtree')
-        "
+        v-if="!layout.drawer && (menuLocation.menuLocation === 'topandleft' || menuLocation.menuLocation === 'topandtree')"
         class="moz-left-toggle-icon"
         @click="onClickToggleDrawer"
       ></div>
@@ -13,7 +11,7 @@
           <template v-if="title.length - 1 === i">
             <span
               :class="{
-                accent: menuLocation.menuLocation !== 'left',
+                accent: menuLocation.menuLocation !== 'left'
               }"
             >
               {{ t }}
@@ -39,19 +37,14 @@
             class="mozart-icons"
             :class="{
               'icon-table-filter-off': !showFilter,
-              'icon-table-filter-on': showFilter,
+              'icon-table-filter-on': showFilter
             }"
           />
         </button>
 
         <div class="spacer" v-if="showFilterButton" />
 
-        <Button
-          v-for="(action, index) in actionButtons"
-          :key="`action_${index}`"
-          @click="action.click"
-          v-bind="action"
-        />
+        <Button v-for="(action, index) in actionButtons" :key="`action_${index}`" @click="action.click" v-bind="action" />
         <slot name="action"></slot>
       </div>
     </div>
@@ -62,21 +55,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeMount, onMounted, onUnmounted, computed, watch, toRefs, nextTick, reactive, Ref } from "vue";
-import { storeToRefs } from "pinia";
-import { resizeVerticalSize } from "../utils/themeSet";
-import { useTranslation } from "i18next-vue";
-import { useLayoutStore, useMenuLocationStore } from "../stores/mainStore";
-import { useRouter } from "vue-router";
-import { EventBus } from "@aleatorik-ui/common-ui";
-import debounce from "lodash/debounce";
-import Button from "./Button.vue";
+import { ref, onBeforeMount, onMounted, onUnmounted, computed, watch, toRefs, nextTick, reactive, Ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { resizeVerticalSize } from '../utils/themeSet';
+import { useTranslation } from 'i18next-vue';
+import { useLayoutStore, useMenuLocationStore } from '../stores/mainStore';
+import { useRouter } from 'vue-router';
+import { EventBus } from '@aleatorik-ui/common-ui';
+import debounce from 'lodash/debounce';
+import Button from './Button.vue';
 
 /**
- * CONSTANT
+ * define CONSTANT
  */
 interface Actions {
-  action: "Add" | "Remove" | "Edit" | "Save" | "Cancel" | "Search";
+  action: 'Add' | 'Remove' | 'Edit' | 'Save' | 'Cancel' | 'Search' | 'Run' | 'Import' | 'Export';
   icon?: string;
   text?: string;
   disabled?: boolean;
@@ -100,7 +93,7 @@ const { t } = useTranslation();
  */
 const props = withDefaults(defineProps<Props>(), {
   height: 66,
-  showFilterButton: false,
+  showFilterButton: false
 });
 const { height, setControlHeight, showFilterButton, actions } = toRefs(props);
 
@@ -117,7 +110,7 @@ const handleResize = debounce(() => resizeLayout(true), 200);
  * life hook
  */
 onBeforeMount(() => {
-  EventBus.register("theme-changed", onThemeChanged);
+  EventBus.register('theme-changed', onThemeChanged);
 
   if (setControlHeight?.value) {
     setControlHeight.value(height.value);
@@ -126,12 +119,12 @@ onBeforeMount(() => {
 
 onMounted(() => {
   resizeLayout();
-  window.addEventListener("resize", handleResize);
+  window.addEventListener('resize', handleResize);
 });
 
 onUnmounted(() => {
-  EventBus.remove("theme-changed", onThemeChanged);
-  window.removeEventListener("resize", handleResize);
+  EventBus.remove('theme-changed', onThemeChanged);
+  window.removeEventListener('resize', handleResize);
   // if (observer) {
   //   observer.disconnect();
   // }
@@ -140,7 +133,7 @@ onUnmounted(() => {
 watch([showFilter], () => {
   nextTick(() => {
     resizeLayout(true);
-    EventBus.fire("horizontal-filter-toggle");
+    EventBus.fire('horizontal-filter-toggle');
   });
 });
 
@@ -151,23 +144,32 @@ watch([actions], () => {
         const _action = {
           icon: null,
           text: t(action.action),
-          ...action,
+          ...action
         };
         switch (action.action) {
-          case "Add":
-            _action.icon = "plus";
+          case 'Add':
+            _action.icon = 'plus';
             break;
-          case "Remove":
-            _action.icon = "trash";
+          case 'Remove':
+            _action.icon = 'trash';
             break;
-          case "Save":
-            _action.icon = "save";
+          case 'Save':
+            _action.icon = 'save';
             break;
-          case "Cancel":
-            _action.icon = "cancel";
+          case 'Cancel':
+            _action.icon = 'cancel';
             break;
-          case "Search":
-            _action.icon = "search";
+          case 'Search':
+            _action.icon = 'search';
+            break;
+          case 'Run':
+            _action.icon = 'play';
+            break;
+          case 'Import':
+            _action.icon = 'import';
+            break;
+          case 'Export':
+            _action.icon = 'download';
             break;
         }
 
@@ -179,16 +181,16 @@ watch([actions], () => {
 const title = computed(() => {
   const navis = (router.currentRoute.value.meta.navis as any[]) || [];
   if (
-    (navis && navis.length > 0 && menuLocation.menuLocation === "top") ||
-    menuLocation.menuLocation === "topandleft" ||
-    menuLocation.menuLocation === "topandtree"
+    (navis && navis.length > 0 && menuLocation.menuLocation === 'top') ||
+    menuLocation.menuLocation === 'topandleft' ||
+    menuLocation.menuLocation === 'topandtree'
   ) {
     let result: string[] = [];
     navis.reverse()?.forEach((element, index) => {
       result.push(t(element) as string);
     });
     return result;
-  } else if (menuLocation.menuLocation === "left" && navis && navis.length > 0) {
+  } else if (menuLocation.menuLocation === 'left' && navis && navis.length > 0) {
     return [t(navis[0]) as string];
   }
   return [];
@@ -214,7 +216,7 @@ const resizeLayout = (zero: boolean = false) => {
 const onClickToggleDrawer = () => {
   layout.setLayout({
     ...storeToRefs(layout),
-    drawer: true,
+    drawer: true
   });
 };
 
