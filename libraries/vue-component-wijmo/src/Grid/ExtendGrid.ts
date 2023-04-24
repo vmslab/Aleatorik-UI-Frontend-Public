@@ -1546,7 +1546,6 @@ export default class ExtendGrid {
     let removedItems = [...this.removed.values()].filter(item => !this.added.has(item._RID));
     let updatedItems = [...this.updated.values()].filter(item => !this.removed.has(item._RID));
     let addedItems = [...this.added.values()].filter(item => !this.removed.has(item._RID));
-    let remainItems = [...this.removed.values()].filter(item => this.added.has(item._RID));
 
     const grid = this.flexGrid,
       cv = grid.collectionView;

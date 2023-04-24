@@ -64,7 +64,7 @@
     </template>
     <template #filter>
       <div>
-        <label>{{ $t("Finished") }} {{ $t("Status") }}</label>
+        <label>{{ $t('Finished') }} {{ $t('Status') }}</label>
         <WjMultiSelect
           placeholder=""
           :showSelectAllCheckbox="true"
@@ -79,9 +79,7 @@
   <div class="todo moz-frame-for-outer-control">
     <WjFlexGrid
       style="width: 100%; height: var(--size-content-height)"
-      :itemsSource="
-        todoItems?.filter(item => options.checkedItems.some(checkItem => checkItem.value === item.isFinished))
-      "
+      :itemsSource="todoItems?.filter(item => options.checkedItems.some(checkItem => checkItem.value === item.isFinished))"
       :initialized="onInitialized"
       selectionMode="MultiRange"
       allowSorting="MultiColumn"
@@ -133,25 +131,25 @@
 </template>
 
 <script setup lang="ts">
-import { Get, Add, Modify, Remove } from "../../stores/queryStore";
-import { onMounted, ref, reactive } from "vue";
-import { useQuery, useQueryClient, useMutation } from "vue-query";
-import { ExtendGrid } from "@aleatorik-ui/vue-component-wijmo";
-import { WjFlexGrid, WjFlexGridColumn } from "@grapecity/wijmo.vue2.grid";
-import { WjMultiSelect } from "@grapecity/wijmo.vue2.input";
-import { FlexGrid } from "@grapecity/wijmo.grid";
-import { InputDateTime } from "@grapecity/wijmo.input";
+import { Get, Add, Modify, Remove } from '../../stores/queryStore';
+import { onMounted, ref, reactive } from 'vue';
+import { useQuery, useQueryClient, useMutation } from 'vue-query';
+import { ExtendGrid } from '@aleatorik-ui/vue-component-wijmo';
+import { WjFlexGrid, WjFlexGridColumn } from '@grapecity/wijmo.vue2.grid';
+import { WjMultiSelect } from '@grapecity/wijmo.vue2.input';
+import { FlexGrid } from '@grapecity/wijmo.grid';
+import { InputDateTime } from '@grapecity/wijmo.input';
 
-import "devextreme-vue/text-area";
-import { DxLoadPanel } from "devextreme-vue/load-panel";
-import { useTranslation } from "i18next-vue";
-import { generateGUID } from "@aleatorik-ui/common-ui";
-import { showMessage } from "../../utils/dialog";
-import { Controller } from "../../components";
-import DxButton from "devextreme-vue/button";
+import 'devextreme-vue/text-area';
+import { DxLoadPanel } from 'devextreme-vue/load-panel';
+import { useTranslation } from 'i18next-vue';
+import { generateGUID } from '@aleatorik-ui/common-ui';
+import { showMessage } from '../../utils/dialog';
+import { Controller } from '../../components';
+import DxButton from 'devextreme-vue/button';
 
-import { storeToRefs } from "pinia";
-import { useMenuStore } from "../../stores/mainStore";
+import { storeToRefs } from 'pinia';
+import { useMenuStore } from '../../stores/mainStore';
 
 const menuModule = useMenuStore();
 const { isEditing, currentMenu } = storeToRefs(menuModule);
@@ -159,8 +157,8 @@ const { isEditing, currentMenu } = storeToRefs(menuModule);
 const { t } = useTranslation();
 
 const finishedSelect = ref([
-  { state: t("Finished"), checked: true, value: true },
-  { state: t("InProgress"), checked: true, value: false },
+  { state: t('Finished'), checked: true, value: true },
+  { state: t('InProgress'), checked: true, value: false }
 ]);
 
 const todoItems = ref<any[] | null>([]);
@@ -171,57 +169,57 @@ const options = reactive({
   loading: false,
   filter: true,
   activeDelete: false,
-  checkedItems: [{ value: false }, { value: true }] as any[],
+  checkedItems: [{ value: false }, { value: true }] as any[]
 });
 const callResult = reactive({ add: 0, update: 0, remove: 0 });
 const queryClient = useQueryClient();
 
 const dateEditor = ref<InputDateTime>(
-  new InputDateTime(document.createElement("div"), {
-    format: "yyyy-MM-dd HH:mm:ss",
-  }),
+  new InputDateTime(document.createElement('div'), {
+    format: 'yyyy-MM-dd HH:mm:ss'
+  })
 );
 
-useQuery("Todo", ({ queryKey }) => Get(queryKey[0]), {
+useQuery('Todo', ({ queryKey }) => Get(queryKey[0]), {
   refetchOnWindowFocus: false,
   onSuccess: result => {
     menuModule.endEdit();
     if (result && result.data) todoItems.value = result.data;
     else todoItems.value = [];
 
-    showMessage("Data load complete", true);
+    showMessage('Data load complete', true);
   },
   onError: err => {
-    showMessage("An error occurred while loading data", false);
+    showMessage('An error occurred while loading data', false);
     todoItems.value = [];
-  },
+  }
 });
 
-const addTodo = useMutation(param => Add("Todo", param), {
+const addTodo = useMutation(param => Add('Todo', param), {
   onSuccess: result => {
     if (result && result.data > 0) callResult.add += result.data;
   },
   onError: err => {
-    showMessage("An error occurred while adding data", false);
-  },
+    showMessage('An error occurred while adding data', false);
+  }
 });
 
-const modifyTodo = useMutation(param => Modify("Todo", param), {
+const modifyTodo = useMutation(param => Modify('Todo', param), {
   onSuccess: result => {
     if (result && result.data > 0) callResult.update += result.data;
   },
   onError: err => {
-    showMessage("An error occurred while updating data", false);
-  },
+    showMessage('An error occurred while updating data', false);
+  }
 });
 
-const removeTodo = useMutation(param => Remove("Todo", param), {
+const removeTodo = useMutation(param => Remove('Todo', param), {
   onSuccess: result => {
     if (result && result.data > 0) callResult.remove += result.data;
   },
   onError: err => {
-    showMessage("An error occurred while removing data", false);
-  },
+    showMessage('An error occurred while removing data', false);
+  }
 });
 
 onMounted(async () => {
@@ -232,19 +230,19 @@ const onInitialized = (flexGrid: FlexGrid) => {
   grid.value = flexGrid;
   flexGrid.beginningEdit.addHandler((s, e) => {
     switch (e.getColumn().binding) {
-      case "contents":
+      case 'contents':
         e.getRow().height = 150;
         break;
     }
   });
   flexGrid.cellEditEnded.addHandler((s, e) => {
     switch (e.getColumn().binding) {
-      case "contents":
+      case 'contents':
         e.getRow().height = null;
         break;
-      case "isFinished":
-        if (!e.getRow().dataItem["finishedDate"] && s.getCellData(e.row, e.col, false)) {
-          e.getRow().dataItem["finishedDate"] = new Date();
+      case 'isFinished':
+        if (!e.getRow().dataItem['finishedDate'] && s.getCellData(e.row, e.col, false)) {
+          e.getRow().dataItem['finishedDate'] = new Date();
           s.refreshCells(false);
         }
         break;
@@ -253,8 +251,8 @@ const onInitialized = (flexGrid: FlexGrid) => {
   extendgrid.value = new ExtendGrid({
     flexGrid,
     dataOptions: {
-      dataKey: "id",
-      validateKey: "save",
+      dataKey: 'id',
+      validateKey: 'save'
     },
     gridOptions: {
       useParseDate: true,
@@ -279,7 +277,7 @@ const onInitialized = (flexGrid: FlexGrid) => {
             for await (const item of addItems) {
               await addTodo.mutateAsync(item.data);
             }
-            showMessage(`Added ${callResult.add} Row${callResult.add > 1 ? "s" : ""}`, callResult.add > 0);
+            showMessage(`Added ${callResult.add} Row${callResult.add > 1 ? 's' : ''}`, callResult.add > 0);
           }
 
           if (updateItems?.length > 0) {
@@ -287,7 +285,7 @@ const onInitialized = (flexGrid: FlexGrid) => {
             for await (const item of updateItems) {
               await modifyTodo.mutateAsync(item.data);
             }
-            showMessage(`Updated ${callResult.update} Row${callResult.update > 1 ? "s" : ""}`, callResult.update > 0);
+            showMessage(`Updated ${callResult.update} Row${callResult.update > 1 ? 's' : ''}`, callResult.update > 0);
           }
 
           if (removeItems?.length > 0) {
@@ -295,7 +293,7 @@ const onInitialized = (flexGrid: FlexGrid) => {
             for await (const item of removeItems) {
               await removeTodo.mutateAsync(item.key);
             }
-            showMessage(`Removed ${callResult.remove} Row${callResult.remove > 1 ? "s" : ""}`, callResult.remove > 0);
+            showMessage(`Removed ${callResult.remove} Row${callResult.remove > 1 ? 's' : ''}`, callResult.remove > 0);
           }
         } catch {
           options.loading = false;
@@ -305,14 +303,14 @@ const onInitialized = (flexGrid: FlexGrid) => {
         menuModule.endEdit();
         options.loading = false;
         return true;
-      },
-    },
+      }
+    }
   });
 };
 
 const loadData = async () => {
   options.loading = true;
-  queryClient.invalidateQueries("Todo");
+  queryClient.invalidateQueries('Todo');
   options.loading = false;
 };
 

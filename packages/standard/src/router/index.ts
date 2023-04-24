@@ -74,11 +74,11 @@ const router = createRouter({
           beforeEnter
         },
         {
-          path: "CodeCategoryMaster",
-          name: "코드 그룹",
-          meta: { id: "CodeCategoryMaster", module: this },
-          component: () => import("../views/mdm/MdmCodeCategoryMaster.vue"),
-          beforeEnter,
+          path: 'CodeCategoryMaster',
+          name: '코드 그룹',
+          meta: { id: 'CodeCategoryMaster', module: this },
+          component: () => import('../views/mdm/MdmCodeCategoryMaster.vue'),
+          beforeEnter
         },
         {
           path: 'CodeGroupSub1',
@@ -110,11 +110,11 @@ const router = createRouter({
           beforeEnter
         },
         {
-          path: "ItemSiteBufferMaster",
-          name: "ISB 정보",
-          meta: { id: "ItemSiteBufferMaster", module: this },
-          component: () => import("../views/mdm/MdmItemSiteBufferMaster.vue"),
-          beforeEnter,
+          path: 'ItemSiteBufferMaster',
+          name: 'ISB 정보',
+          meta: { id: 'ItemSiteBufferMaster', module: this },
+          component: () => import('../views/mdm/MdmItemSiteBufferMaster.vue'),
+          beforeEnter
         },
         {
           path: 'BomMaster',
@@ -189,11 +189,11 @@ const router = createRouter({
         },
         /** -------------------------------------------------------------------------------------------- */
         {
-          path: "CustMaster",
-          name: "고객 정보",
-          meta: { id: "CustMaster", module: this },
-          component: () => import("../views/mdm/MdmCustMaster.vue"),
-          beforeEnter,
+          path: 'CustMaster',
+          name: '고객 정보',
+          meta: { id: 'CustMaster', module: this },
+          component: () => import('../views/mdm/MdmCustMaster.vue'),
+          beforeEnter
         },
         {
           path: 'Demand',
@@ -232,11 +232,11 @@ const router = createRouter({
           beforeEnter
         },
         {
-          path: "Constraint",
-          name: "CONSTRAINT INFO",
-          meta: { id: "ConstInfo", module: this },
-          component: () => import("../views/mdm/MdmConstraint.vue"),
-          beforeEnter,
+          path: 'Constraint',
+          name: 'CONSTRAINT INFO',
+          meta: { id: 'ConstInfo', module: this },
+          component: () => import('../views/mdm/MdmConstraint.vue'),
+          beforeEnter
         },
         {
           path: 'PmPlan',
@@ -254,11 +254,11 @@ const router = createRouter({
         },
         /** -------------------------------------------------------------------------------------------- */
         {
-          path: "CalendarMaster",
-          name: "캘린더마스터",
-          meta: { id: "CalendarMaster", module: this },
-          component: () => import("../views/mdm/MdmCalendarMaster.vue"),
-          beforeEnter,
+          path: 'CalendarMaster',
+          name: '캘린더마스터',
+          meta: { id: 'CalendarMaster', module: this },
+          component: () => import('../views/mdm/MdmCalendarMaster.vue'),
+          beforeEnter
         },
         {
           path: 'CalSub1',
@@ -298,11 +298,11 @@ const router = createRouter({
           beforeEnter
         },
         {
-          path: "FactorMaster",
-          name: "Factor 관리",
-          meta: { id: "FactorMaster", module: this },
-          component: () => import("../views/plm/PlmFactorMaster.vue"),
-          beforeEnter,
+          path: 'FactorMaster',
+          name: 'Factor 관리',
+          meta: { id: 'FactorMaster', module: this },
+          component: () => import('../views/plm/PlmFactorMaster.vue'),
+          beforeEnter
         },
         {
           path: 'Scenario',
@@ -485,6 +485,13 @@ const router = createRouter({
           name: 'Graph',
           meta: { id: 'graph', module: this },
           component: () => import('../views/exp/Graph.vue'),
+          beforeEnter
+        },
+        {
+          path: 'employee',
+          name: 'Employee',
+          meta: { id: 'employee', module: this },
+          component: () => import('../views/exp/Employee.vue'),
           beforeEnter
         }
       ]
