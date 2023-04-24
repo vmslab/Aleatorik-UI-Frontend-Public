@@ -1,6 +1,6 @@
-import { defineStore, storeToRefs } from "pinia";
-import dayjs from "dayjs";
-import notify from "devextreme/ui/notify";
+import { defineStore, storeToRefs } from 'pinia';
+import dayjs from 'dayjs';
+import notify from 'devextreme/ui/notify';
 import {
   setCssSizeVariable,
   DRAWER_MAX,
@@ -13,29 +13,29 @@ import {
   SIDE_TAB_BAR_WIDTH,
   MENU_HEIGHT,
   STATUS_HEIGHT,
-  IThemeData,
-} from "@aleatorik-ui/common-ui";
-import router from "../router";
-import { systemId } from "../utils/env";
-import { ITreeNode, makeMenuChildren, makeToHierarchicalFormat } from "../../src/utils/tree";
-import { Get } from "./queryStore";
+  IThemeData
+} from '@aleatorik-ui/common-ui';
+import router from '../router';
+import { systemId } from '../utils/env';
+import { ITreeNode, makeMenuChildren, makeToHierarchicalFormat } from '../../src/utils/tree';
+import { Get } from './queryStore';
 export type IMenu = {
   systemId: string;
   menuId: string;
-  type: "Category" | "Menu";
+  type: 'Category' | 'Menu';
   name: string;
   path: string;
   categoryId?: string;
   sequence?: number;
   separator?: boolean;
-  state?: "loaded" | "added" | "removed";
+  state?: 'loaded' | 'added' | 'removed';
   params?: string;
   isRead?: boolean;
   isWrite?: boolean;
   items?: IMenu[];
 };
 
-export const useLayoutStore = defineStore("layout", {
+export const useLayoutStore = defineStore('layout', {
   state: () => ({
     width: 0,
     height: 0,
@@ -50,14 +50,14 @@ export const useLayoutStore = defineStore("layout", {
     statusHeight: STATUS_HEIGHT,
     drawer: true,
     login: false,
-    compact: true,
+    compact: true
   }),
   getters: {
     renderType(layout) {
       return () => {
         return layout.login ? 1 : 0;
       };
-    },
+    }
   },
   actions: {
     setLayout(from: any) {
@@ -80,27 +80,27 @@ export const useLayoutStore = defineStore("layout", {
         controlHeight: this.controlHeight,
         sideTabBarWidth: this.sideTabBarWidth,
         menuHeight: this.menuHeight,
-        statusHeight: this.statusHeight,
+        statusHeight: this.statusHeight
       });
-    },
-  },
+    }
+  }
 });
 
-export const useLoadStore = defineStore("load", {
+export const useLoadStore = defineStore('load', {
   state: () => ({
-    loading: false,
+    loading: false
   }),
   actions: {
     setLoad(from: any) {
       this.loading = from.loading;
-    },
-  },
+    }
+  }
 });
 
-export const useAlarmStore = defineStore("alarm", {
+export const useAlarmStore = defineStore('alarm', {
   state: () => ({
-    message: "",
-    type: "success",
+    message: '',
+    type: 'success'
   }),
   actions: {
     setAlarm(from: any) {
@@ -111,89 +111,89 @@ export const useAlarmStore = defineStore("alarm", {
           message: this.message,
           type: this.type,
           displayTime: 2000,
-          width: "auto",
+          width: 'auto',
           minWidth: 150,
           animation: {
             show: {
-              type: "fade",
+              type: 'fade',
               duration: 400,
               from: 0,
-              to: 1,
+              to: 1
             },
-            hide: { type: "fade", duration: 40, to: 0 },
-          },
+            hide: { type: 'fade', duration: 40, to: 0 }
+          }
         },
-        { position: "bottom center", direction: "up-push" },
+        { position: 'bottom center', direction: 'up-push' }
       );
-    },
-  },
+    }
+  }
 });
 
-export const useUserStore = defineStore("user", {
+export const useUserStore = defineStore('user', {
   state: () => ({
-    role: "",
-    name: "",
-    email: "",
+    role: '',
+    name: '',
+    email: ''
   }),
   actions: {
     setUser(from: any) {
       this.role = from.role;
       this.name = from.name;
       this.email = from.email;
-    },
-  },
+    }
+  }
 });
 
-export const usePathStore = defineStore("path", {
+export const usePathStore = defineStore('path', {
   state: () => ({
-    path: "",
+    path: ''
   }),
   actions: {
     setPath(from: any) {
       this.path = from.path;
-    },
-  },
+    }
+  }
 });
 
-export const useServerStore = defineStore("server", {
+export const useServerStore = defineStore('server', {
   state: () => ({
-    time: dayjs(),
+    time: dayjs()
   }),
   actions: {
     setServer(from: any) {
       this.time = from.time;
-    },
-  },
+    }
+  }
 });
 
-export const useThemeStore = defineStore("theme", {
+export const useThemeStore = defineStore('theme', {
   state: (): {
-    theme: "light" | "dark";
-    compact: "normal" | "compact";
+    theme: 'light' | 'dark';
+    compact: 'normal' | 'compact';
     themeData: IThemeData;
   } => ({
-    theme: "light",
-    compact: "normal",
+    theme: 'light',
+    compact: 'normal',
     themeData: {
       common: {},
       light: {},
       dark: {},
       compact: {},
-      normal: {},
-    },
+      normal: {}
+    }
   }),
   actions: {
     setTheme(from: any) {
       this.theme = from.theme;
       this.compact = from.compact;
       this.themeData = from.themeData;
-    },
-  },
+    }
+  }
 });
 
-export const useMenuLocationStore = defineStore("menuLocation", {
+export const useMenuLocationStore = defineStore('menuLocation', {
   state: () => ({
-    menuLocation: "topandleft",
+    menuLocation: 'topandleft'
   }),
   actions: {
     setMenuLocation(value: string) {
@@ -201,17 +201,17 @@ export const useMenuLocationStore = defineStore("menuLocation", {
 
       let menuSizeObj = storeToRefs(layout);
 
-      if (value === "top") {
+      if (value === 'top') {
         menuSizeObj.drawer.value = false;
         menuSizeObj.drawerWidth.value = 0;
         menuSizeObj.drawerMax.value = 0;
         menuSizeObj.drawerMin.value = 0;
-      } else if (value === "topandleft" || value === "topandtree") {
+      } else if (value === 'topandleft' || value === 'topandtree') {
         menuSizeObj.drawer.value = true;
         menuSizeObj.drawerWidth.value = 200;
         menuSizeObj.drawerMax.value = 200;
         menuSizeObj.drawerMin.value = 0;
-      } else if (value === "left") {
+      } else if (value === 'left') {
         menuSizeObj.drawer.value = true;
         menuSizeObj.drawerWidth.value = DRAWER_MAX;
         menuSizeObj.drawerMax.value = DRAWER_MAX;
@@ -220,15 +220,15 @@ export const useMenuLocationStore = defineStore("menuLocation", {
       this.menuLocation = value;
 
       layout.setLayout({
-        ...menuSizeObj,
+        ...menuSizeObj
       });
-    },
-  },
+    }
+  }
 });
 
-export const useMenuItems = defineStore("menuItems", {
+export const useMenuItems = defineStore('menuItems', {
   state: () => ({
-    items: [] as any[],
+    items: [] as any[]
   }),
   getters: {
     getMenuSetting(): any[] {
@@ -239,13 +239,13 @@ export const useMenuItems = defineStore("menuItems", {
       const menuModule = useMenuStore();
       const { getTopAndLeft, getLeftTreeMenu } = storeToRefs(menuModule);
 
-      if (menuLocation.value === "topandleft") {
+      if (menuLocation.value === 'topandleft') {
         return getTopAndLeft.value;
-      } else if (menuLocation.value === "topandtree") {
+      } else if (menuLocation.value === 'topandtree') {
         return getLeftTreeMenu.value;
       }
       return [];
-    },
+    }
   },
   actions: {
     setMenuItems(from: any) {
@@ -253,28 +253,28 @@ export const useMenuItems = defineStore("menuItems", {
     },
     clearMenuItems() {
       this.items = [];
-    },
-  },
+    }
+  }
 });
 
-export const useMenuStore = defineStore("menu", {
+export const useMenuStore = defineStore('menu', {
   state: () => ({
     rootMenu: {} as IMenu,
     secondMenu: undefined as IMenu | undefined,
     currentMenu: {} as IMenu | undefined,
     rootItems: [] as IMenu[],
     menuItems: [] as ITreeNode[],
-    currentMenuId: "" as string,
-    categoryId: "" as string,
+    currentMenuId: '' as string,
+    categoryId: '' as string,
     navis: [] as string[],
-    isEditing: false,
+    isEditing: false
   }),
   getters: {
     getcurrent(state): IMenu | undefined {
       return state.currentMenu;
     },
     rootMenuId(state): string {
-      if (!state.rootMenu) return "";
+      if (!state.rootMenu) return '';
       return state.rootMenu.menuId;
     },
     targetId(state): string {
@@ -312,12 +312,12 @@ export const useMenuStore = defineStore("menu", {
 
       itemArr.push(
         ...menus
-          .filter(t => (t.categoryId === "" || t.categoryId == null) && t.type === "Category")
+          .filter(t => (t.categoryId === '' || t.categoryId == null) && t.type === 'Category')
           .map(t => {
             const onlyParent = Object.assign({}, t);
             delete onlyParent.items;
             return onlyParent;
-          }),
+          })
       );
 
       return itemArr;
@@ -329,7 +329,7 @@ export const useMenuStore = defineStore("menu", {
 
       const menus = [...menuItems.items];
 
-      return menus.filter(t => t.categoryId === this.targetId && t.type === "Menu");
+      return menus.filter(t => t.categoryId === this.targetId && t.type === 'Menu');
     },
     getLeftTreeMenu(): any[] {
       const menuItems = useMenuItems();
@@ -348,7 +348,7 @@ export const useMenuStore = defineStore("menu", {
       const menuItems = useMenuItems();
 
       return menuItems.items.find(t => t.menuId === id);
-    },
+    }
   },
   actions: {
     async loadData(forceUpdate = false) {
@@ -360,7 +360,7 @@ export const useMenuStore = defineStore("menu", {
 
         if (forceUpdate || menuItems.items.length === 0) {
           try {
-            const result = await Get("Menu", { systemId: systemId, email: email.value });
+            const result = await Get('Menu', { systemId: systemId, email: email.value });
             menuItems.setMenuItems(result.data);
           } catch (e) {
             console.log(e);
@@ -369,14 +369,14 @@ export const useMenuStore = defineStore("menu", {
         }
 
         const path = router.currentRoute.value.path;
-        if (path === "/" || path === `/${systemId}`) return;
+        if (path === '/' || path.startsWith(`${systemId ? `/${systemId}` : ``}/main`)) return;
 
         const currentMenu = menuItems.items.find((menu: IMenu) => menu.path === path);
         if (currentMenu) {
           if (currentMenu.isRead) this.setCurrentMenu(currentMenu);
-          else router.push("/401");
+          else router.push('/401');
         } else {
-          router.push("/401");
+          router.push('/401');
         }
       } catch (error) {
         console.log(error);
@@ -393,24 +393,24 @@ export const useMenuStore = defineStore("menu", {
 
       this.rootMenu = value;
       if (this.rootMenu) {
-        if (this.rootMenu.type === "Menu") {
+        if (this.rootMenu.type === 'Menu') {
           this.menuItems = [
             {
               name: this.rootMenu.type,
-              menu: this.rootMenu,
-            },
+              menu: this.rootMenu
+            }
           ];
         } else {
           this.menuItems = [
             {
               name: this.rootMenu.type,
               menu: this.rootMenu,
-              children: makeMenuChildren(this.rootMenu.menuId, menuItems.items),
-            },
+              children: makeMenuChildren(this.rootMenu.menuId, menuItems.items)
+            }
           ];
         }
       } else {
-        this.menuItems = makeMenuChildren("", menuItems.items);
+        this.menuItems = makeMenuChildren('', menuItems.items);
       }
     },
     setCurrentMenuId(value: string) {
@@ -426,19 +426,19 @@ export const useMenuStore = defineStore("menu", {
       const menuItem = menuItems.items.find(menu => menu.menuId === value.menuId);
 
       this.setCurrentMenuId(menuItem.menuId);
-      this.setCategoryId(menuItem.categoryId || "");
+      this.setCategoryId(menuItem.categoryId || '');
       this.changeCurrentMenu(menuItem);
 
       const categoryMenu = menuItems.items.find(t => t.menuId === menuItem.categoryId)!;
 
       if (!categoryMenu) {
-        if (menuItem.categoryId === "Favorite") {
+        if (menuItem.categoryId === 'Favorite') {
           this.changeRootMenu({
             systemId: systemId,
-            menuId: "Favorite",
-            type: "Category",
-            name: "",
-            path: "/favorite",
+            menuId: 'Favorite',
+            type: 'Category',
+            name: '',
+            path: '/favorite'
           });
         } else {
           this.changeRootMenu(undefined);
@@ -447,7 +447,7 @@ export const useMenuStore = defineStore("menu", {
         return;
       }
 
-      if (categoryMenu.type === "Category") {
+      if (categoryMenu.type === 'Category') {
         const rootMenu = menuItems.items.find(t => t.menuId === categoryMenu.categoryId)!;
 
         if (rootMenu) {
@@ -476,8 +476,8 @@ export const useMenuStore = defineStore("menu", {
     },
     setIsEditing(isEditing: boolean) {
       this.isEditing = isEditing;
-    },
-  },
+    }
+  }
 });
 
 export const getNavis = async (path: string, navis: string[]): Promise<string[]> => {

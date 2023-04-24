@@ -41,22 +41,23 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
-import { storeToRefs } from "pinia";
-import { useMutation } from "vue-query";
-import { useTranslation } from "i18next-vue";
-import DxButton from "devextreme-vue/button";
-import DxTextBox from "devextreme-vue/text-box";
-import { DxValidator, DxRequiredRule, DxPatternRule, DxStringLengthRule, DxEmailRule } from "devextreme-vue/validator";
-import { DxCheckBox } from "devextreme-vue/check-box";
+import { onBeforeMount, computed, ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMutation } from 'vue-query';
+import { useTranslation } from 'i18next-vue';
+import DxButton from 'devextreme-vue/button';
+import DxTextBox from 'devextreme-vue/text-box';
+import { DxValidator, DxRequiredRule, DxPatternRule, DxStringLengthRule, DxEmailRule } from 'devextreme-vue/validator';
+import { DxCheckBox } from 'devextreme-vue/check-box';
 
-import { Login as LoginCall, getCookie, setCookie, parseExpires, removeCookie } from "@aleatorik-ui/common-api";
-import { encodeUnescapeBtoa, decodeEscapeAtob } from "@aleatorik-ui/common-ui";
-import { useLayoutStore, useLoadStore, useAlarmStore, useUserStore, useMenuStore, useThemeStore } from "../stores/mainStore";
+import { Login as LoginCall, getCookie, setCookie, parseExpires, removeCookie } from '@aleatorik-ui/common-api';
+import { encodeUnescapeBtoa, decodeEscapeAtob } from '@aleatorik-ui/common-ui';
+import { useLayoutStore, useLoadStore, useAlarmStore, useUserStore, useMenuStore, useThemeStore } from '../stores/mainStore';
 
-import sha256 from "crypto-js/sha256";
-import router from "../router";
-import { domain } from "../utils/env";
+import sha256 from 'crypto-js/sha256';
+import router from '../router';
+import { domain } from '../utils/env';
+import { systemPath } from '../router/index';
 
 const { t } = useTranslation();
 
@@ -67,18 +68,24 @@ const user = useUserStore();
 const menuModule = useMenuStore();
 const themeModule = useThemeStore();
 
-const { width, height } = storeToRefs(layout);
+const { width, height, renderType } = storeToRefs(layout);
 const { theme } = storeToRefs(themeModule);
 
-const savedId = ref(decodeEscapeAtob(getCookie("save_id")));
+const savedId = ref(decodeEscapeAtob(getCookie('save_id')));
 const id = ref(savedId.value);
-const pw = ref("");
+const pw = ref('');
 let saveId = savedId.value ? true : false;
+
+onBeforeMount(() => {
+  if (renderType.value() === 1) {
+    router.push(`${systemPath}/main`);
+  }
+});
 
 const failedLogin = (message: string) => {
   alarm.setAlarm({
     message,
-    type: "error"
+    type: 'error'
   });
 };
 
@@ -86,15 +93,15 @@ const mutation = useMutation(LoginCall, {
   onSuccess: async result => {
     if (result && result.data && result.data.success) {
       const refreshToken = encodeUnescapeBtoa(result.data.refreshToken);
-      setCookie("refresh_token", refreshToken, {
-        path: "/",
-        sameSite: "strict",
+      setCookie('refresh_token', refreshToken, {
+        path: '/',
+        sameSite: 'strict',
         expires: parseExpires(result.data.expiration)
       });
       if (saveId) {
-        setCookie("save_id", encodeUnescapeBtoa(id.value), { sameSite: "strict" });
+        setCookie('save_id', encodeUnescapeBtoa(id.value), { sameSite: 'strict' });
       } else {
-        removeCookie("save_id");
+        removeCookie('save_id');
       }
       user.setUser({
         name: result.data.name,
@@ -106,10 +113,10 @@ const mutation = useMutation(LoginCall, {
         login: true
       });
     } else {
-      failedLogin("SignIn Failed!");
+      failedLogin('SignIn Failed!');
     }
     menuModule.resetData();
-    router.push("/");
+    router.push('/');
     load.setLoad({ loading: false });
   },
   onError: (err: any) => {
@@ -126,7 +133,7 @@ const onLogin = async () => {
 
 const onCheckId = () => {
   if (!id.value) return;
-  if (id.value.search("@") === -1) {
+  if (id.value.search('@') === -1) {
     id.value += `@${domain}`;
   }
 };
