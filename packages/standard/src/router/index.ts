@@ -74,19 +74,11 @@ const router = createRouter({
           beforeEnter
         },
         {
-<<<<<<< Updated upstream
-          path: 'CodeGroupMaster',
-          name: '코드 그룹',
-          meta: { id: 'CodeGroupMaster', module: this },
-          component: () => import('../views/mdm/MdmCodeGroupMaster.vue'),
-          beforeEnter
-=======
           path: "CodeCategoryMaster",
           name: "코드 그룹",
           meta: { id: "CodeCategoryMaster", module: this },
           component: () => import("../views/mdm/MdmCodeCategoryMaster.vue"),
           beforeEnter,
->>>>>>> Stashed changes
         },
         {
           path: 'CodeGroupSub1',
@@ -118,19 +110,11 @@ const router = createRouter({
           beforeEnter
         },
         {
-<<<<<<< Updated upstream
-          path: 'IsbMaster',
-          name: 'ISB 정보',
-          meta: { id: 'IsbMaster', module: this },
-          component: () => import('../views/mdm/MdmIsbMaster.vue'),
-          beforeEnter
-=======
           path: "ItemSiteBufferMaster",
           name: "ISB 정보",
           meta: { id: "ItemSiteBufferMaster", module: this },
           component: () => import("../views/mdm/MdmItemSiteBufferMaster.vue"),
           beforeEnter,
->>>>>>> Stashed changes
         },
         {
           path: 'BomMaster',
@@ -205,19 +189,11 @@ const router = createRouter({
         },
         /** -------------------------------------------------------------------------------------------- */
         {
-<<<<<<< Updated upstream
-          path: 'CustInfo',
-          name: '고객 정보',
-          meta: { id: 'CustInfo', module: this },
-          component: () => import('../views/mdm/MdmCustInfo.vue'),
-          beforeEnter
-=======
           path: "CustMaster",
           name: "고객 정보",
           meta: { id: "CustMaster", module: this },
           component: () => import("../views/mdm/MdmCustMaster.vue"),
           beforeEnter,
->>>>>>> Stashed changes
         },
         {
           path: 'Demand',
@@ -256,19 +232,11 @@ const router = createRouter({
           beforeEnter
         },
         {
-<<<<<<< Updated upstream
-          path: 'ConstInfo',
-          name: 'CONSTRAINT INFO',
-          meta: { id: 'ConstInfo', module: this },
-          component: () => import('../views/mdm/MdmConstInfo.vue'),
-          beforeEnter
-=======
           path: "Constraint",
           name: "CONSTRAINT INFO",
           meta: { id: "ConstInfo", module: this },
           component: () => import("../views/mdm/MdmConstraint.vue"),
           beforeEnter,
->>>>>>> Stashed changes
         },
         {
           path: 'PmPlan',
@@ -286,19 +254,11 @@ const router = createRouter({
         },
         /** -------------------------------------------------------------------------------------------- */
         {
-<<<<<<< Updated upstream
-          path: 'CalMaster',
-          name: '캘린더마스터',
-          meta: { id: 'CalMaster', module: this },
-          component: () => import('../views/mdm/MdmCalMaster.vue'),
-          beforeEnter
-=======
           path: "CalendarMaster",
           name: "캘린더마스터",
           meta: { id: "CalendarMaster", module: this },
           component: () => import("../views/mdm/MdmCalendarMaster.vue"),
           beforeEnter,
->>>>>>> Stashed changes
         },
         {
           path: 'CalSub1',
@@ -338,19 +298,11 @@ const router = createRouter({
           beforeEnter
         },
         {
-<<<<<<< Updated upstream
-          path: 'Factor',
-          name: 'Factor 관리',
-          meta: { id: 'Factor', module: this },
-          component: () => import('../views/plm/PlmFactor.vue'),
-          beforeEnter
-=======
           path: "FactorMaster",
           name: "Factor 관리",
           meta: { id: "FactorMaster", module: this },
           component: () => import("../views/plm/PlmFactorMaster.vue"),
           beforeEnter,
->>>>>>> Stashed changes
         },
         {
           path: 'Scenario',
