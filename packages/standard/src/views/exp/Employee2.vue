@@ -1,6 +1,6 @@
 <template>
   <Controller
-    :show-filter-button="false"
+    :show-filter-button="true"
     :actions="[
       {
         action: 'Add',
@@ -25,13 +25,26 @@
       }
     ]"
   >
+    <template #filter>
+      <div>
+        <label>{{ $t('부서') }}</label>
+        <WjMultiSelect
+          ref="deptSelect"
+          placeholder="부서 선택"
+          :showSelectAllCheckbox="true"
+          :itemsSource="deptList"
+          :itemsSourceChanged="onItemsSourceChanged"
+          :checkedItemsChanged="onCheckedItemsChanged"
+        ></WjMultiSelect>
+      </div>
+    </template>
   </Controller>
   <div class="moz-frame-for-outer-control">
     <WjFlexGrid
       style="width: 100%; height: calc(var(--size-content-inner-height-outer-controller) - 4px)"
       :autoGenerateColumns="false"
       :alternatingRowStep="0"
-      :itemsSource="dataSource"
+      :itemsSource="filteredSource"
       :initialized="onInitialized"
       :selectionChanged="onSelectionChanged"
       :isReadOnly="!currentMenu?.isWrite"
@@ -78,12 +91,13 @@
   </div>
 </template>
 <script setup lang="ts">
-import { onMounted, ref, reactive } from 'vue';
+import { onMounted, ref, reactive, computed } from 'vue';
 import { useQuery, useQueryClient, useMutation } from 'vue-query';
 import { ExtendGrid } from '@aleatorik-ui/vue-component-wijmo';
 import { WjFlexGrid, WjFlexGridColumn } from '@grapecity/wijmo.vue2.grid';
+import { WjMultiSelect } from '@grapecity/wijmo.vue2.input';
 import { FlexGrid } from '@grapecity/wijmo.grid';
-import { InputDateTime, InputMask } from '@grapecity/wijmo.input';
+import { InputDateTime, InputMask, MultiSelect } from '@grapecity/wijmo.input';
 
 import { useTranslation } from 'i18next-vue';
 import { showDialog, showMessage } from '../../utils/dialog';
@@ -94,6 +108,7 @@ import { Call } from '../../stores/queryStore';
 import Controller from '../../components/Controller.vue';
 import LoadPanel from '../../components/LoadPanel.vue';
 import { disableKeyColumnEdit } from '../../utils/commonFunc';
+import { EventArgs } from '@grapecity/wijmo';
 
 /**
  * CONSTANT
@@ -124,13 +139,18 @@ const phoneEditor = ref<InputMask>(
 const options = reactive({
   loading: false,
   filter: true,
-  activeDelete: false
+  activeDelete: false,
+  checkedItems: [] as any[]
 });
 
+const filteredSource = computed(() => dataSource?.value?.filter(d => options.checkedItems.includes(d.department)));
 const dataSource = ref<any[] | null>([]); // data list
 const grid = ref<FlexGrid | null>(null);
 const extendGrid = ref<ExtendGrid | null>(null);
-const gridKeys: string[] = ['empNO'];
+const gridKeys: string[] = ['empNo'];
+
+const deptSelect = ref();
+const deptList = ref<string[] | null>([]);
 
 /**
  * Initialize
@@ -138,6 +158,9 @@ const gridKeys: string[] = ['empNO'];
 onMounted(async () => {
   await loadData();
 });
+
+// select box initialize
+const onDeptInitialized = (e: any) => {};
 
 // grid initialize
 const onInitialized = (flexGrid: FlexGrid) => {
@@ -172,6 +195,7 @@ const onInitialized = (flexGrid: FlexGrid) => {
 // data loaded cache reset and reload
 const loadData = async () => {
   options.loading = true;
+  queryClient.invalidateQueries('TrDepartment');
   queryClient.invalidateQueries('TrEmployee');
   extendGrid.value?.clearChanges();
   onCellEditEnded();
@@ -181,6 +205,21 @@ const loadData = async () => {
 /**
  * API Call
  */
+// data load api
+useQuery('TrDepartment', ({ queryKey }) => Call(`TrDepartment?createUser=${email.value}`), {
+  refetchOnWindowFocus: false,
+  onSuccess: result => {
+    menuModule.endEdit();
+
+    if (result && result.data) deptList.value = result.data;
+    else deptList.value = [];
+  },
+  onError: err => {
+    showMessage('An error occurred while loading data', false);
+    deptList.value = [];
+  }
+});
+
 // data load api
 useQuery('TrEmployee', ({ queryKey }) => Call(`TrEmployee?createUser=${email.value}`), {
   refetchOnWindowFocus: false,
@@ -246,7 +285,7 @@ const onRemove = async () => {
             count: _rows.length
           })
         : t(`confirmDeleteSingleRow`, {
-            id: _rows[0]?.dataItem[gridKeys[0]]
+            id: _rows[0]?.dataItem?.siteID
           })
   });
 
@@ -286,6 +325,19 @@ const onSave = async () => {
 /**
  * Event
  */
+const onItemsSourceChanged = (s: MultiSelect, e: EventArgs) => {
+  s.itemsSource.forEach((item: any) => {
+    s.checkedItems.push(item);
+  });
+
+  s.invalidate();
+  onCheckedItemsChanged(s);
+};
+
+const onCheckedItemsChanged = (s: any) => {
+  options.checkedItems = s.checkedItems;
+};
+
 const onSelectionChanged = () => {
   const flexGrid = grid.value;
   if (!flexGrid) return;
