@@ -83,9 +83,9 @@ import LoadPanel from '../../components/LoadPanel.vue';
 import { disableKeyColumnEdit } from '../../utils/commonFunc';
 
 /**
- * CONSTANT
+ * Define CONSTANT
  */
-const menuModule = useMenuStore();
+const menuModule = useMenuStore(); 
 const { isEditing, currentMenu } = storeToRefs(menuModule);
 
 const { t } = useTranslation(); // 다국어
@@ -283,4 +283,7 @@ const pastingCell = (grid: any, e: any) => {
 const beginningEdit = (grid: any, e: any) => {
   disableKeyColumnEdit(grid, e, gridKeys);
 };
+
+
+
 </script>

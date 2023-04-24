@@ -218,10 +218,10 @@ const router = createRouter({
           beforeEnter
         },
         {
-          path: 'OperResMaster',
+          path: 'OperRes',
           name: 'OPERATION RESOURCE',
-          meta: { id: 'OperResMaster', module: this },
-          component: () => import('../views/mdm/MdmOperResMaster.vue'),
+          meta: { id: 'OperRes', module: this },
+          component: () => import('../views/mdm/MdmOperRes.vue'),
           beforeEnter
         },
         {
