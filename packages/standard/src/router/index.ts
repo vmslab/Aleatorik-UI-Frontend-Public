@@ -489,6 +489,20 @@ const router = createRouter({
         },
       ]
     },
+    {
+      path: `${systemPath}/edu`,
+      name: 'Education',
+      component: () => import('../views/Main.vue'),
+      children: [
+        {
+          path: 'empm0',
+          name: 'Employee',
+          meta: { id: 'empm0', module: this },
+          component: () => import('../views/exp/TrEmployee0.vue'),
+          beforeEnter
+        },
+      ]
+    },
     /** -------------------------------------------------------------------------------------------- */
     {
       path: '/:pathMatch(.*)*',
