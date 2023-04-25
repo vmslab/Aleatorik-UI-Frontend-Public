@@ -29,8 +29,6 @@ export { ScrollBar } from "@aleatorik-ui/common-ui";
 
 export { Flow, FlowClone, FlowMinimap } from "@aleatorik-ui/common-ui";
 
-import Editor from "./components/Editor/Editor";
-
 import Graph from "./components/Graph/Graph";
 
 import dedent from "./utils/dedent";

@@ -487,20 +487,6 @@ const router = createRouter({
           component: () => import('../views/exp/Graph.vue'),
           beforeEnter
         },
-        {
-          path: 'employee',
-          name: 'Employee',
-          meta: { id: 'employee', module: this },
-          component: () => import('../views/exp/Employee.vue'),
-          beforeEnter
-        },
-        {
-          path: 'employee2',
-          name: 'Employee2',
-          meta: { id: 'employee2', module: this },
-          component: () => import('../views/exp/Employee2.vue'),
-          beforeEnter
-        }
       ]
     },
     /** -------------------------------------------------------------------------------------------- */
